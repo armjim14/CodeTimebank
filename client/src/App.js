@@ -9,14 +9,14 @@ import Login from './components/Login';
 import MainPage from './components/MainPage';
 
 // For GraphQL
-// import ApolloClient from 'apollo-client';
-// import { ApolloProvider } from 'react-apollo';
-// const client = new ApolloClient({});
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+const client = new ApolloClient({});
 
 function App() {
   return (
     <div className="container">
-      {/* <ApolloProvider client={client}> */}
+      <ApolloProvider client={client}>
         <Router>
           <Switch>
 
@@ -39,7 +39,7 @@ function App() {
 
           </Switch>
         </Router>
-      {/* </ApolloProvider> */}
+      </ApolloProvider>
     </div>
   )
 }
