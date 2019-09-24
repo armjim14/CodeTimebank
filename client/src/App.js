@@ -8,31 +8,38 @@ import Register from './components/Register';
 import Login from './components/Login';
 import MainPage from './components/MainPage';
 
+// For GraphQL
+// import ApolloClient from 'apollo-client';
+// import { ApolloProvider } from 'react-apollo';
+// const client = new ApolloClient({});
+
 function App() {
   return (
     <div className="container">
-      <Router>
-        <Switch>
+      {/* <ApolloProvider client={client}> */}
+        <Router>
+          <Switch>
 
-          <Route exact path="/">
-            <Navbar />
-            <MainPage />
-          </Route>
+            <Route exact path="/">
+              <Navbar />
+              <MainPage />
+            </Route>
 
-          <Route exact path="/login">
-            <Navbar />
-            <Login />
-          </Route>
+            <Route exact path="/login">
+              <Navbar />
+              <Login />
+            </Route>
 
-          <Route exact path="/register">
-            <Navbar />
-            <Register />
-          </Route>
-          
-          <Route exact path="leaderboard/" />
+            <Route exact path="/register">
+              <Navbar />
+              <Register />
+            </Route>
 
-        </Switch>
-      </Router>
+            <Route exact path="leaderboard/" />
+
+          </Switch>
+        </Router>
+      {/* </ApolloProvider> */}
     </div>
   )
 }
