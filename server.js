@@ -6,6 +6,8 @@ const path = require("path");
 
 // connectDB();
 
+var db = require("./models");
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));
 // app.use(route);
