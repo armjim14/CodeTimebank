@@ -1,1 +1,0 @@
-// sequelize table def here
