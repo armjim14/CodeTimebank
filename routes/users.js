@@ -30,7 +30,7 @@ router.post(
     const { name, password, github, discord } = req.body;
 
     try {
-      let user = await db.User.findOne({ where: { username: name } });
+      let user = await db.Users.findOne({ where: { username: name } });
       if (user) {
         return res.status(400).json({ msg: "Username taken!" });
       }
@@ -44,7 +44,7 @@ router.post(
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(password, salt);
 
-      db.User.create(user).then(resp => {
+      db.Users.create(user).then(resp => {
         jwt.sign(resp, "secret", { expiresIn: 360000 }, (err, token) => {
           if (err) throw err;
           res.json({ token });
