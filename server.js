@@ -2,15 +2,13 @@ const express = require("express");
 const app = express();
 // const connectDB = require("./config/db");
 const path = require("path");
-// const route = require("./routes/");
-
-// connectDB();
 
 var db = require("./models");
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json({ extended: true }));
-// app.use(route);
+app.use(express.json({ extended: false }));
+app.use("/api/users", require("./routes/users"));
+// app.use("/api/auth", require("./routes/auth"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
