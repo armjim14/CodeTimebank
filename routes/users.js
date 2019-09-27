@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const db = require("../models");
 const auth = require("../middleware/auth");
 
-router.get("/api/auth", auth, async (req, res) => {
+router.get("/auth", auth, async (req, res) => {
   try {
     const user = await db.Users.findOne({ where: { id: req.user.id } });
     res.json(user);
@@ -18,7 +18,7 @@ router.get("/api/auth", auth, async (req, res) => {
 });
 
 router.post(
-  "/api/login",
+  "/login",
   [
     check("name", "Please include your username").exists(),
     check("password", "Password required").exists()
@@ -58,7 +58,7 @@ router.post(
 );
 
 router.post(
-  "/api/register",
+  "/register",
   [
     check(
       "name",
