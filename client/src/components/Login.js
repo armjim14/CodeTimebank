@@ -1,8 +1,9 @@
-import React, { useContext, Fragment, useState } from "react";
+import React, { useContext, Fragment, useState, useEffect } from "react";
+import { withRouter } from "react-router-dom";
 import AuthContext from "../Context/auth/authContext";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Login(props) {
   const authContext = useContext(AuthContext);
   const { login, error, clearErrors, isAuthenticated } = authContext;
 
@@ -23,6 +24,12 @@ function Login() {
       login({ username, password });
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push("/dashboard");
+    }
+  }, [isAuthenticated, props.history]);
   return (
     <Fragment>
       <div className='row'>
@@ -65,4 +72,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default withRouter(Login);

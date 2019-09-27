@@ -20,8 +20,12 @@ router.get("/auth", auth, async (req, res) => {
 router.post(
   "/login",
   [
-    check("name", "Please include your username").exists(),
-    check("password", "Password required").exists()
+    check("username", "Please include your username")
+      .not()
+      .isEmpty(),
+    check("password", "Password required")
+      .not()
+      .isEmpty()
   ],
   async (req, res) => {
     const errors = validationResult(req);
