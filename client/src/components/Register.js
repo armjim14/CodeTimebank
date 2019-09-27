@@ -28,7 +28,7 @@ function Register() {
         <h1 className='col-md-12 text-center'>Register Below</h1>
       </div>
       <div className='form-group row'>
-        <label for='Username' class='col-md-3 col-form-label'>
+        <label htmlFor='Username' className='col-md-3 col-form-label'>
           Username
         </label>
         <div className='col-md-9'>
@@ -43,7 +43,7 @@ function Register() {
         </div>
       </div>
       <div className='form-group row'>
-        <label for='Password' class='col-md-3 col-form-label'>
+        <label htmlFor='Password' className='col-md-3 col-form-label'>
           Password
         </label>
         <div className='col-md-9'>
@@ -58,7 +58,7 @@ function Register() {
         </div>
       </div>
       <div className='form-group row'>
-        <label for='Github' class='col-md-3 col-form-label'>
+        <label htmlFor='Github' className='col-md-3 col-form-label'>
           Github Username
         </label>
         <div className='col-md-9'>
@@ -73,7 +73,7 @@ function Register() {
         </div>
       </div>
       <div className='form-group row'>
-        <label for='Discord' class='col-md-3 col-form-label'>
+        <label htmlFor='Discord' className='col-md-3 col-form-label'>
           Discord Username
         </label>
         <div className='col-md-9'>

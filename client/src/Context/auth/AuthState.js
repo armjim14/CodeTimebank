@@ -33,7 +33,7 @@ const AuthState = props => {
     };
 
     try {
-      const res = await axios.post("/api/users", formFields, config);
+      const res = await axios.post("/api/register", formFields, config);
       dispatch({ type: REGISTER_SUCCESS, payload: res.data });
 
       loadUser();
@@ -65,7 +65,7 @@ const AuthState = props => {
     };
 
     try {
-      const res = await axios.post("/api/auth", formFields, config);
+      const res = await axios.post("/api/login", formFields, config);
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
 
       loadUser();
