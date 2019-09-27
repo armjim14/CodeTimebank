@@ -3,12 +3,12 @@ import "./App.css";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Navbar from "./Components/Navbar";
-import Register from "./Components/Register";
-import Login from "./Components/Login";
-import MainPage from "./Components/MainPage";
-import Dashboard from "./Components/Dashboard";
-import Leaderboards from "./Components/Leaderboards";
+import Navbar from "./components/Navbar";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import MainPage from "./components/MainPage";
+import Dashboard from "./components/Dashboard";
+import Leaderboards from "./components/Leaderboards";
 // Hooks
 import AuthState from "./Context/auth/AuthState";
 import TimeState from "./Context/time/TimeState";
@@ -17,7 +17,7 @@ import TimeState from "./Context/time/TimeState";
 import setAuthToken from "./Utils/setAuthToken";
 
 // used for pages where user must be logged in
-import PrivateRoute from "./Components/PrivateRoute";
+import PrivateRoute from "./components/PrivateRoute";
 
 // For GraphQL
 import ApolloClient from "apollo-boost";
