@@ -1,19 +1,19 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Navbar from './components/Navbar';
-import Register from './components/Register';
-import Login from './components/Login';
-import MainPage from './components/MainPage';
+import Navbar from "./Components/Navbar";
+import Register from "./Components/Register";
+import Login from "./Components/Login";
+import MainPage from "./Components/MainPage";
 // Hooks
-import AuthState from './Context/auth/AuthState';
-import TimeState from './Context/time/TimeState';
+import AuthState from "./Context/auth/AuthState";
+import TimeState from "./Context/time/TimeState";
 
 // For GraphQL
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
 const client = new ApolloClient({});
 
 function App() {
