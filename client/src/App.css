@@ -5,3 +5,8 @@
   --greyish: #d2d2d2;
   --b: #000000;
 }
+
+body {
+  background: url("./img/clocktile.png");
+  background-size: cover;
+}
