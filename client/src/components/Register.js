@@ -1,6 +1,27 @@
-import React, { Fragment } from "react";
+import React, { useState, useContext, Fragment } from "react";
+import AuthContext from "../Context/auth/authContext";
 
 function Register() {
+  const authContext = useContext(AuthContext);
+  const { register, error, clearErrors, isAuthenticated } = authContext;
+
+  const [user, setUser] = useState({
+    name: "",
+    password: "",
+    github: "",
+    discord: ""
+  });
+  const { name, password, github, discord } = user;
+
+  const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
+  const onSubmit = e => {
+    e.preventDefault();
+    if (name === "" || password === "" || github === "" || discord === "") {
+      alert("Please fill in all fields!");
+    } else {
+      register({ name, password, github, discord });
+    }
+  };
   return (
     <Fragment>
       <div className='row'>
@@ -13,10 +34,11 @@ function Register() {
         <div className='col-md-9'>
           <input
             type='text'
-            name='Username'
-            id='uname'
+            name='name'
             className='form-control'
             placeholder='Enter your username for the Code Timebank here'
+            value={name}
+            onChange={onChange}
           />
         </div>
       </div>
@@ -27,10 +49,11 @@ function Register() {
         <div className='col-md-9'>
           <input
             type='password'
-            name='Password'
-            id='pword'
+            name='password'
             className='form-control'
             placeholder='Super secret password'
+            value={password}
+            onChange={onChange}
           />
         </div>
       </div>
@@ -41,10 +64,11 @@ function Register() {
         <div className='col-md-9'>
           <input
             type='text'
-            name='Github'
-            id='ghubname'
+            name='github'
             className='form-control'
             placeholder='Enter your Github username here'
+            value={github}
+            onChange={onChange}
           />
         </div>
       </div>
@@ -55,14 +79,15 @@ function Register() {
         <div className='col-md-9'>
           <input
             type='text'
-            name='Discord'
-            id='discord'
+            name='discord'
             className='form-control'
             placeholder='Username#1234'
+            value={discord}
+            onChange={onChange}
           />
         </div>
       </div>
-      <button className='btn btn-block btn-secondary' onClick={""}>
+      <button className='btn btn-block btn-secondary' onClick={onSubmit}>
         Submit
       </button>
     </Fragment>
