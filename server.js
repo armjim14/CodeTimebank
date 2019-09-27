@@ -7,7 +7,7 @@ var db = require("./models");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: false }));
-// app.use("/api/users", require("./routes/users"));
+app.use("/api/users", require("./routes/users"));
 // app.use("/api/auth", require("./routes/auth"));
 
 if (process.env.NODE_ENV === "production") {
