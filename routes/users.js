@@ -76,6 +76,9 @@ router.post(
       .isEmpty(),
     check("discord", "Please enter your Discord username")
       .not()
+      .isEmpty(),
+    check("skype", "Please enter a Skype username")
+      .not()
       .isEmpty()
   ],
   async (req, res) => {
@@ -83,7 +86,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { name, password, github, discord } = req.body;
+    const { name, password, github, discord, skype } = req.body;
 
     try {
       let user = await db.Users.findOne({ where: { username: name } });
@@ -94,7 +97,8 @@ router.post(
         username: name,
         password: password,
         github: github,
-        discord: discord
+        discord: discord,
+        skype: skype
       };
 
       const salt = await bcrypt.genSalt(10);

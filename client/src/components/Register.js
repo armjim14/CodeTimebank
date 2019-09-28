@@ -1,7 +1,7 @@
-import React, { useState, useContext, Fragment } from "react";
+import React, { useState, useContext, Fragment, useEffect } from "react";
 import AuthContext from "../Context/auth/authContext";
 
-function Register() {
+function Register(props) {
   const authContext = useContext(AuthContext);
   const { register, error, clearErrors, isAuthenticated } = authContext;
 
@@ -9,19 +9,33 @@ function Register() {
     name: "",
     password: "",
     github: "",
-    discord: ""
+    discord: "",
+    skype: ""
   });
-  const { name, password, github, discord } = user;
+  const { name, password, github, discord, skype } = user;
 
   const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
   const onSubmit = e => {
     e.preventDefault();
-    if (name === "" || password === "" || github === "" || discord === "") {
+    if (
+      name === "" ||
+      password === "" ||
+      github === "" ||
+      discord === "" ||
+      skype === ""
+    ) {
       alert("Please fill in all fields!");
     } else {
-      register({ name, password, github, discord });
+      register({ name, password, github, discord, skype });
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push("/dashboard");
+    }
+  }, [isAuthenticated, props.history]);
+
   return (
     <Fragment>
       <div className='row'>
@@ -83,6 +97,21 @@ function Register() {
             className='form-control'
             placeholder='Username#1234'
             value={discord}
+            onChange={onChange}
+          />
+        </div>
+      </div>
+      <div className='form-group row'>
+        <label htmlFor='Skype' className='col-md-3 col-form-label'>
+          Skype Username
+        </label>
+        <div className='col-md-9'>
+          <input
+            type='text'
+            name='skype'
+            className='form-control'
+            placeholder='Skype Username Here'
+            value={skype}
             onChange={onChange}
           />
         </div>
