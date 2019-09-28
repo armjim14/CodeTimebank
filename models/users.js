@@ -19,6 +19,10 @@ module.exports = function(sequelize, DataTypes) {
     discord: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    skype: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   });
   return User;

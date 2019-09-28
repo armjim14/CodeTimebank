@@ -68,6 +68,15 @@ function Login(props) {
       <button className='btn btn-block btn-secondary' onClick={onSubmit}>
         Submit
       </button>
+      <div className='row mt-5'>
+        <div className='col-md-12'>
+          <h5 className='text-center'>
+            <a href='/register' rel='noopener noreferrer'>
+              Not registered yet? Click here to register.
+            </a>
+          </h5>
+        </div>
+      </div>
     </Fragment>
   );
 }
