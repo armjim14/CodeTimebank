@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-    var timestamps = sequelize.define("timestamps", {
+    var skype = sequelize.define("skype", {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -8,20 +8,15 @@ module.exports = function(sequelize, DataTypes) {
           len: [2, 70]
         }
       },
-      create_time: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      update_time: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      id: {
+      password: {
         type: DataTypes.STRING,
         allowNull: false
       },
       skype: {
-      
-    );
-    return User;
+        type: DataTypes.STRING,
+        allowNull: false
+      }
+    });
+    return skype;
   };
+  
