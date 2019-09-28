@@ -1,7 +1,31 @@
-import React from 'react';
+import React, { useEffect, useContext, Fragment } from 'react';
 import { Link } from "react-router-dom";
+import AuthContext from "../Context/auth/authContext";
 
-function Navbar() {
+function Navbar(props) {
+
+    const authContext = useContext(AuthContext);
+    const { login, error, clearErrors, isAuthenticated } = authContext;
+
+    const restLinks = () => {
+        if (isAuthenticated) {
+            return <Fragment>
+                <li className="nav-item">
+                    <Link style={style.forTextEven} className="nav-link" to="/dashboard">Profile</Link>
+                </li>
+            </Fragment>
+        } else {
+            return <Fragment>
+                <li className="nav-item">
+                    <Link style={style.forTextOdd} className="nav-link" to="/login">Login</Link>
+                </li>
+                <li className="nav-item">
+                    <Link style={style.forTextOdd} className="nav-link" to="/register">Register</Link>
+                </li>
+            </Fragment>
+        }
+    }//, [isAuthenticated, props.history]);
+
     return (
         <header>
             <div className="row text-center mt-3 mb-3">
@@ -16,12 +40,7 @@ function Navbar() {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav m-auto">
-                        <li className="nav-item">
-                            <Link style={style.forTextOdd} className="nav-link" to="/login">Login</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link style={style.forTextEven} className="nav-link" to="/register">Register</Link>
-                        </li>
+                        {restLinks()}
                         <li className="nav-item">
                             <Link style={style.forTextOdd} className="nav-link" to="/">Help Others</Link>
                         </li>
@@ -31,14 +50,12 @@ function Navbar() {
                         <li className="nav-item">
                             <Link style={style.forTextOdd} className="nav-link" to="/">Leaderboards</Link>
                         </li>
-                        <li className="nav-item">
-                            <Link style={style.forTextEven} className="nav-link" to="/">Your Profile</Link>
-                        </li>
                     </ul>
                 </div>
             </nav>
         </header>
     )
+
 }
 
 // this style is here incase having every other Link a different color might better

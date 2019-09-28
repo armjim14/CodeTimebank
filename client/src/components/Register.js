@@ -29,11 +29,13 @@ function Register(props) {
       register({ name, password, github, discord, skype });
     }
   };
+
   useEffect(() => {
     if (isAuthenticated) {
       props.history.push("/dashboard");
     }
   }, [isAuthenticated, props.history]);
+
   return (
     <Fragment>
       <div className='row'>
