@@ -32,7 +32,7 @@ function App() {
   return (
     <AuthState>
       <TimeState>
-        <div className='container'>
+        <div className='container bg-light px-5'>
           <ApolloProvider client={client}>
             <Router>
               <Fragment>
