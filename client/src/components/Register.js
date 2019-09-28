@@ -1,7 +1,7 @@
-import React, { useState, useContext, Fragment } from "react";
+import React, { useState, useContext, Fragment, useEffect } from "react";
 import AuthContext from "../Context/auth/authContext";
 
-function Register() {
+function Register(props) {
   const authContext = useContext(AuthContext);
   const { register, error, clearErrors, isAuthenticated } = authContext;
 
@@ -22,6 +22,13 @@ function Register() {
       register({ name, password, github, discord });
     }
   };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      props.history.push("/dashboard");
+    }
+  }, [isAuthenticated, props.history]);
+
   return (
     <Fragment>
       <div className='row'>
