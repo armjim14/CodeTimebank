@@ -9,9 +9,11 @@ import Login from "./components/Login";
 import MainPage from "./components/MainPage";
 import Dashboard from "./components/Dashboard";
 import Leaderboards from "./components/Leaderboards";
+import Alerts from "./components/Alerts";
 // Hooks
 import AuthState from "./Context/auth/AuthState";
 import TimeState from "./Context/time/TimeState";
+import AlertState from "./Context/alert/AlertState";
 
 // jwt Middleware
 import setAuthToken from "./Utils/setAuthToken";
@@ -32,22 +34,33 @@ function App() {
   return (
     <AuthState>
       <TimeState>
-        <div className='container bg-light px-5'>
-          <ApolloProvider client={client}>
-            <Router>
-              <Fragment>
-                <Navbar />
-                <Switch>
-                  <Route exact path='/' component={MainPage} />
-                  <Route exact path='/login' component={Login} />
-                  <Route exact path='/register' component={Register} />
-                  <Route exact path='/leaderboards' component={Leaderboards} />
-                  <PrivateRoute exact path='/dashboard' component={Dashboard} />
-                </Switch>
-              </Fragment>
-            </Router>
-          </ApolloProvider>
-        </div>
+        <AlertState>
+          <div className='container bg-light px-5'>
+            <ApolloProvider client={client}>
+              <Router>
+                <Fragment>
+                  <Navbar />
+                  <Alerts />
+                  <Switch>
+                    <Route exact path='/' component={MainPage} />
+                    <Route exact path='/login' component={Login} />
+                    <Route exact path='/register' component={Register} />
+                    <Route
+                      exact
+                      path='/leaderboards'
+                      component={Leaderboards}
+                    />
+                    <PrivateRoute
+                      exact
+                      path='/dashboard'
+                      component={Dashboard}
+                    />
+                  </Switch>
+                </Fragment>
+              </Router>
+            </ApolloProvider>
+          </div>
+        </AlertState>
       </TimeState>
     </AuthState>
   );
