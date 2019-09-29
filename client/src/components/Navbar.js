@@ -13,7 +13,7 @@ function Navbar(props) {
           <li className='nav-item'>
             <Link
               style={style.forTextEven}
-              className='nav-link'
+              className='nav-link text-off-white'
               to='/dashboard'
             >
               Profile
@@ -25,12 +25,20 @@ function Navbar(props) {
       return (
         <Fragment>
           <li className='nav-item'>
-            <Link style={style.forTextOdd} className='nav-link' to='/login'>
+            <Link
+              style={style.forTextOdd}
+              className='nav-link text-off-white'
+              to='/login'
+            >
               Login
             </Link>
           </li>
           <li className='nav-item'>
-            <Link style={style.forTextOdd} className='nav-link' to='/register'>
+            <Link
+              style={style.forTextOdd}
+              className='nav-link text-off-white'
+              to='/register'
+            >
               Register
             </Link>
           </li>
@@ -40,15 +48,20 @@ function Navbar(props) {
   }; //, [isAuthenticated, props.history]);
 
   return (
-    <header>
-      <div className='row text-center mt-3 mb-3'>
+    <header className='container-fluid'>
+      <div className='row text-center bg-gradient-greyish py-4'>
         <div className='col-md-12'>
           <Link style={style.forHeader} to='/'>
-            <h1 className='pt-2'>Code Timebank</h1>
+            <h1
+              className='text-black'
+              style={{ fontFamily: "Verdana", fontWeight: "bold" }}
+            >
+              Code Timebank
+            </h1>
           </Link>
         </div>
       </div>
-      <nav className='navbar navbar-expand-lg navbar-light bg-light mb-3'>
+      <nav className='row navbar navbar-expand-lg navbar-light bg-gradient-dbrown py-2'>
         <button
           className='navbar-toggler'
           type='button'
@@ -65,17 +78,29 @@ function Navbar(props) {
           <ul className='navbar-nav m-auto'>
             {restLinks()}
             <li className='nav-item'>
-              <Link style={style.forTextOdd} className='nav-link' to='/'>
+              <Link
+                style={style.forTextOdd}
+                className='nav-link text-off-white'
+                to='/'
+              >
                 Help Others
               </Link>
             </li>
             <li className='nav-item'>
-              <Link style={style.forTextEven} className='nav-link' to='/'>
+              <Link
+                style={style.forTextEven}
+                className='nav-link text-off-white'
+                to='/'
+              >
                 Request Help
               </Link>
             </li>
             <li className='nav-item'>
-              <Link style={style.forTextOdd} className='nav-link' to='/'>
+              <Link
+                style={style.forTextOdd}
+                className='nav-link text-off-white'
+                to='/'
+              >
                 Leaderboards
               </Link>
             </li>

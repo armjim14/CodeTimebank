@@ -35,11 +35,11 @@ function App() {
     <AuthState>
       <TimeState>
         <AlertState>
-          <div className='container bg-light px-5'>
-            <ApolloProvider client={client}>
-              <Router>
-                <Fragment>
-                  <Navbar />
+          <ApolloProvider client={client}>
+            <Router>
+              <Fragment>
+                <Navbar />
+                <div className='container bg-off-white px-5'>
                   <Alerts />
                   <Switch>
                     <Route exact path='/' component={MainPage} />
@@ -56,10 +56,10 @@ function App() {
                       component={Dashboard}
                     />
                   </Switch>
-                </Fragment>
-              </Router>
-            </ApolloProvider>
-          </div>
+                </div>
+              </Fragment>
+            </Router>
+          </ApolloProvider>
         </AlertState>
       </TimeState>
     </AuthState>
