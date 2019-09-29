@@ -41,7 +41,7 @@ function Register(props) {
     if (isAuthenticated) {
       props.history.push("/dashboard");
     }
-    if (error === "Username taken") {
+    if (error === "Username taken!") {
       setAlert(error, "danger");
       clearErrors();
     }
