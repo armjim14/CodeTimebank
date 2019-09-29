@@ -45,7 +45,7 @@ function Navbar(props) {
                             <Link style={style.forTextOdd} className="nav-link" to="/help/others">Help Others</Link>
                         </li>
                         <li className="nav-item">
-                            <Link style={style.forTextEven} className="nav-link" to="/">Request Help</Link>
+                            <Link style={style.forTextEven} className="nav-link" to="/request/help">Request Help</Link>
                         </li>
                         <li className="nav-item">
                             <Link style={style.forTextOdd} className="nav-link" to="/">Leaderboards</Link>

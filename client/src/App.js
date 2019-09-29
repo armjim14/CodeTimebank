@@ -23,6 +23,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import HelpOthers from "./components/HelpOthers";
+import RequestHelp from "./components/RequestHelp";
 const client = new ApolloClient({});
 
 if (localStorage.token) {
@@ -44,6 +45,7 @@ function App() {
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/leaderboards' component={Leaderboards} />
                   <Route exact path='/help/others' component={HelpOthers} />
+                  <Route exact path='/request/help' component={RequestHelp} />
                   <PrivateRoute exact path='/dashboard' component={Dashboard} />
                 </Switch>
               </Fragment>
