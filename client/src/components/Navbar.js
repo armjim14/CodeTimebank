@@ -1,11 +1,11 @@
-import React, { useEffect, useContext, Fragment } from 'react';
+import React, { useContext, Fragment } from 'react';
 import { Link } from "react-router-dom";
 import AuthContext from "../Context/auth/authContext";
 
 function Navbar(props) {
 
     const authContext = useContext(AuthContext);
-    const { login, error, clearErrors, isAuthenticated } = authContext;
+    const { isAuthenticated } = authContext;
 
     const restLinks = () => {
         if (isAuthenticated) {
@@ -42,7 +42,7 @@ function Navbar(props) {
                     <ul className="navbar-nav m-auto">
                         {restLinks()}
                         <li className="nav-item">
-                            <Link style={style.forTextOdd} className="nav-link" to="/">Help Others</Link>
+                            <Link style={style.forTextOdd} className="nav-link" to="/help/others">Help Others</Link>
                         </li>
                         <li className="nav-item">
                             <Link style={style.forTextEven} className="nav-link" to="/">Request Help</Link>

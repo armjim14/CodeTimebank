@@ -11,7 +11,7 @@ import Dashboard from "./components/Dashboard";
 import Leaderboards from "./components/Leaderboards";
 // Hooks
 import AuthState from "./Context/auth/AuthState";
-import TimeState from "./Context/time/TimeState";
+import QuestionState from "./Context/question/QuestionState";
 
 // jwt Middleware
 import setAuthToken from "./Utils/setAuthToken";
@@ -22,6 +22,7 @@ import PrivateRoute from "./components/PrivateRoute";
 // For GraphQL
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import HelpOthers from "./components/HelpOthers";
 const client = new ApolloClient({});
 
 if (localStorage.token) {
@@ -31,7 +32,7 @@ if (localStorage.token) {
 function App() {
   return (
     <AuthState>
-      <TimeState>
+      <QuestionState>
         <div className='container bg-light px-5'>
           <ApolloProvider client={client}>
             <Router>
@@ -42,13 +43,14 @@ function App() {
                   <Route exact path='/login' component={Login} />
                   <Route exact path='/register' component={Register} />
                   <Route exact path='/leaderboards' component={Leaderboards} />
+                  <Route exact path='/help/others' component={HelpOthers} />
                   <PrivateRoute exact path='/dashboard' component={Dashboard} />
                 </Switch>
               </Fragment>
             </Router>
           </ApolloProvider>
         </div>
-      </TimeState>
+      </QuestionState>
     </AuthState>
   );
 }

@@ -18,13 +18,13 @@ module.exports = function(sequelize, DataTypes) {
 
     });
 
-    questions.associate = function(models) {
-      questions.belongsTo(models.User, {
-        foreignKey: {
-          allowNull: false
-        }
-      });
-    };
+    // questions.associate = function(models) {
+    //   questions.belongsTo(models.Users, {
+    //     foreignKey: {
+    //       allowNull: false
+    //     }
+    //   });
+    // };
 
     return questions;
   

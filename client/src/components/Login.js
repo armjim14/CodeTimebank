@@ -1,11 +1,10 @@
 import React, { useContext, Fragment, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import AuthContext from "../Context/auth/authContext";
-import { Link } from "react-router-dom";
 
 function Login(props) {
   const authContext = useContext(AuthContext);
-  const { login, error, clearErrors, isAuthenticated } = authContext;
+  const { login, isAuthenticated } = authContext;
 
   const [user, setUser] = useState({
     username: "",

@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-import QuestionContext from "../Context/question/questionContext";
+import questionContext from "../Context/question/questionContext";
 
 const Dashboard = () => {
 
-  const QuestionContext = useContext(QuestionContext);
+  const QuestionContext = useContext(questionContext);
   const { sendQuestion } = QuestionContext;
 
-  const [questionAsked, setUser] = useState({
+  const [questionAsked, setQuestion] = useState({
     question: "",
     language: "",
     comfort: ""
@@ -14,22 +14,27 @@ const Dashboard = () => {
 
   const { question, language, comfort } = questionAsked;
 
-  const onChange = e => setUser({ ...questionAsked, [e.target.name]: e.target.value });
+  const onChange = e => setQuestion({ ...questionAsked, [e.target.name]: e.target.value });
 
   const submit = e => {
     e.preventDefault();
+   
+    if ( !question || !language || !comfort ) {
+      alert("Fill in all fields");
+    } else {
+      sendQuestion({ question, language, comfort});
+    }
 
-    console.log("stuff")
   }
 
   return (
     <div>
-      <h1>What question do you have in mind</h1>
+      <h1>What question are you wanting to ask</h1>
       <form onSubmit={submit}>
-        <input type="text" required name="question" />
-        <input type="text" required name="language" />
-        <input type="text" required name="comfort" />
-        <input type="submit" />
+        Question: <input onChange={onChange} value={question} type="text" required name="question" /><br /><br />
+        Langugage: <input onChange={onChange} value={language} type="text" required name="language" /><br /><br />
+        Comfort: <input onChange={onChange} value={comfort} type="text" required name="comfort" /><br /><br />
+        <input type="submit" /><br />
       </form>
     </div>
   );

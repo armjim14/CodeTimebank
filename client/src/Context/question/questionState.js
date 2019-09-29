@@ -1,18 +1,34 @@
-import React, { useReducer } from 'react';
+import React /*, { useReducer }*/ from 'react';
 import axios from 'axios';
 import QuestionContext from './questionContext';
-import QuestionReducer from './questionReducer';
+// import QuestionReducer from './questionReducer';
 // import types
-import {} from '../types';
+// import { } from '../types';
 
-const TimeState = props => {
-  const initialState = {};
-  const [state, dispatch] = useReducer(QuestionReducer, initialState);
+const QuestionState = props => {
+  //   const initialState = {};
+  // const [state, dispatch] = useReducer(QuestionReducer, initialState);
   // time and/or app-related functions
 
+  const sendQuestion = async formInfo => {
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    const resp = await axios.post("/api/questions/add", formInfo, config);
+    console.log(resp)
+  }
+
+  const getQuestions = async () => {
+    const quest = await axios.get("/api/questions/get")
+    console.log(quest.data);
+  }
+
   return (
-    <QuestionContext.Provider value={{}}>{props.children}</QuestionContext.Provider>
+    <QuestionContext.Provider value={{ sendQuestion, getQuestions }}>{props.children}</QuestionContext.Provider>
   );
 };
 
-export default TimeState;
+export default QuestionState;

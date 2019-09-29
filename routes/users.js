@@ -10,7 +10,7 @@ router.get("/auth", auth, async (req, res) => {
   try {
     const user = await db.Users.findOne({ where: { id: req.user.id } });
     res.json(user);
-    console.log(user);
+    // console.log(user);
   } catch (err) {
     console.log(err.message);
     res.status(500).send("Server error");

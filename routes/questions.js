@@ -3,8 +3,7 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const db = require("../models");
 
-router.post(
-  "/add/question",
+router.post("/add",
   [
     check("question","Please enter a question")
      .not()
@@ -17,6 +16,11 @@ router.post(
       .isEmpty()
   ],
   async (req, res) => {
+
+    console.log("-----------------");
+    console.log(req.body);
+    console.log("-----------------");
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -27,14 +31,28 @@ router.post(
 
     let theQuestion = { question, language, comfort };
 
-      db.question.create(theQuestion).then(resp => {
-        console.log(resp)
+      db.questions.create(theQuestion).then(resp => {
+        return res.send(resp);
       });
+
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server malfunction");
     }
   }
 );
+
+router.get("/get",
+  async (req, res) => {
+    console.log("I am in routes/questions for get ")
+    try {
+      db.questions.find({}).then(data => res.send(data))
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server malfunction");
+    }
+
+  }
+)
 
 module.exports = router;
