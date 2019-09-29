@@ -7,14 +7,13 @@ function HelpOthers() {
     const { getQuestions } = QuestionContext;
 
     const loadQuestions = () => {
-        console.log(getQuestions)
-        getQuestions();
+        getQuestions().then( data => data.map( info => console.log(info) ));
     }
 
     return (
         <section>
             <h1>Help Others</h1>
-            {loadQuestions}
+            {loadQuestions()}
         </section>
     )
 }

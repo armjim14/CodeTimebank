@@ -17,13 +17,15 @@ const QuestionState = props => {
         "Content-Type": "application/json"
       }
     };
+
     const resp = await axios.post("/api/questions/add", formInfo, config);
     console.log(resp)
+
   }
 
   const getQuestions = async () => {
     const quest = await axios.get("/api/questions/get")
-    console.log(quest.data);
+    return (quest.data);
   }
 
   return (

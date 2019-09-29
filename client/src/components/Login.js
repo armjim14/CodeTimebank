@@ -67,7 +67,7 @@ function Login(props) {
       <button className='btn btn-block btn-secondary' onClick={onSubmit}>
         Submit
       </button>
-      <div className='row mt-5'>
+      <div className='row mt-3 mt-3'>
         <div className='col-md-12'>
           <h5 className='text-center'>
             <a href='/register' rel='noopener noreferrer'>

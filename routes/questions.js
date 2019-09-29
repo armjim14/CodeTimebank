@@ -44,9 +44,8 @@ router.post("/add",
 
 router.get("/get",
   async (req, res) => {
-    console.log("I am in routes/questions for get ")
     try {
-      db.questions.find({}).then(data => res.send(data))
+      db.questions.findAll({}).then(data => res.send(data))
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server malfunction");
