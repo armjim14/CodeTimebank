@@ -54,8 +54,8 @@ function App() {
                       path='/leaderboards'
                       component={Leaderboards}
                     />
-                    <Route exact path='/get/help' component={RequestHelp} />
-                    <Route exact path='/provide/help' component={HelpOthers} />
+                    <Route exact path='/gethelp' component={RequestHelp} />
+                    <Route exact path='/providehelp' component={HelpOthers} />
                     <PrivateRoute
                       exact
                       path='/dashboard'
