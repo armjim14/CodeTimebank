@@ -7,11 +7,11 @@ import questionReducer from './questionReducer';
 
 const QuestionState = props => {
 
-    // const initialState = {
-    //   questions: []
-    // };
+    const initialState = {
+      questions: []
+    };
 
-  const [{questions}, dispatch] = useReducer(questionReducer, { questions: [] });
+  const [state, dispatch] = useReducer(questionReducer, [initialState]);
 
   const sendQuestion = async formInfo => {
 
@@ -34,7 +34,7 @@ const QuestionState = props => {
   }
 
   return (
-    <QuestionContext.Provider value={ sendQuestion, getQuestions, questions }>{props.children}</QuestionContext.Provider>
+    <QuestionContext.Provider value={{ sendQuestion, getQuestions, questions: state.question }}>{props.children}</QuestionContext.Provider>
   );
 };
 
