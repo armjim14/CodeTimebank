@@ -11,6 +11,7 @@ import Dashboard from "./components/Dashboard";
 import Leaderboards from "./components/Leaderboards";
 import Alerts from "./components/Alerts";
 import Footer from "./components/Footer";
+import AlertState from './Context/alert/AlertState';
 // Hooks
 import AuthState from "./Context/auth/AuthState";
 import QuestionState from "./Context/question/QuestionState";
@@ -53,6 +54,8 @@ function App() {
                       path='/leaderboards'
                       component={Leaderboards}
                     />
+                    <Route exact path='/get/help' component={RequestHelp} />
+                    <Route exact path='/provide/help' component={HelpOthers} />
                     <PrivateRoute
                       exact
                       path='/dashboard'

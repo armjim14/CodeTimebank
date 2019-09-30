@@ -81,7 +81,7 @@ function Navbar(props) {
               <Link
                 style={style.forTextOdd}
                 className='nav-link text-off-white'
-                to='/'
+                to='/provide/help'
               >
                 Help Others
               </Link>
@@ -90,7 +90,7 @@ function Navbar(props) {
               <Link
                 style={style.forTextEven}
                 className='nav-link text-off-white'
-                to='/'
+                to='/get/help'
               >
                 Request Help
               </Link>
