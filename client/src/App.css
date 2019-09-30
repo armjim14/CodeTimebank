@@ -1,10 +1,20 @@
 :root {
   --main-color: #a08a59;
-  --off-white: #efefef;
   --lighter-main: #dac294;
   --greyish: #d2d2d2;
+  --off-white: #efefef;
   --b: #000000;
 }
+
+/*
+The above colors are now in our css stylesheet as custom bootstrap classes
+
+  "dbrown": #a08a59,
+  "beige": #dac294,
+  "greyish": #d2d2d2,
+  "off-white": #efefef,
+  "black": #000000
+*/
 
 body {
   background: url("./img/clocktile.png");
