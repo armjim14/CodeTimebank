@@ -1,33 +1,33 @@
-import React, { useContext, useEffect, Fragment } from 'react';
+import React, { useContext, useEffect, Fragment, useState } from 'react';
 import questionContext from "../Context/question/questionContext";
 
-function HelpOthers(props) {
+function HelpOthers() {
     
     const QuestionContext = useContext(questionContext);
     const { getQuestions, questions } = QuestionContext;
 
+    const [ allQuestions, getAllQuestions ] = useState([]);
+
     const loadQuestions = async () => {
 
-        await console.log(questions)
-
-        // return await questions.map( ({id, question, comfort, language}) => {
-        //     return (
-        //         <div>
-        //             <p>{question}</p>   
-        //         </div>
-        //     )
-        // })
+        getAllQuestions(questions)
 
     }
 
+    const allStuff = async () => {
+        console.log(allQuestions)
+        return await allQuestions.map( info => <p>{info.question}</p> )
+    }
+
     useEffect( () => {
-        getQuestions();
+        getQuestions()
+        .then(() => loadQuestions());
     })
 
     return (
         <Fragment>
             <h1>Help Others</h1>
-            {loadQuestions()}
+            {allStuff()}
         </Fragment>
     )
 }
