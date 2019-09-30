@@ -13,8 +13,7 @@ import Alerts from "./components/Alerts";
 import Footer from "./components/Footer";
 // Hooks
 import AuthState from "./Context/auth/AuthState";
-import TimeState from "./Context/time/TimeState";
-import AlertState from "./Context/alert/AlertState";
+import QuestionState from "./Context/question/QuestionState";
 
 // jwt Middleware
 import setAuthToken from "./Utils/setAuthToken";
@@ -25,6 +24,8 @@ import PrivateRoute from "./components/PrivateRoute";
 // For GraphQL
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import HelpOthers from "./components/HelpOthers";
+import RequestHelp from "./components/RequestHelp";
 const client = new ApolloClient({});
 
 if (localStorage.token) {
@@ -34,8 +35,8 @@ if (localStorage.token) {
 function App() {
   return (
     <AuthState>
-      <TimeState>
-        <AlertState>
+      <QuestionState>
+       <AlertState>
           <ApolloProvider client={client}>
             <Router>
               <Fragment>
@@ -63,7 +64,7 @@ function App() {
             </Router>
           </ApolloProvider>
         </AlertState>
-      </TimeState>
+      </QuestionState>
     </AuthState>
   );
 }
