@@ -1,20 +1,22 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, Fragment } from 'react';
 import questionContext from "../Context/question/questionContext";
 
 function HelpOthers(props) {
     
     const QuestionContext = useContext(questionContext);
-    const { getQuestions, questions } = QuestionContext;
+    const [ getQuestions, questions ] = QuestionContext;
 
     const loadQuestions = async () => {
 
-        return await questions.map( ({id, question, comfort, language}) => {
-            return (
-                <div>
-                    <p>{questions}</p>
-                </div>
-            )
-        })
+        console.log(questions)
+
+        // return await questions.map( ({id, question, comfort, language}) => {
+        //     return (
+        //         <div>
+        //             <p>{question}</p>
+        //         </div>
+        //     )
+        // })
 
     }
 
@@ -23,10 +25,10 @@ function HelpOthers(props) {
     })
 
     return (
-        <section>
+        <Fragment>
             <h1>Help Others</h1>
             {loadQuestions()}
-        </section>
+        </Fragment>
     )
 }
 
