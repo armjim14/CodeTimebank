@@ -9,7 +9,7 @@ const Leaderboards = () => {
         </div>
       </div>
       <div className='row'>
-        <table className='table table-bordered'>
+        <table className='table table-beige table-bordered'>
           <thead>
             <tr className='thead-light'>
               <th>Username</th>

@@ -11,7 +11,7 @@ import Dashboard from "./components/Dashboard";
 import Leaderboards from "./components/Leaderboards";
 import Alerts from "./components/Alerts";
 import Footer from "./components/Footer";
-import AlertState from './Context/alert/AlertState';
+import AlertState from "./Context/alert/AlertState";
 // Hooks
 import AuthState from "./Context/auth/AuthState";
 import QuestionState from "./Context/question/QuestionState";
@@ -37,7 +37,7 @@ function App() {
   return (
     <AuthState>
       <QuestionState>
-       <AlertState>
+        <AlertState>
           <ApolloProvider client={client}>
             <Router>
               <Fragment>
@@ -54,8 +54,16 @@ function App() {
                       path='/leaderboards'
                       component={Leaderboards}
                     />
-                    <Route exact path='/gethelp' component={RequestHelp} />
-                    <Route exact path='/providehelp' component={HelpOthers} />
+                    <PrivateRoute
+                      exact
+                      path='/gethelp'
+                      component={RequestHelp}
+                    />
+                    <PrivateRoute
+                      exact
+                      path='/providehelp'
+                      component={HelpOthers}
+                    />
                     <PrivateRoute
                       exact
                       path='/dashboard'
