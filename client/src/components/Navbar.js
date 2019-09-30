@@ -99,7 +99,7 @@ function Navbar(props) {
               <Link
                 style={style.forTextOdd}
                 className='nav-link text-off-white'
-                to='/'
+                to='/leaderboards'
               >
                 Leaderboards
               </Link>
