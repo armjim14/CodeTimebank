@@ -5,7 +5,10 @@ function MainPage() {
     <Fragment>
       <div className='row'>
         <div className='col-md-12'>
-          <h1 className='text-center text-beige bg-gradient-black border rounded-pill border-dbrown'>
+          <h1
+            className='text-center text-beige border-dbrown'
+            style={{ textShadow: "1px 1px 2px #000000" }}
+          >
             Welcome to the Code Timebank!
           </h1>
         </div>
@@ -77,23 +80,12 @@ function MainPage() {
           <p>
             Our users that help others the most will show up near the top of the
             leaderboards. Tech recruiters and our community in general can see
-            who the most altruistic members are. Using the Github API, users can
-            say whether or not they're hireable. Similarly, community members
-            can look on the leaderboards to find out who answered what, and
-            possibly seek advice from our most knowledgeable members.
+            who the most altruistic members are. Using the Github API, we can
+            show recruiters whether or not they're hireable. Similarly,
+            community members can look on the leaderboards to find out who
+            answered what, and possibly seek advice from our most knowledgeable
+            members.
           </p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil illo
-          rerum natus ipsa quam architecto eum optio porro vitae iusto
-          cupiditate maxime eaque exercitationem aut accusamus explicabo, atque
-          voluptatum ipsum, deleniti error consequatur molestiae. Excepturi
-          quasi sunt debitis sed unde impedit accusantium ipsum id officiis
-          explicabo maiores dolorum, quis vero. Nostrum fuga excepturi, totam
-          eos asperiores voluptate incidunt, minus fugit, omnis distinctio ad
-          numquam sequi accusamus nobis aliquam necessitatibus nemo a id
-          nesciunt! Quos assumenda ipsam alias. Quos dolorum iusto laborum
-          perferendis, esse deleniti, assumenda illo eaque perspiciatis
-          molestiae vero fugit cupiditate reprehenderit eius recusandae
-          excepturi in fuga vel corporis.
         </div>
       </div>
     </Fragment>

@@ -45,9 +45,6 @@ const Footer = () => {
             Matthew Winemiller
           </a>
         </h6>
-        <h6 className='col-md-12 text-center text-greyish small mb-0'>
-          © 2019
-        </h6>
       </div>
     </div>
   );
