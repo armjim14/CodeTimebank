@@ -9,6 +9,8 @@ import Login from "./components/Login";
 import MainPage from "./components/MainPage";
 import Dashboard from "./components/Dashboard";
 import Leaderboards from "./components/Leaderboards";
+import Alerts from "./components/Alerts";
+import Footer from "./components/Footer";
 // Hooks
 import AuthState from "./Context/auth/AuthState";
 import QuestionState from "./Context/question/QuestionState";
@@ -34,24 +36,34 @@ function App() {
   return (
     <AuthState>
       <QuestionState>
-        <div className='container bg-light px-5'>
+       <AlertState>
           <ApolloProvider client={client}>
             <Router>
               <Fragment>
                 <Navbar />
-                <Switch>
-                  <Route exact path='/' component={MainPage} />
-                  <Route exact path='/login' component={Login} />
-                  <Route exact path='/register' component={Register} />
-                  <Route exact path='/leaderboards' component={Leaderboards} />
-                  <Route exact path='/help/others' component={HelpOthers} />
-                  <Route exact path='/request/help' component={RequestHelp} />
-                  <PrivateRoute exact path='/dashboard' component={Dashboard} />
-                </Switch>
+                <Footer />
+                <div className='container bg-off-white px-5'>
+                  <Alerts />
+                  <Switch>
+                    <Route exact path='/' component={MainPage} />
+                    <Route exact path='/login' component={Login} />
+                    <Route exact path='/register' component={Register} />
+                    <Route
+                      exact
+                      path='/leaderboards'
+                      component={Leaderboards}
+                    />
+                    <PrivateRoute
+                      exact
+                      path='/dashboard'
+                      component={Dashboard}
+                    />
+                  </Switch>
+                </div>
               </Fragment>
             </Router>
           </ApolloProvider>
-        </div>
+        </AlertState>
       </QuestionState>
     </AuthState>
   );
