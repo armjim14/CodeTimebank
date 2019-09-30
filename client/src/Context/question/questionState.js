@@ -6,11 +6,12 @@ import questionReducer from './questionReducer';
 // import { } from '../types';
 
 const QuestionState = props => {
+
     const initialState = {
       questions: []
     };
-  const [state, dispatch] = useReducer(questionReducer, initialState);
-  // time and/or app-related functions
+
+  const [state, dispatch] = useReducer(questionReducer, [initialState]);
 
   const sendQuestion = async formInfo => {
 
@@ -26,14 +27,14 @@ const QuestionState = props => {
   }
 
   const getQuestions = () => {
-    dispatch({ type: "SET_LOADING" });
-    axios.get("/api/questions/get")
-      .then( resp => dispatch({type: "GET_LIST", payload: resp.data}) )
+    return axios.get("/api/questions/get")
+      .then( resp => dispatch({type: "GET_LIST", items: resp.data}) )
+      // .then(resp => resp.data)
       .catch(err => console.error(err));
   }
 
   return (
-    <QuestionContext.Provider value={{ sendQuestion, questions: state.sendQuestion, getQuestions }}>{props.children}</QuestionContext.Provider>
+    <QuestionContext.Provider value={{ sendQuestion, getQuestions, questions: state.questions }}>{props.children}</QuestionContext.Provider>
   );
 };
 

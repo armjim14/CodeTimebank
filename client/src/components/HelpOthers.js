@@ -6,22 +6,26 @@ function HelpOthers(props) {
     const QuestionContext = useContext(questionContext);
     const { getQuestions, questions } = QuestionContext;
 
-    const loadQuestions = () => {
-        console.log(questions)
-        // console.log(getQuestions)
-        //getQuestions().then( data => console.log(data)/*data.map(info => console.log(info))*/ );
+    const loadQuestions = async () => {
+
+        return await questions.map( ({id, question, comfort, language}) => {
+            return (
+                <div>
+                    <p>{questions}</p>
+                </div>
+            )
+        })
+
     }
 
-    useEffect(
-        () => loadQuestions(),
-        //eslint-disable-next-line
-        []
-      );
+    useEffect( () => {
+        getQuestions();
+    })
 
     return (
         <section>
             <h1>Help Others</h1>
-            {/* {loadQuestions()} */}
+            {loadQuestions()}
         </section>
     )
 }
