@@ -1,11 +1,17 @@
-import { } from '../types';
-// import { start } from 'repl';
+// import { } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
+    case "SET_LOADING":
+      return {
+        ...state,
+        loading: true
+      }
     case "GET_LIST":
       return {
-        questions: [...action.items]
+        ...state,
+        questions: [...state.questions, action.items],
+        loading: false
       }
     default:
       return state;

@@ -1,33 +1,47 @@
-import React, { useContext, useEffect, Fragment, useState } from 'react';
+import React, { useContext, useEffect, Fragment } from 'react';
 import questionContext from "../Context/question/questionContext";
 
 function HelpOthers() {
-    
+
     const QuestionContext = useContext(questionContext);
-    const { getQuestions, questions } = QuestionContext;
+    const { getQuestions, questions, loading } = QuestionContext;
 
-    const [ allQuestions, getAllQuestions ] = useState([]);
+    const renderQuestions = () => {
 
-    const loadQuestions = async () => {
+        if (loading){
+            return <div>Loading</div>
+        } else {
+            let real = questions[0];
+            
+            if (real) {
 
-        getAllQuestions(questions)
+                return real.map( ({id, question, comfort, language}) => {
+                    return (
+                        <div key={id}>
+                            <p>{question}</p>
+                            <p>{comfort}</p>
+                            <p>{language}</p>
+                            <hr />
+                        </div>
+                    )
+                } )
+
+            }
+            return <div>Not loading</div>
+        }
 
     }
 
-    const allStuff = async () => {
-        console.log(allQuestions)
-        return await allQuestions.map( info => <p>{info.question}</p> )
-    }
-
-    useEffect( () => {
-        getQuestions()
-        .then(() => loadQuestions());
-    })
+    useEffect(
+        () => getQuestions(),
+        //eslint-disable-next-line
+        []
+    );
 
     return (
         <Fragment>
             <h1>Help Others</h1>
-            {allStuff()}
+            {renderQuestions()}
         </Fragment>
     )
 }

@@ -8,10 +8,11 @@ import questionReducer from './questionReducer';
 const QuestionState = props => {
 
     const initialState = {
-      questions: []
+      questions: [],
+      loading: null
     };
 
-  const [state, dispatch] = useReducer(questionReducer, [initialState]);
+  const [state, dispatch] = useReducer(questionReducer, initialState);
 
   const sendQuestion = async formInfo => {
 
@@ -27,6 +28,7 @@ const QuestionState = props => {
   }
 
   const getQuestions = () => {
+    dispatch({ type: "SET_LOADING" });
     return axios.get("/api/questions/get")
       .then( resp => dispatch({type: "GET_LIST", items: resp.data}) )
       // .then(resp => resp.data)
@@ -34,7 +36,7 @@ const QuestionState = props => {
   }
 
   return (
-    <QuestionContext.Provider value={{ sendQuestion, getQuestions, questions: state.question }}>{props.children}</QuestionContext.Provider>
+    <QuestionContext.Provider value={{ sendQuestion, getQuestions, questions: state.questions, loading: state.loading }}>{props.children}</QuestionContext.Provider>
   );
 };
 
