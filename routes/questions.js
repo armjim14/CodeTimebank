@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const db = require("../models");
+const auth = require("../middleware/auth");
 
 router.post("/add",
   [
@@ -14,7 +15,7 @@ router.post("/add",
     check("comfort", "Please provide your comfort level")
       .not()
       .isEmpty()
-  ],
+  ], auth,
   async (req, res) => {
 
     console.log("-----------------");
@@ -25,13 +26,22 @@ router.post("/add",
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { question, language, comfort } = req.body;
+    const { question, language, topic } = req.body;
 
     try {
 
-    let theQuestion = { question, language, comfort };
+      console.log("========================");
+      console.log("========================");
+      console.log(req.user)
+      console.log(req.user.id)
+      console.log("========================");
+      console.log("========================");
+
+    let theQuestion = { question, language, topic, solved: false, UserId: req.user.id };
 
       db.questions.create(theQuestion).then(resp => {
+        console.log("it works");
+        console.log(resp)
         return res.send(resp);
       });
 

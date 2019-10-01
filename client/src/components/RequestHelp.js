@@ -11,10 +11,10 @@ function RequestHelp() {
   const [questionAsked, setQuestion] = useState({
     question: "",
     language: "",
-    comfort: ""
+    topic: ""
   });
 
-  const { question, language, comfort } = questionAsked;
+  const { question, language, topic } = questionAsked;
 
   const onChange = e =>
     setQuestion({ ...questionAsked, [e.target.name]: e.target.value });
@@ -22,10 +22,10 @@ function RequestHelp() {
   const submit = e => {
     e.preventDefault();
 
-    if (question === "" || language === "" || comfort === "") {
+    if (question === "" || language === "" || topic === "") {
       setAlert("Fill in all fields", "danger");
     } else {
-      sendQuestion({ question, language, comfort });
+      sendQuestion({ question, language, topic });
     }
   };
 
@@ -53,13 +53,13 @@ function RequestHelp() {
         />
         <br />
         <br />
-        Comfort:{" "}
+        topic:{" "}
         <input
           onChange={onChange}
-          value={comfort}
+          value={topic}
           type='text'
           required
-          name='comfort'
+          name='topic'
         />
         <br />
         <br />

@@ -11,20 +11,27 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false
       },
 
-      comfort: {
+      topic: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+
+      solved: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: () => {
+          return false;
+        }
       }
 
     });
 
-    // questions.associate = function(models) {
-    //   questions.belongsTo(models.Users, {
-    //     foreignKey: {
-    //       allowNull: false
-    //     }
-    //   });
-    // };
+    questions.associate = function(models) {
+      questions.belongsTo(models.Users, {
+        foreignKey: {
+          allowNull: false
+        }
+      });
+    };
 
     return questions;
   
