@@ -22,6 +22,8 @@ function RequestHelp() {
   const submit = e => {
     e.preventDefault();
 
+    console.log("I was clicked")
+
     if (question === "" || language === "" || topic === "") {
       setAlert("Fill in all fields", "danger");
     } else {

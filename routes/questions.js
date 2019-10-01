@@ -12,15 +12,11 @@ router.post("/add",
     check("language", "Please provide a language")
       .not()
       .isEmpty(),
-    check("comfort", "Please provide your comfort level")
+    check("topic", "Please provide a topic")
       .not()
       .isEmpty()
   ], auth,
   async (req, res) => {
-
-    console.log("-----------------");
-    console.log(req.body);
-    console.log("-----------------");
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -28,16 +24,19 @@ router.post("/add",
     }
     const { question, language, topic } = req.body;
 
+    console.log("i am outside does nodemon work");
+    console.log("i am outside does nodemon work");
+    console.log("i am outside does nodemon work");
+    console.log("i am outside does nodemon work");
+    console.log("i am outside does nodemon work");
+
     try {
 
-      console.log("========================");
-      console.log("========================");
-      console.log(req.user)
-      console.log(req.user.id)
-      console.log("========================");
-      console.log("========================");
+      console.log("i am here")
 
     let theQuestion = { question, language, topic, solved: false, UserId: req.user.id };
+
+    console.log(theQuestion);
 
       db.questions.create(theQuestion).then(resp => {
         console.log("it works");
