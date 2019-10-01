@@ -24,22 +24,13 @@ router.post("/add",
     }
     const { question, language, topic } = req.body;
 
-    console.log("i am outside does nodemon work");
-    console.log("i am outside does nodemon work");
-    console.log("i am outside does nodemon work");
-    console.log("i am outside does nodemon work");
-    console.log("i am outside does nodemon work");
-
     try {
-
-      console.log("i am here")
 
     let theQuestion = { question, language, topic, solved: false, UserId: req.user.id };
 
     console.log(theQuestion);
 
       db.questions.create(theQuestion).then(resp => {
-        console.log("it works");
         console.log(resp)
         return res.send(resp);
       });
