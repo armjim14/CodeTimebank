@@ -71,6 +71,11 @@ function App() {
                       path='/dashboard'
                       component={Dashboard}
                     />
+                    <PrivateRoute
+                      exact
+                      path='/editprofile'
+                      component={EditProfile}
+                    />
                   </Switch>
                 </div>
               </Fragment>
