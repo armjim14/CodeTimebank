@@ -33,6 +33,8 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
+console.log("re-rendered");
+
 function App() {
   return (
     <AuthState>
