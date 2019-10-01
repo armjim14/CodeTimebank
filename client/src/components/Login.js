@@ -1,10 +1,12 @@
 import React, { useContext, Fragment, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import AuthContext from "../Context/auth/authContext";
-import { Link } from "react-router-dom";
+import AlertContext from "../Context/alert/alertContext";
 
 function Login(props) {
   const authContext = useContext(AuthContext);
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
   const { login, error, clearErrors, isAuthenticated } = authContext;
 
   const [user, setUser] = useState({
@@ -19,7 +21,7 @@ function Login(props) {
   const onSubmit = e => {
     e.preventDefault();
     if (username === "" || password === "") {
-      alert("Fill in all fields");
+      setAlert("Please fill in all fields", "danger");
     } else {
       login({ username, password });
     }
@@ -29,7 +31,11 @@ function Login(props) {
     if (isAuthenticated) {
       props.history.push("/dashboard");
     }
-  }, [isAuthenticated, props.history]);
+    if (error === "Invalid credentials") {
+      setAlert(error, "danger");
+      clearErrors();
+    }
+  }, [error, isAuthenticated, props.history]);
   return (
     <Fragment>
       <div className='row'>
@@ -68,7 +74,7 @@ function Login(props) {
       <button className='btn btn-block btn-secondary' onClick={onSubmit}>
         Submit
       </button>
-      <div className='row mt-5'>
+      <div className='row mt-3 mt-3'>
         <div className='col-md-12'>
           <h5 className='text-center'>
             <a href='/register' rel='noopener noreferrer'>

@@ -42,23 +42,6 @@ const AuthState = props => {
     }
   };
 
-  // const navbar = async formFields => {
-  //   const config = {
-  //     headers: {
-  //       "Content-Type": "application/json"
-  //     }
-  //   };
-
-  //   try {
-  //     const res = await axios.post("/api/users/register", formFields, config);
-  //     dispatch({ type: REGISTER_SUCCESS, payload: res.data });
-
-  //     loadUser();
-  //   } catch (err) {
-  //     dispatch({ type: REGISTER_FAIL, payload: err.response.data.msg });
-  //   }
-  // };
-
   // load user function
   const loadUser = async () => {
     if (localStorage.token) {

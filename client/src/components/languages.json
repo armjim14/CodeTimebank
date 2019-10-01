@@ -1,0 +1,58 @@
+[
+    {
+        "name":"JavaScript",
+        "value":0
+    },
+    {
+        "name":"CSS",
+        "value":0
+    },
+    {  
+        "name":"HTML",
+        "value":0
+    },
+    {
+          "name": "C#",
+          "value":0
+    }, 
+    {
+        "name":"C++",
+        "value":0
+    },
+    {  
+        "name": "C",
+        "value": 0
+    },
+    {
+        "name":"Java",
+        "value":0
+    },
+    { 
+        "name":"PHP",
+        "value": 0
+    },
+    {  
+        "name":"Python",
+        "value":0
+    },
+    { 
+        "name":"Ruby",
+        "value":0
+    },
+    {   
+        "name":"Perl",
+        "value":0
+    },
+    { 
+        "name":"SQL",
+        "value":0
+    },
+    {
+        "name":"NOSQL",
+        "value":0 
+    },
+    {   
+        "name":"Other",
+        "value":0
+    }
+] 

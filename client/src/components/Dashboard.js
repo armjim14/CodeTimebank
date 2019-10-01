@@ -1,11 +1,15 @@
 import React from "react";
+import SimplePieChart from "./SimplePieChart";
 
 const Dashboard = () => {
+
   return (
     <div>
-      <h1>You've been authenticated!</h1>
+      <p>Profile page</p>
+      <SimplePieChart/>
     </div>
   );
+
 };
 
 export default Dashboard;
