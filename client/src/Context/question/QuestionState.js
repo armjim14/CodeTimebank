@@ -22,8 +22,14 @@ const QuestionState = props => {
       }
     };
 
-    const resp = await axios.post("/api/questions/add", formInfo, config);
-    console.log(resp)
+    console.log(formInfo)
+
+    try {
+      const resp = await axios.post("/api/questions/add", formInfo, config);
+      console.log(resp)
+    } catch(e) {
+      console.log("I am not working", e)
+    }
 
   }
 

@@ -18,19 +18,25 @@ module.exports = function(sequelize, DataTypes) {
     },
     discord: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
     skype: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
+    },
+    credits: {
+      type: DataTypes.INTEGER,
+      defaultValue: () => {
+        return 0;
+      }
     }
   });
 
-  // Users.associate = function(models) {
-  //   Users.hasMany(models.questions, {
-  //     onDelete: "cascade"
-  //   });
-  // };
+  Users.associate = function(models) {
+    Users.hasMany(models.questions, {
+      onDelete: "cascade"
+    });
+  };
 
   return Users;
 };
