@@ -11,7 +11,8 @@ import {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
   LOGOUT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  RETRIEVE_FAIL
 } from "../types";
 
 const AuthState = props => {
@@ -82,6 +83,21 @@ const AuthState = props => {
   // clear errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
+  // getting info for the edit profile page
+  const getUsernames = async () => {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+
+    try {
+      const res = await axios.get("/api/users");
+      console.log(res.data);
+      return res.data;
+    } catch (err) {
+      dispatch({ type: RETRIEVE_FAIL, payload: err.response.data.msg });
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -94,7 +110,8 @@ const AuthState = props => {
         loadUser,
         login,
         logout,
-        clearErrors
+        clearErrors,
+        getUsernames
       }}
     >
       {props.children}

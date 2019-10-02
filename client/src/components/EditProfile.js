@@ -1,4 +1,5 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
+import AuthContext from "../Context/auth/authContext";
 
 const EditProfile = () => {
   const [info, setInfo] = useState({
@@ -8,9 +9,15 @@ const EditProfile = () => {
   });
   const { skype, github, discord } = info;
 
+  const authContext = useContext(AuthContext);
+  const { getUsernames } = authContext;
+
   const onChange = e => {
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
+  useEffect(() => {
+    getUsernames();
+  }, []);
 
   return (
     <Fragment>

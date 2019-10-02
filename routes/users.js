@@ -17,6 +17,20 @@ router.get("/auth", auth, async (req, res) => {
   }
 });
 
+router.get("/", auth, async (req, res) => {
+  try {
+    const userInfo = await db.Users.findOne({
+      where: { id: req.user.id },
+      attributes: ["github", "discord", "skype"]
+    });
+    res.json(userInfo);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server error");
+    s;
+  }
+});
+
 router.post(
   "/login",
   [
