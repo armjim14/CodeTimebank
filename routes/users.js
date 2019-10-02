@@ -134,4 +134,19 @@ router.post(
   }
 );
 
+router.put("/", auth, async (req, res) => {
+  const { discord, github, skype } = req.body;
+  try {
+    const update = await db.Users.update(
+      { discord, github, skype },
+      { returning: true, where: { id: req.user.id } }
+    );
+    res.json(update);
+    // console.log(user);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 module.exports = router;

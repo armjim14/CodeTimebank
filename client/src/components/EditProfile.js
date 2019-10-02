@@ -1,7 +1,8 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
 import AuthContext from "../Context/auth/authContext";
+import AlertContext from "../Context/alert/alertContext";
 
-const EditProfile = () => {
+const EditProfile = props => {
   const [info, setInfo] = useState({
     skype: "",
     github: "",
@@ -10,14 +11,36 @@ const EditProfile = () => {
   const { skype, github, discord } = info;
 
   const authContext = useContext(AuthContext);
-  const { getUsernames } = authContext;
+  const { getUsernames, updateInfo } = authContext;
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
 
   const onChange = e => {
     setInfo({ ...info, [e.target.name]: e.target.value });
   };
   useEffect(() => {
-    getUsernames();
+    async function fetchData() {
+      let { skype, github, discord } = await getUsernames();
+
+      setInfo({
+        skype,
+        github,
+        discord
+      });
+    }
+    fetchData();
+    //eslint-disable-next-line
   }, []);
+
+  const onSubmit = async e => {
+    e.preventDefault();
+    const res = await updateInfo({ skype, github, discord });
+    if (res.status === 200) {
+      props.history.push("/dashboard");
+    } else {
+      setAlert("Server malfunction", "danger");
+    }
+  };
 
   return (
     <Fragment>
@@ -73,7 +96,9 @@ const EditProfile = () => {
           />
         </div>
       </div>
-      <button className='btn btn-block btn-greyish'>Submit</button>
+      <button className='btn btn-block btn-greyish' onClick={onSubmit}>
+        Submit
+      </button>
       <a href='/dashboard' style={{ textDecoration: "none" }}>
         <button className='btn btn-block btn-dbrown'>Cancel</button>
       </a>

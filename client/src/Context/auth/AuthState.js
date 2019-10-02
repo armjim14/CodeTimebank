@@ -12,7 +12,8 @@ import {
   LOGIN_SUCCESS,
   LOGOUT,
   CLEAR_ERRORS,
-  RETRIEVE_FAIL
+  RETRIEVE_FAIL,
+  SET_ALERT
 } from "../types";
 
 const AuthState = props => {
@@ -98,6 +99,22 @@ const AuthState = props => {
     }
   };
 
+  //updating info from the userprofile page
+  const updateInfo = async formFields => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+
+    try {
+      const res = await axios.put("/api/users/", formFields, config);
+      return res;
+    } catch (err) {
+      dispatch({ type: REGISTER_FAIL, payload: err.response.data.msg });
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -111,7 +128,8 @@ const AuthState = props => {
         login,
         logout,
         clearErrors,
-        getUsernames
+        getUsernames,
+        updateInfo
       }}
     >
       {props.children}
