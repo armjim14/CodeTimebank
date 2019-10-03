@@ -54,4 +54,16 @@ router.get("/get",
   }
 )
 
+router.get("/userq", auth, async (req, res) => {
+  try {
+    console.log("---------------------------")
+    console.log("I am line 59")
+    console.log("---------------------------")
+    db.questions.findAll({where: { UserId: req.user.id }}).then(data => {console.log(data); return res.send(data)})
+  } catch(e) {
+    console.log("Error: " + e)
+    res.send({msg: e})
+  }
+})
+
 module.exports = router;

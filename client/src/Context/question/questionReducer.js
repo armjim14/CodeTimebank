@@ -13,6 +13,12 @@ export default (state, action) => {
         questions: [...state.questions, action.items],
         loading: false
       }
+    case "USER_QUESTIONS":
+      return {
+        ...state,
+        userQuestions: [...state.userQuestions, action.items],
+        loading: false
+      }
     default:
       return state;
   }

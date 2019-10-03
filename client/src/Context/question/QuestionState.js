@@ -9,6 +9,7 @@ const QuestionState = props => {
 
     const initialState = {
       questions: [],
+      userQuestions: [],
       loading: null
     };
 
@@ -41,8 +42,25 @@ const QuestionState = props => {
       .catch(err => console.error(err));
   }
 
+  const getUsersQuestions = async () => {
+    try {
+      const res = await axios.get(`/api/questions/userq`);
+      console.log(res.data);
+      return res.data
+    } catch (e){
+      console.log(e)
+    }
+  } 
+
   return (
-    <QuestionContext.Provider value={{ sendQuestion, getQuestions, questions: state.questions, loading: state.loading }}>{props.children}</QuestionContext.Provider>
+    <QuestionContext.Provider value={{ 
+      sendQuestion,
+      getUsersQuestions, 
+      getQuestions, 
+      questions: 
+      state.questions,
+      userQuestions: state.userQuestions,
+      loading: state.loading }}>{props.children}</QuestionContext.Provider>
   );
 };
 

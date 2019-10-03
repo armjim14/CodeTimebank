@@ -16,7 +16,7 @@ function Navbar(props) {
               className='nav-link text-off-white'
               to='/dashboard'
             >
-              Profile
+              Dashboard
             </Link>
           </li>
         </Fragment>

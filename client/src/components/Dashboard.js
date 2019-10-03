@@ -1,38 +1,64 @@
 import React, { Fragment,useContext, useEffect, useState } from "react";
 import SimplePieChart from "./SimplePieChart";
 import AuthContext from "../Context/auth/authContext";
+import QuestionContext from "../Context/question/questionContext";
 
 const Dashboard = () => {
 
   const [info, updateInfo] = useState({
     name: "",
-    hours: 0
+    id: "",
+    hours: 0,
+    questions: []
   })
 
   const authContext = useContext(AuthContext);
   const { getUsernames } = authContext;
 
+  const questionContext = useContext(QuestionContext);
+  const { getUsersQuestions } = questionContext;
+
   const getHours = () => {
-
-    console.log(info.hours)
-
+    
     if (info.hours){
-      console.log("Yes")
       return <span>{info.hours}</span>
     } else {
-      console.log("No")
       return <span>0</span>
+    }
+  
+  }
+
+  const seeQuestions = () => {
+
+    console.log(info.questions.length);
+
+    if (info.questions.length == 0){
+      return <div className="col-md-12 text-center">There are no questions</div>
+    } else {
+      console.log(info.questions)
+      return info.questions.map( ({id, question, language, topic}) => {
+        return (
+          <div key={id} className="col-md-12 text-center">
+            <h3>{topic}</h3>
+            <p>{language}</p>
+            <p>{question}</p>
+          </div>
+        )
+      })
     }
   }
 
   useEffect(() => {
     async function fetchData() {
+      
+      let dataBack = await getUsersQuestions();
 
       let { github, credits } = await getUsernames();
 
       updateInfo({
         name: github,
-        hours: credits
+        hours: credits,
+        questions: dataBack
       });
 
     }
@@ -75,13 +101,23 @@ const Dashboard = () => {
         <div className="col-md-6">
           <SimplePieChart />
         </div>
-        <div className="col-md-6 pt-5">
-          <p className="text-center pt-5">Credits {getHours()}</p>
+        <div className="col-md-6">
+          <p style={style.vert} className="text-center">Credits: {getHours()}</p>
         </div>
+      </div>
+
+      <div className="row mb-5">
+        {seeQuestions()}
       </div>
 
     </Fragment>
   );
 };
+
+const style = {
+  vert: {
+    marginTop: "40%"
+  }
+}
 
 export default Dashboard;
