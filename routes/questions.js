@@ -28,12 +28,7 @@ router.post("/add",
 
     let theQuestion = { question, language, topic, solved: false, UserId: req.user.id };
 
-    console.log(theQuestion);
-
-      db.questions.create(theQuestion).then(resp => {
-        console.log(resp)
-        return res.send(resp);
-      });
+      db.questions.create(theQuestion).then(resp => res.send(resp));
 
     } catch (err) {
       console.error(err.message);
@@ -56,10 +51,7 @@ router.get("/get",
 
 router.get("/userq", auth, async (req, res) => {
   try {
-    console.log("---------------------------")
-    console.log("I am line 59")
-    console.log("---------------------------")
-    db.questions.findAll({where: { UserId: req.user.id }}).then(data => {console.log(data); return res.send(data)})
+    db.questions.findAll({where: { UserId: req.user.id }}).then(data => res.send(data))
   } catch(e) {
     console.log("Error: " + e)
     res.send({msg: e})

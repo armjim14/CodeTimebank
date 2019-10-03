@@ -83,10 +83,7 @@ export default (state, action) => {
     case RETRIEVE_FAIL:
       return {
         ...state,
-        token: null,
-        isAuthenticated: false,
         loading: false,
-        user: null,
         error: action.payload
       };
     default:

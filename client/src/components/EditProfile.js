@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
 import AuthContext from "../Context/auth/authContext";
 import AlertContext from "../Context/alert/alertContext";
+import { Link } from "react-router-dom";
 
 const EditProfile = props => {
   const [info, setInfo] = useState({
@@ -99,9 +100,9 @@ const EditProfile = props => {
       <button className='btn btn-block btn-greyish' onClick={onSubmit}>
         Submit
       </button>
-      <a href='/dashboard' style={{ textDecoration: "none" }}>
+      <Link to='/dashboard' style={{ textDecoration: "none" }}>
         <button className='btn btn-block btn-dbrown'>Cancel</button>
-      </a>
+      </Link>
     </Fragment>
   );
 };

@@ -1,6 +1,55 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useState, useEffect } from "react";
+import QuestionContext from "../Context/question/questionContext";
+import { Link } from "react-router-dom";
+
 
 const Leaderboards = () => {
+
+  const [state, setState] = useState({ users: [] })
+
+  let { users } = state
+
+  const questionContext = useContext(QuestionContext);
+  const { getAllUsers } = questionContext;
+
+  const renderUsers = () => {
+
+    if (users.length == 0) {
+      return (
+        <tr>
+          <td>No Data</td>
+          <td>No Data</td>
+          <td>No Data</td>
+          <td>No Data</td>
+        </tr>
+      );
+    } else {
+      return users.map(({ id, username, github, credits }) => {
+        return (
+          <tr key={id}>
+            <td><Link to="/">{username}</Link></td>
+            <td>{credits}</td>
+            <td><a href='https://www.github.com' target="__blank">{github}</a></td>
+            <td>Hireable stuff</td>
+          </tr>
+        )
+      })
+    }
+
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+
+      let users = await getAllUsers();
+      console.log(users)
+      setState({ users })
+
+    }
+    fetchData();
+    //eslint-disable-next-line
+  }, []);
+
   return (
     <Fragment>
       <div className='row'>
@@ -19,22 +68,7 @@ const Leaderboards = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <a href='#!'>Example Username (Links to profile)</a>
-              </td>
-              <td>100</td>
-              <td>
-                <a
-                  href='http://www.github.com/Mrrwmix'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  https://github.com/Mrrwmix
-                </a>
-              </td>
-              <td>From Github API: render a checkmark if yes, X if no</td>
-            </tr>
+            {renderUsers()}
           </tbody>
         </table>
       </div>
