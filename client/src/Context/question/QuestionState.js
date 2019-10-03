@@ -52,13 +52,23 @@ const QuestionState = props => {
     }
   } 
 
+  const getAllUsers = async () => {
+    try {
+      const resp = await axios.get(`/api/users/50users`);
+      console.log(resp.data);
+      return resp.data
+    } catch (e){
+      console.log(e)
+    }
+  } 
+
   return (
     <QuestionContext.Provider value={{ 
       sendQuestion,
       getUsersQuestions, 
-      getQuestions, 
-      questions: 
-      state.questions,
+      getQuestions,
+      getAllUsers,
+      questions: state.questions,
       userQuestions: state.userQuestions,
       loading: state.loading }}>{props.children}</QuestionContext.Provider>
   );

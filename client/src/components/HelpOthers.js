@@ -12,11 +12,11 @@ function HelpOthers() {
       let real = questions[0];
 
       if (real) {
-        return real.map(({ id, question, comfort, language }) => {
+        return real.map(({ id, question, topic, language }) => {
           return (
-            <div key={id}>
+            <div className="col-md-12" key={id}>
               <p>{question}</p>
-              <p>{comfort}</p>
+              <p>{topic}</p>
               <p>{language}</p>
               <hr />
             </div>
@@ -37,8 +37,16 @@ function HelpOthers() {
 
   return (
     <Fragment>
-      <h1>Help Others</h1>
+      <div className="row">
+        <div className="col-md-12">
+          <h1 className="text-center">Help Others</h1>
+        </div>
+      </div>
+
+      <div className="row">
       {renderQuestions()}
+      </div>
+      
     </Fragment>
   );
 }

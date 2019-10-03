@@ -150,4 +150,15 @@ router.put("/", auth, async (req, res) => {
   }
 });
 
+router.get("/50users", async (req, res) => {
+  try {
+    const resp = await db.Users.findAll();
+    res.json(resp)
+  }
+  catch (err){
+    console.log(err.message);
+    res.status(500).send("Server error");
+  }
+})
+
 module.exports = router;
