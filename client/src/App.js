@@ -13,6 +13,7 @@ import Leaderboards from "./components/Leaderboards";
 import Alerts from "./components/Alerts";
 import Footer from "./components/Footer";
 import AlertState from "./Context/alert/AlertState";
+import Profile from "./components/Profile";
 // Hooks
 import AuthState from "./Context/auth/AuthState";
 import QuestionState from "./Context/question/QuestionState";
@@ -71,6 +72,11 @@ function App() {
                       exact
                       path='/dashboard'
                       component={Dashboard}
+                    />
+                    <Route
+                      exact 
+                      path="/user/:id"
+                      component={Profile}
                     />
                     <Route exact path='/editprofile' component={EditProfile} />
                   </Switch>
