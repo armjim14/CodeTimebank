@@ -112,7 +112,8 @@ router.post(
         password: password,
         github: github,
         discord: discord,
-        skype: skype
+        skype: skype,
+        credits: 0
       };
 
       const salt = await bcrypt.genSalt(10);

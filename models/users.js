@@ -26,9 +26,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     credits: {
       type: DataTypes.INTEGER,
-      defaultValue: () => {
-        return 0;
-      }
+      allowNull: true
     }
   });
 
