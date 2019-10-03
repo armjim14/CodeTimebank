@@ -3,6 +3,8 @@ import "./App.css";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
+import ExamplePage from "./components/ExamplePage";
+
 import Navbar from "./components/Navbar";
 import Register from "./components/Register";
 import Login from "./components/Login";
@@ -73,6 +75,7 @@ function App() {
                       component={Dashboard}
                     />
                     <Route exact path='/editprofile' component={EditProfile} />
+                    <Route exact path='/example' component={ExamplePage} />
                   </Switch>
                 </div>
               </Fragment>
