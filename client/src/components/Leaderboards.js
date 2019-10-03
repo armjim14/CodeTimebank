@@ -27,9 +27,9 @@ const Leaderboards = () => {
       return users.map(({ id, username, github, credits }) => {
         return (
           <tr key={id}>
-            <td><Link to="/">{username}</Link></td>
+            <td><Link to={`/user/${id}`}>{username}</Link></td>
             <td>{credits}</td>
-            <td><a href='https://www.github.com' target="__blank">{github}</a></td>
+            <td><a href={`https://www.github.com/${github}`} target="__blank">{github}</a></td>
             <td>Hireable stuff</td>
           </tr>
         )

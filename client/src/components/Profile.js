@@ -1,9 +1,8 @@
-import React, { Fragment,useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import SimplePieChart from "./SimplePieChart";
-import AuthContext from "../Context/auth/authContext";
 import QuestionContext from "../Context/question/questionContext";
 
-function Profile() {
+function Profile(props) {
 
     const [info, updateInfo] = useState({
         name: "",
@@ -12,11 +11,8 @@ function Profile() {
         questions: []
       })
     
-      const authContext = useContext(AuthContext);
-      const { getUsernames } = authContext;
-    
       const questionContext = useContext(QuestionContext);
-      const { getUsersQuestions } = questionContext;
+      const { specificUser, specificQuestions } = questionContext;
     
       const getHours = () => {
         
@@ -30,9 +26,9 @@ function Profile() {
     
       const seeQuestions = () => {
     
-        console.log(info.questions.length);
+        // console.log(info.questions.length);
     
-        if (info.questions.length == 0){
+        if (!info.questions || info.questions.length == 0){
           return <div className="col-md-12 text-center">There are no questions</div>
         } else {
           console.log(info.questions)
@@ -50,15 +46,20 @@ function Profile() {
     
       useEffect(() => {
         async function fetchData() {
+
+          let idd = props.match.params.id
           
-          let dataBack = await getUsersQuestions();
+          let dataBack = await specificUser(idd);
+          let questions = await specificQuestions(idd)
+
+          console.log(dataBack)
     
-          let { github, credits } = await getUsernames();
+          let { github, credits } = dataBack;
     
           updateInfo({
             name: github,
             hours: credits,
-            questions: dataBack
+            questions
           });
     
         }

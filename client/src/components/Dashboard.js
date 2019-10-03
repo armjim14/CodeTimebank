@@ -53,11 +53,12 @@ const Dashboard = () => {
       
       let dataBack = await getUsersQuestions();
 
-      let { github, credits } = await getUsernames();
+      let { github, credits, id } = await getUsernames();
 
       updateInfo({
         name: github,
         hours: credits,
+        id,
         questions: dataBack
       });
 
@@ -76,7 +77,7 @@ const Dashboard = () => {
 
       <div className='row'>
         <div className='col-md-6'>
-          <a href='#!' style={{ textDecoration: "none" }}>
+          <a href={`/user/${info.id}`} style={{ textDecoration: "none" }}>
             <button className='btn btn-block btn-beige rounded-pill'>
               View Profile
             </button>

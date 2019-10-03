@@ -161,4 +161,19 @@ router.get("/50users", async (req, res) => {
   }
 })
 
+router.get("/:id", async (req, res) => {
+  console.log("=================")
+  console.log("=================")
+  console.log(req.params.id)
+  console.log("=================")
+  console.log("=================")
+  try {
+    const resp = await db.Users.findOne({where: {id: req.params.id}});
+    res.json(resp)
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).send("Server error");
+  }
+})
+
 module.exports = router;

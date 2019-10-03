@@ -60,7 +60,29 @@ const QuestionState = props => {
     } catch (e){
       console.log(e)
     }
-  } 
+  }
+
+  const specificUser = async id => {
+    console.log(id)
+    try {
+      const resp = await axios.get(`/api/users/${id}`);
+      console.log(resp.data);
+      return resp.data
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const specificQuestions = async id => {
+    console.log(id)
+    try {
+      const resp = await axios.get(`/api/questions/${id}`);
+      console.log(resp.data);
+      return resp.data
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <QuestionContext.Provider value={{ 
@@ -68,6 +90,8 @@ const QuestionState = props => {
       getUsersQuestions, 
       getQuestions,
       getAllUsers,
+      specificQuestions,
+      specificUser,
       questions: state.questions,
       userQuestions: state.userQuestions,
       loading: state.loading }}>{props.children}</QuestionContext.Provider>

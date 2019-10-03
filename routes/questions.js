@@ -58,4 +58,14 @@ router.get("/userq", auth, async (req, res) => {
   }
 })
 
+router.get("/:id", async (req, res) => {
+  try {
+    const resp = await db.questions.findAll({where: {UserId: req.params.id}});
+    res.json(resp)
+  } catch (e) {
+    console.log("Error: " + e)
+    res.send({msg: e})
+  }
+})
+
 module.exports = router;
