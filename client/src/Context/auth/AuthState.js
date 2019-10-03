@@ -90,6 +90,8 @@ const AuthState = props => {
       setAuthToken(localStorage.token);
     }
 
+    loadUser();
+
     try {
       const res = await axios.get("/api/users");
       console.log(res.data);
