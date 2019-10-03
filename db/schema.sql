@@ -1,0 +1,18 @@
+CREATE DATABASE CodeTimeBank_db;
+USE CodeTimeBank_db;
+
+CREATE TABLE questions
+(
+	id INT NOT NULL AUTO_INCREMENT,
+	theQuestion VARCHAR(250) NOT NULL,
+	questions BOOLEAN DEFAULT false,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE users
+(
+	id INT NOT NULL AUTO_INCREMENT,
+	login VARCHAR(250) NOT NULL,
+	register BOOLEAN DEFAULT false,
+	PRIMARY KEY(id)
+);
