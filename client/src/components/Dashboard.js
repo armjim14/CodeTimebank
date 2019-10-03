@@ -1,7 +1,8 @@
 import React, { Fragment,useContext, useEffect, useState } from "react";
-import SimplePieChart from "./SimplePieChart";
+// import SimplePieChart from "./SimplePieChart";
 import AuthContext from "../Context/auth/authContext";
 import QuestionContext from "../Context/question/questionContext";
+import Stats from "./Stats";
 
 const Dashboard = () => {
 
@@ -99,7 +100,7 @@ const Dashboard = () => {
 
       <div className="row">
         <div className="col-md-6">
-          <SimplePieChart />
+          <Stats />
         </div>
         <div className="col-md-6">
           <p style={style.vert} className="text-center">Credits: {getHours()}</p>
