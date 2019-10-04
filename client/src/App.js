@@ -75,11 +75,7 @@ function App() {
                       path='/dashboard'
                       component={Dashboard}
                     />
-                    <Route
-                      exact 
-                      path="/user/:id"
-                      component={Profile}
-                    />
+                    <Route exact path='/user/:id' component={Profile} />
                     <Route exact path='/editprofile' component={EditProfile} />
                     <Route exact path='/example' component={ExamplePage} />
                   </Switch>

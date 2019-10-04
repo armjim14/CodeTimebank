@@ -71,7 +71,7 @@ function Login(props) {
           />
         </div>
       </div>
-      <button className='btn btn-block btn-secondary' onClick={onSubmit}>
+      <button className='btn btn-block btn-greyish' onClick={onSubmit}>
         Submit
       </button>
       <div className='row mt-3 mt-3'>
