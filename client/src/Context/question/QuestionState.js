@@ -32,16 +32,15 @@ const QuestionState = props => {
     }
   };
 
-  const getQuestions = () => {
-    dispatch({ type: "SET_LOADING" });
-    return (
-      axios
-        .get("/api/questions/get")
-        .then(resp => dispatch({ type: "GET_LIST", items: resp.data }))
-        // .then(resp => resp.data)
-        .catch(err => console.error(err))
-    );
-  };
+  const getQuestions = async (lang) => {
+    try {
+      const res = await axios.get(`/api/questions/help/${lang}`);
+      console.log(res.data);
+      return res.data
+    } catch (e){
+      console.log(e)
+    }
+  }
 
   const getUsersQuestions = async () => {
     try {

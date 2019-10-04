@@ -3,6 +3,28 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const db = require("../models");
 const auth = require("../middleware/auth");
+var Op = require("sequelize").Op;
+
+router.get("/help/:lang", auth, async (req, res) => {
+  try {
+
+    const resp = await db.questions.findAll({
+      where: {
+        UserId: {
+          [Op.not]: req.user.id
+        },
+        language: req.params.lang
+      }
+    })
+
+    console.log(resp);
+    res.json(resp)
+
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server malfunction");
+  }
+})
 
 router.post("/add",
   [
