@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, Fragment, useState } from "react";
 import questionContext from "../Context/question/questionContext";
+import { Link } from "react-router-dom";
 import languages from "./data/languages.json";
-import { setServers } from "dns";
+import Moment from "react-moment";
+import "moment-timezone";
 
 function HelpOthers() {
   const QuestionContext = useContext(questionContext);
@@ -35,13 +37,73 @@ function HelpOthers() {
         return questions.map(
           ({ User, id, question, topic, createdAt, language }) => {
             return (
-              <div className='col-md-12' key={id}>
-                <p>{topic}</p>
-                <p>{language}</p>
-                <p>{question}</p>
-                <p>{User.username}</p>
-                <p>{createdAt}</p>
+              <div
+                className='col-md-12 border m-1 border-dbrown rounded'
+                key={id}
+              >
+                <h3 className='text-center'>{topic}</h3>
+                <hr className='mb-0' />
+                <div className='row'>
+                  <div className='col-md-6 pr-0'>
+                    <h6 className='small text-right border border-right p-1'>
+                      Language: {language}
+                    </h6>
+                  </div>
+                  <div className='col-md-6 pl-0'>
+                    <h6 className='text-left small border border-left p-1'>
+                      Asked by{" "}
+                      <Link to={`/user/${User.id}`}>{User.username}</Link> on{" "}
+                      <Moment tz='America/Phoenix' format='LLL Z'>
+                        {createdAt}
+                      </Moment>
+                    </h6>
+                  </div>
+                </div>
+                <div className='row overflow-auto' style={{ height: "7rem" }}>
+                  <p className='col-md-12'>{question}</p>
+                </div>
+
                 <hr />
+                <div className='row'>
+                  <div className='col-md-2 text-right'>
+                    <i className='fas fa-address-book' /> Contact{" "}
+                    <Link to={`/user/${User.id}`}>{User.username}</Link>:
+                  </div>
+                  <div className='col-md-10 d-flex justify-content-around'>
+                    {User.skype != "" && (
+                      <p>
+                        <a href={`skype:${User.skype}?chat`}>
+                          <i className='fab fa-skype text-primary'>
+                            {" "}
+                            {User.skype}
+                          </i>
+                        </a>
+                      </p>
+                    )}
+                    {User.github != "" && (
+                      <p>
+                        <a
+                          href={`https://github.com/${User.github}`}
+                          target='_blank'
+                          rel='noopener noreferrer'
+                          className='text-black'
+                        >
+                          <i className='fab fa-github text-black' />{" "}
+                          {User.github}
+                        </a>
+                      </p>
+                    )}
+                    {User.discord != "" && (
+                      <p>
+                        <i
+                          className='fab fa-discord'
+                          style={{ color: "#7289DA" }}
+                        />{" "}
+                        {User.discord}
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
             );
           }
@@ -68,12 +130,12 @@ function HelpOthers() {
       </div>
 
       <div className='row'>
-        <div className='col-md-12 d-flex align-items-center justify-content-center'>
+        <div className='col-md-12 form-group'>
           <select
             value={lang}
             onChange={testing}
-            type='button'
-            className='btn btn-secondary text-white dropdown-toggle'
+            // type='button'
+            className='text-black dropdown-toggle form-control'
           >
             <option value='none'>Select a Language</option>
             {allOptions()}
