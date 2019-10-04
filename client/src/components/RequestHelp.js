@@ -42,7 +42,7 @@ function RequestHelp(props) {
 
   return (
     <div>
-      <h1>What question are you wanting to ask</h1>
+      <h1 className='text-center'>Request Help</h1>
       <form onSubmit={submit}>
         <div className='row'>
           <div className='form-group col-md-6'>
@@ -83,7 +83,7 @@ function RequestHelp(props) {
             required
             name='question'
             className='form-control'
-            placeholder='Describe your issue in detail.'
+            placeholder='Describe your problem in detail.'
             rows='5'
           />
         </div>
