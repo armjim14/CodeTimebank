@@ -4,7 +4,7 @@ import AuthContext from "../Context/auth/authContext";
 import QuestionContext from "../Context/question/questionContext";
 import Stats from "./Stats";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
 
   const [info, updateInfo] = useState({
     name: "",
@@ -78,11 +78,11 @@ const Dashboard = () => {
 
       <div className='row'>
         <div className='col-md-6'>
-          <a href={`/user/${info.id}`} style={{ textDecoration: "none" }}>
-            <button className='btn btn-block btn-beige rounded-pill'>
+          {/* <a href={`/user/${info.id}`} style={{ textDecoration: "none" }}> */}
+            <button onClick={ () => {props.history.push(`/user/${info.id}`)}} className='btn btn-block btn-beige rounded-pill'>
               View Profile
             </button>
-          </a>
+          {/* </a> */}
         </div>
         <div className='col-md-6'>
           <a href='/editprofile' style={{ textDecoration: "none" }}>
