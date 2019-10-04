@@ -13,11 +13,9 @@ function HelpOthers() {
 
   const testing = async e => {
     let value = e.target.value;
-    console.log(value);
-    setLang({lang: value});
-    let all = await getQuestions(lang);
+    let all = await getQuestions(e.target.value);
     console.log(all);
-    setLang({questions: all, lang: value})
+    await setLang({questions: all, lang: value})
   }
 
   const renderQuestions = () => {
@@ -42,8 +40,6 @@ function HelpOthers() {
       return <div>No Questions</div>;
     }
   };
-
-  // const testing = 
 
   useEffect(
     () => {
