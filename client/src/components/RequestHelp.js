@@ -35,6 +35,16 @@ function RequestHelp() {
     <div>
       <h1>What question are you wanting to ask</h1>
       <form onSubmit={submit}>
+        Topic: {" "}
+        <input
+          onChange={onChange}
+          value={topic}
+          type='text'
+          required
+          name='topic'
+        />
+        <br />
+        <br />
         Question:{" "}
         <input
           onChange={onChange}
@@ -52,16 +62,6 @@ function RequestHelp() {
           type='text'
           required
           name='language'
-        />
-        <br />
-        <br />
-        topic:{" "}
-        <input
-          onChange={onChange}
-          value={topic}
-          type='text'
-          required
-          name='topic'
         />
         <br />
         <br />
