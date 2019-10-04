@@ -7,7 +7,6 @@ function Profile(props) {
     const [info, updateInfo] = useState({
         name: "",
         id: "",
-        hours: 0,
         questions: []
       })
     
@@ -54,11 +53,10 @@ function Profile(props) {
 
           console.log(dataBack)
     
-          let { github, credits } = dataBack;
+          let { github, } = dataBack;
     
           updateInfo({
             name: github,
-            hours: credits,
             questions
           });
     

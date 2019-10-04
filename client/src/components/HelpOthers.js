@@ -1,11 +1,16 @@
 import React, { useContext, useEffect, Fragment, useState } from "react";
 import questionContext from "../Context/question/questionContext";
 import languages from "./data/languages.json"
-import { setServers } from "dns";
+import timeContext from "../Context/time/timeContext";
 
 function HelpOthers() {
+
   const QuestionContext = useContext(questionContext);
   const { getQuestions, loading } = QuestionContext;
+
+  const TimeContext = useContext(timeContext);
+  const { AddCredit } = TimeContext;
+
 
   const allOptions = () => languages.map(({name}, i) => <option value={name} key={i}>{name}</option>)
 
@@ -18,6 +23,11 @@ function HelpOthers() {
     await setLang({questions: all, lang: value})
   }
 
+  const answerQuestion = (id) => {
+    console.log(id)
+    AddCredit(id, 1)
+  }
+
   const renderQuestions = () => {
     console.log(languages)
     if (loading) {
@@ -26,12 +36,13 @@ function HelpOthers() {
       // let real = questions[0];
 
       if (questions) {
-        return questions.map(({ id, question, topic, language }) => {
+        return questions.map(({ id, question, topic, language, User }) => {
           return (
             <div className="col-md-12" key={id}>
-              <p>{topic}</p>
+              <p>{topic} by {User.username}</p>
               <p>{language}</p>
               <p>{question}</p>
+              <button onClick={answerQuestion.bind(this, User.id)}>Answer Question</button>
               <hr />
             </div>
           );

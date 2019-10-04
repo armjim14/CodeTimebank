@@ -31,9 +31,11 @@ module.exports = function(sequelize, DataTypes) {
           allowNull: false
         }
       });
+      // questions.hasMany(models.time, {
+      //   onDelete: "cascade"
+      // });
     };
 
     return questions;
   
   };
-  
