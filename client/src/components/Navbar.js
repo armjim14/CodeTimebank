@@ -1,10 +1,15 @@
-import React, { useEffect, useContext, Fragment } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, Fragment } from "react";
+import { Link, Redirect } from "react-router-dom";
 import AuthContext from "../Context/auth/authContext";
 
 function Navbar(props) {
   const authContext = useContext(AuthContext);
-  const { login, error, clearErrors, isAuthenticated } = authContext;
+  const { logout, isAuthenticated } = authContext;
+
+  const goHome = async e => {
+    logout();
+    return <Redirect to='/' />;
+  };
 
   const restLinks = () => {
     if (isAuthenticated) {
@@ -105,6 +110,15 @@ function Navbar(props) {
               </Link>
             </li>
           </ul>
+          {isAuthenticated && (
+            <div
+              onClick={goHome}
+              style={{ cursor: "pointer" }}
+              className='nav-item text-right text-off-white'
+            >
+              Logout
+            </div>
+          )}
         </div>
       </nav>
     </header>
