@@ -15,6 +15,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
 
+    repo: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
     solved: {
       type: DataTypes.BOOLEAN,
       defaultValue: () => {

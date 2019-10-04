@@ -49,13 +49,14 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { question, language, topic } = req.body;
+    const { question, language, topic, repo } = req.body;
 
     try {
       let theQuestion = {
         question,
         language,
         topic,
+        repo,
         solved: false,
         UserId: req.user.id
       };
