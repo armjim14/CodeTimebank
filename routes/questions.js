@@ -14,7 +14,8 @@ router.get("/help/:lang", auth, async (req, res) => {
           [Op.not]: req.user.id
         },
         language: req.params.lang
-      }
+      },
+      include: [db.Users]
     })
 
     console.log(resp);

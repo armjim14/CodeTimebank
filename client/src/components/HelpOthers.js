@@ -17,15 +17,13 @@ function HelpOthers() {
     setLang({lang: value});
     let all = await getQuestions(lang);
     console.log(all);
-    setLang({questions: all, lang: value})
+    await setLang({questions: all, lang: value})
   }
 
   const renderQuestions = () => {
-    console.log(languages)
     if (loading) {
       return <div>Loading</div>;
     } else {
-      // let real = questions[0];
 
       if (questions) {
         return questions.map(({ id, question, topic, language }) => {
@@ -39,6 +37,7 @@ function HelpOthers() {
           );
         });
       }
+
       return <div>No Questions</div>;
     }
   };
@@ -63,7 +62,7 @@ function HelpOthers() {
 
       <div className="row">
         <div className="col-md-12 d-flex align-items-center justify-content-center">
-              <select value={lang} onChange={testing} type="button" className="btn btn-secondary text-white dropdown-toggle">
+              <select id="lang" value={lang} onChange={testing} type="button" className="btn btn-secondary text-white dropdown-toggle">
                 <option value="none">Select a Language</option>
                 {allOptions()}
               </select>
