@@ -7,7 +7,7 @@ var Op = require("sequelize").Op;
 
 router.get("/help/:lang", auth, async (req, res) => {
   try {
-    
+
     const resp = await db.questions.findAll({
       where: {
         UserId: {

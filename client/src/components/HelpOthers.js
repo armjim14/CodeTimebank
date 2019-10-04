@@ -5,15 +5,19 @@ import { setServers } from "dns";
 
 function HelpOthers() {
   const QuestionContext = useContext(questionContext);
-  const { getQuestions, questions, loading } = QuestionContext;
+  const { getQuestions, loading } = QuestionContext;
 
   const allOptions = () => languages.map(({name}, i) => <option value={name} key={i}>{name}</option>)
 
-  const [{lang}, setLang] = useState({lang: ""})
+  const [{lang, questions}, setLang] = useState({lang: "", questions: []})
 
-  const testing = e => {
-    setLang({lang: e.target.value});
-    console.log(lang)
+  const testing = async e => {
+    let value = e.target.value;
+    console.log(value);
+    setLang({lang: value});
+    let all = await getQuestions(lang);
+    console.log(all);
+    setLang({questions: all, lang: value})
   }
 
   const renderQuestions = () => {
@@ -21,10 +25,10 @@ function HelpOthers() {
     if (loading) {
       return <div>Loading</div>;
     } else {
-      let real = questions[0];
+      // let real = questions[0];
 
-      if (real) {
-        return real.map(({ id, question, topic, language }) => {
+      if (questions) {
+        return questions.map(({ id, question, topic, language }) => {
           return (
             <div className="col-md-12" key={id}>
               <p>{topic}</p>
@@ -35,7 +39,7 @@ function HelpOthers() {
           );
         });
       }
-      return <div>Not loading</div>;
+      return <div>No Questions</div>;
     }
   };
 
@@ -44,7 +48,6 @@ function HelpOthers() {
   useEffect(
     () => {
       console.log(lang)
-      getQuestions();
     },
     // eslint-disable-next-line
     []
