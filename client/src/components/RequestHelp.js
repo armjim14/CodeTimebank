@@ -3,7 +3,7 @@ import alertContext from "../Context/alert/alertContext";
 import questionContext from "../Context/question/questionContext";
 import languages from "./data/languages";
 
-function RequestHelp() {
+function RequestHelp(props) {
   const QuestionContext = useContext(questionContext);
   const { sendQuestion } = QuestionContext;
   const AlertContext = useContext(alertContext);
@@ -21,15 +21,22 @@ function RequestHelp() {
   const onChange = e =>
     setQuestion({ ...questionAsked, [e.target.name]: e.target.value });
 
-  const submit = e => {
+  const submit = async e => {
     e.preventDefault();
+
+    const res = await sendQuestion({ question, language, topic });
 
     console.log("I was clicked");
 
-    if (question === "" || language === "" || topic === "") {
-      setAlert("Fill in all fields", "danger");
+    if (
+      question === "" ||
+      language === "" ||
+      topic === "" ||
+      res.status !== 200
+    ) {
+      setAlert("Fill in all fields correctly", "danger");
     } else {
-      sendQuestion({ question, language, topic });
+      props.history.push("/dashboard");
     }
   };
 
