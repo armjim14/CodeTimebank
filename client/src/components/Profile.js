@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-import SimplePieChart from "./SimplePieChart";
+import Stats from "./Stats";
 import QuestionContext from "../Context/question/questionContext";
 
 function Profile(props) {
@@ -83,7 +83,7 @@ function Profile(props) {
     
           <div className="row">
             <div className="col-md-6">
-              <SimplePieChart />
+              <Stats />
             </div>
             <div className="col-md-6">
               <p style={style.vert} className="text-center">Credits: {getHours()}</p>
