@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var questions = sequelize.define("questions", {
     question: {
       type: DataTypes.TEXT,
@@ -28,13 +28,15 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  questions.associate = function(models) {
-    questions.belongsTo(models.Users, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
+    questions.associate = function (models) {
+      questions.belongsTo(models.Users, {
+        foreignKey: {
+          allowNull: false
+        }
+      });
+      // questions.hasMany(models.time, {
+      //   onDelete: "cascade"
+      // });
+    };
+    return questions;
   };
-
-  return questions;
-};

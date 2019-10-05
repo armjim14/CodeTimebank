@@ -62,6 +62,17 @@ const QuestionState = props => {
     }
   };
 
+  const getExceptUsers = async () => {
+    try {
+      const resp = await axios.get(`/api/users/except`);
+      console.log(resp);
+      console.log("I ran the API")
+      return resp.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const specificUser = async id => {
     console.log(id);
     try {
@@ -91,6 +102,7 @@ const QuestionState = props => {
         getUsersQuestions,
         getQuestions,
         getAllUsers,
+        getExceptUsers,
         specificQuestions,
         specificUser,
         questions: state.questions,

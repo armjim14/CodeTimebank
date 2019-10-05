@@ -1,13 +1,18 @@
 import React, { useContext, useEffect, Fragment, useState } from "react";
 import questionContext from "../Context/question/questionContext";
+
+import timeContext from "../Context/time/timeContext";
 import { Link } from "react-router-dom";
 import languages from "./data/languages.json";
 import Moment from "react-moment";
 import "moment-timezone";
 
 function HelpOthers() {
+
   const QuestionContext = useContext(questionContext);
   const { getQuestions, loading } = QuestionContext;
+
+  const { AddCredit } = TimeContext;
 
   const allOptions = () =>
     languages.map(({ name }, i) => (
@@ -25,12 +30,16 @@ function HelpOthers() {
     await setLang({ questions: all, lang: value });
   };
 
+  const answerQuestion = (id) => {
+    console.log(id)
+    AddCredit(id, 1)
+  }
+
   const renderQuestions = () => {
     console.log(languages);
     if (loading) {
       return <div>Loading</div>;
     } else {
-      // let real = questions[0];
 
       if (questions) {
         console.log(questions);
@@ -107,6 +116,7 @@ function HelpOthers() {
           }
         );
       }
+
       return <div>No Questions</div>;
     }
   };
