@@ -39,6 +39,7 @@
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^1.7.0",
     "react-apollo": "^3.1.1",
+    "react-d3-cloud": "^0.7.0",
     "react-dom": "^16.10.1",
     "react-router": "^5.1.0",
     "react-router-dom": "^5.1.0",

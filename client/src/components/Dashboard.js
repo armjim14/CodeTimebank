@@ -3,6 +3,8 @@ import React, { Fragment,useContext, useEffect, useState } from "react";
 import AuthContext from "../Context/auth/authContext";
 import QuestionContext from "../Context/question/questionContext";
 import Stats from "./Stats";
+import WordCloudLang from "./WordCloud"
+import languages from "./data/languages.json"
 
 const Dashboard = (props) => {
 
@@ -107,7 +109,11 @@ const Dashboard = (props) => {
           <p style={style.vert} className="text-center">Credits: {getHours()}</p>
         </div>
       </div>
-
+          <WordCloudLang
+    data={languages}
+    fontSizeMapper={fontSizeMapper}
+    rotate={rotate}
+            />,
       <div className="row mb-5">
         {seeQuestions()}
       </div>
