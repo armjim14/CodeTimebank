@@ -12,11 +12,12 @@ function RequestHelp(props) {
   const [questionAsked, setQuestion] = useState({
     question: "",
     language: "",
-    topic: ""
+    topic: "",
+    repo: ""
   });
   console.log(languages);
 
-  const { question, language, topic } = questionAsked;
+  const { question, language, topic, repo } = questionAsked;
 
   const onChange = e =>
     setQuestion({ ...questionAsked, [e.target.name]: e.target.value });
@@ -24,7 +25,7 @@ function RequestHelp(props) {
   const submit = async e => {
     e.preventDefault();
 
-    const res = await sendQuestion({ question, language, topic });
+    const res = await sendQuestion({ question, language, topic, repo });
 
     console.log("I was clicked");
 
@@ -85,6 +86,17 @@ function RequestHelp(props) {
             className='form-control'
             placeholder='Describe your problem in detail.'
             rows='5'
+          />
+        </div>
+        <div className='form-group'>
+          <label htmlFor='repo'>Github Repository:</label>
+          <input
+            type='text'
+            value={repo}
+            onChange={onChange}
+            name='repo'
+            className='form-control'
+            placeholder='Add a link to a Github Repository (Optional)'
           />
         </div>
         <input type='submit' />
