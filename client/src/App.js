@@ -17,9 +17,11 @@ import Alerts from "./components/Alerts";
 import Footer from "./components/Footer";
 import AlertState from "./Context/alert/AlertState";
 import Profile from "./components/Profile";
+import CreditForm from "./components/CreditForm";
 // Hooks
 import AuthState from "./Context/auth/AuthState";
 import QuestionState from "./Context/question/QuestionState";
+import TimeState from "./Context/time/TimeState";
 
 // jwt Middleware
 import setAuthToken from "./Utils/setAuthToken";
@@ -44,6 +46,7 @@ function App() {
   return (
     <AuthState>
       <QuestionState>
+        <TimeState>
         <AlertState>
           <ApolloProvider client={client}>
             <Router>
@@ -80,6 +83,10 @@ function App() {
                       exact
                       path='/changepassword'
                       component={ChangePassword}
+                    <PrivateRoute 
+                      exact 
+                      path="/form/:id" 
+                      component={CreditForm} 
                     />
                     <Route exact path='/user/:id' component={Profile} />
                     <PrivateRoute
@@ -94,6 +101,7 @@ function App() {
             </Router>
           </ApolloProvider>
         </AlertState>
+        </TimeState>
       </QuestionState>
     </AuthState>
   );

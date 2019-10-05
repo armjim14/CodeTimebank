@@ -8,7 +8,6 @@ const Dashboard = props => {
   const [info, updateInfo] = useState({
     name: "",
     id: "",
-    hours: 0,
     questions: []
   });
 
@@ -41,6 +40,8 @@ const Dashboard = props => {
             <h3>{topic}</h3>
             <p>{language}</p>
             <p>{question}</p>
+            <button onClick={ () => {alert("in working progress")}}>Delete Questions</button>
+            <button onClick={ () => {props.history.push("/form")}}>Mark as resolved</button>
           </div>
         );
       });
@@ -51,11 +52,10 @@ const Dashboard = props => {
     async function fetchData() {
       let dataBack = await getUsersQuestions();
 
-      let { github, credits, id } = await getUsernames();
+      let { github, id } = await getUsernames();
 
       updateInfo({
         name: github,
-        hours: credits,
         id,
         questions: dataBack
       });

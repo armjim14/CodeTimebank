@@ -21,7 +21,6 @@ router.get("/help/:lang", auth, async (req, res) => {
         }
       ]
     });
-
     console.log(resp);
     res.json(resp);
   } catch (err) {
