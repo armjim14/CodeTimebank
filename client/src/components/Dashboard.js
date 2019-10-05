@@ -3,6 +3,7 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import AuthContext from "../Context/auth/authContext";
 import QuestionContext from "../Context/question/questionContext";
 import Stats from "./Stats";
+import TimeGauge from "./TimeGauge";
 
 const Dashboard = props => {
   const [info, updateInfo] = useState({
@@ -115,10 +116,9 @@ const Dashboard = props => {
         <div className='col-md-6'>
           <Stats />
         </div>
-        <div className='col-md-6'>
-          <p style={style.vert} className='text-center'>
-            Credits: {getHours()}
-          </p>
+        <div className="col-md-6">
+          <TimeGauge hours={info.hours}/>
+          <p style={style.vert} className="text-center">Credits: {getHours()}</p>
         </div>
       </div>
 
