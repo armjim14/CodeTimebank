@@ -12,6 +12,7 @@ function HelpOthers() {
   const QuestionContext = useContext(questionContext);
   const { getQuestions, loading } = QuestionContext;
 
+  const TimeContext = useContext(timeContext);
   const { AddCredit } = TimeContext;
 
   const allOptions = () =>

@@ -80,7 +80,7 @@ function App() {
                     />
                     <PrivateRoute 
                       exact 
-                      path="/form" 
+                      path="/form/:id" 
                       component={CreditForm} 
                     />
                     <Route exact path='/user/:id' component={Profile} />

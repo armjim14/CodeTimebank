@@ -2,6 +2,7 @@ import React, { Fragment,useContext, useEffect, useState } from "react";
 // import SimplePieChart from "./SimplePieChart";
 import AuthContext from "../Context/auth/authContext";
 import QuestionContext from "../Context/question/questionContext";
+import TimeContext from "../Context/time/timeContext";
 import Stats from "./Stats";
 
 const Dashboard = (props) => {
@@ -9,6 +10,7 @@ const Dashboard = (props) => {
   const [info, updateInfo] = useState({
     name: "",
     id: "",
+    hours: 0,
     questions: []
   })
 
@@ -17,6 +19,9 @@ const Dashboard = (props) => {
 
   const questionContext = useContext(QuestionContext);
   const { getUsersQuestions } = questionContext;
+
+  const timeContext = useContext(TimeContext);
+  const { userCredit } = timeContext;
 
   const getHours = () => {
     
@@ -43,7 +48,7 @@ const Dashboard = (props) => {
             <p>{language}</p>
             <p>{question}</p>
             <button onClick={ () => {alert("in working progress")}}>Delete Questions</button>
-            <button onClick={ () => {props.history.push("/form")}}>Mark as resolved</button>
+            <button onClick={ () => {props.history.push(`/form/${id}`)}}>Mark as resolved</button>
           </div>
         )
       })
@@ -52,6 +57,11 @@ const Dashboard = (props) => {
 
   useEffect(() => {
     async function fetchData() {
+
+      let hoursData = await userCredit();
+
+      let totalHours = hoursData.reduce((a, b) => { return a.Time + b.Time})
+      console.log(totalHours)
       
       let dataBack = await getUsersQuestions();
 
@@ -60,7 +70,8 @@ const Dashboard = (props) => {
       updateInfo({
         name: github,
         id,
-        questions: dataBack
+        questions: dataBack,
+        hours: totalHours
       });
 
     }

@@ -13,18 +13,25 @@ const TimeState = props => {
     
     const [state, dispatch] = useReducer(timeReducer, initialState);
 
-    const AddCredit = async (ids, info) => {
-        let data = {ids, info}
+    const AddCredit = async (ids, info, qId) => {
+        let data = {ids, info, qId}
         const resp = axios.post("/api/time/test", data);
         console.log(resp.data);
         return resp.data;
+    }
+
+    const userCredit = async () => {
+      let resp = await axios.get("/api/time/currentUser");
+      console.log(resp.data);
+      return resp.data;
     }
 
       
   return (
     <TimeContext.Provider
       value={{
-        AddCredit
+        AddCredit,
+        userCredit
       }}
     >
       {props.children}
