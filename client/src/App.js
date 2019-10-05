@@ -49,7 +49,7 @@ function App() {
               <Fragment>
                 <Navbar />
                 <Footer />
-                <div className='container bg-off-white px-5'>
+                <div className='container bg-off-white px-5 shadow'>
                   <Alerts />
                   <Switch>
                     <Route exact path='/' component={MainPage} />

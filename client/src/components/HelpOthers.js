@@ -35,10 +35,10 @@ function HelpOthers() {
       if (questions) {
         console.log(questions);
         return questions.map(
-          ({ User, id, question, topic, createdAt, language }) => {
+          ({ User, id, question, topic, createdAt, language, repo }) => {
             return (
               <div
-                className='col-md-12 border m-1 border-dbrown rounded'
+                className='col-md-12 border border-dbrown rounded my-4 shadow'
                 key={id}
               >
                 <h3 className='text-center'>{topic}</h3>
@@ -64,6 +64,17 @@ function HelpOthers() {
                 </div>
 
                 <hr />
+                {repo != "" && (
+                  <Fragment>
+                    <div className='row'>
+                      <div className='col-md-12 text-center text-dbrown small'>
+                        Github Repository: <a href={`${repo}`}>${repo}</a>
+                      </div>
+                    </div>
+                    <hr />
+                  </Fragment>
+                )}
+
                 <div className='row'>
                   <div className='col-md-2 text-right'>
                     <i className='fas fa-address-book' /> Contact{" "}
@@ -77,19 +88,6 @@ function HelpOthers() {
                             {" "}
                             {User.skype}
                           </i>
-                        </a>
-                      </p>
-                    )}
-                    {User.github != "" && (
-                      <p>
-                        <a
-                          href={`https://github.com/${User.github}`}
-                          target='_blank'
-                          rel='noopener noreferrer'
-                          className='text-black'
-                        >
-                          <i className='fab fa-github text-black' />{" "}
-                          {User.github}
                         </a>
                       </p>
                     )}
