@@ -62,7 +62,7 @@ function Login(props) {
         </label>
         <div className='col-md-10'>
           <input
-            type='text'
+            type='password'
             name='password'
             className='form-control'
             placeholder='Enter your password'
