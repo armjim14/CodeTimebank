@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import ReactD3Gauge from 'react-d3-gauge';
-import { callbackify } from 'util';
 
-class App extends Component {
+
+class TimeGauge extends Component {
     
     calculateTime(){
         let currentTime = 70;
@@ -32,4 +32,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default TimeGauge;
