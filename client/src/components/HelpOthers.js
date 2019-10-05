@@ -8,7 +8,6 @@ import Moment from "react-moment";
 import "moment-timezone";
 
 function HelpOthers() {
-
   const QuestionContext = useContext(questionContext);
   const { getQuestions, loading } = QuestionContext;
   const TimeContext = useContext(timeContext);
@@ -30,17 +29,16 @@ function HelpOthers() {
     await setLang({ questions: all, lang: value });
   };
 
-  const answerQuestion = (id) => {
-    console.log(id)
-    AddCredit(id, 1)
-  }
+  const answerQuestion = id => {
+    console.log(id);
+    AddCredit(id, 1);
+  };
 
   const renderQuestions = () => {
     console.log(languages);
     if (loading) {
       return <div>Loading</div>;
     } else {
-
       if (questions) {
         console.log(questions);
         return questions.map(
