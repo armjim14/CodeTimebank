@@ -8,7 +8,7 @@ class TimeGauge extends Component {
         let currentTime = this.props.hours;
         console.log ("current time " +currentTime)
         let gaugeTime;
-        if (currentTime == 0 ||currentTime == null || currentTime == undefined){
+        if (currentTime == 0 ||currentTime == null || currentTime == undefined || currentTime == NaN){
             
             gaugeTime= 50;
         } else {
