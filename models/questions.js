@@ -34,7 +34,19 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false
       }
     });
+
+    questions.associate = function(models) {
+      questions.belongsTo(models.Users, {
+        foreignKey: {
+          allowNull: false
+        }
+      });
+      // questions.hasMany(models.time, {
+      //   onDelete: "cascade"
+      // });
+    };
+
+    return questions;
+  
   };
 
-  return questions;
-};

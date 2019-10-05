@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const db = require("../models");
 const auth = require("../middleware/auth");
 const config = require("config");
+var Op = require("sequelize").Op;
 
 router.get("/auth", auth, async (req, res) => {
   try {
@@ -22,7 +23,7 @@ router.get("/", auth, async (req, res) => {
   try {
     const userInfo = await db.Users.findOne({
       where: { id: req.user.id },
-      attributes: ["github", "discord", "skype", "credits", "id"]
+      attributes: ["github", "discord", "skype", "id"]
     });
     res.json(userInfo);
   } catch (err) {
@@ -172,11 +173,6 @@ router.get("/50users", async (req, res) => {
 })
 
 router.get("/:id", async (req, res) => {
-  console.log("=================")
-  console.log("=================")
-  console.log(req.params.id)
-  console.log("=================")
-  console.log("=================")
   try {
     const resp = await db.Users.findOne({where: {id: req.params.id}});
     res.json(resp)
@@ -186,4 +182,27 @@ router.get("/:id", async (req, res) => {
   }
 })
 
+router.get("/except", auth, async (req, res) => {
+  console.log("\n\n" + req.user.id + "\n\n")
+  try {
+    console.log("\n I am in here \n")
+    const resp = await db.Users.findAll({
+      where: {
+        id: {
+          [Op.not]: req.user.id
+        }
+      }
+    })
+    console.log("-------------------")
+    console.log(resp)
+    console.log("-------------------")
+    res.json(resp);
+  } catch(e) {
+    console.log(e)
+    console.log(e.message);
+    res.status(500).send("Server error");
+  }
+})
+
 module.exports = router;
+

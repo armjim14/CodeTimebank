@@ -23,15 +23,14 @@ module.exports = function(sequelize, DataTypes) {
     skype: {
       type: DataTypes.STRING,
       allowNull: true
-    },
-    credits: {
-      type: DataTypes.INTEGER,
-      allowNull: true
     }
   });
 
   Users.associate = function(models) {
     Users.hasMany(models.questions, {
+      onDelete: "cascade"
+    });
+    Users.hasMany(models.time, {
       onDelete: "cascade"
     });
   };
