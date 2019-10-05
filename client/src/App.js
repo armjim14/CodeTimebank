@@ -78,10 +78,14 @@ function App() {
                       path='/dashboard'
                       component={Dashboard}
                     />
+                    <PrivateRoute 
+                      exact 
+                      path="/form" 
+                      component={CreditForm} 
+                    />
                     <Route exact path='/user/:id' component={Profile} />
                     <Route exact path='/editprofile' component={EditProfile} />
                     <Route exact path='/example' component={ExamplePage} />
-                    <Route exact path="/form" component={CreditForm} />
                   </Switch>
                 </div>
               </Fragment>

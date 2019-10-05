@@ -13,9 +13,9 @@ const TimeState = props => {
     
     const [state, dispatch] = useReducer(timeReducer, initialState);
 
-    const AddCredit = async (id, time) => {
-        let info = {id, number: time}
-        const resp = axios.post("/api/time/test", info);
+    const AddCredit = async (ids, info) => {
+        let data = {ids, info}
+        const resp = axios.post("/api/time/test", data);
         console.log(resp.data);
         return resp.data;
     }

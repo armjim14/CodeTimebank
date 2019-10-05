@@ -6,10 +6,12 @@ const auth = require("../middleware/auth");
 var Op = require("sequelize").Op;
 
 router.post("/test", auth, async (req, res) => {
-    const { id, number } = req.body;
+    const { ids, info } = req.body;
     console.log(req.body);
-    console.log(id);
-    console.log(number);
+    console.log(ids);
+    console.log(info);
+    // db.time.update
+    res.json({msg: "sucsess"})
 })
 
 module.exports = router;
