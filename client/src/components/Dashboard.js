@@ -105,7 +105,7 @@ const Dashboard = (props) => {
           <Stats />
         </div>
         <div className="col-md-6">
-          <TimeGauge/>
+          <TimeGauge hours={info.hours}/>
           <p style={style.vert} className="text-center">Credits: {getHours()}</p>
         </div>
       </div>

@@ -5,9 +5,10 @@ import ReactD3Gauge from 'react-d3-gauge';
 class TimeGauge extends Component {
     
     calculateTime(){
-        let currentTime = 70;
+        let currentTime = this.props.hours;
+        console.log ("current time " +currentTime)
         let gaugeTime;
-        if (currentTime == 0 || null || undefined){
+        if (currentTime == 0 ||currentTime == null || currentTime == undefined){
             
             gaugeTime= 50;
         } else {
@@ -25,7 +26,6 @@ class TimeGauge extends Component {
           colors={['red', 'green']}
           width={400}
           percent={this.calculateTime()}
-
         />
       </div>
     );
