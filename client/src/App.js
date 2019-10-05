@@ -11,6 +11,7 @@ import Login from "./components/Login";
 import MainPage from "./components/MainPage";
 import Dashboard from "./components/Dashboard";
 import EditProfile from "./components/EditProfile";
+import ChangePassword from "./components/ChangePassword";
 import Leaderboards from "./components/Leaderboards";
 import Alerts from "./components/Alerts";
 import Footer from "./components/Footer";
@@ -49,7 +50,7 @@ function App() {
               <Fragment>
                 <Navbar />
                 <Footer />
-                <div className='container bg-off-white px-5 shadow'>
+                <div className='container-fluid bg-off-white px-5 shadow'>
                   <Alerts />
                   <Switch>
                     <Route exact path='/' component={MainPage} />
@@ -75,8 +76,17 @@ function App() {
                       path='/dashboard'
                       component={Dashboard}
                     />
+                    <PrivateRoute
+                      exact
+                      path='/changepassword'
+                      component={ChangePassword}
+                    />
                     <Route exact path='/user/:id' component={Profile} />
-                    <Route exact path='/editprofile' component={EditProfile} />
+                    <PrivateRoute
+                      exact
+                      path='/editprofile'
+                      component={EditProfile}
+                    />
                     <Route exact path='/example' component={ExamplePage} />
                   </Switch>
                 </div>

@@ -145,6 +145,32 @@ router.post(
   }
 );
 
+//changing password
+router.put("/password", auth, async (req, res) => {
+  let { password, oldPassword } = req.body;
+  try {
+    let user = await db.Users.findOne({ where: { id: req.user.id } });
+
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ msg: "Incorrect old password" });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    password = await bcrypt.hash(password, salt);
+
+    const update = await db.Users.update(
+      { password },
+      { returning: true, where: { id: req.user.id } }
+    );
+    res.status(200).json(update);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(err.message);
+  }
+});
+// updating contact information
 router.put("/", auth, async (req, res) => {
   const { discord, github, skype } = req.body;
   try {
@@ -155,7 +181,7 @@ router.put("/", auth, async (req, res) => {
     res.json(update);
     // console.log(user);
   } catch (err) {
-    console.log(err.message);
+    console.error(err.message);
     res.status(500).send("Server error");
   }
 });
@@ -163,27 +189,26 @@ router.put("/", auth, async (req, res) => {
 router.get("/50users", async (req, res) => {
   try {
     const resp = await db.Users.findAll();
-    res.json(resp)
-  }
-  catch (err){
+    res.json(resp);
+  } catch (err) {
     console.log(err.message);
     res.status(500).send("Server error");
   }
-})
+});
 
 router.get("/:id", async (req, res) => {
-  console.log("=================")
-  console.log("=================")
-  console.log(req.params.id)
-  console.log("=================")
-  console.log("=================")
+  console.log("=================");
+  console.log("=================");
+  console.log(req.params.id);
+  console.log("=================");
+  console.log("=================");
   try {
-    const resp = await db.Users.findOne({where: {id: req.params.id}});
-    res.json(resp)
+    const resp = await db.Users.findOne({ where: { id: req.params.id } });
+    res.json(resp);
   } catch (e) {
     console.log(e.message);
     res.status(500).send("Server error");
   }
-})
+});
 
 module.exports = router;
