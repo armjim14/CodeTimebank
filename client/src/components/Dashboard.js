@@ -59,20 +59,39 @@ const Dashboard = (props) => {
     async function fetchData() {
 
       let hoursData = await userCredit();
-
-      let totalHours = hoursData.reduce((a, b) => { return a.Time + b.Time})
-      console.log(totalHours)
-      
       let dataBack = await getUsersQuestions();
-
       let { github, id } = await getUsernames();
 
-      updateInfo({
-        name: github,
-        id,
-        questions: dataBack,
-        hours: totalHours
-      });
+      if (hoursData.length > 1){
+          console.log(hoursData)
+          let totalHours = hoursData.reduce((a, b) => { return a.Time + b.Time})
+          console.log(totalHours)
+    
+          updateInfo({
+            name: github,
+            id,
+            questions: dataBack,
+            hours: totalHours
+          });
+      } else if (hoursData.length === 1) {
+        console.log(hoursData)
+        updateInfo({
+          name: github,
+          id,
+          questions: dataBack,
+          hours: hoursData[0].Time
+        });
+
+      } else {
+
+        updateInfo({
+          name: github,
+          id,
+          questions: dataBack,
+          hours: 0
+        });
+
+      }
 
     }
     fetchData();

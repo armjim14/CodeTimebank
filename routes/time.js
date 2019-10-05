@@ -42,8 +42,12 @@ router.get("/currentUser", auth, async (req, res) => {
         }
     })
 
-    console.log(resp);
     res.json(resp);
+})
+
+router.get("/user/:id", async (req, res) => {
+    const resp = await db.time.findAll({where: {UserId: req.params.id}})
+    res.json(resp)
 })
 
 module.exports = router;

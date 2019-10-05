@@ -26,12 +26,19 @@ const TimeState = props => {
       return resp.data;
     }
 
+    const forUser = async id => {
+      let resp = await axios.get(`/api/time/user/${id}`);
+      console.log(resp);
+      return resp.data;
+    }
+
       
   return (
     <TimeContext.Provider
       value={{
         AddCredit,
-        userCredit
+        userCredit,
+        forUser
       }}
     >
       {props.children}
