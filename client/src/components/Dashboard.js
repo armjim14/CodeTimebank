@@ -3,6 +3,7 @@ import React, { Fragment,useContext, useEffect, useState } from "react";
 import AuthContext from "../Context/auth/authContext";
 import QuestionContext from "../Context/question/questionContext";
 import Stats from "./Stats";
+import TimeChart from "./TimeChart";
 
 const Dashboard = (props) => {
 
@@ -104,6 +105,7 @@ const Dashboard = (props) => {
           <Stats />
         </div>
         <div className="col-md-6">
+          <TimeChart/>
           <p style={style.vert} className="text-center">Credits: {getHours()}</p>
         </div>
       </div>
