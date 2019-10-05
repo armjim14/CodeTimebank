@@ -1,16 +1,15 @@
-import React, { Fragment,useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 // import SimplePieChart from "./SimplePieChart";
 import AuthContext from "../Context/auth/authContext";
 import QuestionContext from "../Context/question/questionContext";
 import Stats from "./Stats";
 
-const Dashboard = (props) => {
-
+const Dashboard = props => {
   const [info, updateInfo] = useState({
     name: "",
     id: "",
     questions: []
-  })
+  });
 
   const authContext = useContext(AuthContext);
   const { getUsernames } = authContext;
@@ -19,40 +18,38 @@ const Dashboard = (props) => {
   const { getUsersQuestions } = questionContext;
 
   const getHours = () => {
-    
-    if (info.hours){
-      return <span>{info.hours}</span>
+    if (info.hours) {
+      return <span>{info.hours}</span>;
     } else {
-      return <span>0</span>
+      return <span>0</span>;
     }
-  
-  }
+  };
 
   const seeQuestions = () => {
-
     console.log(info.questions.length);
 
-    if (info.questions.length == 0){
-      return <div className="col-md-12 text-center">There are no questions</div>
+    if (info.questions.length == 0) {
+      return (
+        <div className='col-md-12 text-center'>There are no questions</div>
+      );
     } else {
-      console.log(info.questions)
-      return info.questions.map( ({id, question, language, topic}) => {
+      console.log(info.questions);
+      return info.questions.map(({ id, question, language, topic }) => {
         return (
-          <div key={id} className="col-md-12 text-center">
+          <div key={id} className='col-md-12 text-center'>
             <h3>{topic}</h3>
             <p>{language}</p>
             <p>{question}</p>
             <button onClick={ () => {alert("in working progress")}}>Delete Questions</button>
             <button onClick={ () => {props.history.push("/form")}}>Mark as resolved</button>
           </div>
-        )
-      })
+        );
+      });
     }
-  }
+  };
 
   useEffect(() => {
     async function fetchData() {
-      
       let dataBack = await getUsersQuestions();
 
       let { github, id } = await getUsernames();
@@ -62,7 +59,6 @@ const Dashboard = (props) => {
         id,
         questions: dataBack
       });
-
     }
     fetchData();
     //eslint-disable-next-line
@@ -76,42 +72,57 @@ const Dashboard = (props) => {
         </div>
       </div>
 
+      <div className='row d-flex justify-content-center'>
+        <div className='col-md-3'>
+          <button
+            onClick={() => {
+              props.history.push(`/user/${info.id}`);
+            }}
+            className='btn btn-block btn-beige rounded-pill'
+          >
+            View Profile
+          </button>
+        </div>
+        <div className='col-md-3'>
+          <button
+            onClick={() => {
+              props.history.push(`/editprofile`);
+            }}
+            className='btn btn-block btn-greyish rounded-pill'
+          >
+            Edit Contact Info
+          </button>
+        </div>
+        <div className='col-md-3'>
+          <button
+            onClick={() => {
+              props.history.push(`/changepassword`);
+            }}
+            className='btn btn-block btn-beige rounded-pill'
+          >
+            Change Password
+          </button>
+        </div>
+      </div>
+
+      <div className='row mt-4'>
+        <div className='col-md-12'>
+          <h2 className='text-center'>Hello, {info.name}</h2>
+        </div>
+      </div>
+
       <div className='row'>
         <div className='col-md-6'>
-          {/* <a href={`/user/${info.id}`} style={{ textDecoration: "none" }}> */}
-            <button onClick={ () => {props.history.push(`/user/${info.id}`)}} className='btn btn-block btn-beige rounded-pill'>
-              View Profile
-            </button>
-          {/* </a> */}
-        </div>
-        <div className='col-md-6'>
-          <a href='/editprofile' style={{ textDecoration: "none" }}>
-            <button className='btn btn-block btn-greyish rounded-pill'>
-              Edit Profile
-            </button>
-          </a>
-        </div>
-      </div>
-
-      <div className="row mt-4">
-        <div className="col-md-12">
-          <h2 className="text-center">Hello, {info.name}</h2>
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-md-6">
           <Stats />
         </div>
-        <div className="col-md-6">
-          <p style={style.vert} className="text-center">Credits: {getHours()}</p>
+        <div className='col-md-6'>
+          <p style={style.vert} className='text-center'>
+            Credits: {getHours()}
+          </p>
         </div>
       </div>
 
-      <div className="row mb-5">
-        {seeQuestions()}
-      </div>
-
+      <div className='row mb-5'>{seeQuestions()}</div>
     </Fragment>
   );
 };
@@ -120,6 +131,6 @@ const style = {
   vert: {
     marginTop: "40%"
   }
-}
+};
 
 export default Dashboard;

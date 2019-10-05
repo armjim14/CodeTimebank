@@ -101,7 +101,7 @@ const AuthState = props => {
     }
   };
 
-  //updating info from the userprofile page
+  //updating contact info from the userprofile page
   const updateInfo = async formFields => {
     const config = {
       headers: {
@@ -114,6 +114,24 @@ const AuthState = props => {
       return res;
     } catch (err) {
       dispatch({ type: REGISTER_FAIL, payload: err.response.data.msg });
+    }
+  };
+
+  //updating password
+  const changePassword = async formFields => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+
+    try {
+      let res = await axios.put("/api/users/password", formFields, config);
+      return res;
+    } catch (err) {
+      console.error(err);
+      return err;
+      // dispatch({ type: REGISTER_FAIL, payload: err.response.data.msg });
     }
   };
 
@@ -131,7 +149,8 @@ const AuthState = props => {
         logout,
         clearErrors,
         getUsernames,
-        updateInfo
+        updateInfo,
+        changePassword
       }}
     >
       {props.children}
