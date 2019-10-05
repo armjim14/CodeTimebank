@@ -1,18 +1,8 @@
-import React, { useReducer } from "react";
+import React from "react";
 import axios from "axios";
 import QuestionContext from "./questionContext";
-import questionReducer from "./questionReducer";
-// import types
-// import { } from '../types';
 
 const QuestionState = props => {
-  const initialState = {
-    questions: [],
-    userQuestions: [],
-    loading: null
-  };
-
-  const [state, dispatch] = useReducer(questionReducer, initialState);
 
   const sendQuestion = async formInfo => {
     const config = {
@@ -62,17 +52,6 @@ const QuestionState = props => {
     }
   };
 
-  const getExceptUsers = async () => {
-    try {
-      const resp = await axios.get(`/api/users/except`);
-      console.log(resp);
-      console.log("I ran the API")
-      return resp.data;
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
   const specificUser = async id => {
     console.log(id);
     try {
@@ -102,12 +81,8 @@ const QuestionState = props => {
         getUsersQuestions,
         getQuestions,
         getAllUsers,
-        getExceptUsers,
         specificQuestions,
-        specificUser,
-        questions: state.questions,
-        userQuestions: state.userQuestions,
-        loading: state.loading
+        specificUser
       }}
     >
       {props.children}

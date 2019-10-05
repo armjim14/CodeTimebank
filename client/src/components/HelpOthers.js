@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, Fragment, useState } from "react";
 import questionContext from "../Context/question/questionContext";
 
-import timeContext from "../Context/time/timeContext";
 import { Link } from "react-router-dom";
 import languages from "./data/languages.json";
 import Moment from "react-moment";
@@ -11,9 +10,6 @@ function HelpOthers() {
 
   const QuestionContext = useContext(questionContext);
   const { getQuestions, loading } = QuestionContext;
-
-  const TimeContext = useContext(timeContext);
-  const { AddCredit } = TimeContext;
 
   const allOptions = () =>
     languages.map(({ name }, i) => (
@@ -30,11 +26,6 @@ function HelpOthers() {
     console.log(all);
     await setLang({ questions: all, lang: value });
   };
-
-  const answerQuestion = (id) => {
-    console.log(id)
-    AddCredit(id, 1)
-  }
 
   const renderQuestions = () => {
     console.log(languages);
@@ -75,7 +66,7 @@ function HelpOthers() {
                 </div>
 
                 <hr />
-                {repo != "" && (
+                {repo !== "" && (
                   <Fragment>
                     <div className='row'>
                       <div className='col-md-12 text-center text-dbrown small'>
@@ -92,7 +83,7 @@ function HelpOthers() {
                     <Link to={`/user/${User.id}`}>{User.username}</Link>:
                   </div>
                   <div className='col-md-10 d-flex justify-content-around'>
-                    {User.skype != "" && (
+                    {User.skype !== "" && (
                       <p>
                         <a href={`skype:${User.skype}?chat`}>
                           <i className='fab fa-skype text-primary'>
@@ -102,7 +93,7 @@ function HelpOthers() {
                         </a>
                       </p>
                     )}
-                    {User.discord != "" && (
+                    {User.discord !== "" && (
                       <p>
                         <i
                           className='fab fa-discord'

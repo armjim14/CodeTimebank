@@ -37,7 +37,7 @@ const Dashboard = (props) => {
 
     console.log(info.questions.length);
 
-    if (info.questions.length == 0){
+    if (info.questions.length === 0){
       return <div className="col-md-12 text-center">There are no questions</div>
     } else {
       console.log(info.questions)

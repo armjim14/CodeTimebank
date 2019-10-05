@@ -1,17 +1,8 @@
-import React, { useReducer } from "react";
+import React from "react";
 import axios from "axios";
 import TimeContext from "./timeContext";
-import timeReducer from "./timeReducer";
 
 const TimeState = props => {
-
-    const initialState = {
-      questions: [],
-      userQuestions: [],
-      loading: null
-    };
-    
-    const [state, dispatch] = useReducer(timeReducer, initialState);
 
     const AddCredit = async (ids, info, qId) => {
         let data = {ids, info, qId}
