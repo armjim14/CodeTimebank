@@ -56,7 +56,7 @@ drawChart(){
   //Bars
 
 
-    console.log(languages)
+    // console.log(languages)
 
   // const h = 500; const x= 400
   const colorScale= d3.scaleOrdinal(d3.schemeSet3)
