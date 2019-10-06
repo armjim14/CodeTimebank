@@ -19,7 +19,7 @@ function Register(props) {
   const { name, password, password2, github, discord, skype } = user;
 
   const onChange = e => setUser({ ...user, [e.target.name]: e.target.value });
-  const onSubmit = e => {
+  const onSubmit = async e => {
     e.preventDefault();
     if (
       name === "" ||
@@ -30,16 +30,12 @@ function Register(props) {
       skype === ""
     ) {
       setAlert("Please fill in all fields!", "danger");
+    } else if (name.split("").length < 2) {
+      setAlert("Username must be at least 2 characters long", "danger");
     } else if (password !== password2) {
       setAlert("Passwords do not match", "danger");
     } else {
       register({ name, password, github, discord, skype });
-      setTimeout(() => console.log(error), 2000);
-      if (!error) {
-        for (let i = 0; i < error.length; i++) {
-          setAlert(error[i].msg, "danger");
-        }
-      }
     }
   };
 

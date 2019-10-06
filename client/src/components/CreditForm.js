@@ -136,15 +136,20 @@ function CreditForm(props) {
       console.log(aName);
       return (
         <Fragment key={i}>
-          <div className='col-md-6 text-center'>{aName}</div>
-          <div className='col-md-6 text-center'>
-            <input
-              type='number'
-              onChange={changeHours.bind(this, { unique, i })}
-              className='form-control'
-              min='1'
-            />{" "}
-            Hours
+          <div className='row mt-4'>
+            <div className='col-md-6 text-right'>
+              <h4 className='mr-1'>{aName}</h4>
+            </div>
+            <div className='col-md-6 text-left'>
+              <input
+                type='number'
+                onChange={changeHours.bind(this, { unique, i })}
+                className='form-control text-center'
+                placeholder='Hour(s)'
+                min='1'
+                style={{ width: "6rem" }}
+              />{" "}
+            </div>
           </div>
         </Fragment>
       );
@@ -153,18 +158,35 @@ function CreditForm(props) {
 
   return (
     <Fragment>
+      <div className='row'>
+        <div className='col-md-12'>
+          <h1 className='text-center'>Credit Form</h1>
+        </div>
+      </div>
       <form onSubmit={answeredQuestion}>
-        <select
-          value={person}
-          onChange={testing}
-          type='button'
-          className='btn btn-secondary text-white dropdown-toggle'
-        >
-          <option value='none'>Select who helped you</option>
-          {renderUsers()}
-        </select>
-        <div className='row'>{getHelpers()}</div>
-        <input type='submit' />
+        <div className='row'>
+          <div className='col-md-12 text-center'>
+            You may select multiple users
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-md-12 d-flex justify-content-center'>
+            <select
+              value={person}
+              onChange={testing}
+              className='dropdown-toggle form-control w-50'
+            >
+              <option value='none'>Select who helped you</option>
+              {renderUsers()}
+            </select>
+          </div>
+        </div>
+        {getHelpers()}
+        <div className='row mt-5'>
+          <div className='col-md-12 d-flex justify-content-center'>
+            <input type='submit' className='btn btn-block btn-greyish w-50' />
+          </div>
+        </div>
       </form>
     </Fragment>
   );
