@@ -5,11 +5,6 @@ import TimeContext from "../Context/time/timeContext";
 import AuthContext from "../Context/auth/authContext";
 
 function Profile(props) {
-  const [info, updateInfo] = useState({
-    name: "",
-    hours: 0,
-    questions: []
-  });
 
     const [info, updateInfo] = useState({
         name: "",
@@ -22,6 +17,9 @@ function Profile(props) {
 
       const timeContext = useContext(TimeContext);
       const { forUser } = timeContext;
+
+      const authContext = useContext(AuthContext);
+      const { getRepos } = authContext;
     
       const getHours = () => {
         
@@ -98,6 +96,13 @@ function Profile(props) {
         fetchData();
         //eslint-disable-next-line
       }, []);
+
+      const renderQuestions = () => {
+
+
+
+      if (1 == 1){
+      
     
       return (
         <div className='col-md-12 text-center'>There are no questions</div>
@@ -167,7 +172,7 @@ function Profile(props) {
 
       <div className='row'>
         <div className='col-md-6'>
-          <Stats name={info.name} info={arr} />
+          <Stats name={info.name} />
         </div>
         <div className='col-md-6'>
           <p style={style.vert} className='text-center'>

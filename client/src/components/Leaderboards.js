@@ -6,8 +6,6 @@ import TimeContext from "../Context/time/timeContext";
 const Leaderboards = () => {
   const [state, setState] = useState({ users: [] });
 
-  const [state, setState] = useState({ usersa: [] })
-
   let { usersa } = state
 
   const questionContext = useContext(QuestionContext);
@@ -34,7 +32,7 @@ const Leaderboards = () => {
             <td>
               <Link to={`/user/${id}`}>{username}</Link>
             </td>
-            <td>{credits}</td>
+            <td>{hours}</td>
             <td>
               <a href={`https://www.github.com/${github}`} target='__blank'>
                 {github}
