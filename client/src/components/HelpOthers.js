@@ -62,7 +62,7 @@ function HelpOthers() {
                       </h6>
                     </div>
                   </div>
-                  <div className='row overflow-auto' style={{ height: "7rem" }}>
+                  <div className='row overflow-auto' style={{ height: "7rem", wordBreak: "break-all" }}>
                     <p className='col-md-12'>{question}</p>
                   </div>
 

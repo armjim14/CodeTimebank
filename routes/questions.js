@@ -80,7 +80,7 @@ router.get("/get", async (req, res) => {
 router.get("/userq", auth, async (req, res) => {
   try {
     db.questions
-      .findAll({ where: { UserId: req.user.id } })
+      .findAll({ where: { UserId: req.user.id }, include: [db.Users] })
       .then(data => res.send(data));
   } catch (e) {
     console.log("Error: " + e);

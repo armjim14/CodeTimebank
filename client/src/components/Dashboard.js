@@ -6,12 +6,17 @@ import TimeContext from "../Context/time/timeContext";
 import Stats from "./Stats";
 import TimeGauge from "./TimeGauge";
 
+import { Link } from "react-router-dom";
+import Moment from "react-moment";
+
+
 const Dashboard = props => {
 
   const [info, updateInfo] = useState({
     name: "",
     id: "",
     hours: 0,
+    which: "unsolved",
     questions: []
   });
 
@@ -42,46 +47,101 @@ const Dashboard = props => {
       );
     } else {
       console.log(info.questions);
-      return info.questions.map(({ id, question, language, topic, solved }) => {
-        if (solved) {
-          return (
-            <div key={id} className='col-md-12 text-center'>
-              <h3>{topic}</h3>
-              <p>{language}</p>
-              <p>{question}</p>
-            </div>
-          );
+      return info.questions.map(({ id, question, language, topic, solved, createdAt, repo }) => {
+        if (info.which === "solved") {
+          if (solved){
+            
+            return (
+              <div
+                className='col-md-12 border border-dbrown rounded my-4 shadow'
+                key={id}
+              >
+                <h3 className='text-center py-1 my-0'>{topic}<i className="far fa-trash-alt"></i></h3>
+                <hr className='my-0' />
+                <div className='row'>
+                  <div className='col-md-6 pr-0'>
+                    <p style={{fontSize:"1.2rem"}} className='text-center border border-right p-1'>
+                      Language: {language}
+                    </p>
+                  </div>
+                  <div className='col-md-6 pl-0'>
+                    <p style={{fontSize:"1rem"}} className='text-center border border-left p-1'>
+                      {" "}
+                      <Moment tz='America/Phoenix' format='LLL Z'>
+                        {createdAt}
+                      </Moment>
+                    </p>
+                  </div>
+                </div>
+                <div className='row overflow-auto' style={{ height: "7rem", wordBreak: "break-all" }}>
+                  <p style={{fontSize:"1.2rem"}} className='col-md-12'>{question}</p>
+                </div>
+  
+                <hr />
+                {repo !== "" && (
+                  <Fragment>
+                    <div className='row'>
+                      <div className='col-md-12 text-center text-dbrown'>
+                        Github Repository: <a style={{fontSize:"1rem"}} href={`${repo}`}>{repo}</a>
+                      </div>
+                    </div>
+                    <hr />
+                  </Fragment>
+                )}
+  
+              </div>
+            );
+
+          }
 
         } else {
-          return (
-            <div key={id} className='col-md-12 text-center'>
-              <h3>{topic}</h3>
-              <p>{language}</p>
-              <p>{question}</p>
-              <button
-                onClick={ async () => {
-                  deleteQuestions(id);
-                  let dataBack = await getUsersQuestions();
-                  updateInfo({
-                    name: info.name,
-                    id: info.id,
-                    questions: dataBack,
-                    hours: info.hours
-                  });
-          
-                }}
+
+          if (!solved) {
+
+            return (
+              <div
+                className='col-md-12 border border-dbrown rounded my-4 shadow'
+                key={id}
               >
-                Delete Questions
-            </button>
-              <button
-                onClick={() => {
-                  props.history.push(`/form/${id}`);
-                }}
-              >
-                Mark as resolved
-            </button>
-            </div>
-          );
+                <h3 className='text-center py-1 my-0'>{topic}</h3>
+                <hr className='my-0' />
+                <div className='row'>
+                  <div className='col-md-6 pr-0'>
+                    <p style={{fontSize:"1rem"}} className='text-center border border-right p-1'>
+                      Language: {language}
+                    </p>
+                  </div>
+                  <div className='col-md-6 pl-0'>
+                    <p style={{fontSize:"1rem"}} className='text-center border border-left p-1'>
+                      {" "}
+                      <Moment tz='America/Phoenix' format='LLL Z'>
+                        {createdAt}
+                      </Moment>
+                    </p>
+                  </div>
+                </div>
+                <div className='row overflow-auto' style={{ height: "7rem", wordBreak: "break-all" }}>
+                  <p style={{fontSize:"1.2rem"}} className='col-md-12'>{question}</p>
+                </div>
+  
+                <hr />
+                {repo !== "" && (
+                  <Fragment>
+                    <div className='row'>
+                      <div className='col-md-12 text-center text-dbrown'>
+                        Github Repository: <a style={{fontSize:"1rem"}} href={`${repo}`}>{repo}</a>
+                      </div>
+                    </div>
+                    <hr />
+                  </Fragment>
+                )}
+  
+              </div>
+            );
+
+
+          }
+
         }
       });
     }
@@ -104,7 +164,8 @@ const Dashboard = props => {
           name: github,
           id,
           questions: dataBack,
-          hours: totalHours
+          hours: totalHours,
+          which: info.which
         });
       } else if (hoursData.length === 1) {
         console.log(hoursData);
@@ -112,14 +173,16 @@ const Dashboard = props => {
           name: github,
           id,
           questions: dataBack,
-          hours: hoursData[0].Time
+          hours: hoursData[0].Time,
+          which: info.which
         });
       } else {
         updateInfo({
           name: github,
           id,
           questions: dataBack,
-          hours: 0
+          hours: info.hours,
+          which: info.which
         });
       }
     }
@@ -135,7 +198,7 @@ const Dashboard = props => {
         </div>
       </div>
 
-      <div className='row d-flex justify-content-center'>
+      <div className='row d-flex justify-content-center mt-3'>
         <div className='col-md-3'>
           <button
             onClick={() => {
@@ -170,19 +233,59 @@ const Dashboard = props => {
 
       <div className='row mt-4'>
         <div className='col-md-12'>
-          <h2 className='text-center'>Hello, {info.name}</h2>
+          <h1 className='text-center'>Hello, {info.name}</h1>
         </div>
       </div>
 
-      <div className='row'>
+      <div className='row mt-4'>
         {/* <div className='col-md-6'>
           <Stats />
         </div> */}
-        <div className='col-md-6'>
+        <div className='col-md-12 d-flex justify-content-center'>
           <TimeGauge hours={info.hours} />
-          <p style={style.vert} className='text-center'>
+        </div>
+      </div>
+
+      <div className="row mb-4">
+        <div className="col-md-12">
+          <h2 style={style.vert} className='text-center'>
             Credits: {getHours()}
-          </p>
+          </h2>
+        </div>
+      </div>
+
+      <div className="row mb-3">
+        <div className="col-md-6 d-flex justify-content-center pl-5">
+          <button 
+            className="btn btn-outline-primary ml-5"
+            onClick={ () => {
+              updateInfo({
+                name: info.name,
+                id: info.id,
+                questions: info.questions,
+                hours: info.hours,
+                which: "unsolved"
+              });      
+            }}
+          >
+            unsolved
+          </button>
+        </div>
+        <div className="col-md-6 d-flex justify-content-center pr-5">
+          <button 
+            className="btn btn-outline-primary mr-5"
+            onClick={ () => {
+              updateInfo({
+                name: info.name,
+                id: info.id,
+                questions: info.questions,
+                hours: info.hours,
+                which: "solved"
+              });      
+            }}
+          >
+            solved
+          </button>
         </div>
       </div>
 
@@ -193,8 +296,34 @@ const Dashboard = props => {
 
 const style = {
   vert: {
-    marginTop: "40%"
+    marginTop: "50px",
+    // fontSize: "20px",
+    fontWeight: "bold"
   }
 };
 
 export default Dashboard;
+
+{/* <button
+onClick={async () => {
+  deleteQuestions(id);
+  let dataBack = await getUsersQuestions();
+  updateInfo({
+    name: info.name,
+    id: info.id,
+    questions: dataBack,
+    hours: info.hours,
+    which: info.which
+  });
+
+}}
+>
+Delete Questions
+</button>
+<button
+onClick={() => {
+  props.history.push(`/form/${id}`);
+}}
+>
+Mark as resolved
+</button> */}
