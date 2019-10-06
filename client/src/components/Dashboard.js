@@ -34,8 +34,10 @@ const Dashboard = props => {
   const seeQuestions = () => {
     console.log(info.questions.length);
 
-    if (info.questions.length === 0){
-      return <div className="col-md-12 text-center">There are no questions</div>
+    if (info.questions.length === 0) {
+      return (
+        <div className='col-md-12 text-center'>There are no questions</div>
+      );
     } else {
       console.log(info.questions);
       return info.questions.map(({ id, question, language, topic }) => {
@@ -44,18 +46,20 @@ const Dashboard = props => {
             <h3>{topic}</h3>
             <p>{language}</p>
             <p>{question}</p>
-            <button 
-              onClick={ () => {
-                alert("in working progress")
-              }}>
-             Delete Questions
-             </button>
-            <button 
-              onClick={ () => {
-                props.history.push(`/form/${id}`)
-               }}>
-             Mark as resolved
-              </button>
+            <button
+              onClick={() => {
+                alert("in working progress");
+              }}
+            >
+              Delete Questions
+            </button>
+            <button
+              onClick={() => {
+                props.history.push(`/form/${id}`);
+              }}
+            >
+              Mark as resolved
+            </button>
           </div>
         );
       });
@@ -64,42 +68,39 @@ const Dashboard = props => {
 
   useEffect(() => {
     async function fetchData() {
-
       let hoursData = await userCredit();
       let dataBack = await getUsersQuestions();
       let { github, id } = await getUsernames();
 
-      if (hoursData.length > 1){
-          console.log(hoursData)
-          let totalHours = hoursData.reduce((a, b) => { return a.Time + b.Time})
-          console.log(totalHours)
-    
-          updateInfo({
-            name: github,
-            id,
-            questions: dataBack,
-            hours: totalHours
-          });
+      if (hoursData.length > 1) {
+        console.log(hoursData);
+        let totalHours = hoursData.reduce((a, b) => {
+          return a.Time + b.Time;
+        });
+        console.log(totalHours);
+
+        updateInfo({
+          name: github,
+          id,
+          questions: dataBack,
+          hours: totalHours
+        });
       } else if (hoursData.length === 1) {
-        console.log(hoursData)
+        console.log(hoursData);
         updateInfo({
           name: github,
           id,
           questions: dataBack,
           hours: hoursData[0].Time
         });
-
       } else {
-
         updateInfo({
           name: github,
           id,
           questions: dataBack,
           hours: 0
         });
-
       }
-
     }
     fetchData();
     //eslint-disable-next-line
@@ -153,9 +154,9 @@ const Dashboard = props => {
       </div>
 
       <div className='row'>
-        <div className='col-md-6'>
+        {/* <div className='col-md-6'>
           <Stats />
-        </div>
+        </div> */}
         <div className='col-md-6'>
           <TimeGauge hours={info.hours} />
           <p style={style.vert} className='text-center'>

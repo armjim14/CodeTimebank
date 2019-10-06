@@ -201,7 +201,7 @@ const AuthState = props => {
     axios(
       `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`
     ).then(res => {
-      console.log(res);
+      // console.log(res);
       for (let i = 0; i < res.data.length; i++) {
         switch (res.data[i].language) {
           case "JavaScript":
@@ -244,7 +244,7 @@ const AuthState = props => {
             initArr[12].value++;
             break;
           default:
-            console.log(res.data[i]);
+            // console.log(res.data[i]);
             initArr[13].value++;
             break;
         }
