@@ -37,7 +37,7 @@ const Stats = props => {
     d3.csv(
       "https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv",
       data => {
-        data = arr;
+        data = arr.filter(a => a.value > 0).sort((a, b) => b.value - a.value);
         console.log(data);
         // })
         // console.log(data)
