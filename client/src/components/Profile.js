@@ -11,27 +11,94 @@ function Profile(props) {
     questions: []
   });
 
-  const questionContext = useContext(QuestionContext);
-  const { specificUser, specificQuestions } = questionContext;
+    const [info, updateInfo] = useState({
+        name: "",
+        hours: 0,
+        questions: []
+      })
+    
+      const questionContext = useContext(QuestionContext);
+      const { specificUser, specificQuestions } = questionContext;
 
-  const timeContext = useContext(TimeContext);
-  const { forUser } = timeContext;
+      const timeContext = useContext(TimeContext);
+      const { forUser } = timeContext;
+    
+      const getHours = () => {
+        
+        if (info.hours){
+          return <span>{info.hours}</span>
+        } else {
+          return <span>0</span>
+        }
+      
+      }
+    
+      const seeQuestions = () => {
+    
+        // console.log(info.questions.length);
+    
+        if (!info.questions || info.questions.length === 0){
+          return <div className="col-md-12 text-center">There are no questions</div>
+        } else {
+          console.log(info.questions)
+          return info.questions.map( ({ question, language, topic}, i) => {
+            return (
+              <div key={i} className="col-md-12 text-center">
+                <h3>{topic}</h3>
+                <p>{language}</p>
+                <p>{question}</p>
+              </div>
+            )
+          })
+        }
+      }
+    
+      useEffect(() => {
+        async function fetchData() {
 
-  const authContext = useContext(AuthContext);
-  const { getRepos, arr } = authContext;
+          let idd = props.match.params.id
+          
+          let dataBack = await specificUser(idd);
+          let questions = await specificQuestions(idd)
+          let hoursData = await forUser(idd);
+          let { github, } = dataBack;
+          
+          if (hoursData.length > 1){
 
-  const getHours = () => {
-    if (info.hours) {
-      return <span>{info.hours}</span>;
-    } else {
-      return <span>0</span>;
-    }
-  };
+            console.log(hoursData);
+            let hours = hoursData.map(ar => ar.Time).reduce( (a, b) => a + b )
+            console.log(hours)
 
-  const seeQuestions = () => {
-    // console.log(info.questions.length);
+            updateInfo({
+              name: github,
+              questions,
+              hours
+            });
 
-    if (!info.questions || info.questions.length === 0) {
+          } else if (hoursData.length === 1) {
+              console.log(hoursData)
+            updateInfo({
+              name: github,
+              questions,
+              hours: hoursData[0].Time
+            });
+
+          } else {
+
+            updateInfo({
+              name: github,
+              questions,
+              hours: 0
+            });
+
+          }
+    
+    
+        }
+        fetchData();
+        //eslint-disable-next-line
+      }, []);
+    
       return (
         <div className='col-md-12 text-center'>There are no questions</div>
       );

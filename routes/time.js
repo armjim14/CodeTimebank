@@ -46,7 +46,7 @@ router.get("/currentUser", auth, async (req, res) => {
 })
 
 router.get("/user/:id", async (req, res) => {
-    const resp = await db.time.findAll({where: {UserId: req.params.id}})
+    const resp = await db.time.findAll({where: {UserId: req.params.id}, include: [db.Users] } )
     res.json(resp)
 })
 
