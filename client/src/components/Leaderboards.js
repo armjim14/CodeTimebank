@@ -2,23 +2,16 @@ import React, { Fragment, useContext, useState, useEffect } from "react";
 import QuestionContext from "../Context/question/questionContext";
 import { Link } from "react-router-dom";
 
-
 const Leaderboards = () => {
+  const [state, setState] = useState({ users: [] });
 
-  const [state, setState] = useState({ users: [] })
-
-  let { users } = state
+  let { users } = state;
 
   const questionContext = useContext(QuestionContext);
   const { getAllUsers } = questionContext;
 
   const renderUsers = () => {
-
-<<<<<<< HEAD
     if (!users || users.length == 0) {
-=======
-    if (users.length === 0) {
->>>>>>> c06806c80d2ad165932b92e721641f6759c7d4a8
       return (
         <tr>
           <td>No Data</td>
@@ -31,24 +24,27 @@ const Leaderboards = () => {
       return users.map(({ id, username, github, credits }) => {
         return (
           <tr key={id}>
-            <td><Link to={`/user/${id}`}>{username}</Link></td>
+            <td>
+              <Link to={`/user/${id}`}>{username}</Link>
+            </td>
             <td>{credits}</td>
-            <td><a href={`https://www.github.com/${github}`} target="__blank">{github}</a></td>
+            <td>
+              <a href={`https://www.github.com/${github}`} target='__blank'>
+                {github}
+              </a>
+            </td>
             <td>Hireable stuff</td>
           </tr>
-        )
-      })
+        );
+      });
     }
-
-  }
+  };
 
   useEffect(() => {
     async function fetchData() {
-
       let users = await getAllUsers();
-      console.log(users)
-      setState({ users })
-
+      console.log(users);
+      setState({ users });
     }
     fetchData();
     //eslint-disable-next-line
@@ -71,9 +67,7 @@ const Leaderboards = () => {
               <th>Hireable</th>
             </tr>
           </thead>
-          <tbody>
-            {renderUsers()}
-          </tbody>
+          <tbody>{renderUsers()}</tbody>
         </table>
       </div>
     </Fragment>
