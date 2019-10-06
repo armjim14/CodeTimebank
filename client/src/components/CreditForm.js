@@ -21,7 +21,8 @@ function CreditForm(props) {
         let temp = [];
         helpers.map(ar => temp.push(+ar.info[0]))
         console.log(temp)
-        AddCredit(temp, helpers, +props.match.params.id)
+        AddCredit(temp, helpers, +props.match.params.id);
+        props.history.push("/dashboard");
     }
 
 

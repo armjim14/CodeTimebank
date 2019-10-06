@@ -5,13 +5,23 @@ const db = require("../models");
 const auth = require("../middleware/auth");
 var Op = require("sequelize").Op;
 
+async function markSolved(id) {
+    const resp = await db.questiions.update({
+        solved: true,
+        where: {
+            id
+        }
+    })
+    return resp
+}
+
 router.post("/test", auth, async (req, res) => {
     const { ids, info, qId } = req.body;
     console.log(req.user.id)
     let data = [];
     let counter = 0;
 
-    for (let e in info){
+    for (let e in info) {
         let temp = {
             UserId: ids[e],
             questionId: qId,
@@ -31,8 +41,19 @@ router.post("/test", auth, async (req, res) => {
     console.log(data);
     console.log(counter);
 
-    const resp = await db.time.bulkCreate(data)
-    res.json(resp)
+    await db.time.bulkCreate(data)
+
+    await db.questions.update({
+        solved: true
+    },
+        {
+            where: {
+                id: qId
+            }
+        }
+    )
+
+    res.json({ msg: "completed" })
 })
 
 router.get("/currentUser", auth, async (req, res) => {
@@ -46,7 +67,7 @@ router.get("/currentUser", auth, async (req, res) => {
 })
 
 router.get("/user/:id", async (req, res) => {
-    const resp = await db.time.findAll({where: {UserId: req.params.id}, include: [db.Users] } )
+    const resp = await db.time.findAll({ where: { UserId: req.params.id }, include: [db.Users] })
     res.json(resp)
 })
 

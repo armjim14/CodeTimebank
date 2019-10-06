@@ -7,6 +7,7 @@ import Stats from "./Stats";
 import TimeGauge from "./TimeGauge";
 
 const Dashboard = props => {
+
   const [info, updateInfo] = useState({
     name: "",
     id: "",
@@ -18,7 +19,7 @@ const Dashboard = props => {
   const { getUsernames } = authContext;
 
   const questionContext = useContext(QuestionContext);
-  const { getUsersQuestions } = questionContext;
+  const { getUsersQuestions, deleteQuestions } = questionContext;
 
   const timeContext = useContext(TimeContext);
   const { userCredit } = timeContext;
@@ -41,28 +42,47 @@ const Dashboard = props => {
       );
     } else {
       console.log(info.questions);
-      return info.questions.map(({ id, question, language, topic }) => {
-        return (
-          <div key={id} className='col-md-12 text-center'>
-            <h3>{topic}</h3>
-            <p>{language}</p>
-            <p>{question}</p>
-            <button
-              onClick={() => {
-                alert("in working progress");
-              }}
-            >
-              Delete Questions
+      return info.questions.map(({ id, question, language, topic, solved }) => {
+        if (solved) {
+          return (
+            <div key={id} className='col-md-12 text-center'>
+              <h3>{topic}</h3>
+              <p>{language}</p>
+              <p>{question}</p>
+            </div>
+          );
+
+        } else {
+          return (
+            <div key={id} className='col-md-12 text-center'>
+              <h3>{topic}</h3>
+              <p>{language}</p>
+              <p>{question}</p>
+              <button
+                onClick={ async () => {
+                  deleteQuestions(id);
+                  let dataBack = await getUsersQuestions();
+                  updateInfo({
+                    name: info.name,
+                    id: info.id,
+                    questions: dataBack,
+                    hours: info.hours
+                  });
+          
+                }}
+              >
+                Delete Questions
             </button>
-            <button
-              onClick={() => {
-                props.history.push(`/form/${id}`);
-              }}
-            >
-              Mark as resolved
+              <button
+                onClick={() => {
+                  props.history.push(`/form/${id}`);
+                }}
+              >
+                Mark as resolved
             </button>
-          </div>
-        );
+            </div>
+          );
+        }
       });
     }
   };
@@ -71,20 +91,21 @@ const Dashboard = props => {
     async function fetchData() {
       let hoursData = await userCredit();
       let dataBack = await getUsersQuestions();
+      console.log(dataBack);
       let { github, id } = await getUsernames();
 
-      if (hoursData.length > 1){
-          console.log(hoursData)
-          console.log(hoursData.map( ar => ar.Time ))
-          let totalHours = hoursData.map( ar => ar.Time ).reduce((a, b) => a + b)
-          console.log(totalHours)
-    
-          updateInfo({
-            name: github,
-            id,
-            questions: dataBack,
-            hours: totalHours
-          });
+      if (hoursData.length > 1) {
+        console.log(hoursData)
+        console.log(hoursData.map(ar => ar.Time))
+        let totalHours = hoursData.map(ar => ar.Time).reduce((a, b) => a + b)
+        console.log(totalHours)
+
+        updateInfo({
+          name: github,
+          id,
+          questions: dataBack,
+          hours: totalHours
+        });
       } else if (hoursData.length === 1) {
         console.log(hoursData);
         updateInfo({

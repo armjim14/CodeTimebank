@@ -6,8 +6,8 @@ const TimeState = props => {
 
     const AddCredit = async (ids, info, qId) => {
         let data = {ids, info, qId}
-        const resp = axios.post("/api/time/test", data);
-        console.log(resp.data);
+        const resp = await axios.post("/api/time/test", data);
+        console.log(resp);
         return resp.data;
     }
 

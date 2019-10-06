@@ -52,13 +52,19 @@ const Leaderboards = () => {
 
       let everyUserTime = [];
 
+      console.log(usersInfo);
+
       for (let e in usersInfo) {
         let hourData = await forUser(usersInfo[e].id);
-        everyUserTime.push(hourData)
+        console.log(hourData);
+        if (hourData.length > 0){
+          everyUserTime.push(hourData)
+        }
       }
 
       let users = [];
 
+      console.log(everyUserTime);
       for (let i = 0; i < everyUserTime.length; i++) {
         let hours = everyUserTime[i].map(ar => ar.Time).reduce((a, b) => a + b);
         let id = everyUserTime[i][0].UserId

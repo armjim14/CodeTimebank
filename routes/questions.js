@@ -100,4 +100,18 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    db.questions.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).send("nope")
+  }
+})
+
 module.exports = router;
