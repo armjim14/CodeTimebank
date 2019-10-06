@@ -11,6 +11,7 @@ import Login from "./components/Login";
 import MainPage from "./components/MainPage";
 import Dashboard from "./components/Dashboard";
 import EditProfile from "./components/EditProfile";
+import ChangePassword from "./components/ChangePassword";
 import Leaderboards from "./components/Leaderboards";
 import Alerts from "./components/Alerts";
 import Footer from "./components/Footer";
