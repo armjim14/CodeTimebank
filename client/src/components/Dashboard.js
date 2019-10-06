@@ -41,8 +41,20 @@ const Dashboard = props => {
             <h3>{topic}</h3>
             <p>{language}</p>
             <p>{question}</p>
-            <button onClick={ () => {alert("in working progress")}}>Delete Questions</button>
-            <button onClick={ () => {props.history.push("/form")}}>Mark as resolved</button>
+            <button
+              onClick={() => {
+                alert("in working progress");
+              }}
+            >
+              Delete Questions
+            </button>
+            <button
+              onClick={() => {
+                props.history.push("/form");
+              }}
+            >
+              Mark as resolved
+            </button>
           </div>
         );
       });
@@ -116,9 +128,11 @@ const Dashboard = props => {
         <div className='col-md-6'>
           <Stats />
         </div>
-        <div className="col-md-6">
-          <TimeGauge hours={info.hours}/>
-          <p style={style.vert} className="text-center">Credits: {getHours()}</p>
+        <div className='col-md-6'>
+          <TimeGauge hours={info.hours} />
+          <p style={style.vert} className='text-center'>
+            Credits: {getHours()}
+          </p>
         </div>
       </div>
 
