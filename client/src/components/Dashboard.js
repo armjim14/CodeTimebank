@@ -24,6 +24,7 @@ const Dashboard = props => {
   const { userCredit } = timeContext;
 
   const getHours = () => {
+    console.log(info.hours)
     if (info.hours) {
       return <span>{info.hours}</span>;
     } else {
@@ -71,7 +72,8 @@ const Dashboard = props => {
 
       if (hoursData.length > 1){
           console.log(hoursData)
-          let totalHours = hoursData.reduce((a, b) => { return a.Time + b.Time})
+          console.log(hoursData.map( ar => ar.Time ))
+          let totalHours = hoursData.map( ar => ar.Time ).reduce((a, b) => a + b)
           console.log(totalHours)
     
           updateInfo({
