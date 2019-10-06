@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 // import SimplePieChart from "./SimplePieChart";
 import AuthContext from "../Context/auth/authContext";
 import QuestionContext from "../Context/question/questionContext";
+import TimeContext from "../Context/time/timeContext";
 import Stats from "./Stats";
 import TimeGauge from "./TimeGauge";
 
@@ -9,6 +10,7 @@ const Dashboard = props => {
   const [info, updateInfo] = useState({
     name: "",
     id: "",
+    hours: 0,
     questions: []
   });
 
@@ -17,6 +19,9 @@ const Dashboard = props => {
 
   const questionContext = useContext(QuestionContext);
   const { getUsersQuestions } = questionContext;
+
+  const timeContext = useContext(TimeContext);
+  const { userCredit } = timeContext;
 
   const getHours = () => {
     if (info.hours) {
@@ -29,10 +34,8 @@ const Dashboard = props => {
   const seeQuestions = () => {
     console.log(info.questions.length);
 
-    if (info.questions.length == 0) {
-      return (
-        <div className='col-md-12 text-center'>There are no questions</div>
-      );
+    if (info.questions.length === 0){
+      return <div className="col-md-12 text-center">There are no questions</div>
     } else {
       console.log(info.questions);
       return info.questions.map(({ id, question, language, topic }) => {
@@ -41,20 +44,18 @@ const Dashboard = props => {
             <h3>{topic}</h3>
             <p>{language}</p>
             <p>{question}</p>
-            <button
-              onClick={() => {
-                alert("in working progress");
-              }}
-            >
-              Delete Questions
-            </button>
-            <button
-              onClick={() => {
-                props.history.push("/form");
-              }}
-            >
-              Mark as resolved
-            </button>
+            <button 
+              onClick={ () => {
+                alert("in working progress")
+              }}>
+             Delete Questions
+             </button>
+            <button 
+              onClick={ () => {
+                props.history.push(`/form/${id}`)
+               }}>
+             Mark as resolved
+              </button>
           </div>
         );
       });
@@ -63,15 +64,42 @@ const Dashboard = props => {
 
   useEffect(() => {
     async function fetchData() {
-      let dataBack = await getUsersQuestions();
 
+      let hoursData = await userCredit();
+      let dataBack = await getUsersQuestions();
       let { github, id } = await getUsernames();
 
-      updateInfo({
-        name: github,
-        id,
-        questions: dataBack
-      });
+      if (hoursData.length > 1){
+          console.log(hoursData)
+          let totalHours = hoursData.reduce((a, b) => { return a.Time + b.Time})
+          console.log(totalHours)
+    
+          updateInfo({
+            name: github,
+            id,
+            questions: dataBack,
+            hours: totalHours
+          });
+      } else if (hoursData.length === 1) {
+        console.log(hoursData)
+        updateInfo({
+          name: github,
+          id,
+          questions: dataBack,
+          hours: hoursData[0].Time
+        });
+
+      } else {
+
+        updateInfo({
+          name: github,
+          id,
+          questions: dataBack,
+          hours: 0
+        });
+
+      }
+
     }
     fetchData();
     //eslint-disable-next-line
