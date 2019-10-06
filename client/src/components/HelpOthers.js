@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, Fragment, useState } from "react";
 import questionContext from "../Context/question/questionContext";
+import timeContext from "../Context/time/timeContext";
 
 import { Link } from "react-router-dom";
 import languages from "./data/languages.json";
