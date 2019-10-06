@@ -47,52 +47,57 @@ function App() {
     <AuthState>
       <QuestionState>
         <TimeState>
-        <AlertState>
-          <ApolloProvider client={client}>
-            <Router>
-              <Fragment>
-                <Navbar />
-                <Footer />
-                <div className='container bg-off-white px-5 shadow'>
-                  <Alerts />
-                  <Switch>
-                    <Route exact path='/' component={MainPage} />
-                    <Route exact path='/login' component={Login} />
-                    <Route exact path='/register' component={Register} />
-                    <Route
-                      exact
-                      path='/leaderboards'
-                      component={Leaderboards}
-                    />
-                    <PrivateRoute
-                      exact
-                      path='/gethelp'
-                      component={RequestHelp}
-                    />
-                    <PrivateRoute
-                      exact
-                      path='/providehelp'
-                      component={HelpOthers}
-                    />
-                    <PrivateRoute
-                      exact
-                      path='/dashboard'
-                      component={Dashboard}
-                    />
-                    <PrivateRoute 
-                      exact 
-                      path="/form/:id" 
-                      component={CreditForm} 
-                    />
-                    <Route exact path='/user/:id' component={Profile} />
-                    <Route exact path='/editprofile' component={EditProfile} />
-                    <Route exact path='/example' component={ExamplePage} />
-                  </Switch>
-                </div>
-              </Fragment>
-            </Router>
-          </ApolloProvider>
-        </AlertState>
+          <AlertState>
+            <ApolloProvider client={client}>
+              <Router>
+                <Fragment>
+                  <Navbar />
+                  <Footer />
+                  <div className='container bg-off-white px-5 shadow'>
+                    <Alerts />
+                    <Switch>
+                      <Route exact path='/' component={MainPage} />
+                      <Route exact path='/login' component={Login} />
+                      <Route exact path='/register' component={Register} />
+                      <Route
+                        exact
+                        path='/leaderboards'
+                        component={Leaderboards}
+                      />
+                      <PrivateRoute
+                        exact
+                        path='/gethelp'
+                        component={RequestHelp}
+                      />
+                      <PrivateRoute
+                        exact
+                        path='/providehelp'
+                        component={HelpOthers}
+                      />
+                      <PrivateRoute
+                        exact
+                        path='/dashboard'
+                        component={Dashboard}
+                      />
+                      <PrivateRoute
+                        exact
+                        path="/form/:id"
+                        component={CreditForm}
+                      />
+                      <PrivateRoute
+                        exact
+                        path="/changepassword"
+                        component={ChangePassword}
+                      />
+                      <Route exact path='/user/:id' component={Profile} />
+                      <Route exact path='/editprofile' component={EditProfile} />
+                      <Route exact path='/example' component={ExamplePage} />
+                    </Switch>
+                  </div>
+                </Fragment>
+              </Router>
+            </ApolloProvider>
+          </AlertState>
         </TimeState>
       </QuestionState>
     </AuthState>

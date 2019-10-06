@@ -58,7 +58,10 @@ function Profile(props) {
           let { github, } = dataBack;
           
           if (hoursData.length > 1){
-            let hours = hoursData.map( (a, b) => a.Time + b.Time )
+            console.log("I am here")
+            console.log(hoursData);
+            let hours = hoursData.map(ar => ar.Time).reduce( (a, b) => a + b )
+            console.log(hours)
             updateInfo({
               name: github,
               questions,
@@ -66,7 +69,7 @@ function Profile(props) {
             });
 
           } else if (hoursData.length === 1) {
-
+              console.log(hoursData)
             updateInfo({
               name: github,
               questions,
