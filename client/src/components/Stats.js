@@ -6,6 +6,7 @@ import languages from "./data/languages.json"
 class Stats  extends Component {
 
 componentDidMount(){
+  console.log(d3);
   this.drawChart();
 }
 //https://www.d3-graph-gallery.com/graph/barplot_horizontal.html
