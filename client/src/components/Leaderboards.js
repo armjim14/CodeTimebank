@@ -3,8 +3,8 @@ import QuestionContext from "../Context/question/questionContext";
 import { Link } from "react-router-dom";
 import TimeContext from "../Context/time/timeContext";
 
-
 const Leaderboards = () => {
+  const [state, setState] = useState({ users: [] });
 
   const [state, setState] = useState({ usersa: [] })
 
@@ -17,8 +17,7 @@ const Leaderboards = () => {
   const { forUser } = timeContext;
 
   const renderUsers = () => {
-
-
+    
     if (!usersa || usersa.length === 0) {
       return (
         <tr>
@@ -32,16 +31,21 @@ const Leaderboards = () => {
       return usersa.map(({ id, username, github, hours }) => {
         return (
           <tr key={id}>
-            <td><Link to={`/user/${id}`}>{username}</Link></td>
-            <td>{hours}</td>
-            <td><a href={`https://www.github.com/${github}`} target="__blank">{github}</a></td>
+            <td>
+              <Link to={`/user/${id}`}>{username}</Link>
+            </td>
+            <td>{credits}</td>
+            <td>
+              <a href={`https://www.github.com/${github}`} target='__blank'>
+                {github}
+              </a>
+            </td>
             <td>Hireable stuff</td>
           </tr>
-        )
-      })
+        );
+      });
     }
-
-  }
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -89,7 +93,6 @@ const Leaderboards = () => {
         }
       }
       setState({ usersa: users })
-
     }
     fetchData();
     //eslint-disable-next-line
@@ -112,9 +115,7 @@ const Leaderboards = () => {
               <th>Hireable</th>
             </tr>
           </thead>
-          <tbody>
-            {renderUsers()}
-          </tbody>
+          <tbody>{renderUsers()}</tbody>
         </table>
       </div>
     </Fragment>

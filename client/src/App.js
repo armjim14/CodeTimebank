@@ -53,7 +53,7 @@ function App() {
                 <Fragment>
                   <Navbar />
                   <Footer />
-                  <div className='container bg-off-white px-5 shadow'>
+                  <div className='container-fluid bg-off-white px-5'>
                     <Alerts />
                     <Switch>
                       <Route exact path='/' component={MainPage} />
@@ -81,16 +81,20 @@ function App() {
                       />
                       <PrivateRoute
                         exact
-                        path="/form/:id"
+                        path='/form/:id'
                         component={CreditForm}
                       />
                       <PrivateRoute
                         exact
-                        path="/changepassword"
+                        path='/changepassword'
                         component={ChangePassword}
                       />
                       <Route exact path='/user/:id' component={Profile} />
-                      <Route exact path='/editprofile' component={EditProfile} />
+                      <Route
+                        exact
+                        path='/editprofile'
+                        component={EditProfile}
+                      />
                       <Route exact path='/example' component={ExamplePage} />
                     </Switch>
                   </div>

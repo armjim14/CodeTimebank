@@ -17,6 +17,6 @@ The above colors are now in our css stylesheet as custom bootstrap classes
 */
 
 body {
-  background: url("./img/clocktile.png");
+  background: var(--off-white);
   background-size: cover;
 }
