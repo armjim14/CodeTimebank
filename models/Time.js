@@ -16,11 +16,11 @@ module.exports = function(sequelize, DataTypes) {
           allowNull: false
         }
       });
-      // time.belongsTo(models.questions, {
-      //   foreignKey: {
-      //     allowNull: false
-      //   }
-      // })
+      time.belongsTo(models.questions, {
+        foreignKey: {
+          allowNull: false
+        }
+      })
     };
     
     return time;

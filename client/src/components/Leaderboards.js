@@ -1,20 +1,25 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
 import QuestionContext from "../Context/question/questionContext";
 import { Link } from "react-router-dom";
+import TimeContext from "../Context/time/timeContext";
 
 
 const Leaderboards = () => {
 
-  const [state, setState] = useState({ users: [] })
+  const [state, setState] = useState({ usersa: [] })
 
-  let { users } = state
+  let { usersa } = state
 
   const questionContext = useContext(QuestionContext);
   const { getAllUsers } = questionContext;
 
+  const timeContext = useContext(TimeContext);
+  const { forUser } = timeContext;
+
   const renderUsers = () => {
 
-    if (users.length == 0) {
+
+    if (!usersa || usersa.length === 0) {
       return (
         <tr>
           <td>No Data</td>
@@ -24,11 +29,11 @@ const Leaderboards = () => {
         </tr>
       );
     } else {
-      return users.map(({ id, username, github, credits }) => {
+      return usersa.map(({ id, username, github, hours }) => {
         return (
           <tr key={id}>
             <td><Link to={`/user/${id}`}>{username}</Link></td>
-            <td>{credits}</td>
+            <td>{hours}</td>
             <td><a href={`https://www.github.com/${github}`} target="__blank">{github}</a></td>
             <td>Hireable stuff</td>
           </tr>
@@ -41,9 +46,49 @@ const Leaderboards = () => {
   useEffect(() => {
     async function fetchData() {
 
-      let users = await getAllUsers();
+      let usersInfo = await getAllUsers();
+
+      let everyUserTime = [];
+
+      for (let e in usersInfo) {
+        let hourData = await forUser(usersInfo[e].id);
+        everyUserTime.push(hourData)
+      }
+
+      let users = [];
+
+      for (let i = 0; i < everyUserTime.length; i++) {
+        let hours = everyUserTime[i].map(ar => ar.Time).reduce((a, b) => a + b);
+        let id = everyUserTime[i][0].UserId
+        let username = everyUserTime[i][0].User.username
+        let github = everyUserTime[i][0].User.github
+        let ob = { hours, id, username, github }
+        users.push(ob)
+      }
+
+      let run = true;
+
       console.log(users)
-      setState({ users })
+
+      if (users.length > 0) {
+        while (run) {
+          run = false;
+          for (let i = 0; i < users.length - 1; i++) {
+            let j = i + 1;
+            let num1 = users[i].hours;
+            let num2 = users[j].hours;
+            console.log(num1)
+            if (num1 < num2) {
+              run = true;
+              let tempA = users[i];
+              let tempB = users[j];
+              users[i] = tempB;
+              users[j] = tempA;
+            }
+          }
+        }
+      }
+      setState({ usersa: users })
 
     }
     fetchData();

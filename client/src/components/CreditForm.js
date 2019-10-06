@@ -2,15 +2,13 @@ import React, { Fragment, useContext, useState, useEffect } from "react";
 import QuestionContext from "../Context/question/questionContext";
 import timeContext from "../Context/time/timeContext";
 import AuthContext from "../Context/auth/authContext";
-import HelpOthers from "./HelpOthers";
-import { getDefaultValues } from "apollo-utilities";
 
 function CreditForm(props) {
 
     const [{ users, helpers, person }, setState] = useState({ users: [], helpers: [], person: "" })
 
     const questionContext = useContext(QuestionContext);
-    const { getExceptUsers, getAllUsers } = questionContext;
+    const { getAllUsers } = questionContext;
 
     const authContext = useContext(AuthContext);
     const { getUsernames } = authContext;  
@@ -23,13 +21,13 @@ function CreditForm(props) {
         let temp = [];
         helpers.map(ar => temp.push(+ar.info[0]))
         console.log(temp)
-        AddCredit(temp, helpers)
+        AddCredit(temp, helpers, +props.match.params.id)
     }
 
 
     const renderUsers = () => {
 
-        if (!users || users.length == 0) {
+        if (!users || users.length === 0) {
             return (
                 <option value="none">No users...</option>
             );
@@ -54,7 +52,7 @@ function CreditForm(props) {
             let temp = []
 
             for (let e in users){
-                if (users[e].id == id){
+                if (users[e].id === id){
                     console.log("do nothing")
                 } else {
                     temp.push(users[e])

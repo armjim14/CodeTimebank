@@ -1,17 +1,21 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import Stats from "./Stats";
 import QuestionContext from "../Context/question/questionContext";
+import TimeContext from "../Context/time/timeContext";
 
 function Profile(props) {
 
     const [info, updateInfo] = useState({
         name: "",
-        id: "",
+        hours: 0,
         questions: []
       })
     
       const questionContext = useContext(QuestionContext);
       const { specificUser, specificQuestions } = questionContext;
+
+      const timeContext = useContext(TimeContext);
+      const { forUser } = timeContext;
     
       const getHours = () => {
         
@@ -27,13 +31,13 @@ function Profile(props) {
     
         // console.log(info.questions.length);
     
-        if (!info.questions || info.questions.length == 0){
+        if (!info.questions || info.questions.length === 0){
           return <div className="col-md-12 text-center">There are no questions</div>
         } else {
           console.log(info.questions)
-          return info.questions.map( ({id, question, language, topic}) => {
+          return info.questions.map( ({ question, language, topic}, i) => {
             return (
-              <div key={id} className="col-md-12 text-center">
+              <div key={i} className="col-md-12 text-center">
                 <h3>{topic}</h3>
                 <p>{language}</p>
                 <p>{question}</p>
@@ -50,15 +54,39 @@ function Profile(props) {
           
           let dataBack = await specificUser(idd);
           let questions = await specificQuestions(idd)
-
-          console.log(dataBack)
-    
+          let hoursData = await forUser(idd);
           let { github, } = dataBack;
+          
+          if (hoursData.length > 1){
+
+            console.log(hoursData);
+            let hours = hoursData.map(ar => ar.Time).reduce( (a, b) => a + b )
+            console.log(hours)
+
+            updateInfo({
+              name: github,
+              questions,
+              hours
+            });
+
+          } else if (hoursData.length === 1) {
+              console.log(hoursData)
+            updateInfo({
+              name: github,
+              questions,
+              hours: hoursData[0].Time
+            });
+
+          } else {
+
+            updateInfo({
+              name: github,
+              questions,
+              hours: 0
+            });
+
+          }
     
-          updateInfo({
-            name: github,
-            questions
-          });
     
         }
         fetchData();
