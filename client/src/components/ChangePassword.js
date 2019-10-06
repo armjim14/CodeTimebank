@@ -33,8 +33,8 @@ const ChangePassword = props => {
         password: password
       });
       if (res.status == 200) {
-        setAlert("Password successfully changed!", "success", 900);
-        setTimeout(() => props.history.push("/dashboard"), 1000);
+        setAlert("Password successfully changed!", "success");
+        props.history.push("/dashboard");
       } else {
         setAlert("Something went wrong. Try again!", "danger");
       }

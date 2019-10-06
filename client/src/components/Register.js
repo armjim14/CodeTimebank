@@ -34,6 +34,12 @@ function Register(props) {
       setAlert("Passwords do not match", "danger");
     } else {
       register({ name, password, github, discord, skype });
+      setTimeout(() => console.log(error), 2000);
+      if (!error) {
+        for (let i = 0; i < error.length; i++) {
+          setAlert(error[i].msg, "danger");
+        }
+      }
     }
   };
 
