@@ -14,7 +14,11 @@ const Leaderboards = () => {
 
   const renderUsers = () => {
 
+<<<<<<< HEAD
     if (!users || users.length == 0) {
+=======
+    if (users.length === 0) {
+>>>>>>> c06806c80d2ad165932b92e721641f6759c7d4a8
       return (
         <tr>
           <td>No Data</td>

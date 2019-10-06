@@ -15,7 +15,6 @@ function RequestHelp(props) {
     topic: "",
     repo: ""
   });
-  console.log(languages);
 
   const { question, language, topic, repo } = questionAsked;
 
@@ -26,8 +25,6 @@ function RequestHelp(props) {
     e.preventDefault();
 
     const res = await sendQuestion({ question, language, topic, repo });
-
-    console.log("I was clicked");
 
     if (
       question === "" ||
