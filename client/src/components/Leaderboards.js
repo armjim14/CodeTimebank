@@ -18,6 +18,7 @@ const Leaderboards = () => {
 
   const renderUsers = () => {
 
+
     if (!usersa || usersa.length === 0) {
       return (
         <tr>

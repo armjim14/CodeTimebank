@@ -58,10 +58,11 @@ function Profile(props) {
           let { github, } = dataBack;
           
           if (hoursData.length > 1){
-            console.log("I am here")
+
             console.log(hoursData);
             let hours = hoursData.map(ar => ar.Time).reduce( (a, b) => a + b )
             console.log(hours)
+
             updateInfo({
               name: github,
               questions,
