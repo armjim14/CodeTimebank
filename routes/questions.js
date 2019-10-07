@@ -80,7 +80,7 @@ router.get("/get", async (req, res) => {
 router.get("/userq", auth, async (req, res) => {
   try {
     db.questions
-      .findAll({ where: { UserId: req.user.id } })
+      .findAll({ where: { UserId: req.user.id }, include: [db.Users] })
       .then(data => res.send(data));
   } catch (e) {
     console.log("Error: " + e);
@@ -99,5 +99,19 @@ router.get("/:id", async (req, res) => {
     res.send({ msg: e });
   }
 });
+
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    db.questions.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).send("nope")
+  }
+})
 
 module.exports = router;

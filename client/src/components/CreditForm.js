@@ -40,6 +40,7 @@ function CreditForm(props) {
     if (resp) {
       setAlert("Question marked as solved and credit given", "success");
       props.history.push("/dashboard");
+
     }
   };
 

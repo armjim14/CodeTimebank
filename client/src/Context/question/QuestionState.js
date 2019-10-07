@@ -74,6 +74,17 @@ const QuestionState = props => {
     }
   };
 
+  const deleteQuestions = async id => {
+    console.log(id);
+    try {
+      axios.delete(`/api/questions/delete/${id}`);
+      console.log("it deleted");
+      return "okay";
+    } catch (e) {
+
+    }
+  } 
+
   return (
     <QuestionContext.Provider
       value={{
@@ -81,6 +92,7 @@ const QuestionState = props => {
         getUsersQuestions,
         getQuestions,
         getAllUsers,
+        deleteQuestions,
         specificQuestions,
         specificUser
       }}

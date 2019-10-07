@@ -10,6 +10,13 @@ const TimeState = props => {
     return resp.data;
   };
 
+    const AddCredit = async (ids, info, qId) => {
+       let data = {ids, info, qId}
+        const resp = await axios.post("/api/time/test", data);
+        console.log(resp);
+        return resp.data;
+    }
+
   const userCredit = async () => {
     let resp = await axios.get("/api/time/currentUser");
     // console.log(resp.data);
