@@ -1,15 +1,23 @@
-import React, { useContext, Fragment } from "react";
+import React, { useContext, Fragment, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import AuthContext from "../Context/auth/authContext";
 
 function Navbar(props) {
   const authContext = useContext(AuthContext);
-  const { logout, isAuthenticated } = authContext;
+  const { logout, isAuthenticated, loadUser } = authContext;
 
   const goHome = async e => {
     logout();
     return <Redirect to='/' />;
   };
+
+  useEffect(() => {
+    function fetchData() {
+      loadUser()
+    }
+    fetchData();
+    //eslint-disable-next-line
+  }, []);
 
   const restLinks = () => {
     if (isAuthenticated) {

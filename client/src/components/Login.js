@@ -27,7 +27,8 @@ function Login(props) {
     }
   };
 
-  useEffect(() => {
+  useEffect( () => {
+
     if (isAuthenticated) {
       props.history.push("/dashboard");
     }
@@ -36,6 +37,7 @@ function Login(props) {
       clearErrors();
     }
   }, [error, isAuthenticated, props.history]);
+  
   return (
     <Fragment>
       <div className='row'>
