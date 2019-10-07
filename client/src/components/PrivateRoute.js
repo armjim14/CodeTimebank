@@ -5,7 +5,8 @@ import AuthContext from "../Context/auth/authContext";
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, loadUser } = authContext;
-  console.log(isAuthenticated)
+
+  console.log(rest)
   // Add a loading check later
 
   useEffect(() => {
