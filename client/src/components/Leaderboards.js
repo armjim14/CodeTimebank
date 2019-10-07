@@ -1,6 +1,107 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext, useState, useEffect } from "react";
+import QuestionContext from "../Context/question/questionContext";
+import { Link } from "react-router-dom";
+import TimeContext from "../Context/time/timeContext";
 
 const Leaderboards = () => {
+  const [state, setState] = useState({ users: [] });
+
+  let { usersa } = state
+
+  const questionContext = useContext(QuestionContext);
+  const { getAllUsers } = questionContext;
+
+  const timeContext = useContext(TimeContext);
+  const { forUser } = timeContext;
+
+  const renderUsers = () => {
+    
+    if (!usersa || usersa.length === 0) {
+      return (
+        <tr>
+          <td>No Data</td>
+          <td>No Data</td>
+          <td>No Data</td>
+          <td>No Data</td>
+        </tr>
+      );
+    } else {
+      return usersa.map(({ id, username, github, hours }) => {
+        return (
+          <tr key={id}>
+            <td>
+              <Link to={`/user/${id}`}>{username}</Link>
+            </td>
+            <td>{hours}</td>
+            <td>
+              <a href={`https://www.github.com/${github}`} target='__blank'>
+                {github}
+              </a>
+            </td>
+            <td>Hireable stuff</td>
+          </tr>
+        );
+      });
+    }
+  };
+
+  useEffect(() => {
+    async function fetchData() {
+
+      let usersInfo = await getAllUsers();
+
+      let everyUserTime = [];
+
+      console.log(usersInfo);
+
+      for (let e in usersInfo) {
+        let hourData = await forUser(usersInfo[e].id);
+        console.log(hourData);
+        if (hourData.length > 0){
+          everyUserTime.push(hourData)
+        }
+      }
+
+      let users = [];
+
+      console.log(everyUserTime);
+      for (let i = 0; i < everyUserTime.length; i++) {
+        let hours = everyUserTime[i].map(ar => ar.Time).reduce((a, b) => a + b);
+        let id = everyUserTime[i][0].UserId
+        let username = everyUserTime[i][0].User.username
+        let github = everyUserTime[i][0].User.github
+        let ob = { hours, id, username, github }
+        users.push(ob)
+      }
+
+      let run = true;
+
+      console.log(users)
+
+      if (users.length > 0) {
+        while (run) {
+          run = false;
+          for (let i = 0; i < users.length - 1; i++) {
+            let j = i + 1;
+            let num1 = users[i].hours;
+            let num2 = users[j].hours;
+            console.log(num1)
+            if (num1 < num2) {
+              run = true;
+              let tempA = users[i];
+              let tempB = users[j];
+              users[i] = tempB;
+              users[j] = tempA;
+            }
+          }
+        }
+      }
+      setState({ usersa: users })
+    }
+    fetchData();
+    //eslint-disable-next-line
+  }, []);
+
   return (
     <Fragment>
       <div className='row'>
@@ -18,24 +119,7 @@ const Leaderboards = () => {
               <th>Hireable</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>
-                <a href='#!'>Example Username (Links to profile)</a>
-              </td>
-              <td>100</td>
-              <td>
-                <a
-                  href='http://www.github.com/Mrrwmix'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  https://github.com/Mrrwmix
-                </a>
-              </td>
-              <td>From Github API: render a checkmark if yes, X if no</td>
-            </tr>
-          </tbody>
+          <tbody>{renderUsers()}</tbody>
         </table>
       </div>
     </Fragment>

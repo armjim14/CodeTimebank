@@ -4,8 +4,13 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
+    "d3": "^5.12.0",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.26",
     "react": "^16.9.0",
+    "react-d3-gauge": "0.0.1",
     "react-dom": "^16.9.0",
+    "react-moment": "^0.9.4",
     "react-scripts": "3.1.2",
     "uuid": "^3.3.3"
   },

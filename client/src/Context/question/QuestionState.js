@@ -1,42 +1,104 @@
-import React, { useReducer } from 'react';
-import axios from 'axios';
-import QuestionContext from './questionContext';
-import questionReducer from './questionReducer';
-// import types
-// import { } from '../types';
+import React from "react";
+import axios from "axios";
+import QuestionContext from "./questionContext";
 
 const QuestionState = props => {
 
-    const initialState = {
-      questions: [],
-      loading: null
-    };
-
-  const [state, dispatch] = useReducer(questionReducer, initialState);
-
   const sendQuestion = async formInfo => {
-
     const config = {
       headers: {
         "Content-Type": "application/json"
       }
     };
 
-    const resp = await axios.post("/api/questions/add", formInfo, config);
-    console.log(resp)
+    console.log(formInfo);
 
+    try {
+      const resp = await axios.post("/api/questions/add", formInfo, config);
+      console.log(resp);
+      return resp;
+    } catch (e) {
+      console.log("I am not working", e);
+    }
+  };
+
+  const getQuestions = async (lang) => {
+    try {
+      const res = await axios.get(`/api/questions/help/${lang}`);
+      console.log(res.data);
+      return res.data
+    } catch (e){
+      console.log(e)
+    }
   }
 
-  const getQuestions = () => {
-    dispatch({ type: "SET_LOADING" });
-    return axios.get("/api/questions/get")
-      .then( resp => dispatch({type: "GET_LIST", items: resp.data}) )
-      // .then(resp => resp.data)
-      .catch(err => console.error(err));
-  }
+  const getUsersQuestions = async () => {
+    try {
+      const res = await axios.get(`/api/questions/userq`);
+      console.log(res.data);
+      return res.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const getAllUsers = async () => {
+    try {
+      const resp = await axios.get(`/api/users/50users`);
+      console.log(resp.data);
+      return resp.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const specificUser = async id => {
+    console.log(id);
+    try {
+      const resp = await axios.get(`/api/users/${id}`);
+      console.log(resp.data);
+      return resp.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const specificQuestions = async id => {
+    console.log(id);
+    try {
+      const resp = await axios.get(`/api/questions/${id}`);
+      console.log(resp.data);
+      return resp.data;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const deleteQuestions = async id => {
+    console.log(id);
+    try {
+      axios.delete(`/api/questions/delete/${id}`);
+      console.log("it deleted");
+      return "okay";
+    } catch (e) {
+
+    }
+  } 
 
   return (
-    <QuestionContext.Provider value={{ sendQuestion, getQuestions, questions: state.questions, loading: state.loading }}>{props.children}</QuestionContext.Provider>
+    <QuestionContext.Provider
+      value={{
+        sendQuestion,
+        getUsersQuestions,
+        getQuestions,
+        getAllUsers,
+        deleteQuestions,
+        specificQuestions,
+        specificUser
+      }}
+    >
+      {props.children}
+    </QuestionContext.Provider>
   );
 };
 

@@ -5,12 +5,27 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const db = require("../models");
 const auth = require("../middleware/auth");
+const config = require("config");
+var Op = require("sequelize").Op;
 
 router.get("/auth", auth, async (req, res) => {
   try {
     const user = await db.Users.findOne({ where: { id: req.user.id } });
     res.json(user);
     // console.log(user);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.get("/", auth, async (req, res) => {
+  try {
+    const userInfo = await db.Users.findOne({
+      where: { id: req.user.id },
+      attributes: ["github", "discord", "skype", "id"]
+    });
+    res.json(userInfo);
   } catch (err) {
     console.log(err.message);
     res.status(500).send("Server error");
@@ -50,10 +65,15 @@ router.post(
         user: { id: user.id }
       };
 
-      jwt.sign(payload, "secret", { expiresIn: 360000 }, (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      });
+      jwt.sign(
+        payload,
+        config.get("jwtSecret"),
+        { expiresIn: 360000 },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server error");
@@ -98,7 +118,8 @@ router.post(
         password: password,
         github: github,
         discord: discord,
-        skype: skype
+        skype: skype,
+        credits: 0
       };
 
       const salt = await bcrypt.genSalt(10);
@@ -108,10 +129,15 @@ router.post(
         const payload = {
           user: { id: resp.id }
         };
-        jwt.sign(payload, "secret", { expiresIn: 360000 }, (err, token) => {
-          if (err) throw err;
-          res.json({ token });
-        });
+        jwt.sign(
+          payload,
+          config.get("jwtSecret"),
+          { expiresIn: 360000 },
+          (err, token) => {
+            if (err) throw err;
+            res.json({ token });
+          }
+        );
       });
     } catch (err) {
       console.error(err.message);
@@ -120,4 +146,88 @@ router.post(
   }
 );
 
+//changing password
+router.put("/password", auth, async (req, res) => {
+  let { password, oldPassword } = req.body;
+  try {
+    let user = await db.Users.findOne({ where: { id: req.user.id } });
+
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ msg: "Incorrect old password" });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    password = await bcrypt.hash(password, salt);
+
+    const update = await db.Users.update(
+      { password },
+      { returning: true, where: { id: req.user.id } }
+    );
+    res.status(200).json(update);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send(err.message);
+  }
+});
+// updating contact information
+router.put("/", auth, async (req, res) => {
+  const { discord, github, skype } = req.body;
+  try {
+    const update = await db.Users.update(
+      { discord, github, skype },
+      { returning: true, where: { id: req.user.id } }
+    );
+    res.json(update);
+    // console.log(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.get("/50users", async (req, res) => {
+  try {
+    const resp = await db.Users.findAll();
+    res.json(resp);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const resp = await db.Users.findOne({ where: { id: req.params.id } });
+    res.json(resp);
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.get("/except", auth, async (req, res) => {
+  console.log("\n\n" + req.user.id + "\n\n")
+  try {
+    console.log("\n I am in here \n")
+    const resp = await db.Users.findAll({
+      where: {
+        id: {
+          [Op.not]: req.user.id
+        }
+      }
+    })
+    console.log("-------------------")
+    console.log(resp)
+    console.log("-------------------")
+    res.json(resp);
+  } catch(e) {
+    console.log(e)
+    console.log(e.message);
+    res.status(500).send("Server error");
+  }
+})
+
 module.exports = router;
+

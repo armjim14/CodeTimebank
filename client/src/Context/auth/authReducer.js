@@ -6,7 +6,9 @@ import {
   USER_LOADED,
   AUTH_ERR,
   LOGOUT,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  RETRIEVE_FAIL,
+  GITHUB_DATA
 } from "../types";
 
 export default (state, action) => {
@@ -78,6 +80,17 @@ export default (state, action) => {
         loading: false,
         user: null,
         error: action.payload
+      };
+    case RETRIEVE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload
+      };
+    case GITHUB_DATA:
+      return {
+        ...state,
+        arr: [...action.payload]
       };
     default:
       return state;
