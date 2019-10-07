@@ -252,7 +252,7 @@ const Dashboard = props => {
               props.history.push(`/editprofile`);
             }}
             id="ButtonMargin"
-            className='btn btn-block btn-greyish rounded-pill'
+            className='btn btn-block btn-beige rounded-pill'
           >
             Edit Contact Info
           </button>
