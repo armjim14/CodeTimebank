@@ -21,18 +21,18 @@ body {
   background-size: cover;
 }
 
-#loginBox {
+.loginStuff {
   width: 500px;
 }
 
 .inputStuff {
   width: 90%;
   margin-left: 5%;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 @media screen and (max-width: 600px){
-  #loginBox {
+  .loginStuff {
     width: 100%;
   }
   .inputStuff {
