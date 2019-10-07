@@ -131,7 +131,7 @@ const Dashboard = props => {
                       }}
                     >Solved?
                   <i
-                    class="ml-2 text-success fas fa-check-square"
+                    className="ml-2 text-success fas fa-check-square"
                     onClick={() => {
                       props.history.push(`/form/${id}`);
                     }}
@@ -242,7 +242,7 @@ const Dashboard = props => {
             }}
             className='btn btn-block btn-beige rounded-pill'
           >
-            View Profile
+            View Profile as someone else
           </button>
         </div>
         <div className='col-md-3'>

@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 // const connectDB = require("./config/db");
 const path = require("path");
-
 var db = require("./models");
 
 app.use(express.urlencoded({ extended: true }));
