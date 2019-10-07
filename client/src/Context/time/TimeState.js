@@ -3,12 +3,6 @@ import axios from "axios";
 import TimeContext from "./timeContext";
 
 const TimeState = props => {
-  const AddCredit = async (ids, info, qId) => {
-    let data = { ids, info, qId };
-    const resp = await axios.post("/api/time/test", data);
-    // console.log(resp.data);
-    return resp.data;
-  };
 
     const AddCredit = async (ids, info, qId) => {
        let data = {ids, info, qId}
