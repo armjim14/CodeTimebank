@@ -37,6 +37,7 @@ const EditProfile = props => {
     e.preventDefault();
     const res = await updateInfo({ skype, github, discord });
     if (res.status === 200) {
+      setAlert("Contact information changed successfully!", "success");
       props.history.push("/dashboard");
     } else {
       setAlert("Server malfunction", "danger");
