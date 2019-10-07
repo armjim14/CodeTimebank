@@ -49,23 +49,23 @@ const Dashboard = props => {
       console.log(info.questions);
       return info.questions.map(({ id, question, language, topic, solved, createdAt, repo }) => {
         if (info.which === "solved") {
-          if (solved){
-            
+          if (solved) {
+
             return (
               <div
                 className='col-md-12 border border-dbrown rounded my-4 shadow'
                 key={id}
               >
-                <h3 className='text-center py-1 my-0'>{topic}<i className="far fa-trash-alt"></i></h3>
+                <h3 className='text-center py-1 my-0'>{topic}</h3>
                 <hr className='my-0' />
                 <div className='row'>
                   <div className='col-md-6 pr-0'>
-                    <p style={{fontSize:"1.2rem"}} className='text-center border border-right p-1'>
+                    <p style={{ fontSize: "1.2rem" }} className='text-center border border-right p-1'>
                       Language: {language}
                     </p>
                   </div>
                   <div className='col-md-6 pl-0'>
-                    <p style={{fontSize:"1rem"}} className='text-center border border-left p-1'>
+                    <p style={{ fontSize: "1rem" }} className='text-center border border-left p-1'>
                       {" "}
                       <Moment tz='America/Phoenix' format='LLL Z'>
                         {createdAt}
@@ -74,21 +74,21 @@ const Dashboard = props => {
                   </div>
                 </div>
                 <div className='row overflow-auto' style={{ height: "7rem", wordBreak: "break-all" }}>
-                  <p style={{fontSize:"1.2rem"}} className='col-md-12'>{question}</p>
+                  <p style={{ fontSize: "1.2rem" }} className='col-md-12'>{question}</p>
                 </div>
-  
+
                 <hr />
                 {repo !== "" && (
                   <Fragment>
                     <div className='row'>
                       <div className='col-md-12 text-center text-dbrown'>
-                        Github Repository: <a style={{fontSize:"1rem"}} href={`${repo}`}>{repo}</a>
+                        Github Repository: <a style={{ fontSize: "1rem" }} href={`${repo}`}>{repo}</a>
                       </div>
                     </div>
                     <hr />
                   </Fragment>
                 )}
-  
+
               </div>
             );
 
@@ -103,16 +103,52 @@ const Dashboard = props => {
                 className='col-md-12 border border-dbrown rounded my-4 shadow'
                 key={id}
               >
-                <h3 className='text-center py-1 my-0'>{topic}</h3>
+                <h3 className='text-center py-1 my-0'>
+                  {topic}                  
+                </h3>
+                <h3 className="text-center py-1 my-0">
+                  <i
+                    style={{ cursor: "pointer" }}
+                    className="text-danger mr-5 fas fa-trash-alt"
+                    onClick={async () => {
+                      deleteQuestions(id);
+                      let dataBack = await getUsersQuestions();
+                      updateInfo({
+                        name: info.name,
+                        id: info.id,
+                        questions: dataBack,
+                        hours: info.hours,
+                        which: info.which
+                      });
+                    }}
+                  >
+                  </i>
+                    <span 
+                      className="text-success" 
+                      style={{fontSize: "1rem", cursor: "pointer"}}
+                      onClick={() => {
+                        props.history.push(`/form/${id}`);
+                      }}
+                    >Solved?
+                  <i
+                    class="ml-2 text-success fas fa-check-square"
+                    onClick={() => {
+                      props.history.push(`/form/${id}`);
+                    }}
+                  >
+                  </i>
+                  </span>
+                </h3>
+      
                 <hr className='my-0' />
                 <div className='row'>
                   <div className='col-md-6 pr-0'>
-                    <p style={{fontSize:"1rem"}} className='text-center border border-right p-1'>
+                    <p style={{ fontSize: "1rem" }} className='text-center border border-right p-1'>
                       Language: {language}
                     </p>
                   </div>
                   <div className='col-md-6 pl-0'>
-                    <p style={{fontSize:"1rem"}} className='text-center border border-left p-1'>
+                    <p style={{ fontSize: "1rem" }} className='text-center border border-left p-1'>
                       {" "}
                       <Moment tz='America/Phoenix' format='LLL Z'>
                         {createdAt}
@@ -121,21 +157,21 @@ const Dashboard = props => {
                   </div>
                 </div>
                 <div className='row overflow-auto' style={{ height: "7rem", wordBreak: "break-all" }}>
-                  <p style={{fontSize:"1.2rem"}} className='col-md-12'>{question}</p>
+                  <p style={{ fontSize: "1.2rem" }} className='col-md-12'>{question}</p>
                 </div>
-  
+
                 <hr />
                 {repo !== "" && (
                   <Fragment>
                     <div className='row'>
                       <div className='col-md-12 text-center text-dbrown'>
-                        Github Repository: <a style={{fontSize:"1rem"}} href={`${repo}`}>{repo}</a>
+                        Github Repository: <a style={{ fontSize: "1rem" }} href={`${repo}`}>{repo}</a>
                       </div>
                     </div>
                     <hr />
                   </Fragment>
                 )}
-  
+
               </div>
             );
 
@@ -256,35 +292,35 @@ const Dashboard = props => {
 
       <div className="row mb-3">
         <div className="col-md-6 d-flex justify-content-center pl-5">
-          <button 
-            className="btn btn-outline-primary ml-5"
-            onClick={ () => {
+          <button
+            className="btn btn-outline-danger ml-5"
+            onClick={() => {
               updateInfo({
                 name: info.name,
                 id: info.id,
                 questions: info.questions,
                 hours: info.hours,
                 which: "unsolved"
-              });      
+              });
             }}
           >
-            unsolved
+            Unsolved
           </button>
         </div>
         <div className="col-md-6 d-flex justify-content-center pr-5">
-          <button 
-            className="btn btn-outline-primary mr-5"
-            onClick={ () => {
+          <button
+            className="btn btn-outline-success mr-5"
+            onClick={() => {
               updateInfo({
                 name: info.name,
                 id: info.id,
                 questions: info.questions,
                 hours: info.hours,
                 which: "solved"
-              });      
+              });
             }}
           >
-            solved
+            Solved
           </button>
         </div>
       </div>
