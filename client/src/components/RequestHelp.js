@@ -40,7 +40,7 @@ function RequestHelp(props) {
 
   return (
     <div>
-      <h1 className='text-center'>Request Help</h1>
+      <h1 className='text-center mt-2'>Request Help</h1>
       <form onSubmit={submit}>
         <div className='row'>
           <div className='form-group col-md-6'>
@@ -96,7 +96,9 @@ function RequestHelp(props) {
             placeholder='Add a link to a Github Repository (Optional)'
           />
         </div>
-        <input type='submit' />
+        <div className="forButton d-flex justify-content-center mt-2" style={{ width: "100%" }}>
+          <input className="btn btn-greyish" style={{ marginBottom: "60px" }} type='submit' />
+        </div>
       </form>
     </div>
   );

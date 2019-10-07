@@ -228,7 +228,7 @@ const Dashboard = props => {
 
   return (
     <Fragment>
-      <div className='row'>
+      <div className='row mt-3'>
         <div className='col-md-12'>
           <h1 className='text-center text-black'>Dashboard</h1>
         </div>
@@ -240,6 +240,7 @@ const Dashboard = props => {
             onClick={() => {
               props.history.push(`/user/${info.id}`);
             }}
+            id="ButtonMargin"
             className='btn btn-block btn-beige rounded-pill'
           >
             View Profile as someone else
@@ -250,6 +251,7 @@ const Dashboard = props => {
             onClick={() => {
               props.history.push(`/editprofile`);
             }}
+            id="ButtonMargin"
             className='btn btn-block btn-greyish rounded-pill'
           >
             Edit Contact Info
@@ -290,10 +292,18 @@ const Dashboard = props => {
         </div>
       </div>
 
-      <div className="row mb-3">
-        <div className="col-md-6 d-flex justify-content-center pl-5">
+      <hr />
+
+      <div className="row mb-4">
+        <div className="col-md-12 text-center">
+          <h2 className="font-weight-bold">Question History</h2>
+        </div>
+      </div>
+
+      <div className="row mb-2">
+        <div className="col-md-6 d-flex justify-content-center mb-3">
           <button
-            className="btn btn-outline-danger ml-5"
+            className="btn btn-outline-danger"
             onClick={() => {
               updateInfo({
                 name: info.name,
@@ -307,9 +317,9 @@ const Dashboard = props => {
             Unsolved
           </button>
         </div>
-        <div className="col-md-6 d-flex justify-content-center pr-5">
+        <div className="col-md-6 d-flex justify-content-center">
           <button
-            className="btn btn-outline-success mr-5"
+            className="btn btn-outline-success"
             onClick={() => {
               updateInfo({
                 name: info.name,

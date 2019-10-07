@@ -31,6 +31,10 @@ body {
   font-size: 1.2rem;
 }
 
+.fullWidth {
+  width: 100%;
+}
+
 @media screen and (max-width: 600px){
   .loginStuff {
     width: 100%;
@@ -41,6 +45,10 @@ body {
   }
 }
 
-.fullWidth {
-  width: 100%;
+@media screen and (max-width: 768px){
+  #ButtonMargin {
+    margin-bottom: 20px; 
+  }
 }
+
+/* 768 */

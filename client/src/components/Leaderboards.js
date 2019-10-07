@@ -22,7 +22,7 @@ const Leaderboards = () => {
           <td>No Data</td>
           <td>No Data</td>
           <td>No Data</td>
-          <td>No Data</td>
+          {/* <td>No Data</td> */}
         </tr>
       );
     } else {
@@ -38,7 +38,7 @@ const Leaderboards = () => {
                 {github}
               </a>
             </td>
-            <td>Hireable stuff</td>
+            {/* <td>Hireable stuff</td> */}
           </tr>
         );
       });
@@ -110,13 +110,13 @@ const Leaderboards = () => {
         </div>
       </div>
       <div className='row'>
-        <table className='table table-beige table-bordered'>
+        <table className='table table-beige table-bordered text-center'>
           <thead>
             <tr className='thead-light'>
               <th>Username</th>
               <th>Total Time Earned</th>
               <th>Github Profile</th>
-              <th>Hireable</th>
+              {/* <th>Hireable</th> */}
             </tr>
           </thead>
           <tbody>{renderUsers()}</tbody>
