@@ -35,75 +35,79 @@ function HelpOthers() {
       if (questions) {
         console.log(questions);
         return questions.map(
-          ({ User, id, question, topic, createdAt, language, repo }) => {
-            return (
-              <div
-                className='col-md-12 border border-dbrown rounded my-4 shadow'
-                key={id}
-              >
-                <h3 className='text-center'>{topic}</h3>
-                <hr className='mb-0' />
-                <div className='row'>
-                  <div className='col-md-6 pr-0'>
-                    <h6 className='small text-right border border-right p-1'>
-                      Language: {language}
-                    </h6>
-                  </div>
-                  <div className='col-md-6 pl-0'>
-                    <h6 className='text-left small border border-left p-1'>
-                      Asked by{" "}
-                      <Link to={`/user/${User.id}`}>{User.username}</Link> on{" "}
-                      <Moment tz='America/Phoenix' format='LLL Z'>
-                        {createdAt}
-                      </Moment>
-                    </h6>
-                  </div>
-                </div>
-                <div className='row overflow-auto' style={{ height: "7rem" }}>
-                  <p className='col-md-12'>{question}</p>
-                </div>
-
-                <hr />
-                {repo !== "" && (
-                  <Fragment>
-                    <div className='row'>
-                      <div className='col-md-12 text-center text-dbrown small'>
-                        Github Repository: <a href={`${repo}`}>${repo}</a>
-                      </div>
+          ({ User, id, question, topic, createdAt, language, repo, solved }) => {
+            if (solved) {
+              console.log("dont send question")
+            } else {
+              return (
+                <div
+                  className='col-md-12 border border-dbrown rounded my-4 shadow'
+                  key={id}
+                >
+                  <h3 className='text-center'>{topic}</h3>
+                  <hr className='mb-0' />
+                  <div className='row'>
+                    <div className='col-md-6 pr-0'>
+                      <h6 className='small text-right border border-right p-1'>
+                        Language: {language}
+                      </h6>
                     </div>
-                    <hr />
-                  </Fragment>
-                )}
-
-                <div className='row'>
-                  <div className='col-md-2 text-right'>
-                    <i className='fas fa-address-book' /> Contact{" "}
-                    <Link to={`/user/${User.id}`}>{User.username}</Link>:
+                    <div className='col-md-6 pl-0'>
+                      <h6 className='text-left small border border-left p-1'>
+                        Asked by{" "}
+                        <Link to={`/user/${User.id}`}>{User.username}</Link> on{" "}
+                        <Moment tz='America/Phoenix' format='LLL Z'>
+                          {createdAt}
+                        </Moment>
+                      </h6>
+                    </div>
                   </div>
-                  <div className='col-md-10 d-flex justify-content-around'>
-                    {User.skype !== "" && (
-                      <p>
-                        <a href={`skype:${User.skype}?chat`}>
-                          <i className='fab fa-skype text-primary'>
-                            {" "}
-                            {User.skype}
-                          </i>
-                        </a>
-                      </p>
-                    )}
-                    {User.discord !== "" && (
-                      <p>
-                        <i
-                          className='fab fa-discord'
-                          style={{ color: "#7289DA" }}
-                        />{" "}
-                        {User.discord}
-                      </p>
-                    )}
+                  <div className='row overflow-auto' style={{ height: "7rem", wordBreak: "break-all" }}>
+                    <p className='col-md-12'>{question}</p>
+                  </div>
+
+                  <hr />
+                  {repo !== "" && (
+                    <Fragment>
+                      <div className='row'>
+                        <div className='col-md-12 text-center text-dbrown small'>
+                          Github Repository: <a href={`${repo}`}>${repo}</a>
+                        </div>
+                      </div>
+                      <hr />
+                    </Fragment>
+                  )}
+
+                  <div className='row'>
+                    <div className='col-md-2 text-right'>
+                      <i className='fas fa-address-book' /> Contact{" "}
+                      <Link to={`/user/${User.id}`}>{User.username}</Link>:
+                    </div>
+                    <div className='col-md-10 d-flex justify-content-around'>
+                      {User.skype !== "" && (
+                        <p>
+                          <a href={`skype:${User.skype}?chat`}>
+                            <i className='fab fa-skype text-primary'>
+                              {" "}
+                              {User.skype}
+                            </i>
+                          </a>
+                        </p>
+                      )}
+                      {User.discord !== "" && (
+                        <p>
+                          <i
+                            className='fab fa-discord'
+                            style={{ color: "#7289DA" }}
+                          />{" "}
+                          {User.discord}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
+              );
+            }
           }
         );
       }

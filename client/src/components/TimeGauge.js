@@ -23,7 +23,7 @@ class TimeGauge extends Component {
       <div className="App">
         <ReactD3Gauge
           needleColor="blue"
-          colors={['red', 'green']}
+          colors={['#dc3545', '#28a745']}
           width={400}
           percent={this.calculateTime()}
         />

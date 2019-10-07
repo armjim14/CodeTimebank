@@ -35,7 +35,6 @@ module.exports = function (sequelize, DataTypes) {
         }
       });
       questions.hasMany(models.time, {
-        onDelete: "cascade"
       });
     };
     return questions;
