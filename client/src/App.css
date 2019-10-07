@@ -20,3 +20,27 @@ body {
   background: var(--off-white);
   background-size: cover;
 }
+
+#loginBox {
+  width: 500px;
+}
+
+.inputStuff {
+  width: 90%;
+  margin-left: 5%;
+  font-size: 1.3rem;
+}
+
+@media screen and (max-width: 600px){
+  #loginBox {
+    width: 100%;
+  }
+  .inputStuff {
+    width: 100%;
+    margin-left: 0px;
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}
