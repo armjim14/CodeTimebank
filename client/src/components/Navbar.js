@@ -32,6 +32,24 @@ function Navbar(props) {
               Dashboard
             </Link>
           </li>
+          <li className='nav-item'>
+            <Link
+              style={style.forTextOdd}
+              className='nav-link text-off-white'
+              to='/providehelp'
+            >
+              Help Others
+              </Link>
+          </li>
+          <li className='nav-item'>
+            <Link
+              style={style.forTextEven}
+              className='nav-link text-off-white'
+              to='/gethelp'
+            >
+              Request Help
+              </Link>
+          </li>
         </Fragment>
       );
     } else {
@@ -90,24 +108,6 @@ function Navbar(props) {
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav m-auto'>
             {restLinks()}
-            <li className='nav-item'>
-              <Link
-                style={style.forTextOdd}
-                className='nav-link text-off-white'
-                to='/providehelp'
-              >
-                Help Others
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                style={style.forTextEven}
-                className='nav-link text-off-white'
-                to='/gethelp'
-              >
-                Request Help
-              </Link>
-            </li>
             <li className='nav-item'>
               <Link
                 style={style.forTextOdd}
