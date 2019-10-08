@@ -5,7 +5,7 @@ import QuestionContext from "../Context/question/questionContext";
 import TimeContext from "../Context/time/timeContext";
 import Stats from "./Stats";
 import TimeGauge from "./TimeGauge";
-
+// import WordCloud from "./WordCloud";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 
@@ -279,6 +279,7 @@ const Dashboard = props => {
         </div> */}
         <div className='col-md-12 d-flex justify-content-center'>
           <TimeGauge hours={info.hours} />
+          {/* <WordCloud /> */}
         </div>
       </div>
 
