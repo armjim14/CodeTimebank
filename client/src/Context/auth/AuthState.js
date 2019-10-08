@@ -265,10 +265,14 @@ const AuthState = props => {
     }
   };
 
-  const getGithubInfo = async () => {
-    const resp = await axios.get("/api/github/Mrrwmix");
-    console.log(`github resp is`, resp.data);
-    dispatch({ type: GITHUB_PROFILE, payload: resp.data });
+  const getGithubInfo = async username => {
+    try {
+      const resp = await axios.get(`/api/github/${username}`);
+      console.log(`github resp is`, resp.data);
+      dispatch({ type: GITHUB_PROFILE, payload: resp.data });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
