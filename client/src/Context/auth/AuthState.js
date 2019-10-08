@@ -13,7 +13,8 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
   RETRIEVE_FAIL,
-  GITHUB_DATA
+  GITHUB_DATA,
+  GITHUB_PROFILE
 } from "../types";
 
 const AuthState = props => {
@@ -266,7 +267,8 @@ const AuthState = props => {
 
   const getGithubInfo = async () => {
     const resp = await axios.get("/api/github/Mrrwmix");
-    console.log(`github resp is`, resp);
+    console.log(`github resp is`, resp.data);
+    dispatch({ type: GITHUB_PROFILE, payload: resp.data });
   };
 
   return (
@@ -278,6 +280,13 @@ const AuthState = props => {
         error: state.error,
         user: state.user,
         arr: state.arr,
+        ghAvatar: state.ghAvatar,
+        ghName: state.ghName,
+        ghCompany: state.ghCompany,
+        ghBlog: state.ghBlog,
+        ghLocation: state.ghLocation,
+        ghBio: state.ghBio,
+        ghRepos: state.ghRepos,
         register,
         loadUser,
         login,
