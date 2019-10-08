@@ -155,9 +155,32 @@ function Profile(props) {
   return (
     <Fragment>
       <div className='row'>
-        <div className='col-md-12'>
-          <img src={ghAvatar} alt='Avatar' className='text-left' />
-          <h1 className='text-center text-black'>{info.name} Profile</h1>
+        <div className='col-md-3'>
+          <div className='thumbnail text-center'>
+            <img src={ghAvatar} alt='Avatar' className='text-left' />
+          </div>
+        </div>
+        <div className='col-md-9'>
+          <div className='border-bottom border-black'>
+            <h2 className='text-center text-black'>{info.name}'s Profile</h2>
+          </div>
+          <hr />
+          <div className='row'>
+            <div className='col-md-8'>
+              <ul className='list-group'>
+                <li className='list-group-item'>Name: {ghName}</li>
+                <li>Location: {ghLocation}</li>
+                <li>Company: {ghCompany}</li>
+              </ul>
+            </div>
+            <div className='col-md-4'>
+              <h6>Bio: {ghBio}</h6>
+              <h6>Number of Repositories: {ghRepos}</h6>
+              <a href={ghBlog} target='_blank' rel='noopener noreferrer'>
+                {ghBlog}
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
