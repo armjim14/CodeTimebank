@@ -106,7 +106,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { name, password, github, discord, skype } = req.body;
+    const { name, password, github, discord, skype, hirable, securityAnswer, securityQuestion } = req.body;
 
     try {
       let user = await db.Users.findOne({ where: { username: name } });
@@ -119,7 +119,10 @@ router.post(
         github: github,
         discord: discord,
         skype: skype,
-        credits: 0
+        credits: 0,
+        hirable,
+        securityAnswer,
+        securityQuestion
       };
 
       const salt = await bcrypt.genSalt(10);

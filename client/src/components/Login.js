@@ -79,56 +79,18 @@ function Login(props) {
           </h5>
         </div>
       </div>
+      <div className='row mt-4 mt-3'>
+        <div className='col-md-12'>
+          <h5 className='text-center'>
+            <a className="text-danger" href='/forgotPasswordPartOne' rel='noopener noreferrer'>
+              Forgot Password
+            </a>
+          </h5>
+        </div>
+      </div>
+
     </Fragment>
   );
 }
 
 export default withRouter(Login);
-
-// <Fragment>
-// <div className='row pt-3 pb-3'>
-//   <h1 className='col-md-12 text-center'>Login</h1>
-// </div>
-// <div className='form-group row'>
-//   {/* <label htmlFor='username' className='col-md-2 col-form-label'>
-//     Username
-//   </label> */}
-//   <div className='col-md-10 offset-1'>
-//     <input
-//       type='text'
-//       name='username'
-//       className='form-control'
-//       placeholder='Username'
-//       value={username}
-//       onChange={onChange}
-//     />
-//   </div>
-// </div>
-// <div className='form-group row'>
-//   {/* <label htmlFor='password' className='col-md-2 col-form-label'>
-//     Password
-//   </label> */}
-//   <div className='col-md-10'>
-//     <input
-//       type='password'
-//       name='password'
-//       className='form-control'
-//       placeholder='Password'
-//       value={password}
-//       onChange={onChange}
-//     />
-//   </div>
-// </div>
-// <button className='btn btn-primary btn-greyish' onClick={onSubmit}>
-//   Submit
-// </button>
-// <div className='row mt-3 mt-3'>
-//   <div className='col-md-12'>
-//     <h5 className='text-center'>
-//       <a href='/register' rel='noopener noreferrer'>
-//         Not registered yet? Click here to register.
-//       </a>
-//     </h5>
-//   </div>
-// </div>
-// </Fragment>

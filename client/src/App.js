@@ -35,6 +35,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import HelpOthers from "./components/HelpOthers";
 import RequestHelp from "./components/RequestHelp";
+import ForgotPassword from "./components/ForgotPassword";
 const client = new ApolloClient({});
 
 if (localStorage.token) {
@@ -61,6 +62,7 @@ function App() {
                         <Route exact path='/' component={MainPage} />
                         <Route exact path='/login' component={Login} />
                         <Route exact path='/register' component={Register} />
+                        <Route exact path='/forgotPasswordPartOne' component={ForgotPassword} />
                         <Route
                           exact
                           path='/leaderboards'
