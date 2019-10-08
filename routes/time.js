@@ -5,16 +5,6 @@ const db = require("../models");
 const auth = require("../middleware/auth");
 var Op = require("sequelize").Op;
 
-async function markSolved(id) {
-    const resp = await db.questiions.update({
-        solved: true,
-        where: {
-            id
-        }
-    })
-    return resp
-}
-
 router.post("/test", auth, async (req, res) => {
     const { ids, info, qId } = req.body;
     console.log(req.user.id)

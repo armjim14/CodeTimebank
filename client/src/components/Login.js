@@ -45,7 +45,7 @@ function Login(props) {
       </div>
       <div className='row'>
         <div className='fullWidth d-flex justify-content-center'>
-          <div class="loginStuff">
+          <div className="loginStuff">
             <input
               type='text'
               name='username'
