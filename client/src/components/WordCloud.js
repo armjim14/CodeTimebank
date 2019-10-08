@@ -6,7 +6,7 @@ import languages from './data/languages'
 function WordCloud() {
   return (
     <div style={{ height: 400, width: 600 }}>
-        <h1>Word Cloud</h1>
+        {/* <h1>Word Cloud</h1> */}
       <ReactWordcloud words={languages} />
     </div>
   );
