@@ -11,7 +11,9 @@
     "react-d3-gauge": "0.0.1",
     "react-dom": "^16.9.0",
     "react-moment": "^0.9.4",
+    "react-parallax": "^2.2.3",
     "react-scripts": "3.1.2",
+    "react-scroll-parallax": "^2.2.0",
     "uuid": "^3.3.3"
   },
   "scripts": {

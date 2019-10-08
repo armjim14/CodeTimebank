@@ -34,6 +34,10 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import HelpOthers from "./components/HelpOthers";
 import RequestHelp from "./components/RequestHelp";
+
+//Parallax
+import { Parallax, Background } from "react-parallax";
+
 const client = new ApolloClient({});
 
 if (localStorage.token) {
@@ -53,51 +57,57 @@ function App() {
                 <Fragment>
                   <Navbar />
                   <Footer />
-                  <div className='container-fluid bg-off-white px-5'>
-                    <Alerts />
-                    <Switch>
-                      <Route exact path='/' component={MainPage} />
-                      <Route exact path='/login' component={Login} />
-                      <Route exact path='/register' component={Register} />
-                      <Route
-                        exact
-                        path='/leaderboards'
-                        component={Leaderboards}
-                      />
-                      <PrivateRoute
-                        exact
-                        path='/gethelp'
-                        component={RequestHelp}
-                      />
-                      <PrivateRoute
-                        exact
-                        path='/providehelp'
-                        component={HelpOthers}
-                      />
-                      <PrivateRoute
-                        exact
-                        path='/dashboard'
-                        component={Dashboard}
-                      />
-                      <PrivateRoute
-                        exact
-                        path='/form/:id'
-                        component={CreditForm}
-                      />
-                      <PrivateRoute
-                        exact
-                        path='/changepassword'
-                        component={ChangePassword}
-                      />
-                      <Route exact path='/user/:id' component={Profile} />
-                      <Route
-                        exact
-                        path='/editprofile'
-                        component={EditProfile}
-                      />
-                      <Route exact path='/example' component={ExamplePage} />
-                    </Switch>
-                  </div>
+
+                  <Parallax strength={300}>
+                    <div className="container-fluid px-5">
+                      <Alerts />
+                      <Switch>
+                        <Route exact path="/" component={MainPage} />
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path="/register" component={Register} />
+                        <Route
+                          exact
+                          path="/leaderboards"
+                          component={Leaderboards}
+                        />
+                        <PrivateRoute
+                          exact
+                          path="/gethelp"
+                          component={RequestHelp}
+                        />
+                        <PrivateRoute
+                          exact
+                          path="/providehelp"
+                          component={HelpOthers}
+                        />
+                        <PrivateRoute
+                          exact
+                          path="/dashboard"
+                          component={Dashboard}
+                        />
+                        <PrivateRoute
+                          exact
+                          path="/form/:id"
+                          component={CreditForm}
+                        />
+                        <PrivateRoute
+                          exact
+                          path="/changepassword"
+                          component={ChangePassword}
+                        />
+                        <Route exact path="/user/:id" component={Profile} />
+                        <Route
+                          exact
+                          path="/editprofile"
+                          component={EditProfile}
+                        />
+                        <Route exact path="/example" component={ExamplePage} />
+                      </Switch>
+                    </div>
+                    <Background className="custom-bg">
+                      <img className="Parallax" src="clocktile.png" alt="clocktile" />
+                    </Background>
+                  </Parallax>
                 </Fragment>
               </Router>
             </ApolloProvider>

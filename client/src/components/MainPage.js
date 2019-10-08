@@ -1,8 +1,12 @@
 import React, { Fragment } from "react";
 
+
+
 function MainPage() {
-  return (
+ 
+  return (  
     <Fragment>
+     
       <div className='row'>
         <div className='col-md-12'>
           <h1
@@ -13,10 +17,12 @@ function MainPage() {
           </h1>
         </div>
       </div>
+     
       <div className='row'>
         <div className='col-md-12'>
           <h3 className='text-center text-black'>Wait... What's a timebank?</h3>
         </div>
+        
       </div>
       <div className='row'>
         <div className='col-md-12'>

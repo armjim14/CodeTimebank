@@ -20,3 +20,7 @@ body {
   background: var(--off-white);
   background-size: cover;
 }
+
+.Parallax {
+  background-size: 100% auto !important;
+}

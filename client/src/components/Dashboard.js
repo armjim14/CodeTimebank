@@ -1,11 +1,9 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-// import SimplePieChart from "./SimplePieChart";
 import AuthContext from "../Context/auth/authContext";
 import QuestionContext from "../Context/question/questionContext";
 import TimeContext from "../Context/time/timeContext";
 import Stats from "./Stats";
 import TimeGauge from "./TimeGauge";
-
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 
