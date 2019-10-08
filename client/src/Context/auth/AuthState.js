@@ -23,7 +23,14 @@ const AuthState = props => {
     loading: true,
     error: null,
     user: null,
-    arr: []
+    arr: [],
+    ghAvatar: null,
+    ghName: null,
+    ghCompany: null,
+    ghBlog: null,
+    ghLocation: null,
+    ghBio: null,
+    ghRepos: null
   };
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
@@ -245,7 +252,7 @@ const AuthState = props => {
             initArr[12].value++;
             break;
           default:
-            // console.log(res.data[i]);
+            console.log("Other is", res.data[i]);
             initArr[13].value++;
             break;
         }
@@ -255,6 +262,11 @@ const AuthState = props => {
     if (localStorage.token) {
       setAuthToken(localStorage.token);
     }
+  };
+
+  const getGithubInfo = async () => {
+    const resp = await axios.get("/api/github/Mrrwmix");
+    console.log(`github resp is`, resp);
   };
 
   return (
@@ -274,7 +286,8 @@ const AuthState = props => {
         getUsernames,
         updateInfo,
         changePassword,
-        getRepos
+        getRepos,
+        getGithubInfo
       }}
     >
       {props.children}
