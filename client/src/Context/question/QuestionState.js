@@ -3,7 +3,6 @@ import axios from "axios";
 import QuestionContext from "./questionContext";
 
 const QuestionState = props => {
-
   const sendQuestion = async formInfo => {
     const config = {
       headers: {
@@ -22,20 +21,20 @@ const QuestionState = props => {
     }
   };
 
-  const getQuestions = async (lang) => {
+  const getQuestions = async lang => {
     try {
       const res = await axios.get(`/api/questions/help/${lang}`);
       console.log(res.data);
-      return res.data
-    } catch (e){
-      console.log(e)
+      return res.data;
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   const getUsersQuestions = async () => {
     try {
       const res = await axios.get(`/api/questions/userq`);
-      console.log(res.data);
+      // console.log("this is get user questions", res.data);
       return res.data;
     } catch (e) {
       console.log(e);
@@ -80,10 +79,8 @@ const QuestionState = props => {
       axios.delete(`/api/questions/delete/${id}`);
       console.log("it deleted");
       return "okay";
-    } catch (e) {
-
-    }
-  } 
+    } catch (e) {}
+  };
 
   return (
     <QuestionContext.Provider

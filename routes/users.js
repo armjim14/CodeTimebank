@@ -163,7 +163,7 @@ router.put("/password", auth, async (req, res) => {
 
     const update = await db.Users.update(
       { password },
-      { returning: true, where: { id: req.user.id } }
+      { where: { id: req.user.id }, attributes: [] }
     );
     res.status(200).json(update);
   } catch (err) {
@@ -208,26 +208,25 @@ router.get("/:id", async (req, res) => {
 });
 
 router.get("/except", auth, async (req, res) => {
-  console.log("\n\n" + req.user.id + "\n\n")
+  console.log("\n\n" + req.user.id + "\n\n");
   try {
-    console.log("\n I am in here \n")
+    console.log("\n I am in here \n");
     const resp = await db.Users.findAll({
       where: {
         id: {
           [Op.not]: req.user.id
         }
       }
-    })
-    console.log("-------------------")
-    console.log(resp)
-    console.log("-------------------")
+    });
+    console.log("-------------------");
+    console.log(resp);
+    console.log("-------------------");
     res.json(resp);
-  } catch(e) {
-    console.log(e)
+  } catch (e) {
+    console.log(e);
     console.log(e.message);
     res.status(500).send("Server error");
   }
-})
+});
 
 module.exports = router;
-
