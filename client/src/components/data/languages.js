@@ -1,0 +1,59 @@
+export default 
+[
+    {
+        text:"JavaScript",
+        value:90
+    },
+    {
+        text:"CSS",
+        value:45
+    },
+    {  
+        text:"HTML",
+        value:60
+    },
+    {
+          text: "C#",
+          value:32
+    }, 
+    {
+        text:"C++",
+        value:3
+    },
+    {  
+        text: "C",
+        value: 9
+    },
+    {
+        text:"Java",
+        value:32
+    },
+    { 
+        text:"PHP",
+        value: 12
+    },
+    {  
+        text:"Python",
+        value:40
+    },
+    { 
+        text:"Ruby",
+        value:19
+    },
+    {   
+        text:"Perl",
+        value:9
+    },
+    { 
+        text:"SQL",
+        value:86
+    },
+    {
+        text:"NOSQL",
+        value:75 
+    },
+    {   
+        text:"Other",
+        value:32
+    }
+] 
