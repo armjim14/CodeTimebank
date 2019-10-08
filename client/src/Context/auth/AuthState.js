@@ -128,6 +128,7 @@ const AuthState = props => {
 
     try {
       let res = await axios.put("/api/users/password", formFields, config);
+      console.log(`this is change password`, res.status);
       return res;
     } catch (err) {
       console.error(err);

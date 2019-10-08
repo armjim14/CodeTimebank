@@ -6,69 +6,78 @@ const auth = require("../middleware/auth");
 var Op = require("sequelize").Op;
 
 async function markSolved(id) {
-    const resp = await db.questiions.update({
-        solved: true,
-        where: {
-            id
-        }
-    })
-    return resp
+  const resp = await db.questiions.update({
+    solved: true,
+    where: {
+      id
+    }
+  });
+  return resp;
 }
 
 router.post("/test", auth, async (req, res) => {
-    const { ids, info, qId } = req.body;
-    console.log(req.user.id)
-    let data = [];
-    let counter = 0;
+  const { ids, info, qId } = req.body;
+  console.log(req.user.id);
+  let data = [];
+  let counter = 0;
 
-    for (let e in info) {
-        let temp = {
-            UserId: ids[e],
-            questionId: qId,
-            Time: info[e].hours
-        }
-        counter -= info[e].hours;
-        data.push(temp)
-    }
+  for (let e in info) {
+    let temp = {
+      UserId: ids[e],
+      questionId: qId,
+      Time: info[e].hours
+    };
+    counter -= info[e].hours;
+    data.push(temp);
+  }
 
-    let forUser = {
-        UserId: req.user.id,
-        questionId: qId,
-        Time: counter
-    }
+  let forUser = {
+    UserId: req.user.id,
+    questionId: qId,
+    Time: counter
+  };
 
-    data.push(forUser);
-    console.log(data);
-    console.log(counter);
+  data.push(forUser);
+  console.log(data);
+  console.log(counter);
 
-    await db.time.bulkCreate(data)
+  await db.time.bulkCreate(data);
 
-    await db.questions.update({
-        solved: true
+  await db.questions.update(
+    {
+      solved: true
     },
-        {
-            where: {
-                id: qId
-            }
-        }
-    )
+    {
+      where: {
+        id: qId
+      }
+    }
+  );
 
-    res.json({ msg: "completed" })
-})
+  res.json({ msg: "completed" });
+});
 
 router.get("/currentUser", auth, async (req, res) => {
-    const resp = await db.time.findAll({
-        where: {
-            UserId: req.user.id
-        }
-    })
+  const resp = await db.time.findAll({
+    where: {
+      UserId: req.user.id
+    }
+  });
 
-    res.json(resp);
-})
+  res.json(resp);
+});
 
 router.get("/user/:id", async (req, res) => {
-    const resp = await db.time.findAll({ where: { UserId: req.params.id }, include: [db.Users] })
-    res.json(resp)
-})
+  const resp = await db.time.findAll({
+    where: { UserId: req.params.id },
+    include: [
+      {
+        model: db.Users,
+        attributes: { exclude: ["password"] }
+      }
+    ]
+  });
+  res.json(resp);
+});
 
 module.exports = router;
