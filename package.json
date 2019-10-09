@@ -31,6 +31,7 @@
     "config": "^3.2.2",
     "d3": "^5.12.0",
     "d3-axis": "^1.0.12",
+    "d3-cloud": "^1.2.5",
     "d3-scale": "^3.1.0",
     "d3-selection": "^1.4.0",
     "dotenv": "^8.1.0",
@@ -39,12 +40,15 @@
     "graphql": "^14.5.7",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^1.7.0",
+    "react": "^16.10.0",
     "react-apollo": "^3.1.1",
     "react-d3-gauge": "0.0.1",
-    "react-dom": "^16.10.1",
+    "react-dom": "^16.10.2",
     "react-router": "^5.1.0",
     "react-router-dom": "^5.1.0",
-    "sequelize": "^5.19.0"
+    "react-wordcloud": "^1.1.1",
+    "sequelize": "^5.19.0",
+    "tippy.js": "^5.0.2"
   },
   "devDependencies": {
     "nodemon": "^1.19.2"

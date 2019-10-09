@@ -6,6 +6,7 @@ import AuthContext from "../Context/auth/authContext";
 import Moment from "react-moment";
 import "moment-timezone";
 import { BrowserRouter as Link } from "react-router-dom";
+import FollowerContext from "../Context/follower/followerContext";
 
 function Profile(props) {
   const [info, updateInfo] = useState({
@@ -170,7 +171,7 @@ function Profile(props) {
   useEffect(() => {
     async function fetchData() {
       let idd = props.match.params.id;
-
+      console.log(typeof idd);
       let dataBack = await specificUser(idd);
       let questions = await specificQuestions(idd);
       let hoursData = await forUser(idd);
@@ -217,6 +218,22 @@ function Profile(props) {
         <div className='col-md-9'>
           <div className='border-bottom border-black'>
             <h2 className='text-left text-black'>{info.name}'s Profile</h2>
+            {!isAuthenticated || user.id === +props.match.params.id ? (
+              console.log("No Button")
+            ) : (
+              <div className='row mt-4'>
+                <div className='col-md-12 d-flex justify-content-center'>
+                  <button
+                    className='btn btn-primary'
+                    onClick={() => {
+                      addFollower(+props.match.params.id);
+                    }}
+                  >
+                    Follow {info.name}
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
           <hr />
           <div className='row'>

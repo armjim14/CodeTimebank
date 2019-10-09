@@ -20,3 +20,35 @@ body {
   background: var(--off-white);
   background-size: cover;
 }
+
+.loginStuff {
+  width: 500px;
+}
+
+.inputStuff {
+  width: 90%;
+  margin-left: 5%;
+  font-size: 1.2rem;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+@media screen and (max-width: 600px){
+  .loginStuff {
+    width: 100%;
+  }
+  .inputStuff {
+    width: 100%;
+    margin-left: 0px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  #ButtonMargin {
+    margin-bottom: 10px; 
+  }
+}
+
+/* 768 */

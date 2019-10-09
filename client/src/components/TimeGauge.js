@@ -11,6 +11,10 @@ class TimeGauge extends Component {
         if (currentTime == 0 ||currentTime == null || currentTime == undefined || currentTime == NaN){
             
             gaugeTime= 50;
+        } else if (currentTime > 100){
+          gaugeTime = 100;
+        }else if (currentTime < -100){
+          gaugeTime = 0;
         } else {
             
             gaugeTime = 50 + (currentTime / 2)
@@ -24,7 +28,7 @@ class TimeGauge extends Component {
         <ReactD3Gauge
           needleColor="blue"
           colors={['#dc3545', '#28a745']}
-          width={400}
+          width={320}
           percent={this.calculateTime()}
         />
       </div>

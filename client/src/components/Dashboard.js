@@ -5,7 +5,7 @@ import QuestionContext from "../Context/question/questionContext";
 import TimeContext from "../Context/time/timeContext";
 import Stats from "./Stats";
 import TimeGauge from "./TimeGauge";
-
+// import WordCloud from "./WordCloud";
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
 
@@ -244,7 +244,7 @@ const Dashboard = props => {
 
   return (
     <Fragment>
-      <div className='row'>
+      <div className='row mt-3'>
         <div className='col-md-12'>
           <h1 className='text-center text-black'>Dashboard</h1>
         </div>
@@ -256,6 +256,7 @@ const Dashboard = props => {
             onClick={() => {
               props.history.push(`/user/${info.id}`);
             }}
+            id='ButtonMargin'
             className='btn btn-block btn-beige rounded-pill'
           >
             View Profile as someone else
@@ -266,7 +267,8 @@ const Dashboard = props => {
             onClick={() => {
               props.history.push(`/editprofile`);
             }}
-            className='btn btn-block btn-greyish rounded-pill'
+            id='ButtonMargin'
+            className='btn btn-block btn-beige rounded-pill'
           >
             Edit Contact Info
           </button>
@@ -295,6 +297,7 @@ const Dashboard = props => {
         </div> */}
         <div className='col-md-12 d-flex justify-content-center'>
           <TimeGauge hours={info.hours} />
+          {/* <WordCloud /> */}
         </div>
       </div>
 
@@ -306,10 +309,18 @@ const Dashboard = props => {
         </div>
       </div>
 
-      <div className='row mb-3'>
-        <div className='col-md-6 d-flex justify-content-center pl-5'>
+      <hr />
+
+      <div className='row mb-4'>
+        <div className='col-md-12 text-center'>
+          <h2 className='font-weight-bold'>Question History</h2>
+        </div>
+      </div>
+
+      <div className='row mb-2'>
+        <div className='col-md-6 d-flex justify-content-center mb-3'>
           <button
-            className='btn btn-outline-danger ml-5'
+            className='btn btn-outline-danger'
             onClick={() => {
               updateInfo({
                 name: info.name,
@@ -323,9 +334,9 @@ const Dashboard = props => {
             Unsolved
           </button>
         </div>
-        <div className='col-md-6 d-flex justify-content-center pr-5'>
+        <div className='col-md-6 d-flex justify-content-center'>
           <button
-            className='btn btn-outline-success mr-5'
+            className='btn btn-outline-success'
             onClick={() => {
               updateInfo({
                 name: info.name,

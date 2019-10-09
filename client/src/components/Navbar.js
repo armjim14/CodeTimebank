@@ -85,7 +85,7 @@ function Navbar(props) {
           <Link style={style.forHeader} to='/'>
             <h1
               className='text-black'
-              style={{ fontFamily: "Verdana", fontWeight: "bold" }}
+              style={{ fontFamily: "Verdana", fontWeight: "bold", fontSize: "2.3rem" }}
             >
               Code Timebank
             </h1>
@@ -136,7 +136,7 @@ function Navbar(props) {
 // this style is here incase having every other Link a different color might better
 const style = {
   forHeader: {
-    fontSize: "35px",
+    fontSize: "2.3rem",
     color: "black"
   },
   forTextOdd: {
