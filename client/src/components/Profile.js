@@ -31,8 +31,13 @@ function Profile(props) {
     ghBlog,
     ghLocation,
     ghBio,
-    ghRepos
+    ghRepos,
+    isAuthenticated,
+    user
   } = authContext;
+
+  const followerContext = useContext(FollowerContext);
+  const { addFollower } = followerContext;
 
   const getHours = () => {
     if (info.hours) {
@@ -221,18 +226,14 @@ function Profile(props) {
             {!isAuthenticated || user.id === +props.match.params.id ? (
               console.log("No Button")
             ) : (
-              <div className='row mt-4'>
-                <div className='col-md-12 d-flex justify-content-center'>
-                  <button
-                    className='btn btn-primary'
-                    onClick={() => {
-                      addFollower(+props.match.params.id);
-                    }}
-                  >
-                    Follow {info.name}
-                  </button>
-                </div>
-              </div>
+              <button
+                className='btn btn-primary mx-auto mb-1'
+                onClick={() => {
+                  addFollower(+props.match.params.id);
+                }}
+              >
+                Follow {info.name}
+              </button>
             )}
           </div>
           <hr />
