@@ -211,16 +211,16 @@ function Profile(props) {
   return (
     <Fragment>
       <div className='row mt-3'>
-        <div className='col-md-3'>
-          <div className='img-thumbnail h-100 w-100 shadow'>
+        <div className='col-md-2'>
+          <div className='h-100 w-100'>
             <img
               src={ghAvatar}
               alt='Avatar'
-              className='d-block m-auto img-fluid'
+              className='d-block m-auto img-fluid rounded shadow'
             />
           </div>
         </div>
-        <div className='col-md-9'>
+        <div className='col-md-10'>
           <div className='border-bottom border-black'>
             <h2 className='text-left text-black'>{info.name}'s Profile</h2>
             {!isAuthenticated || user.id === +props.match.params.id ? (
@@ -283,7 +283,7 @@ function Profile(props) {
                 {ghBlog && (
                   <li className='list-group-item flex-fill d-flex justify-content-start align-items-center'>
                     <i className='fas fa-link mr-2' />
-                    <strong className='mx-2'>Portfolio:</strong>
+                    <strong className='mx-2'>Website:</strong>
                     <a href={ghBlog} target='_blank' rel='noopener noreferrer'>
                       {ghBlog}
                     </a>
