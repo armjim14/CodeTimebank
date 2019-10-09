@@ -100,7 +100,12 @@ router.get("/:id", async (req, res) => {
   try {
     const resp = await db.questions.findAll({
       where: { UserId: req.params.id },
-      include: [db.Users]
+      include: [
+        {
+          model: db.Users,
+          attributes: { exclude: ["password"] }
+        }
+      ]
     });
     res.json(resp);
   } catch (e) {

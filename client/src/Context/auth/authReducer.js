@@ -8,7 +8,8 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
   RETRIEVE_FAIL,
-  GITHUB_DATA
+  GITHUB_DATA,
+  GITHUB_PROFILE
 } from "../types";
 
 export default (state, action) => {
@@ -91,6 +92,17 @@ export default (state, action) => {
       return {
         ...state,
         arr: [...action.payload]
+      };
+    case GITHUB_PROFILE:
+      return {
+        ...state,
+        ghAvatar: action.payload.avatar_url,
+        ghName: action.payload.name,
+        ghCompany: action.payload.company,
+        ghBlog: action.payload.blog,
+        ghLocation: action.payload.location,
+        ghBio: action.payload.bio,
+        ghRepos: action.payload.public_repos
       };
     default:
       return state;
