@@ -271,7 +271,9 @@ router.put("/reset/password", async (req, res) => {
     )
     console.log("Info Updated")
 
-    sendEmail(email, github)
+    await sendEmail(email, github)
+
+    res.status(200).send({msg: "Email send"})
 
   } catch (e) {
     console.log(e);
