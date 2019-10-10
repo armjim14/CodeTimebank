@@ -55,7 +55,7 @@ function App() {
                   <Fragment>
                     <Navbar />
                     <Footer />
-                    <div className='container-fluid bg-off-white px-4'>
+                    <div className='container-fluid bg-athens px-4'>
                       <Alerts />
                       <Switch>
                         <Route exact path='/' component={MainPage} />

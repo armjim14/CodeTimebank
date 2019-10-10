@@ -23,7 +23,7 @@
   --dark: #343a40;
   --dbrown: #a08a59;
   --beige: #dac294;
-  --greyish: #752929;
+  --greyish: #d2d2d2;
   --off-white: #efefef;
   --black: #000000;
   --jgreen: #239695;
@@ -1767,21 +1767,21 @@ pre code {
 .table-greyish,
 .table-greyish > th,
 .table-greyish > td {
-  background-color: #d8c3c3;
+  background-color: #f2f2f2;
 }
 .table-greyish th,
 .table-greyish td,
 .table-greyish thead th,
 .table-greyish tbody + tbody {
-  border-color: #b79090;
+  border-color: #e8e8e8;
 }
 
 .table-hover .table-greyish:hover {
-  background-color: #ceb4b4;
+  background-color: #e5e5e5;
 }
 .table-hover .table-greyish:hover > td,
 .table-hover .table-greyish:hover > th {
-  background-color: #ceb4b4;
+  background-color: #e5e5e5;
 }
 
 .table-off-white,
@@ -2895,33 +2895,33 @@ fieldset:disabled a.btn {
 }
 
 .btn-greyish {
-  color: #fff;
-  background: #752929 linear-gradient(180deg, #8a4949, #752929) repeat-x;
-  border-color: #752929;
+  color: #212529;
+  background: #d2d2d2 linear-gradient(180deg, #d9d9d9, #d2d2d2) repeat-x;
+  border-color: #d2d2d2;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 .btn-greyish:hover {
-  color: #fff;
-  background: #591f1f linear-gradient(180deg, #724141, #591f1f) repeat-x;
-  border-color: #4f1c1c;
+  color: #212529;
+  background: #bfbfbf linear-gradient(180deg, #c9c9c9, #bfbfbf) repeat-x;
+  border-color: #b9b9b9;
 }
 .btn-greyish:focus, .btn-greyish.focus {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(138, 73, 73, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(183, 184, 185, 0.5);
 }
 .btn-greyish.disabled, .btn-greyish:disabled {
-  color: #fff;
-  background-color: #752929;
-  border-color: #752929;
+  color: #212529;
+  background-color: #d2d2d2;
+  border-color: #d2d2d2;
   background-image: none;
 }
 .btn-greyish:not(:disabled):not(.disabled):active, .btn-greyish:not(:disabled):not(.disabled).active, .show > .btn-greyish.dropdown-toggle {
-  color: #fff;
-  background-color: #4f1c1c;
+  color: #212529;
+  background-color: #b9b9b9;
   background-image: none;
-  border-color: #461818;
+  border-color: #b2b2b2;
 }
 .btn-greyish:not(:disabled):not(.disabled):active:focus, .btn-greyish:not(:disabled):not(.disabled).active:focus, .show > .btn-greyish.dropdown-toggle:focus {
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(138, 73, 73, 0.5);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(183, 184, 185, 0.5);
 }
 
 .btn-off-white {
@@ -3505,28 +3505,28 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-greyish {
-  color: #752929;
-  border-color: #752929;
+  color: #d2d2d2;
+  border-color: #d2d2d2;
 }
 .btn-outline-greyish:hover {
-  color: #fff;
-  background-color: #752929;
-  border-color: #752929;
+  color: #212529;
+  background-color: #d2d2d2;
+  border-color: #d2d2d2;
 }
 .btn-outline-greyish:focus, .btn-outline-greyish.focus {
-  box-shadow: 0 0 0 0.2rem rgba(117, 41, 41, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(210, 210, 210, 0.5);
 }
 .btn-outline-greyish.disabled, .btn-outline-greyish:disabled {
-  color: #752929;
+  color: #d2d2d2;
   background-color: transparent;
 }
 .btn-outline-greyish:not(:disabled):not(.disabled):active, .btn-outline-greyish:not(:disabled):not(.disabled).active, .show > .btn-outline-greyish.dropdown-toggle {
-  color: #fff;
-  background-color: #752929;
-  border-color: #752929;
+  color: #212529;
+  background-color: #d2d2d2;
+  border-color: #d2d2d2;
 }
 .btn-outline-greyish:not(:disabled):not(.disabled):active:focus, .btn-outline-greyish:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-greyish.dropdown-toggle:focus {
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(117, 41, 41, 0.5);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(210, 210, 210, 0.5);
 }
 
 .btn-outline-off-white {
@@ -5689,16 +5689,16 @@ a.badge-beige:focus, a.badge-beige.focus {
 }
 
 .badge-greyish {
-  color: #fff;
-  background-color: #752929;
+  color: #212529;
+  background-color: #d2d2d2;
 }
 a.badge-greyish:hover, a.badge-greyish:focus {
-  color: #fff;
-  background-color: #4f1c1c;
+  color: #212529;
+  background-color: #b9b9b9;
 }
 a.badge-greyish:focus, a.badge-greyish.focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(117, 41, 41, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(210, 210, 210, 0.5);
 }
 
 .badge-off-white {
@@ -6010,15 +6010,15 @@ a.badge-cello:focus, a.badge-cello.focus {
 }
 
 .alert-greyish {
-  color: #3d1515;
-  background: #e3d4d4 linear-gradient(180deg, #e7dada, #e3d4d4) repeat-x;
-  border-color: #d8c3c3;
+  color: #6d6d6d;
+  background: #f6f6f6 linear-gradient(180deg, #f7f7f7, #f6f6f6) repeat-x;
+  border-color: #f2f2f2;
 }
 .alert-greyish hr {
-  border-top-color: #ceb4b4;
+  border-top-color: #e5e5e5;
 }
 .alert-greyish .alert-link {
-  color: #170808;
+  color: #545454;
 }
 
 .alert-off-white {
@@ -6518,17 +6518,17 @@ a.badge-cello:focus, a.badge-cello.focus {
 }
 
 .list-group-item-greyish {
-  color: #3d1515;
-  background-color: #d8c3c3;
+  color: #6d6d6d;
+  background-color: #f2f2f2;
 }
 .list-group-item-greyish.list-group-item-action:hover, .list-group-item-greyish.list-group-item-action:focus {
-  color: #3d1515;
-  background-color: #ceb4b4;
+  color: #6d6d6d;
+  background-color: #e5e5e5;
 }
 .list-group-item-greyish.list-group-item-action.active {
   color: #fff;
-  background-color: #3d1515;
-  border-color: #3d1515;
+  background-color: #6d6d6d;
+  border-color: #6d6d6d;
 }
 
 .list-group-item-off-white {
@@ -7545,13 +7545,13 @@ button.bg-beige:focus {
 }
 
 .bg-greyish {
-  background-color: #752929 !important;
+  background-color: #d2d2d2 !important;
 }
 
 a.bg-greyish:hover, a.bg-greyish:focus,
 button.bg-greyish:hover,
 button.bg-greyish:focus {
-  background-color: #4f1c1c !important;
+  background-color: #b9b9b9 !important;
 }
 
 .bg-off-white {
@@ -7705,7 +7705,7 @@ button.bg-cello:focus {
 }
 
 .bg-gradient-greyish {
-  background: #752929 linear-gradient(180deg, #8a4949, #752929) repeat-x !important;
+  background: #d2d2d2 linear-gradient(180deg, #d9d9d9, #d2d2d2) repeat-x !important;
 }
 
 .bg-gradient-off-white {
@@ -7841,7 +7841,7 @@ button.bg-cello:focus {
 }
 
 .border-greyish {
-  border-color: #752929 !important;
+  border-color: #d2d2d2 !important;
 }
 
 .border-off-white {
@@ -11487,11 +11487,11 @@ a.text-beige:hover, a.text-beige:focus {
 }
 
 .text-greyish {
-  color: #752929 !important;
+  color: #d2d2d2 !important;
 }
 
 a.text-greyish:hover, a.text-greyish:focus {
-  color: #3c1515 !important;
+  color: #acacac !important;
 }
 
 .text-off-white {
