@@ -22,11 +22,11 @@ const Leaderboards = () => {
           <td>No Data</td>
           <td>No Data</td>
           <td>No Data</td>
-          {/* <td>No Data</td> */}
+          <td>No Data</td>
         </tr>
       );
     } else {
-      return usersa.map(({ id, username, github, hours }) => {
+      return usersa.map(({ id, username, github, hours, hirable }) => {
         return (
           <tr key={id}>
             <td>
@@ -38,7 +38,7 @@ const Leaderboards = () => {
                 {github}
               </a>
             </td>
-            {/* <td>Hireable stuff</td> */}
+            <td>{(hirable === "true")? <i class="text-success fas fa-check-square"></i> : <i class=" text-danger fas fa-ban"></i> }</td>
           </tr>
         );
       });
@@ -70,7 +70,8 @@ const Leaderboards = () => {
         let id = everyUserTime[i][0].UserId
         let username = everyUserTime[i][0].User.github
         let github = everyUserTime[i][0].User.github
-        let ob = { hours, id, username, github }
+        let hirable = everyUserTime[i][0].User.hirable
+        let ob = { hours, id, username, github, hirable }
         users.push(ob)
       }
 
@@ -110,13 +111,13 @@ const Leaderboards = () => {
         </div>
       </div>
       <div className='row'>
-        <table className='table table-beige table-bordered text-center'>
+        <table className='table table-beige table-striped table-bordered text-center'>
           <thead>
             <tr className='thead-light'>
               <th>Username</th>
               <th>Total Time Earned</th>
               <th>Github Profile</th>
-              {/* <th>Hireable</th> */}
+              <th>Hireable</th>
             </tr>
           </thead>
           <tbody>{renderUsers()}</tbody>
