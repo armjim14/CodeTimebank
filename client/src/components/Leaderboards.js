@@ -6,7 +6,7 @@ import TimeContext from "../Context/time/timeContext";
 const Leaderboards = () => {
   const [state, setState] = useState({ users: [] });
 
-  let { usersa } = state
+  let { usersa } = state;
 
   const questionContext = useContext(QuestionContext);
   const { getAllUsers } = questionContext;
@@ -15,7 +15,6 @@ const Leaderboards = () => {
   const { forUser } = timeContext;
 
   const renderUsers = () => {
-    
     if (!usersa || usersa.length === 0) {
       return (
         <tr>
@@ -38,7 +37,13 @@ const Leaderboards = () => {
                 {github}
               </a>
             </td>
-            <td>{(hirable === "true")? <i class="text-success fas fa-check-square"></i> : <i class=" text-danger fas fa-ban"></i> }</td>
+            <td>
+              {hirable === "true" ? (
+                <i className='text-success fas fa-check-square'></i>
+              ) : (
+                <i className=' text-danger fas fa-ban'></i>
+              )}
+            </td>
           </tr>
         );
       });
@@ -47,7 +52,6 @@ const Leaderboards = () => {
 
   useEffect(() => {
     async function fetchData() {
-
       let usersInfo = await getAllUsers();
 
       let everyUserTime = [];
@@ -57,8 +61,8 @@ const Leaderboards = () => {
       for (let e in usersInfo) {
         let hourData = await forUser(usersInfo[e].id);
         console.log(hourData);
-        if (hourData.length > 0){
-          everyUserTime.push(hourData)
+        if (hourData.length > 0) {
+          everyUserTime.push(hourData);
         }
       }
 
@@ -67,17 +71,17 @@ const Leaderboards = () => {
       console.log(everyUserTime);
       for (let i = 0; i < everyUserTime.length; i++) {
         let hours = everyUserTime[i].map(ar => ar.Time).reduce((a, b) => a + b);
-        let id = everyUserTime[i][0].UserId
-        let username = everyUserTime[i][0].User.github
-        let github = everyUserTime[i][0].User.github
-        let hirable = everyUserTime[i][0].User.hirable
-        let ob = { hours, id, username, github, hirable }
-        users.push(ob)
+        let id = everyUserTime[i][0].UserId;
+        let username = everyUserTime[i][0].User.github;
+        let github = everyUserTime[i][0].User.github;
+        let hirable = everyUserTime[i][0].User.hirable;
+        let ob = { hours, id, username, github, hirable };
+        users.push(ob);
       }
 
       let run = true;
 
-      console.log(users)
+      console.log(users);
 
       if (users.length > 0) {
         while (run) {
@@ -86,7 +90,7 @@ const Leaderboards = () => {
             let j = i + 1;
             let num1 = users[i].hours;
             let num2 = users[j].hours;
-            console.log(num1)
+            console.log(num1);
             if (num1 < num2) {
               run = true;
               let tempA = users[i];
@@ -97,7 +101,7 @@ const Leaderboards = () => {
           }
         }
       }
-      setState({ usersa: users })
+      setState({ usersa: users });
     }
     fetchData();
     //eslint-disable-next-line

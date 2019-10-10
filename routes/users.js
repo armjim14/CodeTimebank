@@ -7,7 +7,7 @@ const db = require("../models");
 const auth = require("../middleware/auth");
 const config = require("config");
 var Op = require("sequelize").Op;
-var nodemailer = require('nodemailer');
+var nodemailer = require("nodemailer");
 
 router.get("/auth", auth, async (req, res) => {
   try {
@@ -24,7 +24,7 @@ router.get("/", auth, async (req, res) => {
   try {
     const userInfo = await db.Users.findOne({
       where: { id: req.user.id },
-      attributes: ["github", "discord", "skype", "id"]
+      attributes: ["github", "discord", "skype", "id", "hirable"]
     });
     res.json(userInfo);
   } catch (err) {
@@ -89,10 +89,7 @@ router.post(
       "name",
       "Please make sure your username is at least two characters long."
     ).isLength({ min: 2 }),
-    check(
-      "name",
-      "Please enter a valid email"
-    ).isEmail(),
+    check("name", "Please enter a valid email").isEmail(),
     check("password", "Please enter a password")
       .not()
       .isEmpty(),
@@ -111,7 +108,16 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { name, password, github, discord, skype, hirable, securityAnswer, securityQuestion } = req.body;
+    const {
+      name,
+      password,
+      github,
+      discord,
+      skype,
+      hirable,
+      securityAnswer,
+      securityQuestion
+    } = req.body;
 
     try {
       let user = await db.Users.findOne({ where: { username: name } });
@@ -181,10 +187,10 @@ router.put("/password", auth, async (req, res) => {
 });
 // updating contact information
 router.put("/", auth, async (req, res) => {
-  const { discord, github, skype } = req.body;
+  const { discord, github, skype, hirable } = req.body;
   try {
     const update = await db.Users.update(
-      { discord, github, skype },
+      { discord, github, skype, hirable },
       { returning: true, where: { id: req.user.id } }
     );
     res.json(update);
@@ -240,19 +246,20 @@ router.get("/except", auth, async (req, res) => {
 router.get("/forgot/:username", async (req, res) => {
   console.log(req.params.username);
   try {
-    const resp = await db.Users.findOne({ where: { username: req.params.username } })
-    res.json(resp)
+    const resp = await db.Users.findOne({
+      where: { username: req.params.username }
+    });
+    res.json(resp);
   } catch (e) {
     console.log(e);
     console.log(e.message);
     res.status(500).send("Server error");
   }
-})
+});
 
 router.put("/reset/password", async (req, res) => {
   console.log(req.body);
   try {
-
     let { id, password, email, github } = req.body;
 
     console.log(req.body);
@@ -260,34 +267,33 @@ router.put("/reset/password", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     password = await bcrypt.hash(password, salt);
 
-    db.Users.update({
-      password
-    },
+    db.Users.update(
+      {
+        password
+      },
       {
         where: {
           id
         }
       }
-    )
-    console.log("Info Updated")
+    );
+    console.log("Info Updated");
 
-    await sendEmail(email, github)
+    await sendEmail(email, github);
 
-    res.status(200).send({msg: "Email send"})
-
+    res.status(200).send({ msg: "Email send" });
   } catch (e) {
     console.log(e);
     console.log(e.message);
     res.status(500).send("Server error");
   }
-})
+});
 
 module.exports = router;
 
 function sendEmail(email, username) {
-
   let transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: "gmail",
     secure: false,
     port: 25,
     auth: {
@@ -312,5 +318,4 @@ function sendEmail(email, username) {
     }
     console.log("The message was sent!");
   });
-
 }
