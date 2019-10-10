@@ -96,8 +96,8 @@ const QuestionState = props => {
   const updatePassword = async userInfo => {
     try {
       console.log(userInfo);
-      await axios.put(`/api/users/reset/password`, userInfo);
-      return "Good to go"
+      const resp = await axios.put(`/api/users/reset/password`, userInfo);
+      return resp
     } catch(e) {
       console.log(e)
     }
