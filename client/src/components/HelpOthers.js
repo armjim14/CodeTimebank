@@ -32,6 +32,7 @@ function HelpOthers() {
   };
 
   const renderFol = () => {
+    console.log(friends)
     if (friends.length > 0){
       return friends.map( ({topic, language, id, User, question, repo, createdAt}) => {
         return (
@@ -207,7 +208,7 @@ function HelpOthers() {
 
         for (let e in resp){
           let info = await specificQuestions(resp[e].followerId);
-
+          console.log(info)
           for (let v in info){
             if (info[v].solved){
               console.log("dont pass")
@@ -217,6 +218,8 @@ function HelpOthers() {
           }
 
         }
+
+        console.log(friends)
 
         setLang({
           lang,
