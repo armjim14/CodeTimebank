@@ -1,9 +1,18 @@
 :root {
-  --main-color: #a08a59;
-  --lighter-main: #dac294;
-  --greyish: #d2d2d2;
+  --dbrown: #a08a59;
+  --beige: #dac294;
+  --greyish: #752929;
   --off-white: #efefef;
-  --b: #000000;
+  --black: #000000;
+  --jgreen: #239695;
+  --fjord: #43426d;
+  --rose: #f24e72;
+  --stone: #727475;
+  --athens: #eaebed;
+  --glacier: #87bbc6;
+  --mariner: #2e7ccb;
+  --brown: #8b7b75;
+  --cello: #1c395d;
 }
 
 /*
@@ -26,7 +35,7 @@ The above colors are now in our css stylesheet as custom bootstrap classes
 */
 
 body {
-  background: var(--off-white);
+  background: var(--athens);
   background-size: cover;
 }
 
