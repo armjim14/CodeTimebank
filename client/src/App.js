@@ -62,7 +62,7 @@ function App() {
                         <Route exact path='/' component={MainPage} />
                         <Route exact path='/login' component={Login} />
                         <Route exact path='/register' component={Register} />
-                        <Route exact path='/forgotPasswordPartOne' component={ForgotPassword} />
+                        <Route exact path='/forgotPassword' component={ForgotPassword} />
                         <Route
                           exact
                           path='/leaderboards'

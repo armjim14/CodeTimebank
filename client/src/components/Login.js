@@ -82,7 +82,7 @@ function Login(props) {
       <div className='row mt-4 mt-3'>
         <div className='col-md-12'>
           <h5 className='text-center'>
-            <a className="text-danger" href='/forgotPasswordPartOne' rel='noopener noreferrer'>
+            <a className="text-danger" href='/forgotPassword' rel='noopener noreferrer'>
               Forgot Password
             </a>
           </h5>

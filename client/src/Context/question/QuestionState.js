@@ -73,14 +73,35 @@ const QuestionState = props => {
     }
   };
 
-  const deleteQuestions = async id => {
+  const deleteQuestions = id => {
     console.log(id);
     try {
       axios.delete(`/api/questions/delete/${id}`);
       console.log("it deleted");
       return "okay";
-    } catch (e) {}
+    } catch (e) {
+      console.log(e)
+    }
   };
+
+  const forgotUser = async username => {
+    try {
+      const resp = await axios.get(`/api/users/forgot/${username}`)
+      return resp.data;
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  const updatePassword = async userInfo => {
+    try {
+      console.log(userInfo);
+      await axios.put(`/api/users/reset/password`, userInfo);
+      return "Good to go"
+    } catch(e) {
+      console.log(e)
+    }
+  }
 
   return (
     <QuestionContext.Provider
@@ -91,6 +112,8 @@ const QuestionState = props => {
         getAllUsers,
         deleteQuestions,
         specificQuestions,
+        forgotUser,
+        updatePassword,
         specificUser
       }}
     >

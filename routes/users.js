@@ -232,4 +232,44 @@ router.get("/except", auth, async (req, res) => {
   }
 });
 
+router.get("/forgot/:username", async (req, res) => {
+  console.log(req.params.username);
+  try {
+    const resp = await db.Users.findOne({ where: { username: req.params.username } })
+    res.json(resp)
+  } catch (e) {
+    console.log(e);
+    console.log(e.message);
+    res.status(500).send("Server error");
+  }
+})
+
+router.put("/reset/password", async (req, res) => {
+  console.log(req.body);
+  try {
+
+    let { id, password } = req.body;
+
+    const salt = await bcrypt.genSalt(10);
+    password = await bcrypt.hash(password, salt);
+
+    db.Users.update({
+      password
+    },
+      {
+        where: {
+          id
+        }
+      }
+    )
+
+    console.log("Info Updated")
+
+  } catch (e) {
+    console.log(e);
+    console.log(e.message);
+    res.status(500).send("Server error");
+  }
+})
+
 module.exports = router;
