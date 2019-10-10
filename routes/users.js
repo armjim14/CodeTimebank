@@ -106,7 +106,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { name, password, github, discord, skype } = req.body;
+    const { name, password, github, discord, skype, hirable, securityAnswer, securityQuestion } = req.body;
 
     try {
       let user = await db.Users.findOne({ where: { username: name } });
@@ -119,7 +119,10 @@ router.post(
         github: github,
         discord: discord,
         skype: skype,
-        credits: 0
+        credits: 0,
+        hirable,
+        securityAnswer,
+        securityQuestion
       };
 
       const salt = await bcrypt.genSalt(10);
@@ -228,5 +231,45 @@ router.get("/except", auth, async (req, res) => {
     res.status(500).send("Server error");
   }
 });
+
+router.get("/forgot/:username", async (req, res) => {
+  console.log(req.params.username);
+  try {
+    const resp = await db.Users.findOne({ where: { username: req.params.username } })
+    res.json(resp)
+  } catch (e) {
+    console.log(e);
+    console.log(e.message);
+    res.status(500).send("Server error");
+  }
+})
+
+router.put("/reset/password", async (req, res) => {
+  console.log(req.body);
+  try {
+
+    let { id, password } = req.body;
+
+    const salt = await bcrypt.genSalt(10);
+    password = await bcrypt.hash(password, salt);
+
+    db.Users.update({
+      password
+    },
+      {
+        where: {
+          id
+        }
+      }
+    )
+
+    console.log("Info Updated")
+
+  } catch (e) {
+    console.log(e);
+    console.log(e.message);
+    res.status(500).send("Server error");
+  }
+})
 
 module.exports = router;
