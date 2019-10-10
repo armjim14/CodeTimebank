@@ -1,15 +1,16 @@
 import React from 'react'
-import { render } from 'react-dom';
+// import { render } from 'react-dom';
 import Typed from 'react-typed';
 
 
-// import WordCloud from './WordCloud'
+import WordCloud from './WordCloud'
 
 const Splash = () => {
     return (
         <div>
-            <img className="splashImage" src="">
-            {/* <WordCloud /> */}
+            <h1>Splash</h1>
+            {/* <img className="splashImage" src=""> */}
+            
             <Typed
                     strings={['Here you can find anything']}
                     typeSpeed={40}
@@ -27,7 +28,8 @@ const Splash = () => {
                     loop >
                     <input type="text"/>
                 </Typed>
-                </img>
+                {/* </img> */}
+                <WordCloud />
         </div>
 
 )

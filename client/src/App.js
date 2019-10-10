@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import "./App.css";
-
+import Splash from "./components/Splash"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import ExamplePage from "./components/ExamplePage";
@@ -63,11 +63,13 @@ function App() {
                         <Route exact path='/login' component={Login} />
                         <Route exact path='/register' component={Register} />
                         <Route exact path='/forgotPassword' component={ForgotPassword} />
+                        <Route exact path='/splash' component={Splash} />
                         <Route
                           exact
                           path='/leaderboards'
                           component={Leaderboards}
                         />
+                        
                         <PrivateRoute
                           exact
                           path='/gethelp'
