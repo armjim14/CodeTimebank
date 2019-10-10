@@ -65,8 +65,8 @@ function RequestHelp(props) {
             >
               <option value=''>Select a language</option>
               {languages.map(language => (
-                <option value={language.name} key={language.name}>
-                  {language.name}
+                <option value={language.text} key={language.text}>
+                  {language.text}
                 </option>
               ))}
             </select>

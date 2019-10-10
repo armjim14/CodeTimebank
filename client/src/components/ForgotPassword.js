@@ -44,7 +44,7 @@ function ForgotPassword(props) {
 
     const checkPasswords = async () => {
         if (all.passwordOne === all.passwordTwo){
-            await updatePassword({id: all.userInfo.id, password: all.passwordOne});
+            await updatePassword({id: all.userInfo.id, password: all.passwordOne, email: all.userInfo.username, github: all.userInfo.github});
             setAlert("Passwords updated", "success")
             props.history.push("/login")
         } else {

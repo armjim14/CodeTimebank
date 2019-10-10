@@ -7,6 +7,7 @@ const db = require("../models");
 const auth = require("../middleware/auth");
 const config = require("config");
 var Op = require("sequelize").Op;
+var nodemailer = require('nodemailer');
 
 router.get("/auth", auth, async (req, res) => {
   try {
@@ -88,6 +89,10 @@ router.post(
       "name",
       "Please make sure your username is at least two characters long."
     ).isLength({ min: 2 }),
+    check(
+      "name",
+      "Please enter a valid email"
+    ).isEmail(),
     check("password", "Please enter a password")
       .not()
       .isEmpty(),
@@ -248,7 +253,9 @@ router.put("/reset/password", async (req, res) => {
   console.log(req.body);
   try {
 
-    let { id, password } = req.body;
+    let { id, password, email, github } = req.body;
+
+    console.log(req.body);
 
     const salt = await bcrypt.genSalt(10);
     password = await bcrypt.hash(password, salt);
@@ -262,8 +269,9 @@ router.put("/reset/password", async (req, res) => {
         }
       }
     )
-
     console.log("Info Updated")
+
+    sendEmail(email, github)
 
   } catch (e) {
     console.log(e);
@@ -273,3 +281,34 @@ router.put("/reset/password", async (req, res) => {
 })
 
 module.exports = router;
+
+function sendEmail(email, username) {
+
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    secure: false,
+    port: 25,
+    auth: {
+      user: process.env.email,
+      pass: process.env.password
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+
+  let HelperOptions = {
+    from: `${process.env.email}`,
+    to: `${email}`,
+    subject: `From: ${process.env.email}`,
+    text: `Hello ${username}, There has been a change to your account`
+  };
+
+  transporter.sendMail(HelperOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log("The message was sent!");
+  });
+
+}

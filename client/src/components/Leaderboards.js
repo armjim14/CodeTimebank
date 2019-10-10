@@ -68,7 +68,7 @@ const Leaderboards = () => {
       for (let i = 0; i < everyUserTime.length; i++) {
         let hours = everyUserTime[i].map(ar => ar.Time).reduce((a, b) => a + b);
         let id = everyUserTime[i][0].UserId
-        let username = everyUserTime[i][0].User.username
+        let username = everyUserTime[i][0].User.github
         let github = everyUserTime[i][0].User.github
         let ob = { hours, id, username, github }
         users.push(ob)

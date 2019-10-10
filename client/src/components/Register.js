@@ -73,13 +73,13 @@ function Register(props) {
       <div className='fullWidth d-flex justify-content-center'>
         <div className="loginStuff">
           <label htmlFor='Username' className='col-md-12 col-form-label font-weight-bold'>
-            Username:
+            Email:
         </label>
           <input
-            type='text'
+            type='email'
             name='name'
             className='form-control mb-4 inputStuff'
-            placeholder='Enter your username for the Code Timebank here'
+            placeholder='Enter your email'
             value={name}
             onChange={onChange}
           />
