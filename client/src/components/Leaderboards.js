@@ -22,22 +22,16 @@ const Leaderboards = () => {
           <td>No Data</td>
           <td>No Data</td>
           <td>No Data</td>
-          <td>No Data</td>
         </tr>
       );
     } else {
-      return usersa.map(({ id, username, github, hours, hirable }) => {
+      return usersa.map(({ id, username, hours, hirable }) => {
         return (
           <tr key={id}>
             <td>
               <Link to={`/user/${id}`}>{username}</Link>
             </td>
             <td>{hours}</td>
-            <td>
-              <a href={`https://www.github.com/${github}`} target='__blank'>
-                {github}
-              </a>
-            </td>
             <td>{(hirable === "true")? <i class="text-success fas fa-check-square"></i> : <i class=" text-danger fas fa-ban"></i> }</td>
           </tr>
         );
@@ -69,9 +63,8 @@ const Leaderboards = () => {
         let hours = everyUserTime[i].map(ar => ar.Time).reduce((a, b) => a + b);
         let id = everyUserTime[i][0].UserId
         let username = everyUserTime[i][0].User.github
-        let github = everyUserTime[i][0].User.github
         let hirable = everyUserTime[i][0].User.hirable
-        let ob = { hours, id, username, github, hirable }
+        let ob = { hours, id, username, hirable }
         users.push(ob)
       }
 
@@ -111,12 +104,11 @@ const Leaderboards = () => {
         </div>
       </div>
       <div className='row'>
-        <table className='table table-beige table-striped table-bordered text-center'>
+        <table className='table table-mariner table-striped table-bordered text-center'>
           <thead>
             <tr className='thead-light'>
-              <th>Username</th>
+              <th>User</th>
               <th>Total Time Earned</th>
-              <th>Github Profile</th>
               <th>Hireable</th>
             </tr>
           </thead>

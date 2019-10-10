@@ -47,10 +47,10 @@ function Login(props) {
         <div className='fullWidth d-flex justify-content-center'>
           <div className="loginStuff">
             <input
-              type='text'
+              type='email'
               name='username'
               className='form-control inputStuff mb-3 mr-0'
-              placeholder='Username'
+              placeholder='Email'
               value={username}
               onChange={onChange}
             />
@@ -73,7 +73,7 @@ function Login(props) {
       <div className='row mt-4 mt-3'>
         <div className='col-md-12'>
           <h5 className='text-center'>
-            <a href='/register' rel='noopener noreferrer'>
+            <a href='/register' rel='noopener noreferrer' className="text-jgreen">
               Not registered? Click here to register.
             </a>
           </h5>
@@ -82,7 +82,7 @@ function Login(props) {
       <div className='row mt-4 mt-3'>
         <div className='col-md-12'>
           <h5 className='text-center'>
-            <a className="text-danger" href='/forgotPassword' rel='noopener noreferrer'>
+            <a className="text-rose" href='/forgotPassword' rel='noopener noreferrer'>
               Forgot Password
             </a>
           </h5>

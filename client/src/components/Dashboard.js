@@ -114,7 +114,7 @@ const Dashboard = props => {
                   <h3 className='text-center py-1 my-0'>
                     <i
                       style={{ cursor: "pointer" }}
-                      className='text-danger mr-5 fas fa-trash-alt'
+                      className='px-2 py-2 text-danger mr-5 fas fa-trash-alt'
                       onClick={async () => {
                         deleteQuestions(id);
                         let dataBack = await getUsersQuestions();
@@ -129,12 +129,12 @@ const Dashboard = props => {
                     ></i>
                     <span
                       className='text-success'
-                      style={{ fontSize: "1rem", cursor: "pointer" }}
+                      style={{ fontSize: "1.5rem", cursor: "pointer" }}
                       onClick={() => {
                         props.history.push(`/form/${id}`);
                       }}
                     >
-                      Solved?
+                      Solved
                       <i
                         className='ml-2 text-success fas fa-check-square'
                         onClick={() => {
@@ -257,9 +257,9 @@ const Dashboard = props => {
               props.history.push(`/user/${info.id}`);
             }}
             id='ButtonMargin'
-            className='btn btn-block btn-beige rounded-pill'
+            className='btn btn-block btn-stone text-white rounded-pill'
           >
-            View Profile as someone else
+            View Your Profile
           </button>
         </div>
         <div className='col-md-3'>
@@ -268,7 +268,7 @@ const Dashboard = props => {
               props.history.push(`/editprofile`);
             }}
             id='ButtonMargin'
-            className='btn btn-block btn-beige rounded-pill'
+            className='btn btn-block btn-stone text-white rounded-pill'
           >
             Edit Contact Info
           </button>
@@ -278,7 +278,7 @@ const Dashboard = props => {
             onClick={() => {
               props.history.push(`/changepassword`);
             }}
-            className='btn btn-block btn-beige rounded-pill'
+            className='btn btn-block btn-stone text-white rounded-pill'
           >
             Change Password
           </button>
@@ -368,29 +368,3 @@ const style = {
 };
 
 export default Dashboard;
-
-{
-  /* <button
-onClick={async () => {
-  deleteQuestions(id);
-  let dataBack = await getUsersQuestions();
-  updateInfo({
-    name: info.name,
-    id: info.id,
-    questions: dataBack,
-    hours: info.hours,
-    which: info.which
-  });
-
-}}
->
-Delete Questions
-</button>
-<button
-onClick={() => {
-  props.history.push(`/form/${id}`);
-}}
->
-Mark as resolved
-</button> */
-}
