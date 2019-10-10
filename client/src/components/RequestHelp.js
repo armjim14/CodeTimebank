@@ -18,8 +18,10 @@ function RequestHelp(props) {
 
   const { question, language, topic, repo } = questionAsked;
 
-  const onChange = e =>
+  const onChange = e => {
+    console.log(languages)
     setQuestion({ ...questionAsked, [e.target.name]: e.target.value });
+  }
 
   const submit = async e => {
     e.preventDefault();
@@ -65,8 +67,8 @@ function RequestHelp(props) {
             >
               <option value=''>Select a language</option>
               {languages.map(language => (
-                <option value={language.name} key={language.name}>
-                  {language.name}
+                <option value={language.text} key={language.text}>
+                  {language.text}
                 </option>
               ))}
             </select>
