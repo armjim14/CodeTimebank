@@ -7,6 +7,7 @@ const db = require("../models");
 const auth = require("../middleware/auth");
 const config = require("config");
 var Op = require("sequelize").Op;
+var nodemailer = require('nodemailer');
 
 router.get("/auth", auth, async (req, res) => {
   try {
@@ -88,6 +89,10 @@ router.post(
       "name",
       "Please make sure your username is at least two characters long."
     ).isLength({ min: 2 }),
+    check(
+      "name",
+      "Please enter a valid email"
+    ).isEmail(),
     check("password", "Please enter a password")
       .not()
       .isEmpty(),
@@ -106,7 +111,7 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { name, password, github, discord, skype } = req.body;
+    const { name, password, github, discord, skype, hirable, securityAnswer, securityQuestion } = req.body;
 
     try {
       let user = await db.Users.findOne({ where: { username: name } });
@@ -119,7 +124,10 @@ router.post(
         github: github,
         discord: discord,
         skype: skype,
-        credits: 0
+        credits: 0,
+        hirable,
+        securityAnswer,
+        securityQuestion
       };
 
       const salt = await bcrypt.genSalt(10);
@@ -163,7 +171,7 @@ router.put("/password", auth, async (req, res) => {
 
     const update = await db.Users.update(
       { password },
-      { returning: true, where: { id: req.user.id } }
+      { where: { id: req.user.id }, attributes: [] }
     );
     res.status(200).json(update);
   } catch (err) {
@@ -208,22 +216,67 @@ router.get("/:id", async (req, res) => {
 });
 
 router.get("/except", auth, async (req, res) => {
-  console.log("\n\n" + req.user.id + "\n\n")
+  console.log("\n\n" + req.user.id + "\n\n");
   try {
-    console.log("\n I am in here \n")
+    console.log("\n I am in here \n");
     const resp = await db.Users.findAll({
       where: {
         id: {
           [Op.not]: req.user.id
         }
       }
-    })
-    console.log("-------------------")
-    console.log(resp)
-    console.log("-------------------")
+    });
+    console.log("-------------------");
+    console.log(resp);
+    console.log("-------------------");
     res.json(resp);
-  } catch(e) {
-    console.log(e)
+  } catch (e) {
+    console.log(e);
+    console.log(e.message);
+    res.status(500).send("Server error");
+  }
+});
+
+router.get("/forgot/:username", async (req, res) => {
+  console.log(req.params.username);
+  try {
+    const resp = await db.Users.findOne({ where: { username: req.params.username } })
+    res.json(resp)
+  } catch (e) {
+    console.log(e);
+    console.log(e.message);
+    res.status(500).send("Server error");
+  }
+})
+
+router.put("/reset/password", async (req, res) => {
+  console.log(req.body);
+  try {
+
+    let { id, password, email, github } = req.body;
+
+    console.log(req.body);
+
+    const salt = await bcrypt.genSalt(10);
+    password = await bcrypt.hash(password, salt);
+
+    db.Users.update({
+      password
+    },
+      {
+        where: {
+          id
+        }
+      }
+    )
+    console.log("Info Updated")
+
+    await sendEmail(email, github)
+
+    res.status(200).send({msg: "Email send"})
+
+  } catch (e) {
+    console.log(e);
     console.log(e.message);
     res.status(500).send("Server error");
   }
@@ -231,3 +284,33 @@ router.get("/except", auth, async (req, res) => {
 
 module.exports = router;
 
+function sendEmail(email, username) {
+
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    secure: false,
+    port: 25,
+    auth: {
+      user: process.env.email,
+      pass: process.env.password
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+
+  let HelperOptions = {
+    from: `${process.env.email}`,
+    to: `${email}`,
+    subject: `From: ${process.env.email}`,
+    text: `Hello ${username}, There has been a change to your account`
+  };
+
+  transporter.sendMail(HelperOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log("The message was sent!");
+  });
+
+}

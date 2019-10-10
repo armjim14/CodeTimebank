@@ -80,7 +80,15 @@ router.get("/get", async (req, res) => {
 router.get("/userq", auth, async (req, res) => {
   try {
     db.questions
-      .findAll({ where: { UserId: req.user.id }, include: [db.Users] })
+      .findAll({
+        where: { UserId: req.user.id },
+        include: [
+          {
+            model: db.Users,
+            attributes: { exclude: ["password"] }
+          }
+        ]
+      })
       .then(data => res.send(data));
   } catch (e) {
     console.log("Error: " + e);
@@ -91,7 +99,13 @@ router.get("/userq", auth, async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const resp = await db.questions.findAll({
-      where: { UserId: req.params.id }
+      where: { UserId: req.params.id },
+      include: [
+        {
+          model: db.Users,
+          attributes: { exclude: ["password"] }
+        }
+      ]
     });
     res.json(resp);
   } catch (e) {
@@ -106,12 +120,11 @@ router.delete("/delete/:id", async (req, res) => {
       where: {
         id: req.params.id
       }
-    })
-
+    });
   } catch (e) {
     console.log(e.message);
-    res.status(500).send("nope")
+    res.status(500).send("nope");
   }
-})
+});
 
 module.exports = router;

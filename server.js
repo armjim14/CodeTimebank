@@ -1,8 +1,8 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 // const connectDB = require("./config/db");
 const path = require("path");
-
 var db = require("./models");
 
 app.use(express.urlencoded({ extended: true }));
@@ -11,6 +11,8 @@ app.use(express.json({ extended: false }));
 app.use("/api/users", require("./routes/users"));
 app.use("/api/questions", require("./routes/questions"));
 app.use("/api/time", require("./routes/time"));
+app.use("/api/github", require("./routes/github"));
+app.use("/api/followers", require("./routes/followers"));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

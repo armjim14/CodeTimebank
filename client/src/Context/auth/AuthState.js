@@ -13,7 +13,8 @@ import {
   LOGOUT,
   CLEAR_ERRORS,
   RETRIEVE_FAIL,
-  GITHUB_DATA
+  GITHUB_DATA,
+  GITHUB_PROFILE
 } from "../types";
 
 const AuthState = props => {
@@ -23,7 +24,14 @@ const AuthState = props => {
     loading: true,
     error: null,
     user: null,
-    arr: []
+    arr: [],
+    ghAvatar: null,
+    ghName: null,
+    ghCompany: null,
+    ghBlog: null,
+    ghLocation: null,
+    ghBio: null,
+    ghRepos: null
   };
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
@@ -128,6 +136,7 @@ const AuthState = props => {
 
     try {
       let res = await axios.put("/api/users/password", formFields, config);
+      console.log(`this is change password`, res.status);
       return res;
     } catch (err) {
       console.error(err);
@@ -244,7 +253,7 @@ const AuthState = props => {
             initArr[12].value++;
             break;
           default:
-            // console.log(res.data[i]);
+            console.log("Other is", res.data[i]);
             initArr[13].value++;
             break;
         }
@@ -253,6 +262,16 @@ const AuthState = props => {
     dispatch({ type: GITHUB_DATA, payload: initArr });
     if (localStorage.token) {
       setAuthToken(localStorage.token);
+    }
+  };
+
+  const getGithubInfo = async username => {
+    try {
+      const resp = await axios.get(`/api/github/${username}`);
+      console.log(`github resp is`, resp.data);
+      dispatch({ type: GITHUB_PROFILE, payload: resp.data });
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -265,6 +284,13 @@ const AuthState = props => {
         error: state.error,
         user: state.user,
         arr: state.arr,
+        ghAvatar: state.ghAvatar,
+        ghName: state.ghName,
+        ghCompany: state.ghCompany,
+        ghBlog: state.ghBlog,
+        ghLocation: state.ghLocation,
+        ghBio: state.ghBio,
+        ghRepos: state.ghRepos,
         register,
         loadUser,
         login,
@@ -273,7 +299,8 @@ const AuthState = props => {
         getUsernames,
         updateInfo,
         changePassword,
-        getRepos
+        getRepos,
+        getGithubInfo
       }}
     >
       {props.children}

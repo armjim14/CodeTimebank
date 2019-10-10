@@ -1,22 +1,72 @@
 :root {
-  --main-color: #a08a59;
-  --lighter-main: #dac294;
-  --greyish: #d2d2d2;
+  --dbrown: #a08a59;
+  --beige: #dac294;
+  --greyish: #752929;
   --off-white: #efefef;
-  --b: #000000;
+  --black: #000000;
+  --jgreen: #239695;
+  --fjord: #43426d;
+  --rose: #f24e72;
+  --stone: #727475;
+  --athens: #eaebed;
+  --glacier: #87bbc6;
+  --mariner: #2e7ccb;
+  --brown: #8b7b75;
+  --cello: #1c395d;
 }
 
 /*
 The above colors are now in our css stylesheet as custom bootstrap classes
 
-  "dbrown": #a08a59,
-  "beige": #dac294,
-  "greyish": #d2d2d2,
-  "off-white": #efefef,
-  "black": #000000
+  --dbrown: #a08a59;
+  --beige: #dac294;
+  --greyish: #752929;
+  --off-white: #efefef;
+  --black: #000000;
+  --jgreen: #239695;
+  --fjord: #43426d;
+  --rose: #f24e72;
+  --stone: #727475;
+  --athens: #eaebed;
+  --glacier: #87bbc6;
+  --mariner: #2e7ccb;
+  --brown: #8b7b75;
+  --cello: #1c395d;
 */
 
 body {
-  background: var(--off-white);
+  background: var(--athens);
   background-size: cover;
 }
+
+.loginStuff {
+  width: 500px;
+}
+
+.inputStuff {
+  width: 90%;
+  margin-left: 5%;
+  font-size: 1.2rem;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .loginStuff {
+    width: 100%;
+  }
+  .inputStuff {
+    width: 100%;
+    margin-left: 0px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #ButtonMargin {
+    margin-bottom: 10px;
+  }
+}
+
+/* 768 */

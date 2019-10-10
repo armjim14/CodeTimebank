@@ -3,7 +3,6 @@ import axios from "axios";
 import QuestionContext from "./questionContext";
 
 const QuestionState = props => {
-
   const sendQuestion = async formInfo => {
     const config = {
       headers: {
@@ -22,20 +21,20 @@ const QuestionState = props => {
     }
   };
 
-  const getQuestions = async (lang) => {
+  const getQuestions = async lang => {
     try {
       const res = await axios.get(`/api/questions/help/${lang}`);
       console.log(res.data);
-      return res.data
-    } catch (e){
-      console.log(e)
+      return res.data;
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
   const getUsersQuestions = async () => {
     try {
       const res = await axios.get(`/api/questions/userq`);
-      console.log(res.data);
+      // console.log("this is get user questions", res.data);
       return res.data;
     } catch (e) {
       console.log(e);
@@ -74,16 +73,35 @@ const QuestionState = props => {
     }
   };
 
-  const deleteQuestions = async id => {
+  const deleteQuestions = id => {
     console.log(id);
     try {
       axios.delete(`/api/questions/delete/${id}`);
       console.log("it deleted");
       return "okay";
     } catch (e) {
-
+      console.log(e)
     }
-  } 
+  };
+
+  const forgotUser = async username => {
+    try {
+      const resp = await axios.get(`/api/users/forgot/${username}`)
+      return resp.data;
+    } catch(e) {
+      console.log(e)
+    }
+  }
+
+  const updatePassword = async userInfo => {
+    try {
+      console.log(userInfo);
+      const resp = await axios.put(`/api/users/reset/password`, userInfo);
+      return resp
+    } catch(e) {
+      console.log(e)
+    }
+  }
 
   return (
     <QuestionContext.Provider
@@ -94,6 +112,8 @@ const QuestionState = props => {
         getAllUsers,
         deleteQuestions,
         specificQuestions,
+        forgotUser,
+        updatePassword,
         specificUser
       }}
     >

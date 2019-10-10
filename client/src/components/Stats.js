@@ -2,7 +2,6 @@ import React, { useEffect, useContext } from "react";
 import AuthContext from "../Context/auth/authContext";
 import * as d3 from "d3";
 // import * as d3Scale from "d3-scale"
-import languages from "./data/languages.json";
 
 const Stats = props => {
   const authContext = useContext(AuthContext);
@@ -10,7 +9,7 @@ const Stats = props => {
   useEffect(() => {
     if (arr.length !== 0 && arr !== undefined) {
       console.log(arr);
-      setTimeout(drawChart, 2000);
+      setTimeout(drawChart, 1500);
       // drawChart();
     }
   }, [arr]);
@@ -91,7 +90,6 @@ const Stats = props => {
 
   return (
     <div>
-      <h1>Display your stats here</h1>
       <div className='stat-div'></div>
     </div>
   );

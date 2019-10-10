@@ -22,6 +22,7 @@ import CreditForm from "./components/CreditForm";
 import AuthState from "./Context/auth/AuthState";
 import QuestionState from "./Context/question/QuestionState";
 import TimeState from "./Context/time/TimeState";
+import FollowerState from "./Context/follower/FollowerState";
 
 // jwt Middleware
 import setAuthToken from "./Utils/setAuthToken";
@@ -34,6 +35,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import HelpOthers from "./components/HelpOthers";
 import RequestHelp from "./components/RequestHelp";
+import ForgotPassword from "./components/ForgotPassword";
 const client = new ApolloClient({});
 
 if (localStorage.token) {
@@ -47,61 +49,64 @@ function App() {
     <AuthState>
       <QuestionState>
         <TimeState>
-          <AlertState>
-            <ApolloProvider client={client}>
-              <Router>
-                <Fragment>
-                  <Navbar />
-                  <Footer />
-                  <div className='container-fluid bg-off-white px-5'>
-                    <Alerts />
-                    <Switch>
-                      <Route exact path='/' component={MainPage} />
-                      <Route exact path='/login' component={Login} />
-                      <Route exact path='/register' component={Register} />
-                      <Route
-                        exact
-                        path='/leaderboards'
-                        component={Leaderboards}
-                      />
-                      <PrivateRoute
-                        exact
-                        path='/gethelp'
-                        component={RequestHelp}
-                      />
-                      <PrivateRoute
-                        exact
-                        path='/providehelp'
-                        component={HelpOthers}
-                      />
-                      <PrivateRoute
-                        exact
-                        path='/dashboard'
-                        component={Dashboard}
-                      />
-                      <PrivateRoute
-                        exact
-                        path='/form/:id'
-                        component={CreditForm}
-                      />
-                      <PrivateRoute
-                        exact
-                        path='/changepassword'
-                        component={ChangePassword}
-                      />
-                      <Route exact path='/user/:id' component={Profile} />
-                      <Route
-                        exact
-                        path='/editprofile'
-                        component={EditProfile}
-                      />
-                      <Route exact path='/example' component={ExamplePage} />
-                    </Switch>
-                  </div>
-                </Fragment>
-              </Router>
-            </ApolloProvider>
-          </AlertState>
+          <FollowerState>
+            <AlertState>
+              <ApolloProvider client={client}>
+                <Router>
+                  <Fragment>
+                    <Navbar />
+                    <Footer />
+                    <div className='container-fluid bg-athens px-4'>
+                      <Alerts />
+                      <Switch>
+                        <Route exact path='/' component={MainPage} />
+                        <Route exact path='/login' component={Login} />
+                        <Route exact path='/register' component={Register} />
+                        <Route exact path='/forgotPassword' component={ForgotPassword} />
+                        <Route
+                          exact
+                          path='/leaderboards'
+                          component={Leaderboards}
+                        />
+                        <PrivateRoute
+                          exact
+                          path='/gethelp'
+                          component={RequestHelp}
+                        />
+                        <PrivateRoute
+                          exact
+                          path='/providehelp'
+                          component={HelpOthers}
+                        />
+                        <PrivateRoute
+                          exact
+                          path='/dashboard'
+                          component={Dashboard}
+                        />
+                        <PrivateRoute
+                          exact
+                          path='/form/:id'
+                          component={CreditForm}
+                        />
+                        <PrivateRoute
+                          exact
+                          path='/changepassword'
+                          component={ChangePassword}
+                        />
+                        <Route exact path='/user/:id' component={Profile} />
+                        <Route
+                          exact
+                          path='/editprofile'
+                          component={EditProfile}
+                        />
+                        <Route exact path='/example' component={ExamplePage} />
+                      </Switch>
+                    </div>
+                  </Fragment>
+                </Router>
+              </ApolloProvider>
+            </AlertState>
+          </FollowerState>
         </TimeState>
       </QuestionState>
     </AuthState>

@@ -28,6 +28,7 @@ function Login(props) {
   };
 
   useEffect(() => {
+
     if (isAuthenticated) {
       props.history.push("/dashboard");
     }
@@ -36,53 +37,58 @@ function Login(props) {
       clearErrors();
     }
   }, [error, isAuthenticated, props.history]);
+
   return (
     <Fragment>
-      <div className='row'>
+      <div className='row pt-3 pb-3'>
         <h1 className='col-md-12 text-center'>Login</h1>
       </div>
-      <div className='form-group row'>
-        <label htmlFor='username' className='col-md-2 col-form-label'>
-          Username
-        </label>
-        <div className='col-md-10'>
-          <input
-            type='text'
-            name='username'
-            className='form-control'
-            placeholder='Enter your username'
-            value={username}
-            onChange={onChange}
-          />
+      <div className='row'>
+        <div className='fullWidth d-flex justify-content-center'>
+          <div className="loginStuff">
+            <input
+              type='text'
+              name='username'
+              className='form-control inputStuff mb-3 mr-0'
+              placeholder='Username'
+              value={username}
+              onChange={onChange}
+            />
+            <input
+              type='password'
+              name='password'
+              className='form-control inputStuff'
+              placeholder='Password'
+              value={password}
+              onChange={onChange}
+            />
+            <div className="forButton d-flex justify-content-center mt-4" style={{width: "100%"}}>
+              <button className='btn btn-primary btn-greyish' onClick={onSubmit}>
+                Submit
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-      <div className='form-group row'>
-        <label htmlFor='password' className='col-md-2 col-form-label'>
-          Password
-        </label>
-        <div className='col-md-10'>
-          <input
-            type='password'
-            name='password'
-            className='form-control'
-            placeholder='Enter your password'
-            value={password}
-            onChange={onChange}
-          />
-        </div>
-      </div>
-      <button className='btn btn-block btn-greyish' onClick={onSubmit}>
-        Submit
-      </button>
-      <div className='row mt-3 mt-3'>
+      <div className='row mt-4 mt-3'>
         <div className='col-md-12'>
           <h5 className='text-center'>
             <a href='/register' rel='noopener noreferrer'>
-              Not registered yet? Click here to register.
+              Not registered? Click here to register.
             </a>
           </h5>
         </div>
       </div>
+      <div className='row mt-4 mt-3'>
+        <div className='col-md-12'>
+          <h5 className='text-center'>
+            <a className="text-danger" href='/forgotPassword' rel='noopener noreferrer'>
+              Forgot Password
+            </a>
+          </h5>
+        </div>
+      </div>
+
     </Fragment>
   );
 }
