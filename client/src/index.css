@@ -32,7 +32,7 @@
   --stone: #727475;
   --athens: #eaebed;
   --glacier: #87bbc6;
-  --mariner: #2e7ccb;
+  --mariner: #6ea3c5;
   --brown: #8b7b75;
   --cello: #1c395d;
   --breakpoint-xs: 0;
@@ -1947,21 +1947,21 @@ pre code {
 .table-mariner,
 .table-mariner > th,
 .table-mariner > td {
-  background-color: #c4daf0;
+  background-color: #d6e5ef;
 }
 .table-mariner th,
 .table-mariner td,
 .table-mariner thead th,
 .table-mariner tbody + tbody {
-  border-color: #92bbe4;
+  border-color: #b4cfe1;
 }
 
 .table-hover .table-mariner:hover {
-  background-color: #b0cdeb;
+  background-color: #c4d9e8;
 }
 .table-hover .table-mariner:hover > td,
 .table-hover .table-mariner:hover > th {
-  background-color: #b0cdeb;
+  background-color: #c4d9e8;
 }
 
 .table-brown,
@@ -3165,33 +3165,33 @@ fieldset:disabled a.btn {
 }
 
 .btn-mariner {
-  color: #fff;
-  background: #2e7ccb linear-gradient(180deg, #4d90d3, #2e7ccb) repeat-x;
-  border-color: #2e7ccb;
+  color: #212529;
+  background: #6ea3c5 linear-gradient(180deg, #84b1ce, #6ea3c5) repeat-x;
+  border-color: #6ea3c5;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 .btn-mariner:hover {
   color: #fff;
-  background: #2769ac linear-gradient(180deg, #4780b8, #2769ac) repeat-x;
-  border-color: #2563a1;
+  background: #5392ba linear-gradient(180deg, #6da2c4, #5392ba) repeat-x;
+  border-color: #4a8cb6;
 }
 .btn-mariner:focus, .btn-mariner.focus {
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(77, 144, 211, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 0.2rem rgba(98, 144, 174, 0.5);
 }
 .btn-mariner.disabled, .btn-mariner:disabled {
-  color: #fff;
-  background-color: #2e7ccb;
-  border-color: #2e7ccb;
+  color: #212529;
+  background-color: #6ea3c5;
+  border-color: #6ea3c5;
   background-image: none;
 }
 .btn-mariner:not(:disabled):not(.disabled):active, .btn-mariner:not(:disabled):not(.disabled).active, .show > .btn-mariner.dropdown-toggle {
   color: #fff;
-  background-color: #2563a1;
+  background-color: #4a8cb6;
   background-image: none;
-  border-color: #225c97;
+  border-color: #4685ae;
 }
 .btn-mariner:not(:disabled):not(.disabled):active:focus, .btn-mariner:not(:disabled):not(.disabled).active:focus, .show > .btn-mariner.dropdown-toggle:focus {
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(77, 144, 211, 0.5);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(98, 144, 174, 0.5);
 }
 
 .btn-brown {
@@ -3730,28 +3730,28 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-mariner {
-  color: #2e7ccb;
-  border-color: #2e7ccb;
+  color: #6ea3c5;
+  border-color: #6ea3c5;
 }
 .btn-outline-mariner:hover {
-  color: #fff;
-  background-color: #2e7ccb;
-  border-color: #2e7ccb;
+  color: #212529;
+  background-color: #6ea3c5;
+  border-color: #6ea3c5;
 }
 .btn-outline-mariner:focus, .btn-outline-mariner.focus {
-  box-shadow: 0 0 0 0.2rem rgba(46, 124, 203, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(110, 163, 197, 0.5);
 }
 .btn-outline-mariner.disabled, .btn-outline-mariner:disabled {
-  color: #2e7ccb;
+  color: #6ea3c5;
   background-color: transparent;
 }
 .btn-outline-mariner:not(:disabled):not(.disabled):active, .btn-outline-mariner:not(:disabled):not(.disabled).active, .show > .btn-outline-mariner.dropdown-toggle {
-  color: #fff;
-  background-color: #2e7ccb;
-  border-color: #2e7ccb;
+  color: #212529;
+  background-color: #6ea3c5;
+  border-color: #6ea3c5;
 }
 .btn-outline-mariner:not(:disabled):not(.disabled):active:focus, .btn-outline-mariner:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-mariner.dropdown-toggle:focus {
-  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(46, 124, 203, 0.5);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 0.2rem rgba(110, 163, 197, 0.5);
 }
 
 .btn-outline-brown {
@@ -5806,16 +5806,16 @@ a.badge-glacier:focus, a.badge-glacier.focus {
 }
 
 .badge-mariner {
-  color: #fff;
-  background-color: #2e7ccb;
+  color: #212529;
+  background-color: #6ea3c5;
 }
 a.badge-mariner:hover, a.badge-mariner:focus {
-  color: #fff;
-  background-color: #2563a1;
+  color: #212529;
+  background-color: #4a8cb6;
 }
 a.badge-mariner:focus, a.badge-mariner.focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(46, 124, 203, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(110, 163, 197, 0.5);
 }
 
 .badge-brown {
@@ -6118,15 +6118,15 @@ a.badge-cello:focus, a.badge-cello.focus {
 }
 
 .alert-mariner {
-  color: #18406a;
-  background: #d5e5f5 linear-gradient(180deg, #dbe9f7, #d5e5f5) repeat-x;
-  border-color: #c4daf0;
+  color: #395566;
+  background: #e2edf3 linear-gradient(180deg, #e6f0f5, #e2edf3) repeat-x;
+  border-color: #d6e5ef;
 }
 .alert-mariner hr {
-  border-top-color: #b0cdeb;
+  border-top-color: #c4d9e8;
 }
 .alert-mariner .alert-link {
-  color: #0f2740;
+  color: #273a45;
 }
 
 .alert-brown {
@@ -6644,17 +6644,17 @@ a.badge-cello:focus, a.badge-cello.focus {
 }
 
 .list-group-item-mariner {
-  color: #18406a;
-  background-color: #c4daf0;
+  color: #395566;
+  background-color: #d6e5ef;
 }
 .list-group-item-mariner.list-group-item-action:hover, .list-group-item-mariner.list-group-item-action:focus {
-  color: #18406a;
-  background-color: #b0cdeb;
+  color: #395566;
+  background-color: #c4d9e8;
 }
 .list-group-item-mariner.list-group-item-action.active {
   color: #fff;
-  background-color: #18406a;
-  border-color: #18406a;
+  background-color: #395566;
+  border-color: #395566;
 }
 
 .list-group-item-brown {
@@ -7635,13 +7635,13 @@ button.bg-glacier:focus {
 }
 
 .bg-mariner {
-  background-color: #2e7ccb !important;
+  background-color: #6ea3c5 !important;
 }
 
 a.bg-mariner:hover, a.bg-mariner:focus,
 button.bg-mariner:hover,
 button.bg-mariner:focus {
-  background-color: #2563a1 !important;
+  background-color: #4a8cb6 !important;
 }
 
 .bg-brown {
@@ -7741,7 +7741,7 @@ button.bg-cello:focus {
 }
 
 .bg-gradient-mariner {
-  background: #2e7ccb linear-gradient(180deg, #4d90d3, #2e7ccb) repeat-x !important;
+  background: #6ea3c5 linear-gradient(180deg, #84b1ce, #6ea3c5) repeat-x !important;
 }
 
 .bg-gradient-brown {
@@ -7877,7 +7877,7 @@ button.bg-cello:focus {
 }
 
 .border-mariner {
-  border-color: #2e7ccb !important;
+  border-color: #6ea3c5 !important;
 }
 
 .border-brown {
@@ -11559,11 +11559,11 @@ a.text-glacier:hover, a.text-glacier:focus {
 }
 
 .text-mariner {
-  color: #2e7ccb !important;
+  color: #6ea3c5 !important;
 }
 
 a.text-mariner:hover, a.text-mariner:focus {
-  color: #20568d !important;
+  color: #427ea5 !important;
 }
 
 .text-brown {

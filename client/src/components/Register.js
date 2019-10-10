@@ -64,7 +64,7 @@ function Register(props) {
       <div className='row mt-3 mb-4'>
         <div className='col-md-12'>
           <h5 className='text-center'>
-            <a href='/login' rel='noopener noreferrer'>
+            <a href='/login' rel='noopener noreferrer' className="text-jgreen">
               Already registered? Click here to Login.
             </a>
           </h5>
@@ -118,7 +118,6 @@ function Register(props) {
             type='text'
             name='securityAnswer'
             className='form-control mb-4 inputStuff'
-            placeholder='Enter a customized Security Question'
             value={securityAnswer}
             onChange={onChange}
           />
@@ -139,7 +138,7 @@ function Register(props) {
             type='text'
             name='github'
             className='form-control mb-4 inputStuff'
-            placeholder='Enter your Github username here'
+            placeholder='Github username'
             value={github}
             onChange={onChange}
           />

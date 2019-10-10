@@ -57,7 +57,7 @@ function Profile(props) {
               key={i}
               className='col-md-12 text-center border border-dbrown rounded my-4 shadow'
             >
-              <h3 className='text-center'>{topic}</h3>
+              <h3 className='text-center mt-2'>{topic}</h3>
               <hr />
               <p>{language}</p>
               <hr />

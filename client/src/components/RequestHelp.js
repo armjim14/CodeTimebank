@@ -101,7 +101,7 @@ function RequestHelp(props) {
           style={{ width: "100%" }}
         >
           <input
-            className='btn btn-greyish'
+            className='btn btn-mariner text-white'
             style={{ marginBottom: "60px" }}
             type='submit'
           />
