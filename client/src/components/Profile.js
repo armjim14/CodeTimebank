@@ -4,6 +4,7 @@ import QuestionContext from "../Context/question/questionContext";
 import TimeContext from "../Context/time/timeContext";
 import AuthContext from "../Context/auth/authContext";
 import Moment from "react-moment";
+import TimeGauge from "./TimeGauge";
 import "moment-timezone";
 import { BrowserRouter as Link } from "react-router-dom";
 import FollowerContext from "../Context/follower/followerContext";
@@ -14,6 +15,7 @@ function Profile(props) {
     hours: 0,
     questions: []
   });
+  const { hours } = info;
 
   const questionContext = useContext(QuestionContext);
   const { specificUser, specificQuestions } = questionContext;
@@ -38,14 +40,6 @@ function Profile(props) {
 
   const followerContext = useContext(FollowerContext);
   const { addFollower } = followerContext;
-
-  const getHours = () => {
-    if (info.hours) {
-      return <span>{info.hours}</span>;
-    } else {
-      return <span>0</span>;
-    }
-  };
 
   const seeQuestions = () => {
     // console.log(info.questions.length);
@@ -304,8 +298,19 @@ function Profile(props) {
 
       <div className='row'>
         <div className='col-md-12 d-flex justify-content-center align-items-center'>
-          <Stats name={info.name} className='mr-3' />
-          <p className='ml-3'>Credits: {getHours()}</p>
+          <div>
+            <h3 className='text-center'>Recent Languages</h3>
+            <Stats name={info.name} className='mr-3' />
+          </div>
+          {hours > 0 || hours < 0 ? (
+            <div>
+              <h3 className='text-center'>Time Banked</h3>
+              <TimeGauge hours={hours} />
+              <h3>Credits: {hours}</h3>
+            </div>
+          ) : (
+            <h3>Credits: {hours}</h3>
+          )}
         </div>
       </div>
 
