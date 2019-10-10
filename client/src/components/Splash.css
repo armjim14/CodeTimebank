@@ -1,0 +1,11 @@
+.typed {
+    font-size: 50pt;
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px #FF0000;
+
+}
+
+.splashImage {
+    background-image: url("../img/Splash.jpg");
+}
