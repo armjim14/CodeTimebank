@@ -32,25 +32,26 @@ function HelpOthers() {
   };
 
   const renderFol = () => {
-    if (friends.length > 0){
-      return friends.map( ({topic, language, id, User, question, repo, createdAt}) => {
+    console.log(friends)
+    if (friends.length > 0) {
+      return friends.map(({ topic, language, id, User, question, repo, createdAt }) => {
         return (
           <div
             className='col-md-12 border border-dbrown rounded my-4 shadow'
             key={id}
           >
-            <h3 className='text-center'>{topic}</h3>
-            <hr className='mb-0' />
-            <div className='row'>
+            <h3 className='text-center mt-2'>{topic}</h3>
+            <hr className='mb-0 mt-0' />
+            <div style={{fontSize: "1.1rem"}} className='row'>
               <div className='col-md-6 pr-0'>
-                <h6 className='small text-right border border-right p-1'>
+                <h6 className='small text-center border border-right p-1'>
                   Language: {language}
                 </h6>
               </div>
               <div className='col-md-6 pl-0'>
-                <h6 className='text-left small border border-left p-1'>
+                <h6 className='text-center small border border-left p-1'>
                   Asked by{" "}
-                  <Link to={`/user/${User.id}`}>{User.username}</Link> on{" "}
+                  <Link to={`/user/${User.id}`}>{User.github}</Link> on{" "}
                   <Moment tz='America/Phoenix' format='LLL Z'>
                     {createdAt}
                   </Moment>
@@ -74,11 +75,11 @@ function HelpOthers() {
             )}
 
             <div className='row'>
-              <div className='col-md-2 text-right'>
+              <div className='col-md-4 text-center'>
                 <i className='fas fa-address-book' /> Contact{" "}
-                <Link to={`/user/${User.id}`}>{User.username}</Link>:
+                <Link to={`/user/${User.id}`}>{User.github}</Link>:
               </div>
-              <div className='col-md-10 d-flex justify-content-around'>
+              <div className='col-md-4 d-flex justify-content-around'>
                 {User.skype !== "" && (
                   <p>
                     <a href={`skype:${User.skype}?chat`}>
@@ -89,21 +90,23 @@ function HelpOthers() {
                     </a>
                   </p>
                 )}
-                {User.discord !== "" && (
-                  <p>
-                    <i
-                      className='fab fa-discord'
-                      style={{ color: "#7289DA" }}
-                    />{" "}
-                    {User.discord}
-                  </p>
-                )}
-              </div>
+                </div>
+                <div className="col-md-4 d-flex justify-content-around">
+                  {User.discord !== "" && (
+                    <a href="https://discord.gg/WGBFhcj" target="__blank" >
+                      <i
+                        className='fab fa-discord'
+                        style={{ color: "#7289DA" }}
+                      />{" "}
+                      {User.discord}
+                    </a>
+                  )}
+                </div>
             </div>
           </div>
         );
 
-      } )
+      })
     }
   }
 
@@ -124,18 +127,18 @@ function HelpOthers() {
                   className='col-md-12 border border-dbrown rounded my-4 shadow'
                   key={id}
                 >
-                  <h3 className='text-center'>{topic}</h3>
-                  <hr className='mb-0' />
-                  <div className='row'>
+                  <h3 className='text-center mt-2'>{topic}</h3>
+                  <hr className='mb-0 mt-0' />
+                  <div style={{fontSize: "1.1rem"}} className='row'>
                     <div className='col-md-6 pr-0'>
-                      <h6 className='small text-right border border-right p-1'>
+                      <h6 className='small text-center border border-right p-1'>
                         Language: {language}
                       </h6>
                     </div>
                     <div className='col-md-6 pl-0'>
-                      <h6 className='text-left small border border-left p-1'>
+                      <h6 className='text-center small border border-left p-1'>
                         Asked by{" "}
-                        <Link to={`/user/${User.id}`}>{User.username}</Link> on{" "}
+                        <Link to={`/user/${User.id}`}>{User.github}</Link> on{" "}
                         <Moment tz='America/Phoenix' format='LLL Z'>
                           {createdAt}
                         </Moment>
@@ -159,11 +162,11 @@ function HelpOthers() {
                   )}
 
                   <div className='row'>
-                    <div className='col-md-2 text-right'>
+                    <div className='col-md-4 text-center'>
                       <i className='fas fa-address-book' /> Contact{" "}
-                      <Link to={`/user/${User.id}`}>{User.username}</Link>:
+                      <Link to={`/user/${User.id}`}>{User.github}</Link>:
                     </div>
-                    <div className='col-md-10 d-flex justify-content-around'>
+                    <div className='col-md-4 d-flex justify-content-around'>
                       {User.skype !== "" && (
                         <p>
                           <a href={`skype:${User.skype}?chat`}>
@@ -174,16 +177,18 @@ function HelpOthers() {
                           </a>
                         </p>
                       )}
-                      {User.discord !== "" && (
-                        <p>
-                          <i
-                            className='fab fa-discord'
-                            style={{ color: "#7289DA" }}
-                          />{" "}
-                          {User.discord}
-                        </p>
-                      )}
-                    </div>
+                      </div>
+                      <div className='col-md-4 d-flex justify-content-around'>
+                        {User.discord !== "" && (
+                          <a href="https://discord.gg/WGBFhcj" target="__blank">
+                            <i
+                              className='fab fa-discord'
+                              style={{ color: "#7289DA" }}
+                            />{" "}
+                            {User.discord}
+                          </a>
+                        )}
+                      </div>
                   </div>
                 </div>
               );
@@ -196,20 +201,20 @@ function HelpOthers() {
     }
   };
 
-  useEffect( () => {
+  useEffect(() => {
     async function getData() {
       let resp = await getFollowers();
       console.log(resp)
 
-      if (resp.length > 0){
+      if (resp.length > 0) {
 
         let friends = [];
 
-        for (let e in resp){
+        for (let e in resp) {
           let info = await specificQuestions(resp[e].followerId);
-
-          for (let v in info){
-            if (info[v].solved){
+          console.log(info)
+          for (let v in info) {
+            if (info[v].solved) {
               console.log("dont pass")
             } else {
               friends.push(info[v])
@@ -217,6 +222,8 @@ function HelpOthers() {
           }
 
         }
+
+        console.log(friends)
 
         setLang({
           lang,
@@ -240,9 +247,9 @@ function HelpOthers() {
 
       <div className='row'>
         <div className="col-md-3">
-          <button 
-            className="btn btn-primary"
-            onClick={ () => {
+          <button
+            className="btn btn-mariner text-white"
+            onClick={() => {
               setLang({
                 lang: "",
                 questions,
@@ -265,9 +272,8 @@ function HelpOthers() {
         </div>
       </div>
 
-      <div className='row'>
-        { (fol) ? (renderFol()) : (renderQuestions()) }
-        {/* {renderFol()} */}
+      <div className='row mb-4'>
+        {(fol) ? (renderFol()) : (renderQuestions())}
       </div>
     </Fragment>
   );

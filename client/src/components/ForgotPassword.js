@@ -78,15 +78,15 @@ function ForgotPassword(props) {
                 <div className='fullWidth d-flex justify-content-center'>
                     <div className="loginStuff">
                         <label htmlFor='username' className='col-md-12 col-form-label font-weight-bold' >
-                            Enter your username:
+                            Enter your Email:
                     </label>
 
                         <input
-                            type='text'
+                            type='email'
                             name='user'
                             onChange={onChange}
                             className='form-control inputStuff mb-3 mr-0'
-                            placeholder='Username'
+                            placeholder='Your Email'
                             value={user}
                         />
 
@@ -102,7 +102,7 @@ function ForgotPassword(props) {
             console.log(all.userInfo.securityQuestion);
             return (
                 <div className="col-md-12 mt-4">
-                    <p style={{ fontSize: "1.5rem" }} className="text-center"><b>Security Question:</b> {all.userInfo.securityQuestion}</p>
+                    <p style={{ fontSize: "1.5rem" }} className="text-center"><b>Security Question:</b> {all.userInfo.securityQuestion}?</p>
                     <input
                         type="text"
                         name="securityAnswer"
@@ -128,7 +128,7 @@ function ForgotPassword(props) {
                             Enter a new password:
                         </label>
                         <input
-                            type='text'
+                            type='password'
                             name='passwordOne'
                             onChange={onChange}
                             className='form-control inputStuff mb-3 mr-0'
@@ -140,7 +140,7 @@ function ForgotPassword(props) {
                             Enter new password again:
                         </label>
                         <input
-                            type='text'
+                            type='password'
                             name='passwordTwo'
                             onChange={onChange}
                             className='form-control inputStuff mb-3 mr-0'
