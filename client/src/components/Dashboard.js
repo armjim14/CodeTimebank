@@ -296,7 +296,9 @@ const Dashboard = props => {
           <Stats />
         </div> */}
         <div className='col-md-12 d-flex justify-content-center'>
-          <TimeGauge hours={info.hours} />
+          {info.hours > 0 ||
+            (info.hours < 0 && <TimeGauge hours={info.hours} />)}
+
           {/* <WordCloud /> */}
         </div>
       </div>

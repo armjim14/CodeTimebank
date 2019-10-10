@@ -9,7 +9,7 @@ const Stats = props => {
   useEffect(() => {
     if (arr.length !== 0 && arr !== undefined) {
       console.log(arr);
-      setTimeout(drawChart, 2000);
+      setTimeout(drawChart, 1500);
       // drawChart();
     }
   }, [arr]);
