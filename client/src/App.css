@@ -35,7 +35,7 @@ body {
   width: 100%;
 }
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 600px) {
   .loginStuff {
     width: 100%;
   }
@@ -45,9 +45,9 @@ body {
   }
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
   #ButtonMargin {
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
   }
 }
 
