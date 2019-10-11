@@ -185,42 +185,43 @@ function Profile(props) {
   // };
 
   const correctButton = () => {
-    if (!isAuthenticated || user.id === +props.match.params.id) {
+    if (!isAuthenticated) {
       return <p className="text-jgreen">Register to follow users</p>
+    } else if (user.id === +props.match.params.id) {
+
+      return <p className="text-jgreen">You are unable to follow yourself</p>
+
+    } else if (info.isFollower) {
+      return (
+        <button
+          className='btn btn-rose mx-auto mb-1'
+          onClick={() => {
+            deleteFollower(props.match.params.id)
+            updateInfo({
+              ...info,
+              isFollower: false
+            })
+          }}
+        >
+          Unfollow {info.name}
+        </button>
+      );
     } else {
+      return (
+        <button
+          className='btn btn-mariner mx-auto mb-1'
+          onClick={() => {
+            addFollower(+props.match.params.id);
+            updateInfo({
+              ...info,
+              isFollower: true
+            })
 
-      if (info.isFollower){
-        return (
-          <button
-            className='btn btn-rose mx-auto mb-1'
-            onClick={() => {
-              deleteFollower(props.match.params.id)
-              updateInfo({
-                ...info,
-                isFollower: false
-              })
-            }}
-          >
-            Unfollow {info.name}
-          </button>
-        );
-      } else {
-        return (
-          <button
-            className='btn btn-mariner mx-auto mb-1'
-            onClick={() => {
-              addFollower(+props.match.params.id);
-              updateInfo({
-                ...info,
-                isFollower: true
-              })
-
-            }}
-          >
-            Follow {info.name}
-          </button>
-        );
-      }
+          }}
+        >
+          Follow {info.name}
+        </button>
+      );
     }
   }
 

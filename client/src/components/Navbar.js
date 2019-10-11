@@ -26,7 +26,7 @@ function Navbar(props) {
           <li className='nav-item'>
             <Link
               style={style.forTextEven}
-              className='nav-link text-off-white'
+              className='nav-link text-white'
               to='/dashboard'
             >
               Dashboard
@@ -35,7 +35,7 @@ function Navbar(props) {
           <li className='nav-item'>
             <Link
               style={style.forTextOdd}
-              className='nav-link text-off-white'
+              className='nav-link text-white'
               to='/providehelp'
             >
               Help Others
@@ -44,7 +44,7 @@ function Navbar(props) {
           <li className='nav-item'>
             <Link
               style={style.forTextEven}
-              className='nav-link text-off-white'
+              className='nav-link text-white'
               to='/gethelp'
             >
               Request Help
@@ -58,7 +58,7 @@ function Navbar(props) {
           <li className='nav-item'>
             <Link
               style={style.forTextOdd}
-              className='nav-link text-off-white'
+              className='nav-link text-white'
               to='/login'
             >
               Login
@@ -67,7 +67,7 @@ function Navbar(props) {
           <li className='nav-item'>
             <Link
               style={style.forTextOdd}
-              className='nav-link text-off-white'
+              className='nav-link text-white'
               to='/register'
             >
               Register
@@ -95,11 +95,29 @@ function Navbar(props) {
 
         <div style={style.linkSize} className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav m-auto'>
+          <li className='nav-item'>
+              <Link
+                style={style.forTextOdd}
+                className='nav-link text-white'
+                to='/'
+              >
+                TempDash
+              </Link>
+            </li>
+          <li className='nav-item'>
+              <Link
+                style={style.forTextOdd}
+                className='nav-link text-white'
+                to='/about'
+              >
+                About
+              </Link>
+            </li>
             {restLinks()}
             <li className='nav-item'>
               <Link
                 style={style.forTextOdd}
-                className='nav-link text-off-white'
+                className='nav-link text-white'
                 to='/leaderboards'
               >
                 Leaderboards
@@ -110,7 +128,7 @@ function Navbar(props) {
             <div
               onClick={goHome}
               style={{ cursor: "pointer" }}
-              className='nav-item text-right text-off-white'
+              className='nav-item text-right text-white'
             >
               Logout
             </div>

@@ -59,11 +59,11 @@ function App() {
                     <div className='container-fluid bg-athens px-4'>
                       <Alerts />
                       <Switch>
-                        <Route exact path='/' component={MainPage} />
+                        <Route exact path='/about' component={MainPage} />
                         <Route exact path='/login' component={Login} />
                         <Route exact path='/register' component={Register} />
                         <Route exact path='/forgotPassword' component={ForgotPassword} />
-                        <Route exact path='/splash' component={Splash} />
+                        <Route exact path='/' component={Splash} />
                         <Route
                           exact
                           path='/leaderboards'
