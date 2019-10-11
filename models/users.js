@@ -35,6 +35,10 @@ module.exports = function(sequelize, DataTypes) {
     securityAnswer: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     }
   });
 
