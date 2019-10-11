@@ -18,7 +18,7 @@ const Splash = () => {
                         'Ready to Code?']}
                         typeSpeed={80}
                         backSpeed={30}
-                        backDelay={300}
+                        backDelay={1500}
                         loop>
 
                         </Typed>

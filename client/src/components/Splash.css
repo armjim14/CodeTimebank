@@ -2,10 +2,10 @@
     font-size: 50pt;
     color: white;
     text-align: center;
-    text-shadow: 2px 2px #FF0000;
+    text-shadow: 2px 2px #396069;
     
         position: absolute;
-        top: 50%;
+        top: 30%;
         left: 50%;
         transform: translate(-50%, -50%);
          
@@ -14,7 +14,8 @@
 
 .splashimage {
     /* background-image: url("../img/Splash.jpg"); */
-    height: 100% ;
+    height: 100%;
     width: 100% ;
+    /* background-size: 100%; */
     position: relative;
 }
