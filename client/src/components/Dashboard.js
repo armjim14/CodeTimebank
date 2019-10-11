@@ -345,12 +345,12 @@ const Dashboard = props => {
             <h1 className='text-center text-jgreen'>Adjust Credits</h1>
             <hr />
           </div>
-          <div className='col-md-12 d-flex justify-content-center'>
+          <div className='col-md-12 d-flex flex-wrap justify-content-center mb-5'>
             {adminNames.map(row => {
               return (
-                <div className='col-md-3' key={row.id}>
-                  <div className='card bg-cello'>
-                    <div className='card-body'>
+                <div className='col-md-3 m-1' key={row.id}>
+                  <div className='bg-cello border border-fjord rounded'>
+                    <div className='p-3'>
                       <h5 className='card-title text-center text-athens'>
                         {row.username}
                       </h5>
@@ -380,40 +380,42 @@ const Dashboard = props => {
             <hr />
           </div>
           <div className='col-md-12'>
-            <table className='table'>
-              <thead className='thead-dark mb-5'>
-                <tr>
-                  <th scope='col'>Username</th>
-                  <th scope='col'>Question Topic</th>
-                  <th scope='col'>Credits Added/Lost</th>
-                  <th scope='col'>Timestamp</th>
-                </tr>
-              </thead>
-              <tbody>
-                {adminArr
-                  .sort((a, b) => b.id - a.id)
-                  .map(row => {
-                    return (
-                      <tr key={row.id}>
-                        <td scope='row'>{row.User.username}</td>
-                        {row.question ? (
-                          <td>{row.question.topic}</td>
-                        ) : (
+            <div className='table-responsive'>
+              <table className='table table-bordered table-hover'>
+                <thead className='thead mb-5 bg-cello text-athens'>
+                  <tr>
+                    <th scope='col'>Username</th>
+                    <th scope='col'>Question Topic</th>
+                    <th scope='col'>Credits Added/Lost</th>
+                    <th scope='col'>Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {adminArr
+                    .sort((a, b) => b.id - a.id)
+                    .map(row => {
+                      return (
+                        <tr key={row.id}>
+                          <td scope='row'>{row.User.username}</td>
+                          {row.question ? (
+                            <td>{row.question.topic}</td>
+                          ) : (
+                            <td>
+                              <strong>Admin adjustment</strong>
+                            </td>
+                          )}
+                          <td>{row.Time}</td>
                           <td>
-                            <strong>Admin adjustment</strong>
+                            <Moment tz='America/Phoenix' format='LLL Z'>
+                              {row.createdAt}
+                            </Moment>
                           </td>
-                        )}
-                        <td>{row.Time}</td>
-                        <td>
-                          <Moment tz='America/Phoenix' format='LLL Z'>
-                            {row.createdAt}
-                          </Moment>
-                        </td>
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </table>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       ) : (
