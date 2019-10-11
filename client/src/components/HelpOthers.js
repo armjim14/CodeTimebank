@@ -8,6 +8,8 @@ import languages from "./data/languages.json";
 import Moment from "react-moment";
 import "moment-timezone";
 
+// 768
+
 function HelpOthers() {
   const QuestionContext = useContext(questionContext);
   const { getQuestions, loading, specificQuestions } = QuestionContext;
@@ -42,7 +44,7 @@ function HelpOthers() {
           >
             <h3 className='text-center mt-2'>{topic}</h3>
             <hr className='mb-0 mt-0' />
-            <div style={{fontSize: "1.1rem"}} className='row'>
+            <div style={{ fontSize: "1.1rem" }} className='row'>
               <div className='col-md-6 pr-0'>
                 <h6 className='small text-center border border-right p-1'>
                   Language: {language}
@@ -58,10 +60,12 @@ function HelpOthers() {
                 </h6>
               </div>
             </div>
-            <div className='row overflow-auto' style={{ height: "7rem", wordBreak: "break-all" }}>
+            <div className='row overflow-hidden' style={{ height: "7rem", wordBreak: "break-all" }}>
               <p className='col-md-12'>{question}</p>
             </div>
-
+            <div className='col-md-12 d-flex justify-content-around'>
+              <button className='btn btn-outline-glacier' onClick={ChangeHeight}>See More</button>
+            </div>
             <hr />
             {repo !== "" && (
               <Fragment>
@@ -90,18 +94,18 @@ function HelpOthers() {
                     </a>
                   </p>
                 )}
-                </div>
-                <div className="col-md-4 d-flex justify-content-around">
-                  {User.discord !== "" && (
-                    <a href="https://discord.gg/WGBFhcj" target="__blank" >
-                      <i
-                        className='fab fa-discord'
-                        style={{ color: "#7289DA" }}
-                      />{" "}
-                      {User.discord}
-                    </a>
-                  )}
-                </div>
+              </div>
+              <div className="col-md-4 d-flex justify-content-around">
+                {User.discord !== "" && (
+                  <a href="https://discord.gg/WGBFhcj" target="__blank" >
+                    <i
+                      className='fab fa-discord'
+                      style={{ color: "#7289DA" }}
+                    />{" "}
+                    {User.discord}
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         );
@@ -111,7 +115,10 @@ function HelpOthers() {
   }
 
   const renderQuestions = () => {
-    console.log(languages);
+
+    console.log(window.innerWidth)
+    let size = window.innerWidth
+
     if (loading) {
       return <div>Loading</div>;
     } else {
@@ -129,7 +136,7 @@ function HelpOthers() {
                 >
                   <h3 className='text-center mt-2'>{topic}</h3>
                   <hr className='mb-0 mt-0' />
-                  <div style={{fontSize: "1.1rem"}} className='row'>
+                  <div style={{ fontSize: "1.1rem" }} className='row'>
                     <div className='col-md-6 pr-0'>
                       <h6 className='small text-center border border-right p-1'>
                         Language: {language}
@@ -145,10 +152,12 @@ function HelpOthers() {
                       </h6>
                     </div>
                   </div>
-                  <div className='row overflow-auto' style={{ height: "7rem", wordBreak: "break-all" }}>
+                  <div className='row overflow-hidden' style={{ height: "7rem", wordBreak: "break-all" }}>
                     <p className='col-md-12'>{question}</p>
                   </div>
-
+                  <div className='col-md-12 d-flex justify-content-around'>
+                    <button className='btn btn-outline-glacier' onClick={ChangeHeight}>See More</button>
+                  </div>
                   <hr />
                   {repo !== "" && (
                     <Fragment>
@@ -165,8 +174,8 @@ function HelpOthers() {
                     <div className='col-md-4 text-center'>
                       <i className='fas fa-address-book' /> Contact{" "}
                       <Link to={`/user/${User.id}`}>{User.github}</Link>:
-                    </div>
-                    <div className='col-md-4 d-flex justify-content-around'>
+                      </div>
+                    <div className='col-md-4 text-center'>
                       {User.skype !== "" && (
                         <p>
                           <a href={`skype:${User.skype}?chat`}>
@@ -177,18 +186,18 @@ function HelpOthers() {
                           </a>
                         </p>
                       )}
-                      </div>
-                      <div className='col-md-4 d-flex justify-content-around'>
-                        {User.discord !== "" && (
-                          <a href="https://discord.gg/WGBFhcj" target="__blank">
-                            <i
-                              className='fab fa-discord'
-                              style={{ color: "#7289DA" }}
-                            />{" "}
-                            {User.discord}
-                          </a>
-                        )}
-                      </div>
+                    </div>
+                    <div className='col-md-4 text-center'>
+                      {User.discord !== "" && (
+                        <a href="https://discord.gg/WGBFhcj" target="__blank">
+                          <i
+                            className='fab fa-discord'
+                            style={{ color: "#7289DA" }}
+                          />{" "}
+                          {User.discord}
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               );
@@ -200,6 +209,18 @@ function HelpOthers() {
       return <div>No Questions</div>;
     }
   };
+
+  const ChangeHeight = e => {
+    e.preventDefault();
+
+    if (e.target.parentNode.previousSibling.style.height === "7rem") {
+      e.target.parentNode.previousSibling.style.height = "fit-content"
+      e.target.innerText = "See Less";
+    } else {
+      e.target.parentNode.previousSibling.style.height = "7rem";
+      e.target.innerText = "See More";
+    }
+  }
 
   useEffect(() => {
     async function getData() {

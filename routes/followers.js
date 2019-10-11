@@ -12,7 +12,6 @@ router.get("/getFollowers", auth, async (req, res) => {
                 UserId: req.user.id
             }
         })
-        console.log(resp);
         res.json(resp);
     } catch(e) {
         res.status(500).send("nope")
@@ -25,6 +24,25 @@ router.post("/add", auth, async (req, res) => {
         await db.followers.create({followerId: req.body.id, UserId: req.user.id})
         res.json({msg: "You added a new follower"})
     } catch(e){
+        res.status(500).send("nope")
+    }
+})
+
+router.delete("/delete/:id", auth, async (req, res) => {
+    console.log("---------------------------")
+    console.log(req.params.id);
+    console.log(req.user.id)
+    console.log("---------------------------")
+    try {
+        const resp = await db.followers.destroy({
+            where:{
+                UserId: req.user.id,
+                followerId: req.params.id
+            }
+        })
+        console.log(resp)
+        res.json(resp)
+    } catch(e) {
         res.status(500).send("nope")
     }
 })
