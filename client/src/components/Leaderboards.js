@@ -33,9 +33,9 @@ const Leaderboards = () => {
             <td>{hours}</td>
             <td>
               {hirable === "true" ? (
-                <i class='text-success fas fa-check-square' />
+                <i className='text-success fas fa-check-square' />
               ) : (
-                <i class='text-rose fas fa-ban' />
+                <i className='text-rose fas fa-ban' />
               )}
             </td>
           </tr>
@@ -107,7 +107,7 @@ const Leaderboards = () => {
           <h1>Leaderboards</h1>
         </div>
       </div>
-      <div className='row'>
+      <div className='row table-responsive mx-0'>
         <table className='table table-mariner table-striped table-bordered text-center'>
           <thead>
             <tr className='thead-light'>
