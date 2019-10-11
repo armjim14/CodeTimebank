@@ -1,15 +1,14 @@
 import React from 'react'
-// import { render } from 'react-dom';
 import Typed from 'react-typed';
 import './Splash.css'
 
-// import WordCloud from './WordCloud'
+
 
 const Splash = () => {
     return (
         <div >
             <img className="splashimage" src="./images/Splash.jpg" />
-            {/* <h1 className="typed"> */}
+            
             <Typed 
             className="typed"
             strings= {['Welcome to code time bank',
@@ -23,7 +22,7 @@ const Splash = () => {
                         loop>
 
                         </Typed>
-                        {/* </h1> */}
+                        
                 
         </div>
 
