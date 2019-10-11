@@ -80,19 +80,7 @@ function Navbar(props) {
 
   return (
     <header className='container-fluid'>
-      <div className='row text-center bg-gradient-greyish py-4'>
-        <div className='col-md-12'>
-          <Link style={style.forHeader} to='/'>
-            <h1
-              className='text-black'
-              style={{ fontFamily: "Verdana", fontWeight: "bold", fontSize: "2.3rem" }}
-            >
-              Code Timebank
-            </h1>
-          </Link>
-        </div>
-      </div>
-      <nav className='row navbar navbar-expand-lg navbar-light bg-gradient-dbrown py-2'>
+      <nav className='row navbar navbar-expand-lg navbar-light bg-gradient-mariner py-2'>
         <button
           className='navbar-toggler'
           type='button'
@@ -105,7 +93,7 @@ function Navbar(props) {
           <span className='navbar-toggler-icon'></span>
         </button>
 
-        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+        <div style={style.linkSize} className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav m-auto'>
             {restLinks()}
             <li className='nav-item'>
@@ -144,6 +132,9 @@ const style = {
   },
   forTextEven: {
     color: "#252525"
+  },
+  linkSize: {
+    fontSize: "1.1rem"
   }
 };
 

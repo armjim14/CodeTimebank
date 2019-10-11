@@ -48,11 +48,11 @@ function CreditForm(props) {
     if (!users || users.length === 0) {
       return <option value='none'>No users...</option>;
     } else {
-      return users.map(({ id, username }) => {
-        let both = `${id}${username}`;
+      return users.map(({ id, github }) => {
+        let both = `${id}${github}`;
         return (
           <option key={id} value={both}>
-            {username}
+            {github}
           </option>
         );
       });

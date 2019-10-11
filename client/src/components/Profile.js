@@ -4,6 +4,7 @@ import QuestionContext from "../Context/question/questionContext";
 import TimeContext from "../Context/time/timeContext";
 import AuthContext from "../Context/auth/authContext";
 import Moment from "react-moment";
+import TimeGauge from "./TimeGauge";
 import "moment-timezone";
 import { BrowserRouter as Link } from "react-router-dom";
 import FollowerContext from "../Context/follower/followerContext";
@@ -12,8 +13,10 @@ function Profile(props) {
   const [info, updateInfo] = useState({
     name: "",
     hours: 0,
-    questions: []
+    questions: [],
+    isFollower: null
   });
+  const { hours } = info;
 
   const questionContext = useContext(QuestionContext);
   const { specificUser, specificQuestions } = questionContext;
@@ -37,15 +40,7 @@ function Profile(props) {
   } = authContext;
 
   const followerContext = useContext(FollowerContext);
-  const { addFollower } = followerContext;
-
-  const getHours = () => {
-    if (info.hours) {
-      return <span>{info.hours}</span>;
-    } else {
-      return <span>0</span>;
-    }
-  };
+  const { addFollower, getFollowers, deleteFollower } = followerContext;
 
   const seeQuestions = () => {
     // console.log(info.questions.length);
@@ -63,7 +58,7 @@ function Profile(props) {
               key={i}
               className='col-md-12 text-center border border-dbrown rounded my-4 shadow'
             >
-              <h3 className='text-center'>{topic}</h3>
+              <h3 className='text-center mt-2'>{topic}</h3>
               <hr />
               <p>{language}</p>
               <hr />
@@ -122,6 +117,19 @@ function Profile(props) {
       let dataBack = await specificUser(idd);
       let questions = await specificQuestions(idd);
       let hoursData = await forUser(idd);
+      let isFollowing = await getFollowers();
+      console.log(isFollowing);
+
+      let whichButton = null;
+
+      if (isFollowing) {
+        for (let v in isFollowing) {
+          if (+idd === isFollowing[v].followerId) {
+            whichButton = true;
+          }
+        }
+      }
+
       let { github } = dataBack;
 
       if (hoursData.length > 1) {
@@ -132,46 +140,89 @@ function Profile(props) {
         updateInfo({
           name: github,
           questions,
-          hours
+          hours,
+          isFollower: whichButton
         });
       } else if (hoursData.length === 1) {
         console.log(hoursData);
         updateInfo({
           name: github,
           questions,
+          isFollower: whichButton,
           hours: hoursData[0].Time
         });
       } else {
         updateInfo({
           name: github,
           questions,
-          hours: 0
+          hours: 0,
+          isFollower: whichButton
         });
       }
       getGithubInfo(github);
     }
     fetchData();
     //eslint-disable-next-line
-  }, []);
+  }, [info.isFollower]);
 
-  const renderQuestions = () => {
-    if (1 == 1) {
-      return (
-        <div className='col-md-12 text-center'>There are no questions</div>
-      );
+  // const renderQuestions = () => {
+  //   if (1 == 1) {
+  //     return (
+  //       <div className='col-md-12 text-center'>There are no questions</div>
+  //     );
+  //   } else {
+  //     // console.log(info.questions);
+  //     return info.questions.map(({ question, language, topic }, i) => {
+  //       return (
+  //         <div key={i} className='col-md-12 text-center'>
+  //           <h3>{topic}</h3>
+  //           <p>{language}</p>
+  //           <p>{question}</p>
+  //         </div>
+  //       );
+  //     });
+  //   }
+  // };
+
+  const correctButton = () => {
+    if (!isAuthenticated || user.id === +props.match.params.id) {
+      return <p className="text-jgreen">Register to follow users</p>
     } else {
-      // console.log(info.questions);
-      return info.questions.map(({ question, language, topic }, i) => {
+
+      if (info.isFollower){
         return (
-          <div key={i} className='col-md-12 text-center'>
-            <h3>{topic}</h3>
-            <p>{language}</p>
-            <p>{question}</p>
-          </div>
+          <button
+            className='btn btn-rose mx-auto mb-1'
+            onClick={() => {
+              deleteFollower(props.match.params.id)
+              updateInfo({
+                ...info,
+                isFollower: false
+              })
+            }}
+          >
+            Unfollow {info.name}
+          </button>
         );
-      });
+      } else {
+        return (
+          <button
+            className='btn btn-mariner mx-auto mb-1'
+            onClick={() => {
+              addFollower(+props.match.params.id);
+              updateInfo({
+                ...info,
+                isFollower: true
+              })
+
+            }}
+          >
+            Follow {info.name}
+          </button>
+        );
+      }
     }
-  };
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -188,18 +239,21 @@ function Profile(props) {
         updateInfo({
           name: github,
           questions,
-          hours
+          hours,
+          isFollower: info.isFollower
         });
       } else if (hoursData.length === 1) {
         updateInfo({
           name: github,
           questions,
+          isFollower: info.isFollower,
           hours: hoursData[0].Time
         });
       } else {
         updateInfo({
           name: github,
           questions,
+          isFollower: info.isFollower,
           hours: 0
         });
       }
@@ -223,18 +277,7 @@ function Profile(props) {
         <div className='col-md-10'>
           <div className='border-bottom border-black'>
             <h2 className='text-left text-black'>{info.name}'s Profile</h2>
-            {!isAuthenticated || user.id === +props.match.params.id ? (
-              console.log("No Button")
-            ) : (
-              <button
-                className='btn btn-primary mx-auto mb-1'
-                onClick={() => {
-                  addFollower(+props.match.params.id);
-                }}
-              >
-                Follow {info.name}
-              </button>
-            )}
+            {correctButton()}
           </div>
           <hr />
           <div className='row'>
@@ -304,8 +347,19 @@ function Profile(props) {
 
       <div className='row'>
         <div className='col-md-12 d-flex justify-content-center align-items-center'>
-          <Stats name={info.name} className='mr-3' />
-          <p className='ml-3'>Credits: {getHours()}</p>
+          <div>
+            <h3 className='text-center'>Recent Languages</h3>
+            <Stats name={info.name} className='mr-3' />
+          </div>
+          {hours > 0 || hours < 0 ? (
+            <div>
+              <h3 className='text-center'>Time Banked</h3>
+              <TimeGauge hours={hours} />
+              <h3>Credits: {hours}</h3>
+            </div>
+          ) : (
+              <h3>Credits: {hours}</h3>
+            )}
         </div>
       </div>
 

@@ -27,12 +27,21 @@ const FollowerState = props => {
         }
     }
 
+    const deleteFollower = async id => {
+      try {
+        const resp = await axios.delete(`/api/followers/delete/${id}`)
+        return resp.data
+      } catch (e) {
+
+      }
+    }
 
   return (
     <FollowerContext.Provider
       value={{
         getFollowers,
-        addFollower
+        addFollower,
+        deleteFollower
       }}
     >
       {props.children}

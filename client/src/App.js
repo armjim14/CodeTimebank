@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import "./App.css";
-
+import Splash from "./components/Splash"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import ExamplePage from "./components/ExamplePage";
@@ -35,6 +35,7 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import HelpOthers from "./components/HelpOthers";
 import RequestHelp from "./components/RequestHelp";
+import ForgotPassword from "./components/ForgotPassword";
 const client = new ApolloClient({});
 
 if (localStorage.token) {
@@ -55,17 +56,20 @@ function App() {
                   <Fragment>
                     <Navbar />
                     <Footer />
-                    <div className='container-fluid bg-off-white px-4'>
+                    <div className='container-fluid bg-athens px-4'>
                       <Alerts />
                       <Switch>
                         <Route exact path='/' component={MainPage} />
                         <Route exact path='/login' component={Login} />
                         <Route exact path='/register' component={Register} />
+                        <Route exact path='/forgotPassword' component={ForgotPassword} />
+                        <Route exact path='/splash' component={Splash} />
                         <Route
                           exact
                           path='/leaderboards'
                           component={Leaderboards}
                         />
+                        
                         <PrivateRoute
                           exact
                           path='/gethelp'

@@ -18,10 +18,26 @@ module.exports = function(sequelize, DataTypes) {
     },
     discord: {
       type: DataTypes.STRING,
-      allowNull: true
+      allowNull: false
     },
     skype: {
       type: DataTypes.STRING,
+      allowNull: false
+    },
+    hirable: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    securityQuestion: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    securityAnswer: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
       allowNull: true
     }
   });

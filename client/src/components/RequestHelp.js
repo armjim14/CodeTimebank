@@ -98,8 +98,15 @@ function RequestHelp(props) {
             placeholder='Add a link to a Github Repository (Optional)'
           />
         </div>
-        <div className="forButton d-flex justify-content-center mt-2" style={{ width: "100%" }}>
-          <input className="btn btn-greyish" style={{ marginBottom: "60px" }} type='submit' />
+        <div
+          className='forButton d-flex justify-content-center mt-2'
+          style={{ width: "100%" }}
+        >
+          <input
+            className='btn btn-mariner text-white'
+            style={{ marginBottom: "60px" }}
+            type='submit'
+          />
         </div>
       </form>
     </div>
