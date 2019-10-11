@@ -24,7 +24,7 @@ router.get("/", auth, async (req, res) => {
   try {
     const userInfo = await db.Users.findOne({
       where: { id: req.user.id },
-      attributes: ["github", "discord", "skype", "id", "hirable"]
+      attributes: ["github", "discord", "skype", "id", "hirable", "isAdmin"]
     });
     res.json(userInfo);
   } catch (err) {

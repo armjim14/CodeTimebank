@@ -22,12 +22,31 @@ const TimeState = props => {
     return resp.data;
   };
 
+  const allUsers = async () => {
+    // add code here to get all users, questions, and times
+    let resp = await axios.get(`/api/time`);
+    console.log(resp);
+    return resp.data;
+  };
+
+  const adjustTime = async (val, id) => {
+    let data = {
+      userid: id,
+      credits: val
+    };
+    let resp = await axios.post(`/api/time/adjust`, data);
+    // console.log(resp);
+    return resp;
+  };
+
   return (
     <TimeContext.Provider
       value={{
         AddCredit,
         userCredit,
-        forUser
+        forUser,
+        allUsers,
+        adjustTime
       }}
     >
       {props.children}
