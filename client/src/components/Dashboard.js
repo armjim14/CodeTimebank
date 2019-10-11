@@ -133,8 +133,19 @@ const Dashboard = props => {
                   className='col-md-12 border border-dbrown rounded my-4 shadow'
                   key={id}
                 >
-                  <h3 className='text-center py-1 my-0'>{topic}</h3>
-                  <h3 className='text-center py-1 my-0'>
+                  <div className="row">
+                    <div className="col-md-4">
+                    </div>
+                    <div className="col-md-4">
+                      <h3 className='text-center pt-1 my-0'>{topic} </h3>
+
+                    </div>
+                    <div className="col-md-4 text-right pr-5 py-3">
+                      <i onClick={changeModal.bind(this, id)} style={{ fontSize: "1.2rem", cursor: "pointer" }} className="text-right fas fa-ellipsis-v"></i>
+                    </div>
+                  </div>
+                  {forModal(id, topic)}
+                  {/* <h3 className='text-center py-1 my-0'>
                     <i
                       style={{ cursor: "pointer" }}
                       className='px-2 py-2 text-danger mr-5 fas fa-trash-alt'
@@ -165,7 +176,7 @@ const Dashboard = props => {
                         }}
                       ></i>
                     </span>
-                  </h3>
+                  </h3> */}
 
                   <hr className='my-0' />
                   <div className='row'>
@@ -220,6 +231,68 @@ const Dashboard = props => {
       );
     }
   };
+
+  const changeModal = (id, e) => {
+    console.log(e.target.parentNode.parentNode.nextSibling);
+    e.target.parentNode.parentNode.nextSibling.style.display = "block";
+    console.log(id)
+  }
+
+  const forModal = (id, topic) => {
+    console.log(topic)
+    return (
+      <div className="modal">
+        <div className="modal-content">
+          <span onClick={closeModal} className="close text-right">&times;</span>
+          <div className="row mb-3">
+            <div className="col-md-12">
+              <p style={{ fontSize: "2rem", fontWeight: "bold" }} className="text-center">{topic}</p>
+            </div>
+            <div className="col-md-6 text-center mb-3">
+              <span
+                className='text-center text-success'
+                style={{ fontSize: "1.5rem", cursor: "pointer" }}
+                onClick={() => {
+                  props.history.push(`/form/${id}`);
+                }}
+              >
+                Solved
+                          <i
+                  className='ml-2 text-success fas fa-check-square'
+                  onClick={() => {
+                    props.history.push(`/form/${id}`);
+                  }}
+                ></i>
+              </span>
+            </div>
+            <div className="col-md-6 text-center">
+              <i
+                style={{ fontSize: "1.5rem", cursor: "pointer" }}
+                className='px-2 py-2 text-center text-danger fas fa-trash-alt'
+                onClick={async () => {
+                  deleteQuestions(id);
+                  let dataBack = await getUsersQuestions();
+                  updateInfo({
+                    name: info.name,
+                    id: info.id,
+                    questions: dataBack,
+                    hours: info.hours,
+                    which: info.which
+                  });
+                }}
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const closeModal = e => {
+    console.log(e.target);
+    console.log(e.target.parentNode.parentNode);
+    e.target.parentNode.parentNode.style.display = "none";
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -298,35 +371,35 @@ const Dashboard = props => {
         </div>
       </div>
 
-      <div className='row d-flex justify-content-center mt-3'>
-        <div className='col-md-3'>
+      <div className='row mt-3'>
+        <div className='col-md-4 d-flex justify-content-center'>
           <button
             onClick={() => {
               props.history.push(`/user/${info.id}`);
             }}
             id='ButtonMargin'
-            className='btn btn-block btn-stone text-white rounded-pill'
+            className='btn btn-outline-stone rounded-pill'
           >
             View Your Profile
           </button>
         </div>
-        <div className='col-md-3'>
+        <div className='col-md-4 d-flex justify-content-center'>
           <button
             onClick={() => {
               props.history.push(`/editprofile`);
             }}
             id='ButtonMargin'
-            className='btn btn-block btn-stone text-white rounded-pill'
+            className='btn btn-outline-stone rounded-pill'
           >
             Edit Contact Info
           </button>
         </div>
-        <div className='col-md-3'>
+        <div className='col-md-4 d-flex justify-content-center'>
           <button
             onClick={() => {
               props.history.push(`/changepassword`);
             }}
-            className='btn btn-block btn-stone text-white rounded-pill'
+            className='btn btn-outline-stone rounded-pill'
           >
             Change Password
           </button>
@@ -400,10 +473,10 @@ const Dashboard = props => {
                           {row.question ? (
                             <td>{row.question.topic}</td>
                           ) : (
-                            <td>
-                              <strong>Admin adjustment</strong>
-                            </td>
-                          )}
+                              <td>
+                                <strong>Admin adjustment</strong>
+                              </td>
+                            )}
                           <td>{row.Time}</td>
                           <td>
                             <Moment tz='America/Phoenix' format='LLL Z'>
@@ -419,68 +492,68 @@ const Dashboard = props => {
           </div>
         </div>
       ) : (
-        <Fragment>
-          <div className='row mt-4'>
-            <div className='col-md-12 d-flex justify-content-center'>
-              {info.hours > 0 ||
-                (info.hours < 0 && <TimeGauge hours={info.hours} />)}
+          <Fragment>
+            <div className='row mt-4'>
+              <div className='col-md-12 d-flex justify-content-center'>
+                {info.hours > 0 ||
+                  (info.hours < 0 && <TimeGauge hours={info.hours} />)}
+              </div>
             </div>
-          </div>
 
-          <div className='row mb-4'>
-            <div className='col-md-12'>
-              <h2 style={style.vert} className='text-center'>
-                Credits: {getHours()}
-              </h2>
+            <div className='row mb-4'>
+              <div className='col-md-12'>
+                <h2 style={style.vert} className='text-center'>
+                  Credits: {getHours()}
+                </h2>
+              </div>
             </div>
-          </div>
 
-          <hr />
+            <hr />
 
-          <div className='row mb-4'>
-            <div className='col-md-12 text-center'>
-              <h2 className='font-weight-bold'>Question History</h2>
+            <div className='row mb-4'>
+              <div className='col-md-12 text-center'>
+                <h2 className='font-weight-bold'>Question History</h2>
+              </div>
             </div>
-          </div>
 
-          <div className='row mb-2'>
-            <div className='col-md-6 d-flex justify-content-center mb-3'>
-              <button
-                className='btn btn-outline-danger'
-                onClick={() => {
-                  updateInfo({
-                    name: info.name,
-                    id: info.id,
-                    questions: info.questions,
-                    hours: info.hours,
-                    which: "unsolved"
-                  });
-                }}
-              >
-                Unsolved
+            <div className='row mb-2'>
+              <div className='col-md-6 d-flex justify-content-center mb-3'>
+                <button
+                  className='btn btn-outline-danger'
+                  onClick={() => {
+                    updateInfo({
+                      name: info.name,
+                      id: info.id,
+                      questions: info.questions,
+                      hours: info.hours,
+                      which: "unsolved"
+                    });
+                  }}
+                >
+                  Unsolved
               </button>
-            </div>
-            <div className='col-md-6 d-flex justify-content-center'>
-              <button
-                className='btn btn-outline-success'
-                onClick={() => {
-                  updateInfo({
-                    name: info.name,
-                    id: info.id,
-                    questions: info.questions,
-                    hours: info.hours,
-                    which: "solved"
-                  });
-                }}
-              >
-                Solved
+              </div>
+              <div className='col-md-6 d-flex justify-content-center'>
+                <button
+                  className='btn btn-outline-success'
+                  onClick={() => {
+                    updateInfo({
+                      name: info.name,
+                      id: info.id,
+                      questions: info.questions,
+                      hours: info.hours,
+                      which: "solved"
+                    });
+                  }}
+                >
+                  Solved
               </button>
+              </div>
             </div>
-          </div>
 
-          <div className='row mb-5'>{seeQuestions()}</div>
-        </Fragment>
-      )}
+            <div className='row mb-5'>{seeQuestions()}</div>
+          </Fragment>
+        )}
     </Fragment>
   );
 };
