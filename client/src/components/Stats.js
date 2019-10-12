@@ -12,6 +12,7 @@ const Stats = props => {
       setTimeout(drawChart, 1500);
       // drawChart();
     }
+    //eslint-disable-next-line
   }, [arr]);
 
   //https://www.d3-graph-gallery.com/graph/barplot_horizontal.html

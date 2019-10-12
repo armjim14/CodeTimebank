@@ -6,12 +6,12 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, loadUser } = authContext;
 
-  console.log(rest)
+  // console.log(rest)
   // Add a loading check later
 
   useEffect(() => {
     function fetchData() {
-      loadUser()
+      loadUser();
     }
     fetchData();
     //eslint-disable-next-line

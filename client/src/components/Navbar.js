@@ -13,7 +13,7 @@ function Navbar(props) {
 
   useEffect(() => {
     function fetchData() {
-      loadUser()
+      loadUser();
     }
     fetchData();
     //eslint-disable-next-line
@@ -26,7 +26,7 @@ function Navbar(props) {
           <li className='nav-item'>
             <Link
               style={style.forTextEven}
-              className='nav-link text-off-white'
+              className='nav-link text-white'
               to='/dashboard'
             >
               Dashboard
@@ -35,20 +35,20 @@ function Navbar(props) {
           <li className='nav-item'>
             <Link
               style={style.forTextOdd}
-              className='nav-link text-off-white'
+              className='nav-link text-white'
               to='/providehelp'
             >
               Help Others
-              </Link>
+            </Link>
           </li>
           <li className='nav-item'>
             <Link
               style={style.forTextEven}
-              className='nav-link text-off-white'
+              className='nav-link text-white'
               to='/gethelp'
             >
               Request Help
-              </Link>
+            </Link>
           </li>
         </Fragment>
       );
@@ -58,7 +58,7 @@ function Navbar(props) {
           <li className='nav-item'>
             <Link
               style={style.forTextOdd}
-              className='nav-link text-off-white'
+              className='nav-link text-white'
               to='/login'
             >
               Login
@@ -67,7 +67,7 @@ function Navbar(props) {
           <li className='nav-item'>
             <Link
               style={style.forTextOdd}
-              className='nav-link text-off-white'
+              className='nav-link text-white'
               to='/register'
             >
               Register
@@ -80,19 +80,7 @@ function Navbar(props) {
 
   return (
     <header className='container-fluid'>
-      <div className='row text-center bg-gradient-greyish py-4'>
-        <div className='col-md-12'>
-          <Link style={style.forHeader} to='/'>
-            <h1
-              className='text-black'
-              style={{ fontFamily: "Verdana", fontWeight: "bold", fontSize: "2.3rem" }}
-            >
-              Code Timebank
-            </h1>
-          </Link>
-        </div>
-      </div>
-      <nav className='row navbar navbar-expand-lg navbar-light bg-gradient-dbrown py-2'>
+      <nav className='row navbar navbar-expand-lg navbar-light bg-gradient-mariner py-2'>
         <button
           className='navbar-toggler'
           type='button'
@@ -105,28 +93,50 @@ function Navbar(props) {
           <span className='navbar-toggler-icon'></span>
         </button>
 
-        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+        <div
+          style={style.linkSize}
+          className='collapse navbar-collapse'
+          id='navbarSupportedContent'
+        >
           <ul className='navbar-nav m-auto'>
+            <li className='nav-item'>
+              <Link
+                style={style.forTextOdd}
+                className='nav-link text-white'
+                to='/'
+              >
+                TempDash
+              </Link>
+            </li>
+            <li className='nav-item'>
+              <Link
+                style={style.forTextOdd}
+                className='nav-link text-white'
+                to='/about'
+              >
+                About
+              </Link>
+            </li>
             {restLinks()}
             <li className='nav-item'>
               <Link
                 style={style.forTextOdd}
-                className='nav-link text-off-white'
+                className='nav-link text-white'
                 to='/leaderboards'
               >
                 Leaderboards
               </Link>
             </li>
+            {isAuthenticated && (
+              <li
+                onClick={goHome}
+                style={{ cursor: "pointer" }}
+                className='nav-item text-white'
+              >
+                <div className='nav-link text-white'>Logout</div>
+              </li>
+            )}
           </ul>
-          {isAuthenticated && (
-            <div
-              onClick={goHome}
-              style={{ cursor: "pointer" }}
-              className='nav-item text-right text-off-white'
-            >
-              Logout
-            </div>
-          )}
         </div>
       </nav>
     </header>
@@ -144,6 +154,9 @@ const style = {
   },
   forTextEven: {
     color: "#252525"
+  },
+  linkSize: {
+    fontSize: "1.1rem"
   }
 };
 

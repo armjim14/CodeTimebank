@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, Fragment, useState } from "react";
 import questionContext from "../Context/question/questionContext";
-import timeContext from "../Context/time/timeContext";
-import followerContext from "../Context/follower/followerContext"
-
+import followerContext from "../Context/follower/followerContext";
+import WordCloud from "./WordCloud";
 import { Link } from "react-router-dom";
 import languages from "./data/languages.json";
 import Moment from "react-moment";
@@ -22,7 +21,12 @@ function HelpOthers() {
       </option>
     ));
 
-  const [{ lang, questions, fol, friends }, setLang] = useState({ lang: "", questions: [], fol: false, friends: [] });
+  const [{ lang, questions, fol, friends }, setLang] = useState({
+    lang: "",
+    questions: [],
+    fol: false,
+    friends: []
+  });
 
   const testing = async e => {
     let value = e.target.value;
@@ -32,120 +36,155 @@ function HelpOthers() {
   };
 
   const renderFol = () => {
-    if (friends.length > 0){
-      return friends.map( ({topic, language, id, User, question, repo, createdAt}) => {
-        return (
-          <div
-            className='col-md-12 border border-dbrown rounded my-4 shadow'
-            key={id}
-          >
-            <h3 className='text-center'>{topic}</h3>
-            <hr className='mb-0' />
-            <div className='row'>
-              <div className='col-md-6 pr-0'>
-                <h6 className='small text-right border border-right p-1'>
-                  Language: {language}
-                </h6>
-              </div>
-              <div className='col-md-6 pl-0'>
-                <h6 className='text-left small border border-left p-1'>
-                  Asked by{" "}
-                  <Link to={`/user/${User.id}`}>{User.username}</Link> on{" "}
-                  <Moment tz='America/Phoenix' format='LLL Z'>
-                    {createdAt}
-                  </Moment>
-                </h6>
-              </div>
-            </div>
-            <div className='row overflow-auto' style={{ height: "7rem", wordBreak: "break-all" }}>
-              <p className='col-md-12'>{question}</p>
-            </div>
-
-            <hr />
-            {repo !== "" && (
-              <Fragment>
-                <div className='row'>
-                  <div className='col-md-12 text-center text-dbrown small'>
-                    Github Repository: <a href={`${repo}`}>${repo}</a>
-                  </div>
+    console.log(friends);
+    if (friends.length > 0) {
+      return friends.map(
+        ({ topic, language, id, User, question, repo, createdAt }) => {
+          return (
+            <div
+              className='col-md-12 border border-dbrown rounded my-4 shadow'
+              key={id}
+            >
+              <h3 className='text-center mt-2'>{topic}</h3>
+              <hr className='mb-0 mt-0' />
+              <div style={{ fontSize: "1.1rem" }} className='row'>
+                <div className='col-md-6 pr-0'>
+                  <h6 className='small text-center border border-right p-1'>
+                    Language: {language}
+                  </h6>
                 </div>
-                <hr />
-              </Fragment>
-            )}
-
-            <div className='row'>
-              <div className='col-md-2 text-right'>
-                <i className='fas fa-address-book' /> Contact{" "}
-                <Link to={`/user/${User.id}`}>{User.username}</Link>:
+                <div className='col-md-6 pl-0'>
+                  <h6 className='text-center small border border-left p-1'>
+                    Asked by <Link to={`/user/${User.id}`}>{User.github}</Link>{" "}
+                    on{" "}
+                    <Moment tz='America/Phoenix' format='LLL Z'>
+                      {createdAt}
+                    </Moment>
+                  </h6>
+                </div>
               </div>
-              <div className='col-md-10 d-flex justify-content-around'>
-                {User.skype !== "" && (
-                  <p>
-                    <a href={`skype:${User.skype}?chat`}>
-                      <i className='fab fa-skype text-primary'>
-                        {" "}
-                        {User.skype}
-                      </i>
+              <div
+                className='row overflow-hidden'
+                style={{ height: "7rem", wordBreak: "break-all" }}
+              >
+                <p className='col-md-12'>{question}</p>
+              </div>
+              <div className='col-md-12 d-flex justify-content-around'>
+                <button
+                  className='btn btn-outline-glacier'
+                  onClick={ChangeHeight}
+                >
+                  See More
+                </button>
+              </div>
+              <hr />
+              {repo !== "" && (
+                <Fragment>
+                  <div className='row'>
+                    <div className='col-md-12 text-center text-dbrown small'>
+                      Github Repository: <a href={`${repo}`}>${repo}</a>
+                    </div>
+                  </div>
+                  <hr />
+                </Fragment>
+              )}
+
+              <div className='row'>
+                <div className='col-md-4 text-center'>
+                  <i className='fas fa-address-book' /> Contact{" "}
+                  <Link to={`/user/${User.id}`}>{User.github}</Link>:
+                </div>
+                <div className='col-md-4 d-flex justify-content-around'>
+                  {User.skype !== "" && (
+                    <p>
+                      <a href={`skype:${User.skype}?chat`}>
+                        <i className='fab fa-skype text-primary'>
+                          {" "}
+                          {User.skype}
+                        </i>
+                      </a>
+                    </p>
+                  )}
+                </div>
+                <div className='col-md-4 d-flex justify-content-around'>
+                  {User.discord !== "" && (
+                    <a href='https://discord.gg/WGBFhcj' target='__blank'>
+                      <i
+                        className='fab fa-discord'
+                        style={{ color: "#7289DA" }}
+                      />{" "}
+                      {User.discord}
                     </a>
-                  </p>
-                )}
-                {User.discord !== "" && (
-                  <p>
-                    <i
-                      className='fab fa-discord'
-                      style={{ color: "#7289DA" }}
-                    />{" "}
-                    {User.discord}
-                  </p>
-                )}
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        );
-
-      } )
+          );
+        }
+      );
     }
-  }
+  };
 
   const renderQuestions = () => {
-    console.log(languages);
+    // console.log(window.innerWidth);
+    // let size = window.innerWidth;
+
     if (loading) {
       return <div>Loading</div>;
     } else {
-      if (questions) {
+      if (questions.length > 0) {
         console.log(questions);
         return questions.map(
-          ({ User, id, question, topic, createdAt, language, repo, solved }) => {
+          ({
+            User,
+            id,
+            question,
+            topic,
+            createdAt,
+            language,
+            repo,
+            solved //eslint-disable-next-line
+          }) => {
             if (solved) {
-              console.log("dont send question")
+              console.log("dont send question");
             } else {
               return (
                 <div
                   className='col-md-12 border border-dbrown rounded my-4 shadow'
                   key={id}
                 >
-                  <h3 className='text-center'>{topic}</h3>
-                  <hr className='mb-0' />
-                  <div className='row'>
+                  <h3 className='text-center mt-2'>{topic}</h3>
+                  <hr className='mb-0 mt-0' />
+                  <div style={{ fontSize: "1.1rem" }} className='row'>
                     <div className='col-md-6 pr-0'>
-                      <h6 className='small text-right border border-right p-1'>
+                      <h6 className='small text-center border border-right p-1'>
                         Language: {language}
                       </h6>
                     </div>
                     <div className='col-md-6 pl-0'>
-                      <h6 className='text-left small border border-left p-1'>
+                      <h6 className='text-center small border border-left p-1'>
                         Asked by{" "}
-                        <Link to={`/user/${User.id}`}>{User.username}</Link> on{" "}
+                        <Link to={`/user/${User.id}`}>{User.github}</Link> on{" "}
                         <Moment tz='America/Phoenix' format='LLL Z'>
                           {createdAt}
                         </Moment>
                       </h6>
                     </div>
                   </div>
-                  <div className='row overflow-auto' style={{ height: "7rem", wordBreak: "break-all" }}>
+                  <div
+                    className='row overflow-hidden'
+                    style={{ height: "7rem", wordBreak: "break-all" }}
+                  >
                     <p className='col-md-12'>{question}</p>
                   </div>
-
+                  <div className='col-md-12 d-flex justify-content-around'>
+                    <button
+                      className='btn btn-outline-glacier'
+                      onClick={ChangeHeight}
+                    >
+                      See More
+                    </button>
+                  </div>
                   <hr />
                   {repo !== "" && (
                     <Fragment>
@@ -159,11 +198,11 @@ function HelpOthers() {
                   )}
 
                   <div className='row'>
-                    <div className='col-md-2 text-right'>
+                    <div className='col-md-4 text-center'>
                       <i className='fas fa-address-book' /> Contact{" "}
-                      <Link to={`/user/${User.id}`}>{User.username}</Link>:
+                      <Link to={`/user/${User.id}`}>{User.github}</Link>:
                     </div>
-                    <div className='col-md-10 d-flex justify-content-around'>
+                    <div className='col-md-4 text-center'>
                       {User.skype !== "" && (
                         <p>
                           <a href={`skype:${User.skype}?chat`}>
@@ -174,14 +213,16 @@ function HelpOthers() {
                           </a>
                         </p>
                       )}
+                    </div>
+                    <div className='col-md-4 text-center'>
                       {User.discord !== "" && (
-                        <p>
+                        <a href='https://discord.gg/WGBFhcj' target='__blank'>
                           <i
                             className='fab fa-discord'
                             style={{ color: "#7289DA" }}
                           />{" "}
                           {User.discord}
-                        </p>
+                        </a>
                       )}
                     </div>
                   </div>
@@ -190,45 +231,68 @@ function HelpOthers() {
             }
           }
         );
+      } else {
+        return (
+          <Fragment>
+            {lang && (
+              <div className='col-md-12 text-center mt-5'>
+                <h3>No questions found.</h3>
+              </div>
+            )}
+            <div className='col-md-12 d-flex justify-content-center w-100 my-3'>
+              <WordCloud />
+            </div>
+          </Fragment>
+        );
       }
-
-      return <div>No Questions</div>;
     }
   };
 
-  useEffect( () => {
+  const ChangeHeight = e => {
+    e.preventDefault();
+
+    if (e.target.parentNode.previousSibling.style.height === "7rem") {
+      e.target.parentNode.previousSibling.style.height = "fit-content";
+      e.target.innerText = "See Less";
+    } else {
+      e.target.parentNode.previousSibling.style.height = "7rem";
+      e.target.innerText = "See More";
+    }
+  };
+
+  useEffect(() => {
     async function getData() {
       let resp = await getFollowers();
-      console.log(resp)
+      // console.log(resp);
 
-      if (resp.length > 0){
-
+      if (resp.length > 0) {
         let friends = [];
 
-        for (let e in resp){
+        for (let e in resp) {
           let info = await specificQuestions(resp[e].followerId);
-
-          for (let v in info){
-            if (info[v].solved){
-              console.log("dont pass")
+          // console.log(info);
+          for (let v in info) {
+            if (info[v].solved) {
+              // console.log("dont pass");
             } else {
-              friends.push(info[v])
+              friends.push(info[v]);
             }
           }
-
         }
+
+        console.log(friends);
 
         setLang({
           lang,
           fol,
           questions,
           friends
-        })
-
+        });
       }
     }
-    getData()
-  }, [])
+    getData();
+    //eslint-disable-next-line
+  }, []);
 
   return (
     <Fragment>
@@ -239,36 +303,38 @@ function HelpOthers() {
       </div>
 
       <div className='row'>
-        <div className="col-md-3">
-          <button 
-            className="btn btn-primary"
-            onClick={ () => {
-              setLang({
-                lang: "",
-                questions,
-                friends,
-                fol: true
-              })
-            }}
-          >Followers Question</button>
-        </div>
-        <div className='col-md-9 form-group'>
-          <select
-            value={lang}
-            onChange={testing}
-            // type='button'
-            className='text-black dropdown-toggle form-control'
-          >
-            <option value='none'>Select a Language</option>
-            {allOptions()}
-          </select>
+        <div className='col-md-12 d-flex justify-content-center w-100 bg-gradient-brown py-2'>
+          <div className='form-group my-auto'>
+            <button
+              className='btn btn-greyish btn-rounded text-black mr-3'
+              onClick={() => {
+                setLang({
+                  lang: "",
+                  questions,
+                  friends,
+                  fol: true
+                });
+              }}
+            >
+              Your Friends' Questions
+            </button>
+          </div>
+
+          <div className='form-group my-auto'>
+            <select
+              value={lang}
+              onChange={testing}
+              // type='button'
+              className='text-black dropdown-toggle form-control w-100 ml-3'
+            >
+              <option value='none'>Select a Language</option>
+              {allOptions()}
+            </select>
+          </div>
         </div>
       </div>
 
-      <div className='row'>
-        { (fol) ? (renderFol()) : (renderQuestions()) }
-        {/* {renderFol()} */}
-      </div>
+      <div className='row mb-4'>{fol ? renderFol() : renderQuestions()}</div>
     </Fragment>
   );
 }

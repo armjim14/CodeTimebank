@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import "./App.css";
-
+import Splash from "./components/Splash";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import ExamplePage from "./components/ExamplePage";
@@ -42,7 +42,7 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-console.log("re-rendered");
+// console.log("re-rendered");
 
 function App() {
   return (
@@ -56,18 +56,24 @@ function App() {
                   <Fragment>
                     <Navbar />
                     <Footer />
-                    <div className='container-fluid bg-athens px-4'>
+                    <div className='container-fluid bg-athens'>
                       <Alerts />
                       <Switch>
-                        <Route exact path='/' component={MainPage} />
+                        <Route exact path='/about' component={MainPage} />
                         <Route exact path='/login' component={Login} />
                         <Route exact path='/register' component={Register} />
-                        <Route exact path='/forgotPassword' component={ForgotPassword} />
+                        <Route
+                          exact
+                          path='/forgotPassword'
+                          component={ForgotPassword}
+                        />
+                        <Route exact path='/' component={Splash} />
                         <Route
                           exact
                           path='/leaderboards'
                           component={Leaderboards}
                         />
+
                         <PrivateRoute
                           exact
                           path='/gethelp'

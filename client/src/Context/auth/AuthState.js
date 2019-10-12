@@ -76,9 +76,9 @@ const AuthState = props => {
     };
 
     try {
-      console.log(formFields);
+      // console.log(formFields);
       const res = await axios.post("/api/users/login", formFields, config);
-      console.log(res);
+      // console.log(res);
       dispatch({ type: LOGIN_SUCCESS, payload: res.data });
 
       loadUser();
@@ -103,7 +103,7 @@ const AuthState = props => {
 
     try {
       const res = await axios.get("/api/users");
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     } catch (err) {
       dispatch({ type: RETRIEVE_FAIL, payload: err.response.data.msg });
@@ -136,7 +136,7 @@ const AuthState = props => {
 
     try {
       let res = await axios.put("/api/users/password", formFields, config);
-      console.log(`this is change password`, res.status);
+      // console.log(`this is change password`, res.status);
       return res;
     } catch (err) {
       console.error(err);
@@ -253,7 +253,7 @@ const AuthState = props => {
             initArr[12].value++;
             break;
           default:
-            console.log("Other is", res.data[i]);
+            // console.log("Other is", res.data[i]);
             initArr[13].value++;
             break;
         }
@@ -268,7 +268,7 @@ const AuthState = props => {
   const getGithubInfo = async username => {
     try {
       const resp = await axios.get(`/api/github/${username}`);
-      console.log(`github resp is`, resp.data);
+      // console.log(`github resp is`, resp.data);
       dispatch({ type: GITHUB_PROFILE, payload: resp.data });
     } catch (err) {
       console.log(err);

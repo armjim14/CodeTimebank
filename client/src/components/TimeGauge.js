@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect } from "react";
 import ReactD3Gauge from "react-d3-gauge";
 
 const TimeGauge = props => {
@@ -21,6 +21,7 @@ const TimeGauge = props => {
   useEffect(() => {
     calculateTime();
     // console.log("calc time ran from useEffect");
+    //eslint-disable-next-line
   }, [props.hours]);
 
   return (

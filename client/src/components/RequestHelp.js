@@ -18,8 +18,10 @@ function RequestHelp(props) {
 
   const { question, language, topic, repo } = questionAsked;
 
-  const onChange = e =>
+  const onChange = e => {
+    console.log(languages)
     setQuestion({ ...questionAsked, [e.target.name]: e.target.value });
+  }
 
   const submit = async e => {
     e.preventDefault();
@@ -101,7 +103,7 @@ function RequestHelp(props) {
           style={{ width: "100%" }}
         >
           <input
-            className='btn btn-greyish'
+            className='btn btn-mariner text-white'
             style={{ marginBottom: "60px" }}
             type='submit'
           />

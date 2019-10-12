@@ -1,13 +1,10 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
-// import SimplePieChart from "./SimplePieChart";
 import AuthContext from "../Context/auth/authContext";
 import QuestionContext from "../Context/question/questionContext";
 import TimeContext from "../Context/time/timeContext";
-import Stats from "./Stats";
 import TimeGauge from "./TimeGauge";
-// import WordCloud from "./WordCloud";
-import { Link } from "react-router-dom";
 import Moment from "react-moment";
+import AlertContext from "../Context/alert/alertContext";
 
 const Dashboard = props => {
   const [info, updateInfo] = useState({
@@ -15,20 +12,46 @@ const Dashboard = props => {
     id: "",
     hours: 0,
     which: "unsolved",
-    questions: []
+    questions: [],
+    isAdmin: false,
+    adminArr: [],
+    adminNames: []
   });
 
   const authContext = useContext(AuthContext);
   const { getUsernames, getGithubInfo } = authContext;
 
   const questionContext = useContext(QuestionContext);
-  const { getUsersQuestions, deleteQuestions } = questionContext;
+  const { getUsersQuestions, deleteQuestions, getAllUsers } = questionContext;
 
   const timeContext = useContext(TimeContext);
-  const { userCredit } = timeContext;
+  const { userCredit, allUsers, adjustTime } = timeContext;
+
+  const { isAdmin, adminArr, adminNames } = info;
+  const alertContext = useContext(AlertContext);
+  const { setAlert } = alertContext;
+
+  const creditSubmit = async e => {
+    e.preventDefault();
+    if (e.target.previousSibling.value == 0) {
+      setAlert("Please input a positive or negative value", "rose");
+    } else {
+      const resp = await adjustTime(
+        e.target.previousSibling.value,
+        e.target.getAttribute("userid")
+      );
+      // console.log(resp);
+      if (resp.status === 200) {
+        setAlert(`Adjustment successful!`, "jgreen");
+        window.location.reload();
+      } else {
+        setAlert(`Adjustment failed!`, `rose`);
+      }
+    }
+  };
 
   const getHours = () => {
-    console.log(info.hours);
+    // console.log(info.hours);
     if (info.hours) {
       return <span>{info.hours}</span>;
     } else {
@@ -37,15 +60,16 @@ const Dashboard = props => {
   };
 
   const seeQuestions = () => {
-    console.log(info.questions.length);
+    // console.log(info.questions.length);
 
     if (info.questions.length === 0) {
       return (
         <div className='col-md-12 text-center'>There are no questions</div>
       );
     } else {
-      console.log(info.questions);
+      // console.log(info.questions);
       return info.questions.map(
+        //eslint-disable-next-line
         ({ id, question, language, topic, solved, createdAt, repo }) => {
           if (info.which === "solved") {
             if (solved) {
@@ -110,11 +134,24 @@ const Dashboard = props => {
                   className='col-md-12 border border-dbrown rounded my-4 shadow'
                   key={id}
                 >
-                  <h3 className='text-center py-1 my-0'>{topic}</h3>
-                  <h3 className='text-center py-1 my-0'>
+                  <div className='row'>
+                    <div className='col-md-4'></div>
+                    <div className='col-md-4'>
+                      <h3 className='text-center pt-1 my-0'>{topic} </h3>
+                    </div>
+                    <div className='col-md-4 text-right pr-5 py-3'>
+                      <i
+                        onClick={changeModal.bind(this, id)}
+                        style={{ fontSize: "1.2rem", cursor: "pointer" }}
+                        className='text-right fas fa-ellipsis-v'
+                      ></i>
+                    </div>
+                  </div>
+                  {forModal(id, topic)}
+                  {/* <h3 className='text-center py-1 my-0'>
                     <i
                       style={{ cursor: "pointer" }}
-                      className='text-danger mr-5 fas fa-trash-alt'
+                      className='px-2 py-2 text-danger mr-5 fas fa-trash-alt'
                       onClick={async () => {
                         deleteQuestions(id);
                         let dataBack = await getUsersQuestions();
@@ -129,12 +166,12 @@ const Dashboard = props => {
                     ></i>
                     <span
                       className='text-success'
-                      style={{ fontSize: "1rem", cursor: "pointer" }}
+                      style={{ fontSize: "1.5rem", cursor: "pointer" }}
                       onClick={() => {
                         props.history.push(`/form/${id}`);
                       }}
                     >
-                      Solved?
+                      Solved
                       <i
                         className='ml-2 text-success fas fa-check-square'
                         onClick={() => {
@@ -142,7 +179,7 @@ const Dashboard = props => {
                         }}
                       ></i>
                     </span>
-                  </h3>
+                  </h3> */}
 
                   <hr className='my-0' />
                   <div className='row'>
@@ -198,35 +235,111 @@ const Dashboard = props => {
     }
   };
 
+  const changeModal = (id, e) => {
+    // console.log(e.target.parentNode.parentNode.nextSibling);
+    e.target.parentNode.parentNode.nextSibling.style.display = "block";
+    // console.log(id)
+  };
+
+  const forModal = (id, topic) => {
+    // console.log(topic)
+    return (
+      <div className='modal'>
+        <div className='modal-content'>
+          <span onClick={closeModal} className='close text-right'>
+            &times;
+          </span>
+          <div className='row mb-3'>
+            <div className='col-md-12'>
+              <p
+                style={{ fontSize: "2rem", fontWeight: "bold" }}
+                className='text-center'
+              >
+                {topic}
+              </p>
+            </div>
+            <div className='col-md-6 text-center mb-3'>
+              <span
+                className='text-center text-success'
+                style={{ fontSize: "1.5rem", cursor: "pointer" }}
+                onClick={() => {
+                  props.history.push(`/form/${id}`);
+                }}
+              >
+                Solved
+                <i
+                  className='ml-2 text-success fas fa-check-square'
+                  onClick={() => {
+                    props.history.push(`/form/${id}`);
+                  }}
+                ></i>
+              </span>
+            </div>
+            <div className='col-md-6 text-center'>
+              <i
+                style={{ fontSize: "1.5rem", cursor: "pointer" }}
+                className='px-2 py-2 text-center text-danger fas fa-trash-alt'
+                onClick={async () => {
+                  deleteQuestions(id);
+                  let dataBack = await getUsersQuestions();
+                  updateInfo({
+                    name: info.name,
+                    id: info.id,
+                    questions: dataBack,
+                    hours: info.hours,
+                    which: info.which
+                  });
+                }}
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const closeModal = e => {
+    console.log(e.target);
+    console.log(e.target.parentNode.parentNode);
+    e.target.parentNode.parentNode.style.display = "none";
+  };
+
   useEffect(() => {
     async function fetchData() {
       let hoursData = await userCredit();
       let dataBack = await getUsersQuestions();
-      console.log(dataBack);
-      let { github, id } = await getUsernames();
+      // console.log(dataBack);
+      let { github, id, isAdmin } = await getUsernames();
       getGithubInfo();
+      // console.log("What is isAdmin?", isAdmin);
 
       if (hoursData.length > 1) {
-        console.log(hoursData);
-        console.log(hoursData.map(ar => ar.Time));
+        // console.log(hoursData);
+        // console.log(hoursData.map(ar => ar.Time));
         let totalHours = hoursData.map(ar => ar.Time).reduce((a, b) => a + b);
-        console.log(totalHours);
+        // console.log(totalHours);
 
         updateInfo({
           name: github,
           id,
           questions: dataBack,
           hours: totalHours,
-          which: info.which
+          which: info.which,
+          isAdmin,
+          adminArr: info.adminArr,
+          adminNames: info.adminNames
         });
       } else if (hoursData.length === 1) {
-        console.log(hoursData);
+        // console.log(hoursData);
         updateInfo({
           name: github,
           id,
           questions: dataBack,
           hours: hoursData[0].Time,
-          which: info.which
+          which: info.which,
+          isAdmin,
+          adminArr: info.adminArr,
+          adminNames: info.adminNames
         });
       } else {
         updateInfo({
@@ -234,7 +347,25 @@ const Dashboard = props => {
           id,
           questions: dataBack,
           hours: info.hours,
-          which: info.which
+          which: info.which,
+          isAdmin,
+          adminArr: info.adminArr,
+          adminNames: info.adminNames
+        });
+      }
+      if (isAdmin) {
+        const resp = await allUsers();
+        const resp2 = await getAllUsers();
+        console.log(`admin resp`, resp);
+        updateInfo({
+          name: github,
+          id,
+          questions: dataBack,
+          hours: info.hours,
+          which: info.which,
+          isAdmin,
+          adminArr: resp,
+          adminNames: resp2
         });
       }
     }
@@ -250,35 +381,35 @@ const Dashboard = props => {
         </div>
       </div>
 
-      <div className='row d-flex justify-content-center mt-3'>
-        <div className='col-md-3'>
+      <div className='row mt-3'>
+        <div className='col-md-4 d-flex justify-content-center'>
           <button
             onClick={() => {
               props.history.push(`/user/${info.id}`);
             }}
             id='ButtonMargin'
-            className='btn btn-block btn-beige rounded-pill'
+            className='btn btn-outline-stone rounded-pill'
           >
-            View Profile as someone else
+            View Your Profile
           </button>
         </div>
-        <div className='col-md-3'>
+        <div className='col-md-4 d-flex justify-content-center'>
           <button
             onClick={() => {
               props.history.push(`/editprofile`);
             }}
             id='ButtonMargin'
-            className='btn btn-block btn-beige rounded-pill'
+            className='btn btn-outline-stone rounded-pill'
           >
             Edit Contact Info
           </button>
         </div>
-        <div className='col-md-3'>
+        <div className='col-md-4 d-flex justify-content-center'>
           <button
             onClick={() => {
               props.history.push(`/changepassword`);
             }}
-            className='btn btn-block btn-beige rounded-pill'
+            className='btn btn-outline-stone rounded-pill'
           >
             Change Password
           </button>
@@ -291,70 +422,153 @@ const Dashboard = props => {
         </div>
       </div>
 
-      <div className='row mt-4'>
-        {/* <div className='col-md-6'>
-          <Stats />
-        </div> */}
-        <div className='col-md-12 d-flex justify-content-center'>
-          {info.hours > 0 ||
-            (info.hours < 0 && <TimeGauge hours={info.hours} />)}
-
-          {/* <WordCloud /> */}
+      {isAdmin ? (
+        <div className='row mt-4'>
+          <div className='col-md-12'>
+            <h1 className='text-center text-jgreen'>Adjust Credits</h1>
+            <hr />
+          </div>
+          <div className='col-md-12 d-flex flex-wrap justify-content-center mb-5'>
+            {adminNames.map(row => {
+              return (
+                <div className='col-md-3 m-1' key={row.id}>
+                  <div className='bg-cello border border-fjord rounded'>
+                    <div className='p-3'>
+                      <h5 className='card-title text-center text-athens'>
+                        {row.username}
+                      </h5>
+                      <form className='form-group'>
+                        <input
+                          type='number'
+                          className='form-control mb-2 text-center'
+                          placeholder='Add/subtract credits'
+                        />
+                        <button
+                          className='btn-rose btn-block rounded'
+                          onClick={creditSubmit}
+                          userid={row.id}
+                          type='submit'
+                        >
+                          Change Credits
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className='col-md-12'>
+            <h1 className='text-center text-jgreen'>Credit History</h1>
+            <hr />
+          </div>
+          <div className='col-md-12'>
+            <div className='table-responsive'>
+              <table className='table table-bordered table-hover'>
+                <thead className='thead mb-5 bg-cello text-athens'>
+                  <tr>
+                    <th scope='col'>Username</th>
+                    <th scope='col'>Question Topic</th>
+                    <th scope='col'>Credits Added/Lost</th>
+                    <th scope='col'>Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {adminArr
+                    .sort((a, b) => b.id - a.id)
+                    .map(row => {
+                      return (
+                        <tr key={row.id}>
+                          <td scope='row'>{row.User.username}</td>
+                          {row.question ? (
+                            <td>{row.question.topic}</td>
+                          ) : (
+                            <td>
+                              <strong>Admin adjustment</strong>
+                            </td>
+                          )}
+                          <td>{row.Time}</td>
+                          <td>
+                            <Moment tz='America/Phoenix' format='LLL Z'>
+                              {row.createdAt}
+                            </Moment>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        <Fragment>
+          <div className='row mt-4'>
+            <div className='col-md-12 d-flex justify-content-center'>
+              {info.hours > 0 || info.hours < 0 ? (
+                <TimeGauge hours={info.hours} />
+              ) : (
+                <p className='text-center'>
+                  Get to asking and answering questions!
+                </p>
+              )}
+            </div>
+          </div>
 
-      <div className='row mb-4'>
-        <div className='col-md-12'>
-          <h2 style={style.vert} className='text-center'>
-            Credits: {getHours()}
-          </h2>
-        </div>
-      </div>
+          <div className='row mb-4'>
+            <div className='col-md-12'>
+              <h2 style={style.vert} className='text-center'>
+                Credits: {getHours()}
+              </h2>
+            </div>
+          </div>
 
-      <hr />
+          <hr />
 
-      <div className='row mb-4'>
-        <div className='col-md-12 text-center'>
-          <h2 className='font-weight-bold'>Question History</h2>
-        </div>
-      </div>
+          <div className='row mb-4'>
+            <div className='col-md-12 text-center'>
+              <h2 className='font-weight-bold'>Question History</h2>
+            </div>
+          </div>
 
-      <div className='row mb-2'>
-        <div className='col-md-6 d-flex justify-content-center mb-3'>
-          <button
-            className='btn btn-outline-danger'
-            onClick={() => {
-              updateInfo({
-                name: info.name,
-                id: info.id,
-                questions: info.questions,
-                hours: info.hours,
-                which: "unsolved"
-              });
-            }}
-          >
-            Unsolved
-          </button>
-        </div>
-        <div className='col-md-6 d-flex justify-content-center'>
-          <button
-            className='btn btn-outline-success'
-            onClick={() => {
-              updateInfo({
-                name: info.name,
-                id: info.id,
-                questions: info.questions,
-                hours: info.hours,
-                which: "solved"
-              });
-            }}
-          >
-            Solved
-          </button>
-        </div>
-      </div>
+          <div className='row mb-2'>
+            <div className='col-md-6 d-flex justify-content-center mb-3'>
+              <button
+                className='btn btn-outline-danger'
+                onClick={() => {
+                  updateInfo({
+                    name: info.name,
+                    id: info.id,
+                    questions: info.questions,
+                    hours: info.hours,
+                    which: "unsolved"
+                  });
+                }}
+              >
+                Unsolved
+              </button>
+            </div>
+            <div className='col-md-6 d-flex justify-content-center'>
+              <button
+                className='btn btn-outline-success'
+                onClick={() => {
+                  updateInfo({
+                    name: info.name,
+                    id: info.id,
+                    questions: info.questions,
+                    hours: info.hours,
+                    which: "solved"
+                  });
+                }}
+              >
+                Solved
+              </button>
+            </div>
+          </div>
 
-      <div className='row mb-5'>{seeQuestions()}</div>
+          <div className='row mb-5'>{seeQuestions()}</div>
+        </Fragment>
+      )}
     </Fragment>
   );
 };
@@ -368,29 +582,3 @@ const style = {
 };
 
 export default Dashboard;
-
-{
-  /* <button
-onClick={async () => {
-  deleteQuestions(id);
-  let dataBack = await getUsersQuestions();
-  updateInfo({
-    name: info.name,
-    id: info.id,
-    questions: dataBack,
-    hours: info.hours,
-    which: info.which
-  });
-
-}}
->
-Delete Questions
-</button>
-<button
-onClick={() => {
-  props.history.push(`/form/${id}`);
-}}
->
-Mark as resolved
-</button> */
-}
