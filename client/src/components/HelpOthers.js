@@ -36,7 +36,6 @@ function HelpOthers() {
   };
 
   const renderFol = () => {
-    console.log(friends);
     if (friends.length > 0) {
       return friends.map(
         ({ topic, language, id, User, question, repo, createdAt }) => {
@@ -126,14 +125,11 @@ function HelpOthers() {
   };
 
   const renderQuestions = () => {
-    // console.log(window.innerWidth);
-    // let size = window.innerWidth;
-
     if (loading) {
       return <div>Loading</div>;
     } else {
       if (questions.length > 0) {
-        console.log(questions);
+
         return questions.map(
           ({
             User,
@@ -302,40 +298,37 @@ function HelpOthers() {
         </div>
       </div>
 
-      <div className='row'>
-        <div className='col-md-12 d-flex justify-content-center w-100 bg-gradient-brown py-2'>
-          <div className='form-group my-auto'>
-            <button
-              className='btn btn-greyish btn-rounded text-black mr-3'
-              onClick={() => {
-                setLang({
-                  lang: "",
-                  questions,
-                  friends,
-                  fol: true
-                });
-              }}
-            >
-              Your Friends' Questions
+      <div className='row bg-gradient-brown py-2'>
+        <div className='col-md-6 d-flex justify-content-center w-100 py-2'>
+          {/* <div className='form-group my-auto'> */}
+          <button
+            className='btn btn-greyish btn-rounded text-black'
+            onClick={() => {
+              setLang({
+                lang: "",
+                questions,
+                friends,
+                fol: true
+              });
+            }}
+          >
+            Your Friend's Questions
             </button>
-          </div>
-
-          <div className='form-group my-auto'>
-            <select
-              value={lang}
-              onChange={testing}
-              // type='button'
-              className='text-black dropdown-toggle form-control w-100 ml-3'
-            >
-              <option value='none'>Select a Language</option>
-              {allOptions()}
-            </select>
-          </div>
+        </div>
+        <div className='col-md-6 d-flex justify-content-center form-group my-auto'>
+          <select
+            value={lang}
+            onChange={testing}
+            // type='button'
+            className='text-black dropdown-toggle form-control w-75'
+          >
+            <option value='none'>Select a Language</option>
+            {allOptions()}
+          </select>
         </div>
       </div>
-
-      <div className='row mb-4'>{fol ? renderFol() : renderQuestions()}</div>
-    </Fragment>
+    <div className='row mb-4'>{fol ? renderFol() : renderQuestions()}</div>
+    </Fragment >
   );
 }
 

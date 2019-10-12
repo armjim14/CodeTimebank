@@ -13,6 +13,8 @@ function Profile(props) {
   const [info, updateInfo] = useState({
     name: "",
     hours: 0,
+    skype: "",
+    discord: "",
     questions: [],
     isFollower: null
   });
@@ -52,65 +54,103 @@ function Profile(props) {
     } else {
       console.log(info.questions);
       return info.questions.map(
-        ({ question, language, topic, createdAt, repo, User }, i) => {
+        ({ id, question, language, topic, createdAt, repo, User }, i) => {
           return (
             <div
-              key={i}
-              className='col-md-12 text-center border border-dbrown rounded my-4 shadow'
-            >
-              <h3 className='text-center mt-2'>{topic}</h3>
-              <hr />
-              <p>{language}</p>
-              <hr />
-              <span>Asked on </span>
-              <Moment tz='America/Phoenix' format='LLL Z'>
-                {createdAt}
-              </Moment>
-              <p>{question}</p>
-              <hr />
-              {repo !== "" && (
-                <Fragment>
-                  <div className='row'>
-                    <div className='col-md-12 text-center text-dbrown small'>
-                      Github Repository: <a href={`${repo}`}>{repo}</a>
-                    </div>
-                  </div>
-                  <hr />
-                </Fragment>
-              )}
-              <div className='row'>
-                <div className='col-md-12 text-center'>
-                  <i className='fas fa-address-book' /> Contact{" "}
-                  <Link to={`/user/${User.id}`}>{User.username}</Link>:
-                  {User.skype !== "" && (
-                    <span className='mx-3'>
-                      <a href={`skype:${User.skype}?chat`}>
-                        <i className='fab fa-skype text-primary'>
-                          {" "}
-                          {User.skype}
-                        </i>
-                      </a>
-                    </span>
-                  )}
-                  {User.discord !== "" && (
-                    <span className='mx-3'>
-                      <i
-                        className='fab fa-discord'
-                        style={{ color: "#7289DA" }}
-                      />{" "}
-                      {User.discord}
-                    </span>
-                  )}
-                </div>
+            className='col-md-12 border border-dbrown rounded my-4 shadow'
+            key={id}
+          >
+            <h3 className='text-center mt-2'>{topic}</h3>
+            <hr className='mb-0 mt-0' />
+            <div style={{ fontSize: "1.1rem" }} className='row'>
+              <div className='col-md-6 pr-0'>
+                <h6 className='small text-center border border-right p-1'>
+                  Language: {language}
+                </h6>
+              </div>
+              <div className='col-md-6 pl-0'>
+                <h6 className='text-center small border border-left p-1'>
+                  <Moment tz='America/Phoenix' format='LLL Z'>
+                    {createdAt}
+                  </Moment>
+                </h6>
               </div>
             </div>
-          );
+            <div
+              className='row overflow-hidden'
+              style={{ height: "7rem", wordBreak: "break-all" }}
+            >
+              <p className='col-md-12'>{question}</p>
+            </div>
+            <div className='col-md-12 d-flex justify-content-around'>
+              <button
+                className='btn btn-outline-glacier'
+                onClick={ChangeHeight}
+              >
+                See More
+              </button>
+            </div>
+            <hr />
+            {repo !== "" && (
+              <Fragment>
+                <div className='row'>
+                  <div className='col-md-12 text-center text-dbrown small'>
+                    Github Repository: <a href={`${repo}`}>${repo}</a>
+                  </div>
+                </div>
+                <hr />
+              </Fragment>
+            )}
+
+            <div className='row'>
+              <div className='col-md-4 text-center'>
+                <i className='fas fa-address-book' /> Contact{" "}
+                <Link to={`/user/${User.id}`}>{User.github}</Link>:
+              </div>
+              <div className='col-md-4 text-center'>
+                {User.skype !== "" && (
+                  <p>
+                    <a href={`skype:${User.skype}?chat`}>
+                      <i className='fab fa-skype text-primary'>
+                        {" "}
+                        {User.skype}
+                      </i>
+                    </a>
+                  </p>
+                )}
+              </div>
+              <div className='col-md-4 text-center'>
+                {User.discord !== "" && (
+                  <a href='https://discord.gg/WGBFhcj' target='__blank'>
+                    <i
+                      className='fab fa-discord'
+                      style={{ color: "#7289DA" }}
+                    />{" "}
+                    {User.discord}
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>          );
         }
       );
     }
   };
 
-  useEffect(() => {
+  const ChangeHeight = e => {
+    e.preventDefault();
+
+    if (e.target.parentNode.previousSibling.style.height === "7rem") {
+      e.target.parentNode.previousSibling.style.height = "fit-content";
+      e.target.innerText = "See Less";
+    } else {
+      e.target.parentNode.previousSibling.style.height = "7rem";
+      e.target.innerText = "See More";
+    }
+  };
+
+
+  useEffect(() => { // working
     async function fetchData() {
       let idd = props.match.params.id;
 
@@ -130,7 +170,7 @@ function Profile(props) {
         }
       }
 
-      let { github } = dataBack;
+      let { github, skype, discord } = dataBack;
 
       if (hoursData.length > 1) {
         console.log(hoursData);
@@ -141,6 +181,8 @@ function Profile(props) {
           name: github,
           questions,
           hours,
+          skype,
+          discord,
           isFollower: whichButton
         });
       } else if (hoursData.length === 1) {
@@ -148,6 +190,8 @@ function Profile(props) {
         updateInfo({
           name: github,
           questions,
+          skype,
+          discord,
           isFollower: whichButton,
           hours: hoursData[0].Time
         });
@@ -155,6 +199,8 @@ function Profile(props) {
         updateInfo({
           name: github,
           questions,
+          skype,
+          discord,
           hours: 0,
           isFollower: whichButton
         });
@@ -165,31 +211,16 @@ function Profile(props) {
     //eslint-disable-next-line
   }, [info.isFollower]);
 
-  // const renderQuestions = () => {
-  //   if (1 == 1) {
-  //     return (
-  //       <div className='col-md-12 text-center'>There are no questions</div>
-  //     );
-  //   } else {
-  //     // console.log(info.questions);
-  //     return info.questions.map(({ question, language, topic }, i) => {
-  //       return (
-  //         <div key={i} className='col-md-12 text-center'>
-  //           <h3>{topic}</h3>
-  //           <p>{language}</p>
-  //           <p>{question}</p>
-  //         </div>
-  //       );
-  //     });
-  //   }
-  // };
-
   const correctButton = () => {
+
+    console.log(info)
+    console.log(info.skype)
+
     if (!isAuthenticated) {
       return <p className="text-jgreen">Register to follow users</p>
     } else if (user.id === +props.match.params.id) {
 
-      return <p className="text-jgreen">You are unable to follow yourself</p>
+      return <p className="text-jgreen mb-2">You are unable to follow yourself</p>
 
     } else if (info.isFollower) {
       return (
@@ -232,8 +263,10 @@ function Profile(props) {
       let dataBack = await specificUser(idd);
       let questions = await specificQuestions(idd);
       let hoursData = await forUser(idd);
-      let { github } = dataBack;
+      let { github, skype, discord } = dataBack;
       getRepos(github);
+
+      console.log(skype)
 
       if (hoursData.length > 1) {
         let hours = hoursData.reduce((a, b) => a.Time + b.Time);
@@ -241,12 +274,16 @@ function Profile(props) {
           name: github,
           questions,
           hours,
+          skype: skype,
+          discord,
           isFollower: info.isFollower
         });
       } else if (hoursData.length === 1) {
         updateInfo({
           name: github,
           questions,
+          skype: skype,
+          discord,
           isFollower: info.isFollower,
           hours: hoursData[0].Time
         });
@@ -254,6 +291,8 @@ function Profile(props) {
         updateInfo({
           name: github,
           questions,
+          skype: skype,
+          discord,
           isFollower: info.isFollower,
           hours: 0
         });
@@ -261,7 +300,7 @@ function Profile(props) {
     }
     fetchData();
     //eslint-disable-next-line
-  }, []);
+  }, [info.isFollower]);
 
   return (
     <Fragment>
@@ -276,9 +315,20 @@ function Profile(props) {
           </div>
         </div>
         <div className='col-md-10'>
-          <div className='border-bottom border-black'>
+          <div className='mb-3'>
             <h2 className='text-left text-black'>{info.name}'s Profile</h2>
             {correctButton()}
+            <a 
+              className="linkHover"
+              href={`skype:${info.skype}?chat`}
+              target="__target"
+            ><i className='fab fa-skype text-primary' /> {info.skype}</a>
+            <br />
+            <a 
+              className="linkHover"
+              href='https://discord.gg/WGBFhcj'
+              target="__target"
+            ><i className='fab fa-discord' style={{ color: "#7289DA" }} /> {info.discord}</a>
           </div>
           <hr />
           <div className='row'>
