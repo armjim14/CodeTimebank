@@ -1,12 +1,9 @@
-USE CodeTimeBank_db;
+INSERT INTO users (username, passsword) VALUES ('username');
+INSERT INTO users (complete) VALUES ('password');
+INSERT INTO users (username, passsword) VALUES ('github');
+INSERT INTO users (username, passsword) VALUES ('discord');
+INSERT INTO users (username, passsword) VALUES ('skype');
 
-INSERT INTO questions (questions, theQuestion) VALUES ('question','Please enter a question');
-INSERT INTO questions (questions, theQuestion) VALUES ('language', 'Please provide a language');
-INSERT INTO questions (questions, theQuestion) VALUES ('comfort", "Please provide your comfort level');
-
-
-INSERT INTO user (username, password) VALUES ('name', false);
-INSERT INTO user (username, password) VALUES ('password', false);
-INSERT INTO user (username, password) VALUES ('github', false);
-INSERT INTO user (username, password) VALUES ('discord', false);
-INSERT INTO user (username, password) VALUES ('skype', false);
+INSERT INTO questions (question, language, topic) VALUES ('Please enter a question' );
+INSERT INTO questions (question, language, topic) VALUES ('Please provide a language');
+INSERT INTO questions (question, language, topic) VALUES ('Please provide your comfort level');
