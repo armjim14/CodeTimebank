@@ -80,7 +80,7 @@ function Navbar(props) {
 
   return (
     <header className='container-fluid'>
-      <nav className='row navbar navbar-expand-lg navbar-light bg-gradient-mariner py-2'>
+      <nav style={{zIndex: "10"}} className='row navbar navbar-expand-lg navbar-light bg-gradient-mariner py-2'>
         <a style={{fontSize: "1.2rem", color: "white"}} class="navbar-brand changeFont" href="/">
           <img className="mr-3 d-inline-block align-center" style={{width: "50px"}} src="/images/image.png" alt="logo" />
            Code Timebank
