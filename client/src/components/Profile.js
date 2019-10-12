@@ -397,12 +397,16 @@ function Profile(props) {
       </div>
 
       <div className='row'>
-        <div className='col-md-12 d-flex justify-content-center align-items-center'>
+        <div className='col-lg-6 col-md-6 col-sm-6 d-flex justify-content-center align-items-center'>
           <div>
             <h3 className='text-center'>Recent Languages</h3>
             <Stats name={info.name} className='mr-3' />
           </div>
+          </div>
+          <div className='col-lg-6 col-md-6 col-sm-6 d-flex text-center justify-content-center align-items-center'>
+
           {hours > 0 || hours < 0 ? (
+            
             <div>
               <h3 className='text-center'>Time Banked</h3>
               <TimeGauge hours={hours} />
@@ -411,6 +415,7 @@ function Profile(props) {
           ) : (
               <h3>Credits: {hours}</h3>
             )}
+            
         </div>
       </div>
 

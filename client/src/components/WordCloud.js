@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import ReactWordcloud from "react-wordcloud";
 import QuestionContext from "../Context/question/questionContext";
-// import words from './data/words'
+import "./WordCloud.css"
 
 function WordCloud() {
   const questionContext = useContext(QuestionContext);
@@ -19,7 +19,7 @@ function WordCloud() {
   }, []);
 
   return (
-    <div style={{ height: 400, width: 600 }} className='img-fluid'>
+    <div style={{ height: 400, width: 600 }} className='img-fluid word-cloud'>
       {cloudfriends.array.length > 0 ? (
         <ReactWordcloud words={cloudfriends.array} alt='Word Cloud' />
       ) : (

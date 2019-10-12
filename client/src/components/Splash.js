@@ -6,14 +6,16 @@ const Splash = () => {
   return (
     <div className='row'>
       <img className='splashimage' src='./images/Splash.jpg' />
+      <img className='splashmobile' src='./images/Splash-mobile.jpg' />
 
       <Typed
         className='typed'
         strings={[
           "Welcome to Code Timebank",
           "Ask for Help",
-          "Help others",
-          "Earn credits (time) and climb the leaderboard",
+          "Help Others",
+          "Earn Credits {time}",
+          "Climb the Leaderboard",
           "Ready to Code?"
         ]}
         typeSpeed={80}
