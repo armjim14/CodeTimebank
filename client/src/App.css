@@ -37,6 +37,10 @@ The above colors are now in our css stylesheet as custom bootstrap classes
 body {
   background: var(--athens);
   background-size: cover;
+  font-family: Palatino, "Palatino LT STD", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+}
+h1, h2, h3{
+  font-family: "Book Antiqua", Georgia, serif;
 }
 
 .loginStuff {
