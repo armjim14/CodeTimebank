@@ -388,7 +388,7 @@ const Dashboard = props => {
               props.history.push(`/user/${info.id}`);
             }}
             id='ButtonMargin'
-            className='btn btn-outline-stone rounded-pill'
+            className='btn btn-stone rounded-pill'
           >
             View Your Profile
           </button>
@@ -399,7 +399,7 @@ const Dashboard = props => {
               props.history.push(`/editprofile`);
             }}
             id='ButtonMargin'
-            className='btn btn-outline-stone rounded-pill'
+            className='btn btn-stone rounded-pill'
           >
             Edit Contact Info
           </button>
@@ -409,7 +409,7 @@ const Dashboard = props => {
             onClick={() => {
               props.history.push(`/changepassword`);
             }}
-            className='btn btn-outline-stone rounded-pill'
+            className='btn btn-stone rounded-pill'
           >
             Change Password
           </button>
@@ -418,7 +418,7 @@ const Dashboard = props => {
 
       <div className='row mt-4'>
         <div className='col-md-12'>
-          <h1 className='text-center'>Hello, {info.name}</h1>
+          <h1 className='text-center'>{info.name}</h1>
         </div>
       </div>
 
@@ -532,9 +532,9 @@ const Dashboard = props => {
           </div>
 
           <div className='row mb-2'>
-            <div className='col-md-6 d-flex justify-content-center mb-3'>
+            <div className='col-md-6 d-flex justify-content-center'>
               <button
-                className='btn btn-outline-danger'
+                className='btn btn-rose'
                 onClick={() => {
                   updateInfo({
                     name: info.name,
@@ -550,7 +550,7 @@ const Dashboard = props => {
             </div>
             <div className='col-md-6 d-flex justify-content-center'>
               <button
-                className='btn btn-outline-success'
+                className='btn btn-jgreen'
                 onClick={() => {
                   updateInfo({
                     name: info.name,
