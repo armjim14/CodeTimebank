@@ -78,6 +78,14 @@ body {
   font-family: 'CashCurrency';
 }
 
+.hoverStuff {
+  color: white;
+}
+
+.hoverStuff:hover {
+  color: var(--mariner)
+}
+
 @media screen and (max-width: 600px) {
   .loginStuff {
     width: 100%;

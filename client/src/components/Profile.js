@@ -378,7 +378,7 @@ function Profile(props) {
                   <li className='list-group-item flex-fill d-flex justify-content-start align-items-center'>
                     <i className='fas fa-link mr-2' />
                     <strong className='mx-2'>Website:</strong>
-                    <a href={ghBlog} target='_blank' rel='noopener noreferrer'>
+                    <a style={{wordBreak: "break-all"}} href={ghBlog} target='_blank' rel='noopener noreferrer'>
                       {ghBlog}
                     </a>
                   </li>

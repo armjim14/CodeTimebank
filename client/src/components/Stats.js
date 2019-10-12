@@ -18,8 +18,8 @@ const Stats = props => {
   //https://www.d3-graph-gallery.com/graph/barplot_horizontal.html
   const drawChart = () => {
     const margin = { top: 20, right: 30, bottom: 40, left: 90 },
-      width = 400 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+      width = 360 - margin.left - margin.right,
+      height = 360 - margin.top - margin.bottom;
 
     const svg = d3
       .select(".stat-div")
