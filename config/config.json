@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "pword",
+    "password": "Monkey",
     "database": "timebank",
     "host": "localhost",
     "dialect": "mysql"
