@@ -81,6 +81,10 @@ function Navbar(props) {
   return (
     <header className='container-fluid'>
       <nav className='row navbar navbar-expand-lg navbar-light bg-gradient-mariner py-2'>
+        <a style={{fontSize: "1.2rem", color: "white"}} class="navbar-brand changeFont" href="/">
+          <img className="mr-3 d-inline-block align-center" style={{width: "50px"}} src="/images/image.png" alt="logo" />
+           Code Timebank
+        </a>
         <button
           className='navbar-toggler'
           type='button'
@@ -93,21 +97,13 @@ function Navbar(props) {
           <span className='navbar-toggler-icon'></span>
         </button>
 
+
         <div
           style={style.linkSize}
           className='collapse navbar-collapse'
           id='navbarSupportedContent'
         >
-          <ul className='navbar-nav m-auto'>
-            <li className='nav-item'>
-              <Link
-                style={style.forTextOdd}
-                className='nav-link text-white'
-                to='/'
-              >
-                TempDash
-              </Link>
-            </li>
+          <ul className='navbar-nav ml-auto'>
             <li className='nav-item'>
               <Link
                 style={style.forTextOdd}

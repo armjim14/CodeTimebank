@@ -19,7 +19,6 @@ function RequestHelp(props) {
   const { question, language, topic, repo } = questionAsked;
 
   const onChange = e => {
-    console.log(languages)
     setQuestion({ ...questionAsked, [e.target.name]: e.target.value });
   }
 
