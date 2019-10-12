@@ -21,7 +21,7 @@ function WordCloud() {
   return (
     <div style={{ height: 400, width: 600 }} className='img-fluid word-cloud'>
       {cloudfriends.array.length > 0 ? (
-        <ReactWordcloud words={cloudfriends.array} alt='Word Cloud' />
+        <ReactWordcloud className="cloud" words={cloudfriends.array} alt='Word Cloud' />
       ) : (
         <h6>Insufficient data to render word cloud</h6>
       )}
