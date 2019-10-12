@@ -69,6 +69,7 @@ const Dashboard = props => {
     } else {
       // console.log(info.questions);
       return info.questions.map(
+        //eslint-disable-next-line
         ({ id, question, language, topic, solved, createdAt, repo }) => {
           if (info.which === "solved") {
             if (solved) {
@@ -133,15 +134,17 @@ const Dashboard = props => {
                   className='col-md-12 border border-dbrown rounded my-4 shadow'
                   key={id}
                 >
-                  <div className="row">
-                    <div className="col-md-4">
-                    </div>
-                    <div className="col-md-4">
+                  <div className='row'>
+                    <div className='col-md-4'></div>
+                    <div className='col-md-4'>
                       <h3 className='text-center pt-1 my-0'>{topic} </h3>
-
                     </div>
-                    <div className="col-md-4 text-right pr-5 py-3">
-                      <i onClick={changeModal.bind(this, id)} style={{ fontSize: "1.2rem", cursor: "pointer" }} className="text-right fas fa-ellipsis-v"></i>
+                    <div className='col-md-4 text-right pr-5 py-3'>
+                      <i
+                        onClick={changeModal.bind(this, id)}
+                        style={{ fontSize: "1.2rem", cursor: "pointer" }}
+                        className='text-right fas fa-ellipsis-v'
+                      ></i>
                     </div>
                   </div>
                   {forModal(id, topic)}
@@ -233,22 +236,29 @@ const Dashboard = props => {
   };
 
   const changeModal = (id, e) => {
-    console.log(e.target.parentNode.parentNode.nextSibling);
+    // console.log(e.target.parentNode.parentNode.nextSibling);
     e.target.parentNode.parentNode.nextSibling.style.display = "block";
-    console.log(id)
-  }
+    // console.log(id)
+  };
 
   const forModal = (id, topic) => {
-    console.log(topic)
+    // console.log(topic)
     return (
-      <div className="modal">
-        <div className="modal-content">
-          <span onClick={closeModal} className="close text-right">&times;</span>
-          <div className="row mb-3">
-            <div className="col-md-12">
-              <p style={{ fontSize: "2rem", fontWeight: "bold" }} className="text-center">{topic}</p>
+      <div className='modal'>
+        <div className='modal-content'>
+          <span onClick={closeModal} className='close text-right'>
+            &times;
+          </span>
+          <div className='row mb-3'>
+            <div className='col-md-12'>
+              <p
+                style={{ fontSize: "2rem", fontWeight: "bold" }}
+                className='text-center'
+              >
+                {topic}
+              </p>
             </div>
-            <div className="col-md-6 text-center mb-3">
+            <div className='col-md-6 text-center mb-3'>
               <span
                 className='text-center text-success'
                 style={{ fontSize: "1.5rem", cursor: "pointer" }}
@@ -257,7 +267,7 @@ const Dashboard = props => {
                 }}
               >
                 Solved
-                          <i
+                <i
                   className='ml-2 text-success fas fa-check-square'
                   onClick={() => {
                     props.history.push(`/form/${id}`);
@@ -265,7 +275,7 @@ const Dashboard = props => {
                 ></i>
               </span>
             </div>
-            <div className="col-md-6 text-center">
+            <div className='col-md-6 text-center'>
               <i
                 style={{ fontSize: "1.5rem", cursor: "pointer" }}
                 className='px-2 py-2 text-center text-danger fas fa-trash-alt'
@@ -285,14 +295,14 @@ const Dashboard = props => {
           </div>
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   const closeModal = e => {
     console.log(e.target);
     console.log(e.target.parentNode.parentNode);
     e.target.parentNode.parentNode.style.display = "none";
-  }
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -473,10 +483,10 @@ const Dashboard = props => {
                           {row.question ? (
                             <td>{row.question.topic}</td>
                           ) : (
-                              <td>
-                                <strong>Admin adjustment</strong>
-                              </td>
-                            )}
+                            <td>
+                              <strong>Admin adjustment</strong>
+                            </td>
+                          )}
                           <td>{row.Time}</td>
                           <td>
                             <Moment tz='America/Phoenix' format='LLL Z'>
@@ -492,68 +502,73 @@ const Dashboard = props => {
           </div>
         </div>
       ) : (
-          <Fragment>
-            <div className='row mt-4'>
-              <div className='col-md-12 d-flex justify-content-center'>
-                {info.hours > 0 ||
-                  (info.hours < 0 && <TimeGauge hours={info.hours} />)}
-              </div>
+        <Fragment>
+          <div className='row mt-4'>
+            <div className='col-md-12 d-flex justify-content-center'>
+              {info.hours > 0 || info.hours < 0 ? (
+                <TimeGauge hours={info.hours} />
+              ) : (
+                <p className='text-center'>
+                  Get to asking and answering questions!
+                </p>
+              )}
             </div>
+          </div>
 
-            <div className='row mb-4'>
-              <div className='col-md-12'>
-                <h2 style={style.vert} className='text-center'>
-                  Credits: {getHours()}
-                </h2>
-              </div>
+          <div className='row mb-4'>
+            <div className='col-md-12'>
+              <h2 style={style.vert} className='text-center'>
+                Credits: {getHours()}
+              </h2>
             </div>
+          </div>
 
-            <hr />
+          <hr />
 
-            <div className='row mb-4'>
-              <div className='col-md-12 text-center'>
-                <h2 className='font-weight-bold'>Question History</h2>
-              </div>
+          <div className='row mb-4'>
+            <div className='col-md-12 text-center'>
+              <h2 className='font-weight-bold'>Question History</h2>
             </div>
+          </div>
 
-            <div className='row mb-2'>
-              <div className='col-md-6 d-flex justify-content-center mb-3'>
-                <button
-                  className='btn btn-outline-danger'
-                  onClick={() => {
-                    updateInfo({
-                      name: info.name,
-                      id: info.id,
-                      questions: info.questions,
-                      hours: info.hours,
-                      which: "unsolved"
-                    });
-                  }}
-                >
-                  Unsolved
+          <div className='row mb-2'>
+            <div className='col-md-6 d-flex justify-content-center mb-3'>
+              <button
+                className='btn btn-outline-danger'
+                onClick={() => {
+                  updateInfo({
+                    name: info.name,
+                    id: info.id,
+                    questions: info.questions,
+                    hours: info.hours,
+                    which: "unsolved"
+                  });
+                }}
+              >
+                Unsolved
               </button>
-              </div>
-              <div className='col-md-6 d-flex justify-content-center'>
-                <button
-                  className='btn btn-outline-success'
-                  onClick={() => {
-                    updateInfo({
-                      name: info.name,
-                      id: info.id,
-                      questions: info.questions,
-                      hours: info.hours,
-                      which: "solved"
-                    });
-                  }}
-                >
-                  Solved
-              </button>
-              </div>
             </div>
+            <div className='col-md-6 d-flex justify-content-center'>
+              <button
+                className='btn btn-outline-success'
+                onClick={() => {
+                  updateInfo({
+                    name: info.name,
+                    id: info.id,
+                    questions: info.questions,
+                    hours: info.hours,
+                    which: "solved"
+                  });
+                }}
+              >
+                Solved
+              </button>
+            </div>
+          </div>
 
-            <div className='row mb-5'>{seeQuestions()}</div>
-          </Fragment>
-        )}
+          <div className='row mb-5'>{seeQuestions()}</div>
+        </Fragment>
+      )}
     </Fragment>
   );
 };
