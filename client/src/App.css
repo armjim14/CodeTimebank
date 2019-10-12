@@ -64,6 +64,20 @@ body {
   color: var(--rose);
 }
 
+.linkHover {
+  cursor: pointer;
+  font-weight: bold;
+  color: black
+}
+
+.linkHover:hover {
+  color: var(--mariner);
+}
+
+.changeFont {
+  font-family: 'CashCurrency';
+}
+
 @media screen and (max-width: 600px) {
   .loginStuff {
     width: 100%;
@@ -114,4 +128,9 @@ body {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+@font-face {
+  font-family: 'CashCurrency';
+  src: local('CashCurrency'), url('./CashCurrency.ttf') format('truetype');
 }

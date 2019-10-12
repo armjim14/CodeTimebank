@@ -72,7 +72,7 @@ function Register(props) {
       </div>
       <div className='fullWidth d-flex justify-content-center'>
         <div className="loginStuff">
-          <label htmlFor='Username' className='col-md-12 col-form-label font-weight-bold'>
+          <label htmlFor='Username' className='col-md-12 col-form-label text-center font-weight-bold'>
             Email:
         </label>
           <input
@@ -83,7 +83,7 @@ function Register(props) {
             value={name}
             onChange={onChange}
           />
-          <label htmlFor='Password' className='col-md-12 col-form-label font-weight-bold'>
+          <label htmlFor='Password' className='col-md-12 col-form-label text-center font-weight-bold'>
             Password:
         </label>
           <input
@@ -102,36 +102,42 @@ function Register(props) {
             value={password2}
             onChange={onChange}
           />
-          <label htmlFor='securityQuestion' className='col-md-12 col-form-label font-weight-bold'>
-            Security Question:
-        </label>
-          <select className='text-black dropdown-toggle form-control' onChange={onChange} name="securityQuestion" value={securityQuestion}>
-            <option value="">Select a question</option>
-            <option value="Favorite Number">Favorite Number</option>
-            <option value="Favorite Letter">Favorite Letter</option>
-          </select>
 
-          <label htmlFor='securityAnswer' className='col-md-12 col-form-label font-weight-bold'>
+          <label htmlFor='securityQuestion' className='col-md-12 col-form-label text-center font-weight-bold'>
+            Security Question:
+          </label>
+
+          <div className="forButton d-flex justify-content-center" style={{ width: "100%" }}>
+            <select className='ml-4 mr-4 text-black dropdown-toggle form-control' onChange={onChange} name="securityQuestion" value={securityQuestion}>
+              <option value="">Select a question</option>
+              <option value="Favorite Number">Favorite Number</option>
+              <option value="Favorite Letter">Favorite Letter</option>
+            </select>
+          </div>
+          <label htmlFor='securityAnswer' className='col-md-12 col-form-label text-center font-weight-bold'>
             Security Answer:
         </label>
           <input
             type='text'
             name='securityAnswer'
-            className='form-control mb-4 inputStuff'
+            className='form-control mb-4 text-center inputStuff'
             value={securityAnswer}
             onChange={onChange}
           />
 
-          <label htmlFor='hirable' className='col-md-12 col-form-label font-weight-bold'>
+          <label htmlFor='hirable' className='col-md-12 col-form-label text-center font-weight-bold'>
             Looking for Employment:
         </label>
-          <select className='text-black dropdown-toggle form-control' onChange={onChange} name="hirable" value={hirable}>
-            <option value="">Select One</option>
-            <option value="true">True</option>
-            <option value="false">False</option>
-          </select>
+        <div className="forButton d-flex justify-content-center" style={{ width: "100%" }}>
 
-          <label htmlFor='Github' className='col-md-12 col-form-label font-weight-bold'>
+          <select className='ml-4 mr-4 mb-4 text-black dropdown-toggle form-control' onChange={onChange} name="hirable" value={hirable}>
+            <option value="">Select One</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+          </div>
+
+          <label htmlFor='Github' className='col-md-12 col-form-label text-center font-weight-bold'>
             Github Username:
         </label>
           <input
@@ -142,7 +148,7 @@ function Register(props) {
             value={github}
             onChange={onChange}
           />
-          <label htmlFor='Discord' className='col-md-12 col-form-label font-weight-bold'>
+          <label htmlFor='Discord' className='col-md-12 col-form-label text-center font-weight-bold'>
             Discord Username:
         </label>
           <input
@@ -153,7 +159,7 @@ function Register(props) {
             value={discord}
             onChange={onChange}
           />
-          <label htmlFor='Skype' className='col-md-12 col-form-label font-weight-bold'>
+          <label htmlFor='Skype' className='col-md-12 col-form-label text-center font-weight-bold'>
             Skype Username:
         </label>
           <input

@@ -30,13 +30,9 @@ import setAuthToken from "./Utils/setAuthToken";
 // used for pages where user must be logged in
 import PrivateRoute from "./components/PrivateRoute";
 
-// For GraphQL
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "react-apollo";
 import HelpOthers from "./components/HelpOthers";
 import RequestHelp from "./components/RequestHelp";
 import ForgotPassword from "./components/ForgotPassword";
-const client = new ApolloClient({});
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -51,7 +47,6 @@ function App() {
         <TimeState>
           <FollowerState>
             <AlertState>
-              <ApolloProvider client={client}>
                 <Router>
                   <Fragment>
                     <Navbar />
@@ -108,9 +103,9 @@ function App() {
                         <Route exact path='/example' component={ExamplePage} />
                       </Switch>
                     </div>
+                    <script src="/js/forNav.js"></script>
                   </Fragment>
                 </Router>
-              </ApolloProvider>
             </AlertState>
           </FollowerState>
         </TimeState>

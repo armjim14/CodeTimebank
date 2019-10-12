@@ -60,7 +60,6 @@ const Dashboard = props => {
   };
 
   const seeQuestions = () => {
-    // console.log(info.questions.length);
 
     if (info.questions.length === 0) {
       return (
@@ -102,12 +101,20 @@ const Dashboard = props => {
                     </div>
                   </div>
                   <div
-                    className='row overflow-auto'
+                    className='row overflow-hidden'
                     style={{ height: "7rem", wordBreak: "break-all" }}
                   >
                     <p style={{ fontSize: "1.2rem" }} className='col-md-12'>
                       {question}
                     </p>
+                  </div>
+                  <div className='col-md-12 d-flex justify-content-around'>
+                    <button
+                      className='btn btn-outline-glacier'
+                      onClick={ChangeHeight}
+                    >
+                      See More
+                    </button>
                   </div>
 
                   <hr />
@@ -148,39 +155,6 @@ const Dashboard = props => {
                     </div>
                   </div>
                   {forModal(id, topic)}
-                  {/* <h3 className='text-center py-1 my-0'>
-                    <i
-                      style={{ cursor: "pointer" }}
-                      className='px-2 py-2 text-danger mr-5 fas fa-trash-alt'
-                      onClick={async () => {
-                        deleteQuestions(id);
-                        let dataBack = await getUsersQuestions();
-                        updateInfo({
-                          name: info.name,
-                          id: info.id,
-                          questions: dataBack,
-                          hours: info.hours,
-                          which: info.which
-                        });
-                      }}
-                    ></i>
-                    <span
-                      className='text-success'
-                      style={{ fontSize: "1.5rem", cursor: "pointer" }}
-                      onClick={() => {
-                        props.history.push(`/form/${id}`);
-                      }}
-                    >
-                      Solved
-                      <i
-                        className='ml-2 text-success fas fa-check-square'
-                        onClick={() => {
-                          props.history.push(`/form/${id}`);
-                        }}
-                      ></i>
-                    </span>
-                  </h3> */}
-
                   <hr className='my-0' />
                   <div className='row'>
                     <div className='col-md-6 pr-0'>
@@ -204,12 +178,21 @@ const Dashboard = props => {
                     </div>
                   </div>
                   <div
-                    className='row overflow-auto'
+                    className='row overflow-hidden'
                     style={{ height: "7rem", wordBreak: "break-all" }}
                   >
                     <p style={{ fontSize: "1.2rem" }} className='col-md-12'>
                       {question}
                     </p>
+                  </div>
+
+                  <div className='col-md-12 d-flex justify-content-around'>
+                    <button
+                      className='btn btn-outline-glacier'
+                      onClick={ChangeHeight}
+                    >
+                      See More
+                    </button>
                   </div>
 
                   <hr />
@@ -235,14 +218,24 @@ const Dashboard = props => {
     }
   };
 
+  const ChangeHeight = e => {
+    e.preventDefault();
+
+    if (e.target.parentNode.previousSibling.style.height === "7rem") {
+      e.target.parentNode.previousSibling.style.height = "fit-content";
+      e.target.innerText = "See Less";
+    } else {
+      e.target.parentNode.previousSibling.style.height = "7rem";
+      e.target.innerText = "See More";
+    }
+  };
+
+
   const changeModal = (id, e) => {
-    // console.log(e.target.parentNode.parentNode.nextSibling);
     e.target.parentNode.parentNode.nextSibling.style.display = "block";
-    // console.log(id)
   };
 
   const forModal = (id, topic) => {
-    // console.log(topic)
     return (
       <div className='modal'>
         <div className='modal-content'>
@@ -299,8 +292,6 @@ const Dashboard = props => {
   };
 
   const closeModal = e => {
-    console.log(e.target);
-    console.log(e.target.parentNode.parentNode);
     e.target.parentNode.parentNode.style.display = "none";
   };
 
@@ -308,16 +299,11 @@ const Dashboard = props => {
     async function fetchData() {
       let hoursData = await userCredit();
       let dataBack = await getUsersQuestions();
-      // console.log(dataBack);
       let { github, id, isAdmin } = await getUsernames();
       getGithubInfo();
-      // console.log("What is isAdmin?", isAdmin);
 
       if (hoursData.length > 1) {
-        // console.log(hoursData);
-        // console.log(hoursData.map(ar => ar.Time));
         let totalHours = hoursData.map(ar => ar.Time).reduce((a, b) => a + b);
-        // console.log(totalHours);
 
         updateInfo({
           name: github,
@@ -388,7 +374,7 @@ const Dashboard = props => {
               props.history.push(`/user/${info.id}`);
             }}
             id='ButtonMargin'
-            className='btn btn-outline-stone rounded-pill'
+            className='btn btn-stone rounded-pill'
           >
             View Your Profile
           </button>
@@ -399,7 +385,7 @@ const Dashboard = props => {
               props.history.push(`/editprofile`);
             }}
             id='ButtonMargin'
-            className='btn btn-outline-stone rounded-pill'
+            className='btn btn-stone rounded-pill'
           >
             Edit Contact Info
           </button>
@@ -409,7 +395,7 @@ const Dashboard = props => {
             onClick={() => {
               props.history.push(`/changepassword`);
             }}
-            className='btn btn-outline-stone rounded-pill'
+            className='btn btn-stone rounded-pill'
           >
             Change Password
           </button>
@@ -418,7 +404,7 @@ const Dashboard = props => {
 
       <div className='row mt-4'>
         <div className='col-md-12'>
-          <h1 className='text-center'>Hello, {info.name}</h1>
+          <h1 className='text-center'>{info.name}</h1>
         </div>
       </div>
 
@@ -483,10 +469,10 @@ const Dashboard = props => {
                           {row.question ? (
                             <td>{row.question.topic}</td>
                           ) : (
-                            <td>
-                              <strong>Admin adjustment</strong>
-                            </td>
-                          )}
+                              <td>
+                                <strong>Admin adjustment</strong>
+                              </td>
+                            )}
                           <td>{row.Time}</td>
                           <td>
                             <Moment tz='America/Phoenix' format='LLL Z'>
@@ -502,73 +488,73 @@ const Dashboard = props => {
           </div>
         </div>
       ) : (
-        <Fragment>
-          <div className='row mt-4'>
-            <div className='col-md-12 d-flex justify-content-center'>
-              {info.hours > 0 || info.hours < 0 ? (
-                <TimeGauge hours={info.hours} />
-              ) : (
-                <p className='text-center'>
-                  Get to asking and answering questions!
+          <Fragment>
+            <div className='row mt-4'>
+              <div className='col-md-12 d-flex justify-content-center'>
+                {info.hours > 0 || info.hours < 0 ? (
+                  <TimeGauge hours={info.hours} />
+                ) : (
+                    <p className='text-center'>
+                      Get to asking and answering questions!
                 </p>
-              )}
+                  )}
+              </div>
             </div>
-          </div>
 
-          <div className='row mb-4'>
-            <div className='col-md-12'>
-              <h2 style={style.vert} className='text-center'>
-                Credits: {getHours()}
-              </h2>
+            <div className='row mb-4'>
+              <div className='col-md-12'>
+                <h2 style={style.vert} className='text-center'>
+                  Credits: {getHours()}
+                </h2>
+              </div>
             </div>
-          </div>
 
-          <hr />
+            <hr />
 
-          <div className='row mb-4'>
-            <div className='col-md-12 text-center'>
-              <h2 className='font-weight-bold'>Question History</h2>
+            <div className='row mb-4'>
+              <div className='col-md-12 text-center'>
+                <h2 className='font-weight-bold'>Question History</h2>
+              </div>
             </div>
-          </div>
 
-          <div className='row mb-2'>
-            <div className='col-md-6 d-flex justify-content-center mb-3'>
-              <button
-                className='btn btn-outline-danger'
-                onClick={() => {
-                  updateInfo({
-                    name: info.name,
-                    id: info.id,
-                    questions: info.questions,
-                    hours: info.hours,
-                    which: "unsolved"
-                  });
-                }}
-              >
-                Unsolved
+            <div className='row mb-2'>
+              <div className='col-md-6 d-flex justify-content-center mb-2'>
+                <button
+                  className='btn btn-rose'
+                  onClick={() => {
+                    updateInfo({
+                      name: info.name,
+                      id: info.id,
+                      questions: info.questions,
+                      hours: info.hours,
+                      which: "unsolved"
+                    });
+                  }}
+                >
+                  Unsolved
               </button>
-            </div>
-            <div className='col-md-6 d-flex justify-content-center'>
-              <button
-                className='btn btn-outline-success'
-                onClick={() => {
-                  updateInfo({
-                    name: info.name,
-                    id: info.id,
-                    questions: info.questions,
-                    hours: info.hours,
-                    which: "solved"
-                  });
-                }}
-              >
-                Solved
+              </div>
+              <div className='col-md-6 d-flex justify-content-center mb-2'>
+                <button
+                  className='btn btn-jgreen'
+                  onClick={() => {
+                    updateInfo({
+                      name: info.name,
+                      id: info.id,
+                      questions: info.questions,
+                      hours: info.hours,
+                      which: "solved"
+                    });
+                  }}
+                >
+                  Solved
               </button>
+              </div>
             </div>
-          </div>
 
-          <div className='row mb-5'>{seeQuestions()}</div>
-        </Fragment>
-      )}
+            <div className='row mb-5'>{seeQuestions()}</div>
+          </Fragment>
+        )}
     </Fragment>
   );
 };
@@ -576,7 +562,6 @@ const Dashboard = props => {
 const style = {
   vert: {
     marginTop: "50px",
-    // fontSize: "20px",
     fontWeight: "bold"
   }
 };
