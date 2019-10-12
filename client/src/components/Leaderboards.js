@@ -50,11 +50,11 @@ const Leaderboards = () => {
 
       let everyUserTime = [];
 
-      console.log(usersInfo);
+      // console.log(usersInfo);
 
       for (let e in usersInfo) {
         let hourData = await forUser(usersInfo[e].id);
-        console.log(hourData);
+        // console.log(hourData);
         if (hourData.length > 0) {
           everyUserTime.push(hourData);
         }
@@ -62,7 +62,7 @@ const Leaderboards = () => {
 
       let users = [];
 
-      console.log(everyUserTime);
+      // console.log(everyUserTime);
       for (let i = 0; i < everyUserTime.length; i++) {
         let hours = everyUserTime[i].map(ar => ar.Time).reduce((a, b) => a + b);
         let id = everyUserTime[i][0].UserId;
@@ -74,7 +74,7 @@ const Leaderboards = () => {
 
       let run = true;
 
-      console.log(users);
+      // console.log(users);
 
       if (users.length > 0) {
         while (run) {
@@ -83,7 +83,7 @@ const Leaderboards = () => {
             let j = i + 1;
             let num1 = users[i].hours;
             let num2 = users[j].hours;
-            console.log(num1);
+            // console.log(num1);
             if (num1 < num2) {
               run = true;
               let tempA = users[i];
@@ -102,13 +102,13 @@ const Leaderboards = () => {
 
   return (
     <Fragment>
-      <div className='row'>
-        <div className='col-md-12 text-center'>
-          <h1>Leaderboards</h1>
+      <div className='row mb-5'>
+        <div className='col-md-12 text-center my-3'>
+          <h1>Leaderboard</h1>
         </div>
       </div>
       <div className='row table-responsive mx-0'>
-        <table className='table table-mariner table-striped table-bordered text-center'>
+        <table className='table table-stone table-striped table-bordered text-center shadow'>
           <thead>
             <tr className='thead-light'>
               <th>User</th>
