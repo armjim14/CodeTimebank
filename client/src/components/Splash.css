@@ -9,6 +9,7 @@
   display: none;
 }
 .typed {
+  font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
   font-size: 50pt;
   color: white;
   text-align: center;
