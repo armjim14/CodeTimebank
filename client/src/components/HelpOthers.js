@@ -1,28 +1,18 @@
 import React, { useContext, useEffect, Fragment, useState } from "react";
 import questionContext from "../Context/question/questionContext";
-import timeContext from "../Context/time/timeContext";
 import followerContext from "../Context/follower/followerContext";
-
+import WordCloud from "./WordCloud";
 import { Link } from "react-router-dom";
 import languages from "./data/languages.json";
 import Moment from "react-moment";
 import "moment-timezone";
 
-// 768
-
 function HelpOthers() {
   const QuestionContext = useContext(questionContext);
-  const {
-    getQuestions,
-    loading,
-    specificQuestions,
-    wordCloudQuestions
-  } = QuestionContext;
+  const { getQuestions, loading, specificQuestions } = QuestionContext;
 
   const FollowerContext = useContext(followerContext);
   const { getFollowers } = FollowerContext;
-
-  useEffect(() => wordCloudQuestions(), []);
 
   const allOptions = () =>
     languages.map(({ name }, i) => (
@@ -243,9 +233,14 @@ function HelpOthers() {
         );
       } else {
         return (
-          <div className='col-md-12 text-center mt-5'>
-            <h3>No questions found.</h3>
-          </div>
+          <Fragment>
+            <div className='col-md-12 text-center mt-5'>
+              <h3>No questions found.</h3>
+            </div>
+            <div className='col-md-12 d-flex justify-content-center my-3'>
+              <WordCloud />
+            </div>
+          </Fragment>
         );
       }
     }
