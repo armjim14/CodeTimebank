@@ -4,7 +4,7 @@ import "./Splash.css";
 
 const Splash = () => {
   return (
-    <div>
+    <div className='row'>
       <img className='splashimage' src='./images/Splash.jpg' />
 
       <Typed

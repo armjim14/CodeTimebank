@@ -13,7 +13,7 @@ function Navbar(props) {
 
   useEffect(() => {
     function fetchData() {
-      loadUser()
+      loadUser();
     }
     fetchData();
     //eslint-disable-next-line
@@ -39,7 +39,7 @@ function Navbar(props) {
               to='/providehelp'
             >
               Help Others
-              </Link>
+            </Link>
           </li>
           <li className='nav-item'>
             <Link
@@ -48,7 +48,7 @@ function Navbar(props) {
               to='/gethelp'
             >
               Request Help
-              </Link>
+            </Link>
           </li>
         </Fragment>
       );
@@ -93,9 +93,13 @@ function Navbar(props) {
           <span className='navbar-toggler-icon'></span>
         </button>
 
-        <div style={style.linkSize} className='collapse navbar-collapse' id='navbarSupportedContent'>
+        <div
+          style={style.linkSize}
+          className='collapse navbar-collapse'
+          id='navbarSupportedContent'
+        >
           <ul className='navbar-nav m-auto'>
-          <li className='nav-item'>
+            <li className='nav-item'>
               <Link
                 style={style.forTextOdd}
                 className='nav-link text-white'
@@ -104,7 +108,7 @@ function Navbar(props) {
                 TempDash
               </Link>
             </li>
-          <li className='nav-item'>
+            <li className='nav-item'>
               <Link
                 style={style.forTextOdd}
                 className='nav-link text-white'
@@ -123,16 +127,16 @@ function Navbar(props) {
                 Leaderboards
               </Link>
             </li>
+            {isAuthenticated && (
+              <li
+                onClick={goHome}
+                style={{ cursor: "pointer" }}
+                className='nav-item text-white'
+              >
+                <div className='nav-link text-white'>Logout</div>
+              </li>
+            )}
           </ul>
-          {isAuthenticated && (
-            <div
-              onClick={goHome}
-              style={{ cursor: "pointer" }}
-              className='nav-item text-right text-white'
-            >
-              Logout
-            </div>
-          )}
         </div>
       </nav>
     </header>

@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useState, useEffect } from "react";
 import AuthContext from "../Context/auth/authContext";
 import AlertContext from "../Context/alert/alertContext";
-import { Link } from "react-router-dom";
 
 const EditProfile = props => {
   const [info, setInfo] = useState({

@@ -10,11 +10,11 @@ const QuestionState = props => {
       }
     };
 
-    console.log(formInfo);
+    // console.log(formInfo);
 
     try {
       const resp = await axios.post("/api/questions/add", formInfo, config);
-      console.log(resp);
+      // console.log(resp);
       return resp;
     } catch (e) {
       console.log("I am not working", e);
@@ -24,7 +24,7 @@ const QuestionState = props => {
   const getQuestions = async lang => {
     try {
       const res = await axios.get(`/api/questions/help/${lang}`);
-      console.log(res.data);
+      // console.log(res.data);
       return res.data;
     } catch (e) {
       console.log(e);
@@ -74,7 +74,7 @@ const QuestionState = props => {
   };
 
   const deleteQuestions = id => {
-    console.log(id);
+    // console.log(id);
     try {
       axios.delete(`/api/questions/delete/${id}`);
       // console.log("it deleted");
@@ -164,7 +164,7 @@ const QuestionState = props => {
     ];
     try {
       const resp = await axios.get(`/api/questions/get`);
-      console.log(`word cloud question response is`, resp);
+      // console.log(`word cloud question response is`, resp);
       for (let i = 0; i < resp.data.length; i++) {
         switch (resp.data[i].language) {
           case "JavaScript":
@@ -211,7 +211,7 @@ const QuestionState = props => {
             break;
         }
       }
-      console.log(initArr);
+      // console.log(initArr);
       return initArr;
     } catch (e) {
       console.log(e);

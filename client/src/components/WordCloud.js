@@ -15,18 +15,15 @@ function WordCloud() {
       setWords({ array: cloudWords });
     }
     getData();
+    //eslint-disable-next-line
   }, []);
 
   return (
-    <div
-      style={{ height: 400, width: 600 }}
-      className='text-center border rounded'
-    >
-      <h4 className='text-center'></h4>
+    <div style={{ height: 400, width: 600 }} className='img-fluid'>
       {cloudfriends.array.length > 0 ? (
-        <ReactWordcloud words={cloudfriends.array} />
+        <ReactWordcloud words={cloudfriends.array} alt='Word Cloud' />
       ) : (
-        <h6>No data to render</h6>
+        <h6>Insufficient data to render word cloud</h6>
       )}
     </div>
   );

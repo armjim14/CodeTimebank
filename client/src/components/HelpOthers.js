@@ -126,8 +126,8 @@ function HelpOthers() {
   };
 
   const renderQuestions = () => {
-    console.log(window.innerWidth);
-    let size = window.innerWidth;
+    // console.log(window.innerWidth);
+    // let size = window.innerWidth;
 
     if (loading) {
       return <div>Loading</div>;
@@ -143,7 +143,7 @@ function HelpOthers() {
             createdAt,
             language,
             repo,
-            solved
+            solved //eslint-disable-next-line
           }) => {
             if (solved) {
               console.log("dont send question");
@@ -234,10 +234,12 @@ function HelpOthers() {
       } else {
         return (
           <Fragment>
-            <div className='col-md-12 text-center mt-5'>
-              <h3>No questions found.</h3>
-            </div>
-            <div className='col-md-12 d-flex justify-content-center my-3'>
+            {lang && (
+              <div className='col-md-12 text-center mt-5'>
+                <h3>No questions found.</h3>
+              </div>
+            )}
+            <div className='col-md-12 d-flex justify-content-center w-100 my-3'>
               <WordCloud />
             </div>
           </Fragment>
@@ -261,17 +263,17 @@ function HelpOthers() {
   useEffect(() => {
     async function getData() {
       let resp = await getFollowers();
-      console.log(resp);
+      // console.log(resp);
 
       if (resp.length > 0) {
         let friends = [];
 
         for (let e in resp) {
           let info = await specificQuestions(resp[e].followerId);
-          console.log(info);
+          // console.log(info);
           for (let v in info) {
             if (info[v].solved) {
-              console.log("dont pass");
+              // console.log("dont pass");
             } else {
               friends.push(info[v]);
             }
@@ -289,6 +291,7 @@ function HelpOthers() {
       }
     }
     getData();
+    //eslint-disable-next-line
   }, []);
 
   return (
