@@ -166,49 +166,52 @@ const QuestionState = props => {
       const resp = await axios.get(`/api/questions/get`);
       // console.log(`word cloud question response is`, resp);
       for (let i = 0; i < resp.data.length; i++) {
-        switch (resp.data[i].language) {
-          case "JavaScript":
-            initArr[0].value++;
-            break;
-          case "CSS":
-            initArr[1].value++;
-            break;
-          case "HTML":
-            initArr[2].value++;
-            break;
-          case "C#":
-            initArr[3].value++;
-            break;
-          case "C++":
-            initArr[4].value++;
-            break;
-          case "C":
-            initArr[5].value++;
-            break;
-          case "Java":
-            initArr[6].value++;
-            break;
-          case "PHP":
-            initArr[7].value++;
-            break;
-          case "Python":
-            initArr[8].value++;
-            break;
-          case "Ruby":
-            initArr[9].value++;
-            break;
-          case "Perl":
-            initArr[10].value++;
-            break;
-          case "SQL":
-            initArr[11].value++;
-            break;
-          case "NoSQL":
-            initArr[12].value++;
-            break;
-          default:
-            initArr[13].value++;
-            break;
+        if (!resp.data[i].solved) {
+          switch (resp.data[i].language) {
+            case "JavaScript":
+              initArr[0].value++;
+              break;
+            case "CSS":
+              // console.log(resp.data[i].solved);
+              initArr[1].value++;
+              break;
+            case "HTML":
+              initArr[2].value++;
+              break;
+            case "C#":
+              initArr[3].value++;
+              break;
+            case "C++":
+              initArr[4].value++;
+              break;
+            case "C":
+              initArr[5].value++;
+              break;
+            case "Java":
+              initArr[6].value++;
+              break;
+            case "PHP":
+              initArr[7].value++;
+              break;
+            case "Python":
+              initArr[8].value++;
+              break;
+            case "Ruby":
+              initArr[9].value++;
+              break;
+            case "Perl":
+              initArr[10].value++;
+              break;
+            case "SQL":
+              initArr[11].value++;
+              break;
+            case "NoSQL":
+              initArr[12].value++;
+              break;
+            default:
+              initArr[13].value++;
+              break;
+          }
         }
       }
       // console.log(initArr);
