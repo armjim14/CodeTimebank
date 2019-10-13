@@ -58,7 +58,7 @@ function Register(props) {
 
   return (
     <Fragment>
-      <div className='row mt-2'>
+      <div style={{marginTop: "85px"}} className='row'>
         <h1 style={{ fontSize: "2.4rem" }} className='col-md-12 text-center'>Register Below</h1>
       </div>
       <div className='row mt-3 mb-4'>

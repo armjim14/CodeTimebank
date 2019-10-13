@@ -102,7 +102,7 @@ const Leaderboards = () => {
 
   return (
     <Fragment>
-      <div className='row mb-5'>
+      <div className='row mb-3'>
         <div className='col-md-12 text-center my-3'>
           <h1>Leaderboard</h1>
         </div>

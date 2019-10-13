@@ -41,7 +41,7 @@ function RequestHelp(props) {
 
   return (
     <div>
-      <h1 className='text-center mt-2'>Request Help</h1>
+      <h1 style={{marginTop: "90px"}} className='text-center'>Request Help</h1>
       <form onSubmit={submit}>
         <div className='row'>
           <div className='form-group col-md-6'>

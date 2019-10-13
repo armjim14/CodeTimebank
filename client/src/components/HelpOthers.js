@@ -292,7 +292,7 @@ function HelpOthers() {
 
   return (
     <Fragment>
-      <div className='row mt-3 mb-3'>
+      <div style={{marginTop: "90px"}} className='row mb-3'>
         <div className='col-md-12'>
           <h1 className='text-center'>Help Others</h1>
         </div>

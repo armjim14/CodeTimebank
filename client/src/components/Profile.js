@@ -310,17 +310,18 @@ function Profile(props) {
 
   return (
     <Fragment>
-      <div className='row mt-3'>
+      <div className='row'>
         <div className='col-md-2'>
           <div className='h-100 w-100'>
             <img
+            style={{marginTop: "40px"}}
               src={ghAvatar}
               alt='Avatar'
-              className='d-block m-auto img-fluid rounded shadow'
+              className='d-block img-fluid rounded shadow'
             />
           </div>
         </div>
-        <div className='col-md-10'>
+        <div className='col-md-10 mt-4'>
           <div className='mb-3'>
             <h2 className='text-left text-black'>{info.name}'s Profile</h2>
             {correctButton()}

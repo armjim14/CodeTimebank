@@ -51,7 +51,7 @@ function App() {
                   <Fragment>
                     <Navbar />
                     <Footer />
-                    <div className='container-fluid bg-athens'>
+                    <div style={{marginTop: "70px"}} className='container-fluid bg-athens'>
                       <Alerts />
                       <Switch>
                         <Route exact path='/about' component={MainPage} />
