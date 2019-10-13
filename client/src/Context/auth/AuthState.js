@@ -88,7 +88,10 @@ const AuthState = props => {
   };
 
   // logout
-  const logout = () => dispatch({ type: LOGOUT });
+  const logout = () => {
+    dispatch({ type: LOGOUT });
+    // window.location.reload();
+  };
 
   // clear errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
