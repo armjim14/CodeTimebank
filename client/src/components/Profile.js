@@ -224,6 +224,7 @@ function Profile(props) {
 
     } else if (info.isFollower) {
       return (
+        <Fragment>
         <button
           className='btn btn-rose mx-auto mb-1'
           onClick={() => {
@@ -236,9 +237,12 @@ function Profile(props) {
         >
           Unfollow {info.name}
         </button>
+        <br />
+        </Fragment>
       );
     } else {
       return (
+        <Fragment>
         <button
           className='btn btn-mariner mx-auto mb-1'
           onClick={() => {
@@ -252,6 +256,8 @@ function Profile(props) {
         >
           Follow {info.name}
         </button>
+        <br />
+        </Fragment>
       );
     }
   }
