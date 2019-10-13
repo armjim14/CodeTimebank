@@ -26,8 +26,8 @@ function CreditForm(props) {
   const answeredQuestion = async e => {
     e.preventDefault();
     let temp = [];
-    helpers.map(ar => temp.push(+ar.info[0]));
-    // console.log(temp);
+    helpers.map(ar => temp.push(+ar.info.split("-").slice(0, 1).join("") ));
+    console.log(temp);
     for (let i = 0; i < helpers.length; i++) {
       console.log("helpers at i is", helpers[i].hours);
 
@@ -49,7 +49,7 @@ function CreditForm(props) {
       return <option value='none'>No users...</option>;
     } else {
       return users.map(({ id, github }) => {
-        let both = `${id}${github}`;
+        let both = `${id}-${github}`;
         return (
           <option key={id} value={both}>
             {github}
@@ -75,7 +75,7 @@ function CreditForm(props) {
         }
       }
 
-      console.log(users);
+      console.log(temp);
       setState({ users: temp });
     }
     fetchData();
@@ -85,7 +85,8 @@ function CreditForm(props) {
   const testing = e => {
     e.preventDefault();
     let ar = helpers;
-    let num = e.target.value[0];
+    let num = e.target.value.split("-").slice(0, 1).join("");
+    console.log(num)
     if (!isNaN(num)) {
       if (!ar) {
         ar = [{ info: e.target.value, hours: 0 }];
@@ -93,14 +94,17 @@ function CreditForm(props) {
         ar.push({ info: e.target.value, hours: 1 });
       }
     }
+    console.log(ar)
+    console.log(helpers)
     setState({ users, helpers: ar, person: e.target.value });
   };
 
   const changeHours = async ({ unique, i }, e) => {
     e.preventDefault();
     let value = e.target.value;
+    console.log("I am here")
     for (let e in helpers) {
-      if (+helpers[e].info[0] === unique) {
+      if (+helpers[e].info.split("-").slice(0, 1).join("") === unique) {
         // let temp = helpers[e].info.split("");
         // temp[0] = await value.toString();
         let newHelpers = helpers;
@@ -125,12 +129,13 @@ function CreditForm(props) {
       );
     }
     return helpers.map((bName, i) => {
+
       let aName = bName.info
-        .split("")
+        .split("-")
         .slice(1)
         .join("");
       let unique = +bName.info
-        .split("")
+        .split("-")
         .slice(0, 1)
         .join("");
       console.log(unique);
