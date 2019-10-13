@@ -60,7 +60,6 @@ const Dashboard = props => {
   };
 
   const seeQuestions = () => {
-
     if (info.questions.length === 0) {
       return (
         <div className='col-md-12 text-center'>There are no questions</div>
@@ -229,7 +228,6 @@ const Dashboard = props => {
       e.target.innerText = "See More";
     }
   };
-
 
   const changeModal = (id, e) => {
     e.target.parentNode.parentNode.nextSibling.style.display = "block";
@@ -469,10 +467,10 @@ const Dashboard = props => {
                           {row.question ? (
                             <td>{row.question.topic}</td>
                           ) : (
-                              <td>
-                                <strong>Admin adjustment</strong>
-                              </td>
-                            )}
+                            <td>
+                              <strong>Admin adjustment</strong>
+                            </td>
+                          )}
                           <td>{row.Time}</td>
                           <td>
                             <Moment tz='America/Phoenix' format='LLL Z'>
@@ -488,73 +486,73 @@ const Dashboard = props => {
           </div>
         </div>
       ) : (
-          <Fragment>
-            <div className='row mt-4'>
-              <div className='col-md-12 d-flex justify-content-center'>
-                {info.hours > 0 || info.hours < 0 ? (
-                  <TimeGauge hours={info.hours} />
-                ) : (
-                    <p className='text-center'>
-                      Get to asking and answering questions!
+        <Fragment>
+          <div className='row mt-4'>
+            <div className='col-md-12 d-flex justify-content-center'>
+              {info.hours > 0 || info.hours < 0 ? (
+                <TimeGauge hours={info.hours} />
+              ) : (
+                <p className='text-center'>
+                  Get to asking and answering questions!
                 </p>
-                  )}
-              </div>
+              )}
             </div>
+          </div>
 
-            <div className='row mb-4'>
-              <div className='col-md-12'>
-                <h2 style={style.vert} className='text-center'>
-                  Credits: {getHours()}
-                </h2>
-              </div>
+          <div className='row mb-4'>
+            <div className='col-md-12'>
+              <h2 style={style.vert} className='text-center'>
+                Credits: {getHours()}
+              </h2>
             </div>
+          </div>
 
-            <hr />
+          <hr />
 
-            <div className='row mb-4'>
-              <div className='col-md-12 text-center'>
-                <h2 className='font-weight-bold'>Question History</h2>
-              </div>
+          <div className='row mb-4'>
+            <div className='col-md-12 text-center'>
+              <h2 className='font-weight-bold'>Question History</h2>
             </div>
+          </div>
 
-            <div className='row mb-2'>
-              <div className='col-md-6 d-flex justify-content-center mb-2'>
-                <button
-                  className='btn btn-rose'
-                  onClick={() => {
-                    updateInfo({
-                      name: info.name,
-                      id: info.id,
-                      questions: info.questions,
-                      hours: info.hours,
-                      which: "unsolved"
-                    });
-                  }}
-                >
-                  Unsolved
+          <div className='row mb-2'>
+            <div className='col-md-6 d-flex justify-content-center mb-2'>
+              <button
+                className='btn btn-rose'
+                onClick={() => {
+                  updateInfo({
+                    name: info.name,
+                    id: info.id,
+                    questions: info.questions,
+                    hours: info.hours,
+                    which: "unsolved"
+                  });
+                }}
+              >
+                Unsolved
               </button>
-              </div>
-              <div className='col-md-6 d-flex justify-content-center mb-2'>
-                <button
-                  className='btn btn-jgreen'
-                  onClick={() => {
-                    updateInfo({
-                      name: info.name,
-                      id: info.id,
-                      questions: info.questions,
-                      hours: info.hours,
-                      which: "solved"
-                    });
-                  }}
-                >
-                  Solved
-              </button>
-              </div>
             </div>
+            <div className='col-md-6 d-flex justify-content-center mb-2'>
+              <button
+                className='btn btn-jgreen'
+                onClick={() => {
+                  updateInfo({
+                    name: info.name,
+                    id: info.id,
+                    questions: info.questions,
+                    hours: info.hours,
+                    which: "solved"
+                  });
+                }}
+              >
+                Solved
+              </button>
+            </div>
+          </div>
 
-            <div className='row mb-5'>{seeQuestions()}</div>
-          </Fragment>
-        )}
+          <div className='row mb-5'>{seeQuestions()}</div>
+        </Fragment>
+      )}
     </Fragment>
   );
 };
