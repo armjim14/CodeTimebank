@@ -43,37 +43,40 @@ const ChangePassword = props => {
 
   return (
     <Fragment>
-      <div className='row'>
+      <div style={{ marginTop: "90px" }} className='row'>
         <div className='col-md-12'>
           <h1 className='text-center text-black'>Change Password</h1>
         </div>
       </div>
-      <div className='form-group row mx-5'>
-        <label htmlFor='original' className='col-md-1'>
-          Old Password:
-        </label>
-        <div className='col-md-11'>
+      <div className='form-group row'>
+        <div className='col-md-4'></div>
+        <div className='col-md-4 text-center'>
+          <label htmlFor='original' className='font-weight-bold'>
+            Old Password:
+          </label>
           <input
             type='password'
             name='original'
-            className='form-control'
+            className='form-control text-center'
             placeholder='Old Password'
             value={original}
             onChange={onChange}
           />
         </div>
+        <div className='col-md-4'></div>
       </div>
-      <div className='form-group row mx-5'>
-        <label htmlFor='new' className='col-md-1'>
-          New Password:
-        </label>
-        <div className='col-md-11'>
+      <div className='form-group row'>
+        <div className='col-md-4'></div>
+        <div className='col-md-4 text-center'>
+          <label htmlFor='new' className='font-weight-bold'>
+            New Password:
+          </label>
           <div className='row'>
             <div className='col-md-12'>
               <input
                 type='password'
                 name='password'
-                className='form-control'
+                className='form-control text-center'
                 placeholder='New Password'
                 value={password}
                 onChange={onChange}
@@ -83,7 +86,7 @@ const ChangePassword = props => {
               <input
                 type='password'
                 name='password2'
-                className='form-control'
+                className='form-control text-center'
                 placeholder='New Password Again'
                 value={password2}
                 onChange={onChange}
@@ -91,10 +94,20 @@ const ChangePassword = props => {
             </div>
           </div>
         </div>
+        <div className='col-md-4'></div>
       </div>
-      <button className='btn btn-block btn-greyish' onClick={onSubmit}>
-        Submit
-      </button>
+      <div className='row'>
+        <div className='col-md-4'></div>
+        <div className='col-md-4 text-center'>
+          <button
+            className='btn btn-block btn-mariner w-25 mx-auto text-white mb-5'
+            onClick={onSubmit}
+          >
+            Submit
+          </button>
+        </div>
+        <div className='col-md-4'></div>
+      </div>
     </Fragment>
   );
 };
