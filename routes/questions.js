@@ -6,6 +6,9 @@ const auth = require("../middleware/auth");
 var Op = require("sequelize").Op;
 
 router.get("/help/:lang", auth, async (req, res) => {
+  if (req.params.lang === "Csharp") {
+    req.params.lang = "C#";
+  }
   try {
     const resp = await db.questions.findAll({
       where: {

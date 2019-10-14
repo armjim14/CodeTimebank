@@ -23,6 +23,9 @@ const QuestionState = props => {
 
   const getQuestions = async lang => {
     try {
+      if (lang === "C#") {
+        lang = "Csharp";
+      }
       const res = await axios.get(`/api/questions/help/${lang}`);
       // console.log(res.data);
       return res.data;
@@ -167,6 +170,7 @@ const QuestionState = props => {
       // console.log(`word cloud question response is`, resp);
       for (let i = 0; i < resp.data.length; i++) {
         if (!resp.data[i].solved) {
+          console.log(resp.data[i].solved);
           switch (resp.data[i].language) {
             case "JavaScript":
               initArr[0].value++;
