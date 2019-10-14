@@ -111,7 +111,12 @@ function Register(props) {
             <select className='ml-4 mr-4 text-black dropdown-toggle form-control' onChange={onChange} name="securityQuestion" value={securityQuestion}>
               <option value="">Select a question</option>
               <option value="Favorite Number">Favorite Number</option>
-              <option value="Favorite Letter">Favorite Letter</option>
+              <option value="Favorite Word">Favorite Word</option>
+              <option value="What is your mother's maiden name">What is your mother's maiden name</option>
+              <option value="What is the name of your first pet">What is the name of your first pet</option>
+              <option value="What was your first car">What was your first car</option>
+              <option value="What elementary school did you attend">What elementary school did you attend</option>
+              <option value="What is the name of the town where you were born">What is the name of the town where you were born</option>
             </select>
           </div>
           <label htmlFor='securityAnswer' className='col-md-12 col-form-label text-center font-weight-bold'>
