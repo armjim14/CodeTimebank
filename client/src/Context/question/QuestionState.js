@@ -23,6 +23,7 @@ const QuestionState = props => {
 
   const getQuestions = async lang => {
     try {
+      console.log(lang)
       const res = await axios.get(`/api/questions/help/${lang}`);
       // console.log(res.data);
       return res.data;
