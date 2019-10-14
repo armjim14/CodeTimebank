@@ -20,9 +20,9 @@ function MainPage() {
       </div>
 
       <div className='row mx-auto'>
-        <div className='col-md-12'>
-          <blockquote className='blockquote border border-greyish text-justify text-center shadow-sm'>
-            <p className='pt-3 px-3 mx-auto'>
+        <div className='col-md-12 d-flex justify-content-center'>
+          <blockquote className='blockquote border border-greyish text-justify text-center shadow-sm w-75'>
+            <p className='p-2 mx-auto'>
               Timebanking is a time-based currency. Give one hour of service to
               another, and receive one time credit. You can use the credits in
               turn to receive services. The focus of Timebanking is on our value
