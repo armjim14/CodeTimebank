@@ -90,6 +90,10 @@ h1, h2, h3{
   color: var(--mariner)
 }
 
+.NavFont {
+  font-size: 1.2rem;
+}
+
 @media screen and (max-width: 600px) {
   .loginStuff {
     width: 100%;
@@ -145,4 +149,10 @@ h1, h2, h3{
 @font-face {
   font-family: 'CashCurrency';
   src: local('CashCurrency'), url('./CashCurrency.ttf') format('truetype');
+}
+
+@media screen and (max-width: 355px){
+  .NavFont {
+    font-size: 1rem;
+  }
 }

@@ -84,7 +84,7 @@ function Navbar(props) {
       className='container-fluid'
     >
       <nav style={{zIndex: "10"}} className='row navbar navbar-expand-lg navbar-light bg-gradient-mariner py-2'>
-        <a style={{fontSize: "1.2rem", color: "white"}} className="navbar-brand changeFont" href="/">
+        <a style={{color: "white"}} className="navbar-brand changeFont NavFont" href="/">
           <img className="mr-3 d-inline-block align-center" style={{width: "30px", paddingBottom: "10px"}} src="/images/realLogo.png" alt="logo" />
            Code Timebank
         </a>
