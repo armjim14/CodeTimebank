@@ -5,32 +5,31 @@
   /* background-size: 100%; */
   position: relative;
 }
-.splashmobile{
+.splashmobile {
   display: none;
 }
 .typed {
-  font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco, "Bitstream Vera Sans Mono", monospace;
+  font-family: "Lucida Sans Typewriter", "Lucida Console", Monaco,
+    "Bitstream Vera Sans Mono", monospace;
   font-size: 50pt;
   color: #efefef;
   text-align: center;
   text-shadow: 2px 2px #1c395d;
 
   position: absolute;
-  top: 30%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-top: 10px ;
-  
 }
 
 @media (max-width: 600px) {
-    .typed{
+  .typed {
     font-size: 25pt;
   }
-  .splashimage{
+  .splashimage {
     display: none;
   }
-  .splashmobile{
+  .splashmobile {
     height: 100vh;
     width: 100%;
     display: block;
