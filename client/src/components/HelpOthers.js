@@ -121,6 +121,17 @@ function HelpOthers() {
           );
         }
       );
+    } else {
+      return (
+        <Fragment>
+          <div className='col-md-12 text-center mt-5'>
+            <h3>No questions found.</h3>
+          </div>
+          <div className='col-md-12 d-flex justify-content-center w-100 my-3'>
+            <WordCloud />
+          </div>
+        </Fragment>
+      );
     }
   };
 
@@ -129,7 +140,6 @@ function HelpOthers() {
       return <div>Loading</div>;
     } else {
       if (questions.length > 0) {
-
         return questions.map(
           ({
             User,
@@ -312,8 +322,8 @@ function HelpOthers() {
               });
             }}
           >
-            Your Friend's Questions
-            </button>
+            Friends' Questions
+          </button>
         </div>
         <div className='col-md-6 d-flex justify-content-center form-group my-auto'>
           <select
@@ -327,8 +337,8 @@ function HelpOthers() {
           </select>
         </div>
       </div>
-    <div className='row mb-4'>{fol ? renderFol() : renderQuestions()}</div>
-    </Fragment >
+      <div className='row mb-4'>{fol ? renderFol() : renderQuestions()}</div>
+    </Fragment>
   );
 }
 
