@@ -221,7 +221,7 @@ const Dashboard = props => {
     e.preventDefault();
 
     if (e.target.parentNode.previousSibling.style.height === "7rem") {
-      e.target.parentNode.previousSibling.style.height = "fit-content";
+      e.target.parentNode.previousSibling.style.height = "auto";
       e.target.innerText = "See Less";
     } else {
       e.target.parentNode.previousSibling.style.height = "7rem";
