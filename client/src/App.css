@@ -37,9 +37,12 @@ The above colors are now in our css stylesheet as custom bootstrap classes
 body {
   background: var(--athens);
   background-size: cover;
-  font-family: Palatino, "Palatino LT STD", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-family: Palatino, "Palatino LT STD", "Palatino Linotype", "Book Antiqua",
+    Georgia, serif;
 }
-h1, h2, h3{
+h1,
+h2,
+h3 {
   font-family: "Book Antiqua", Georgia, serif;
 }
 
@@ -71,7 +74,7 @@ h1, h2, h3{
 .linkHover {
   cursor: pointer;
   font-weight: bold;
-  color: black
+  color: black;
 }
 
 .linkHover:hover {
@@ -79,7 +82,7 @@ h1, h2, h3{
 }
 
 .changeFont {
-  font-family: 'CashCurrency';
+  font-family: "CashCurrency";
 }
 
 .hoverStuff {
@@ -87,11 +90,21 @@ h1, h2, h3{
 }
 
 .hoverStuff:hover {
-  color: var(--mariner)
+  color: var(--mariner);
 }
 
 .NavFont {
   font-size: 1.2rem;
+}
+
+.nav-link:hover {
+  text-shadow: 0 0 3px var(--cello);
+  color: var(--athens) !important;
+}
+
+.navbar-brand:hover {
+  text-shadow: 0 0 3px var(--cello);
+  color: var(--athens) !important;
 }
 
 @media screen and (max-width: 600px) {
@@ -152,11 +165,11 @@ h1, h2, h3{
 }
 
 @font-face {
-  font-family: 'CashCurrency';
-  src: local('CashCurrency'), url('./CashCurrency.ttf') format('truetype');
+  font-family: "CashCurrency";
+  src: local("CashCurrency"), url("./CashCurrency.ttf") format("truetype");
 }
 
-@media screen and (max-width: 355px){
+@media screen and (max-width: 355px) {
   .NavFont {
     font-size: 1rem;
   }

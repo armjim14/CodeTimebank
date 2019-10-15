@@ -124,6 +124,10 @@ router.post(
       if (user) {
         return res.status(400).json({ msg: "Username taken!" });
       }
+      let githubFinder = await db.Users.findOne({ where: { github: github } });
+      if (githubFinder) {
+        return res.status(400).json({ msg: "Github username already in use!" });
+      }
       user = {
         username: name,
         password: password,
