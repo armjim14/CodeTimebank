@@ -123,7 +123,7 @@ const Dashboard = props => {
                       <div className='row'>
                         <div className='col-md-12 text-center text-dbrown'>
                           Github Repository:{" "}
-                          <a style={{ fontSize: "1rem" }} href={`${repo}`}>
+                          <a style={{ fontSize: "1rem", wordBreak: "break-all" }} href={`${repo}`}>
                             {repo}
                           </a>
                         </div>
@@ -202,7 +202,7 @@ const Dashboard = props => {
                       <div className='row'>
                         <div className='col-md-12 text-center text-dbrown'>
                           Github Repository:{" "}
-                          <a style={{ fontSize: "1rem" }} href={`${repo}`}>
+                          <a style={{ fontSize: "1rem", wordBreak: "break-all" }} href={`${repo}`}>
                             {repo}
                           </a>
                         </div>

@@ -96,7 +96,7 @@ function Profile(props) {
               <Fragment>
                 <div className='row'>
                   <div className='col-md-12 text-center text-dbrown small'>
-                    Github Repository: <a href={`${repo}`}>${repo}</a>
+                    Github Repository: <a style={{fontSize: "1rem", wordBreak: "break-all"}} href={`${repo}`}>${repo}</a>
                   </div>
                 </div>
                 <hr />
