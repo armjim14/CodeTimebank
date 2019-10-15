@@ -41,7 +41,8 @@ function HelpOthers() {
         ({ topic, language, id, User, question, repo, createdAt }) => {
           return (
             <div
-              className='col-md-12 border border-dbrown rounded my-4 shadow'
+              style={{padding: "0 15px 0 15px"}}
+              className='queslen border border-dbrown rounded my-4 shadow'
               key={id}
             >
               <h3 className='text-center mt-2'>{topic}</h3>
@@ -156,7 +157,8 @@ function HelpOthers() {
             } else {
               return (
                 <div
-                  className='col-md-12 border border-dbrown rounded my-4 shadow'
+                  style={{padding: "0 15px 0 15px"}}
+                  className='queslen border border-dbrown rounded my-4 shadow'
                   key={id}
                 >
                   <h3 className='text-center mt-2'>{topic}</h3>

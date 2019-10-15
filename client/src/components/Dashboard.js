@@ -73,7 +73,8 @@ const Dashboard = props => {
             if (solved) {
               return (
                 <div
-                  className='col-md-12 border border-dbrown rounded my-4 shadow'
+                  style={{padding: "0 15px 0 15px"}}
+                  className='queslen border border-dbrown rounded my-4 shadow'
                   key={id}
                 >
                   <h3 className='text-center py-1 my-0'>{topic}</h3>
@@ -137,7 +138,8 @@ const Dashboard = props => {
             if (!solved) {
               return (
                 <div
-                  className='col-md-12 border border-dbrown rounded my-4 shadow'
+                  style={{padding: "0 15px 0 15px"}}
+                  className='queslen border border-dbrown rounded my-4 shadow'
                   key={id}
                 >
                   <div className='row'>
