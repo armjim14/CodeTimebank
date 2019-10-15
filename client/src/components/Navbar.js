@@ -79,14 +79,26 @@ function Navbar(props) {
   }; //, [isAuthenticated, props.history]);
 
   return (
-    <header 
-      style={{position: "fixed", top: "0", zIndex: "5"}}
+    <header
+      style={{ position: "fixed", top: "0", zIndex: "5" }}
       className='container-fluid'
     >
-      <nav style={{zIndex: "10"}} className='row navbar navbar-expand-lg navbar-light bg-gradient-mariner py-2'>
-        <a style={{color: "white"}} className="navbar-brand changeFont NavFont" href="/">
-          <img className="mr-3 d-inline-block align-center" style={{width: "30px", paddingBottom: "10px"}} src="/images/realLogo.png" alt="logo" />
-           Code Timebank
+      <nav
+        style={{ zIndex: "10" }}
+        className='row navbar navbar-expand-lg navbar-light bg-gradient-mariner py-2'
+      >
+        <a
+          style={{ color: "white" }}
+          className='navbar-brand changeFont NavFont'
+          href='/'
+        >
+          <img
+            className='mr-3 d-inline-block align-center'
+            style={{ width: "30px", paddingBottom: "10px" }}
+            src='/images/realLogo.png'
+            alt='logo'
+          />
+          Code Timebank
         </a>
         <button
           className='navbar-toggler'
@@ -99,7 +111,6 @@ function Navbar(props) {
         >
           <span className='navbar-toggler-icon'></span>
         </button>
-
 
         <div
           style={style.linkSize}

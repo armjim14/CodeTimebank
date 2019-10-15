@@ -26,6 +26,11 @@
 <body id="#bootstrapOverrides">
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+  <script>
+    $('body').on("click", ".nav-item", function () {
+      $('.navbar-collapse').collapse('hide');
+    })
+  </script>
 </body>
 
 </html>
