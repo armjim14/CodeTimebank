@@ -114,7 +114,7 @@ const Leaderboards = () => {
         </div>
       ) : (
         <div className='row table-responsive mx-0'>
-          <table className='table table-stone table-striped table-bordered text-center shadow'>
+          <table style={{marginBottom: "65px"}} className='table table-stone table-striped table-bordered text-center shadow'>
             <thead>
               <tr className='thead-light'>
                 <th>User</th>
