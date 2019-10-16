@@ -357,7 +357,7 @@ const Dashboard = props => {
     }
     fetchData();
     //eslint-disable-next-line
-  }, []);
+  }, [info.questions]);
 
   return (
     <Fragment>
