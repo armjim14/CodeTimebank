@@ -2,6 +2,7 @@ import React, { Fragment, useContext, useState, useEffect } from "react";
 import QuestionContext from "../Context/question/questionContext";
 import { Link } from "react-router-dom";
 import TimeContext from "../Context/time/timeContext";
+import spinner from "./spinner.gif";
 
 const Leaderboards = () => {
   const [state, setState] = useState({ users: [] });
@@ -107,18 +108,24 @@ const Leaderboards = () => {
           <h1>Leaderboard</h1>
         </div>
       </div>
-      <div className='row table-responsive mx-0'>
-        <table className='table table-stone table-striped table-bordered text-center shadow'>
-          <thead>
-            <tr className='thead-light'>
-              <th>User</th>
-              <th>Total Time Earned</th>
-              <th>Hireable</th>
-            </tr>
-          </thead>
-          <tbody>{renderUsers()}</tbody>
-        </table>
-      </div>
+      {!usersa ? (
+        <div className='text-center'>
+          <img src={spinner} alt='Loading...' className='img-fluid' />
+        </div>
+      ) : (
+        <div className='row table-responsive mx-0'>
+          <table className='table table-stone table-striped table-bordered text-center shadow'>
+            <thead>
+              <tr className='thead-light'>
+                <th>User</th>
+                <th>Total Time Earned</th>
+                <th>Hireable</th>
+              </tr>
+            </thead>
+            <tbody>{renderUsers()}</tbody>
+          </table>
+        </div>
+      )}
     </Fragment>
   );
 };
