@@ -50,7 +50,7 @@ function Login(props) {
               type='email'
               name='username'
               className='form-control inputStuff mb-3 mr-0'
-              placeholder='Email'
+              placeholder='Email guest( a@a.com )'
               value={username}
               onChange={onChange}
             />
@@ -58,7 +58,7 @@ function Login(props) {
               type='password'
               name='password'
               className='form-control inputStuff'
-              placeholder='Password'
+              placeholder='Password guest( a )'
               value={password}
               onChange={onChange}
             />
